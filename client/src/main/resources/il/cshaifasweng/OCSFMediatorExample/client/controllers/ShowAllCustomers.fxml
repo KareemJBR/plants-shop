@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="441.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
+   <children>
+      <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="150.739501953125">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TableView fx:id="customersTable" layoutY="44.0" prefHeight="397.0" prefWidth="723.0">
+        <columns>
+          <TableColumn prefWidth="140.79999387264252" text="ID" />
+          <TableColumn prefWidth="127.199951171875" text="First Name" />
+            <TableColumn prefWidth="138.4000244140625" text="Last Name" />
+            <TableColumn prefWidth="214.39993286132812" text="E-mail" />
+            <TableColumn minWidth="8.0" prefWidth="104.7999267578125" text="Budget" />
+        </columns>
+      </TableView>
+   </children>
+   <effect>
+      <Glow level="0.0" />
+   </effect>
+</AnchorPane>
