@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
+   <children>
+      <Button fx:id="catalogBtn" layoutX="208.0" layoutY="112.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="168.0" style="-fx-background-radius: 25;" text="Catalog">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="customizedOrderBtn" layoutX="208.0" layoutY="244.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="168.0" style="-fx-background-radius: 25;" text="Customized Order">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="cartBtn" layoutX="508.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Cart">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
