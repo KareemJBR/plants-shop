@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Glow?>
@@ -7,10 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="441.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
    <children>
-      <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="150.739501953125">
+      <Text layoutX="286.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="150.739501953125">
          <font>
             <Font size="17.0" />
          </font>
@@ -24,6 +24,11 @@
             <TableColumn minWidth="8.0" prefWidth="104.7999267578125" text="Budget" />
         </columns>
       </TableView>
+      <Hyperlink layoutX="665.0" layoutY="12.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Hyperlink>
    </children>
    <effect>
       <Glow level="0.0" />
