@@ -1,8 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import il.cshaifasweng.OCSFMediatorExample.client.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class SignUp {
 
@@ -27,4 +31,9 @@ public class SignUp {
     @FXML // fx:id="userName"
     private TextField userName; // Value injected by FXMLLoader
 
+
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+        App.setRoot("controllers/LogIN");
+    }
 }

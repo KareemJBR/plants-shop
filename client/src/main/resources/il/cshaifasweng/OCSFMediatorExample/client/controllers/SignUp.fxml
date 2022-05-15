@@ -5,39 +5,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="413.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp">
+<AnchorPane prefHeight="428.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp">
    <children>
-      <TextField fx:id="title" alignment="CENTER" layoutX="96.0" layoutY="38.0" style="-fx-background-color: none;" text="Sign Up">
+      <TextField fx:id="title" alignment="CENTER" layoutX="133.0" layoutY="40.0" style="-fx-background-color: none;" text="Sign Up">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
       </TextField>
-      <TextField fx:id="userName" layoutX="156.0" layoutY="117.0" prefHeight="36.0" prefWidth="255.0" promptText="User Name" style="-fx-background-radius: 15;">
+      <TextField fx:id="userName" layoutX="202.0" layoutY="118.0" prefHeight="36.0" prefWidth="255.0" promptText="User Name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="passwordBtn" layoutX="156.0" layoutY="233.0" prefHeight="36.0" prefWidth="255.0" promptText="Password" style="-fx-background-radius: 15;">
+      <TextField fx:id="passwordBtn" layoutX="202.0" layoutY="233.0" prefHeight="36.0" prefWidth="255.0" promptText="Password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="confirmPasswordBtn" layoutX="156.0" layoutY="288.0" prefHeight="36.0" prefWidth="255.0" promptText="Confirm Password" style="-fx-background-radius: 15;">
+      <TextField fx:id="confirmPasswordBtn" layoutX="202.0" layoutY="289.0" prefHeight="36.0" prefWidth="255.0" promptText="Confirm Password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="phoneNumber" layoutX="156.0" layoutY="172.0" prefHeight="36.0" prefWidth="255.0" promptText="Phone Number" style="-fx-background-radius: 15;">
+      <TextField fx:id="phoneNumber" layoutX="202.0" layoutY="171.0" prefHeight="36.0" prefWidth="255.0" promptText="Phone Number" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="SignUpBtn" layoutX="225.0" layoutY="344.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Sign Up">
+      <Button fx:id="SignUpBtn" layoutX="271.0" layoutY="378.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Sign Up">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn" layoutX="27.0" layoutY="18.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
          <font>
             <Font size="15.0" />
          </font>
