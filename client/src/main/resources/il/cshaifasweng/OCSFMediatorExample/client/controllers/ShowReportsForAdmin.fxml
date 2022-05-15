@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="482.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
+<AnchorPane prefHeight="403.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
    <children>
-      <Text layoutX="272.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers' Reports">
+      <Text layoutX="365.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <TableView fx:id="reportsTable" layoutY="50.0" prefHeight="434.0" prefWidth="690.0">
-        <columns>
-          <TableColumn prefWidth="121.59997403621674" text="ID" />
-          <TableColumn prefWidth="128.00000762939453" text="Customer ID" />
-            <TableColumn prefWidth="133.60003662109375" text="Customer First Name" />
-            <TableColumn prefWidth="135.99996948242188" text="Customer Last Name" />
-            <TableColumn prefWidth="168.80002441406248" text="Order ID" />
-        </columns>
-      </TableView>
-      <Hyperlink layoutX="636.0" layoutY="13.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true">
+      <Hyperlink layoutX="707.0" layoutY="12.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
+      <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="125.0" />
+      <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="173.0" />
+      <Text layoutX="23.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
+      <Text layoutX="25.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
+      <CheckBox fx:id="comparisonOn" layoutX="25.0" layoutY="223.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
+      <Text layoutX="25.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
+      <ComboBox fx:id="shopsList1" layoutX="122.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" />
+      <Line endX="-100.0" endY="198.20001220703125" layoutX="494.0" layoutY="65.0" startX="-100.0" />
+      <Text layoutX="435.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
+      <ComboBox fx:id="shopsList2" disable="true" layoutX="540.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" />
+      <Text layoutX="435.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
+      <Text layoutX="436.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
+      <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="125.0" />
+      <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="173.0" />
+      <Button layoutX="348.0" layoutY="312.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="42.0" prefWidth="92.0" text="Show" />
    </children>
 </AnchorPane>
