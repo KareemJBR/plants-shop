@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +27,11 @@ public class AdministratorHomePage {
     @FXML
     void showReports(ActionEvent event) throws IOException {
         App.setRoot("ShowReportsForAdmin");
+    }
+
+    @FXML
+    void signOut(ActionEvent event) throws IOException {
+        App.setRoot("LogIN");
     }
 
 }
