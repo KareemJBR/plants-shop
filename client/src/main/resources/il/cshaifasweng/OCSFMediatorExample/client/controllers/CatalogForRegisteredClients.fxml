@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CatalogForRegisteredClients">
    <children>
-      <Button fx:id="backBtn" layoutX="29.0" layoutY="21.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+      <Button fx:id="backBtn" layoutX="29.0" layoutY="21.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
          <font>
             <Font size="15.0" />
          </font>

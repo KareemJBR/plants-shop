@@ -1,11 +1,15 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import il.cshaifasweng.OCSFMediatorExample.client.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class CustomizedOrder {
 
@@ -39,4 +43,12 @@ public class CustomizedOrder {
     @FXML // fx:id="title"
     private TextField title; // Value injected by FXMLLoader
 
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+        App.setRoot("controllers/ClientMainPage");
+    }
+    @FXML
+    void Cart(ActionEvent event) throws IOException {
+        App.setRoot("controllers/Cart");
+    }
 }
