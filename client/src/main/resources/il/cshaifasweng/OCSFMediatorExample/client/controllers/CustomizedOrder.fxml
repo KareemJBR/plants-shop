@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CustomizedOrder"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CustomizedOrder">
+   <children>
+      <TextField fx:id="title" layoutX="176.0" layoutY="75.0" style="-fx-background-color: none;" text="Customized Order">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="itemTypeCombo" layoutX="245.0" layoutY="186.0" prefWidth="150.0" promptText="item type" />
+      <Slider fx:id="rangeSlider" blockIncrement="5.0" layoutX="250.0" layoutY="229.0" min="5.0" showTickLabels="true" showTickMarks="true" />
+      <Button fx:id="cartBtn" layoutX="548.0" layoutY="14.0" mnemonicParsing="false" onAction="#Cart" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Cart">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="priceRangeLabel" layoutX="90.0" layoutY="231.0" prefHeight="17.0" prefWidth="114.0" text="price range" />
+      <Label fx:id="ItemTypeLabel" layoutX="90.0" layoutY="199.0" prefHeight="17.0" prefWidth="114.0" text="item type" />
+      <Label fx:id="colorLabel" layoutX="92.0" layoutY="279.0" prefHeight="17.0" prefWidth="114.0" text="color" />
+      <ComboBox fx:id="colorCombo" layoutX="245.0" layoutY="275.0" prefWidth="150.0" />
+      <Button fx:id="addToCartBtn" layoutX="241.0" layoutY="364.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="158.0" style="-fx-background-radius: 25;" text="Add to Cart">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>
