@@ -25,6 +25,9 @@ public class SignUp {
     @FXML // fx:id="phoneNumber"
     private TextField phoneNumber; // Value injected by FXMLLoader
 
+    @FXML // fx:id="phoneNumber1"
+    private TextField phoneNumber1; // Value injected by FXMLLoader
+
     @FXML // fx:id="title"
     private TextField title; // Value injected by FXMLLoader
 
