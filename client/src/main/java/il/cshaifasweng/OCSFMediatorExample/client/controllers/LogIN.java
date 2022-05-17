@@ -35,7 +35,12 @@ public class LogIN {
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
-        App.setRoot("controllers/SignUp");
+       App.setRoot("controllers/SignUp");
+        //SignUp.main(null);
+    }
+    @FXML
+    void logIN(ActionEvent event) {
+
     }
     @FXML
     void openCatalog(ActionEvent event) throws IOException {

@@ -18,7 +18,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="logInBtn" layoutX="269.0" layoutY="273.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Login">
+      <Button fx:id="logInBtn" layoutX="269.0" layoutY="273.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Login">
          <font>
             <Font size="15.0" />
          </font>
