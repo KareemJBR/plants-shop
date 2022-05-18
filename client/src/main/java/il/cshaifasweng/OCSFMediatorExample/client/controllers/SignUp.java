@@ -45,6 +45,12 @@ public class SignUp {
     @FXML // fx:id="userName"
     private TextField userName; // Value injected by FXMLLoader
 
+    @FXML
+    private TextField firstNameTextBox;
+
+    @FXML
+    private TextField lastNameTextBox;
+
 
     @FXML
     void signUp(ActionEvent event) {
@@ -53,14 +59,24 @@ public class SignUp {
         String username=userName.getText();
         String password=passwordBtn.getText();
         String passwordconfirm=confirmPasswordBtn.getText();
+        String firstname=firstNameTextBox.getText();
+        String lastname=lastNameTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
 
         clean();
 
         /// check if all form elements are full
-        if(password.equals("")||passwordconfirm.equals("")||username.equals("")||id.equals("")||creditnumber.equals(""))
+        if(firstname.equals("") || lastname.equals("") || password.equals("")||passwordconfirm.equals("")||username.equals("")||id.equals("")||creditnumber.equals(""))
         {
             errors.add("please fill out all required fields");
+            if(firstname.equals(""))
+            {
+                firstNameTextBox.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+            }
+            if(lastname.equals(""))
+            {
+                lastNameTextBox.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+            }
             if(password.equals(""))
             {
                 passwordBtn.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
@@ -117,6 +133,8 @@ public class SignUp {
     }
 
     private void clean() {
+        lastNameTextBox.setStyle("-fx-background-radius:15;");
+        firstNameTextBox.setStyle("-fx-background-radius:15;");
         confirmPasswordBtn.setStyle("-fx-background-radius:15;");
         passwordBtn.setStyle("-fx-background-radius:15;");
         confirmPasswordBtn.setStyle("-fx-background-radius:15;");
