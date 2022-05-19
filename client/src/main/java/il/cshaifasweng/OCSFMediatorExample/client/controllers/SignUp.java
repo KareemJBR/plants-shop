@@ -1,20 +1,18 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import java.util.List;
+import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
+import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import javafx.application.Application;
+import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class SignUp {
 
@@ -45,22 +43,40 @@ public class SignUp {
     @FXML // fx:id="userName"
     private TextField userName; // Value injected by FXMLLoader
 
+    @FXML
+    private TextField firstNameTextBox;
 
     @FXML
-    void signUp(ActionEvent event) {
+    private TextField lastNameTextBox;
+
+
+    @FXML
+    void signUp(ActionEvent event) throws Exception {
         String creditnumber=creditCardNumber.getText();
         String id=IDNumber.getText();
         String username=userName.getText();
         String password=passwordBtn.getText();
         String passwordconfirm=confirmPasswordBtn.getText();
+        String firstname=firstNameTextBox.getText();
+        String lastname=lastNameTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
-
+        List<Customer> customers=new ArrayList<Customer>();
         clean();
 
-        /// check if all form elements are full
-        if(password.equals("")||passwordconfirm.equals("")||username.equals("")||id.equals("")||creditnumber.equals(""))
+        ///////////////////////////////// Input validation ///////////////////////////
+
+        /// check if all required fields are filled ///
+        if(firstname.equals("") || lastname.equals("") || password.equals("")||passwordconfirm.equals("")||username.equals("")||id.equals("")||creditnumber.equals(""))
         {
             errors.add("please fill out all required fields");
+            if(firstname.equals(""))
+            {
+                firstNameTextBox.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+            }
+            if(lastname.equals(""))
+            {
+                lastNameTextBox.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+            }
             if(password.equals(""))
             {
                 passwordBtn.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
@@ -83,6 +99,33 @@ public class SignUp {
             }
         }
 
+        MsgClass msg =new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg);
+
+        customers=(ArrayList<Customer>)data;
+        if(customers!=null)
+        {
+            for(int i=0;i<customers.size();i++)
+            {
+                if(username.equals(customers.get(i).getUser_name()))
+                {
+                    errors.add("User Name already exists please try with another one");
+                    userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+            for(int i=0;i<customers.size();i++)
+            {
+
+                if(id.equals(Integer.toString(customers.get(i).getUser_id())))
+                {
+                    errors.add("Id Numer already exists please try with another one");
+                    IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+        }
+
       if(id.length()!=9 && id.length()>0)
       {
           errors.add("Id number must contain 9 digits");
@@ -101,22 +144,39 @@ public class SignUp {
           confirmPasswordBtn.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
       }
 
+      ///////////////////////////////// end of Input validation ///////////////////////////
+
       String errormessage="";
       for(int i=0;i<errors.size();i++)
       {
           errormessage+=errors.get(i);
           errormessage+="\n";
       }
+
       if(!errormessage.equals(""))
       {
           showAlert("Invalid inputs",errormessage);
       }
+      else      //no errors detected
+      {
+          msg = new MsgClass("#add customer");
+          msg.setObj(new Customer(Integer.parseInt(id),firstname,lastname,username,password,creditnumber,"network_acount"));
+          SimpleClient.getClient().sendToServer(msg);
+           msg =new MsgClass("#get customers",null);
+          SimpleClient.getClient().sendToServer(msg);
+          showAlert("success","Congratulations, your account has been successfully created");
+          App.setRoot("controllers/LogIN");
+      }
+
 
 
 
     }
 
     private void clean() {
+        userName.setStyle("-fx-background-radius:15;");
+        lastNameTextBox.setStyle("-fx-background-radius:15;");
+        firstNameTextBox.setStyle("-fx-background-radius:15;");
         confirmPasswordBtn.setStyle("-fx-background-radius:15;");
         passwordBtn.setStyle("-fx-background-radius:15;");
         confirmPasswordBtn.setStyle("-fx-background-radius:15;");
@@ -142,5 +202,9 @@ public class SignUp {
         App.setRoot("controllers/LogIN");
     }
 
+    @Subscribe
+    public void onMessageEvent(MsgClass msg) {
+
+    }
 }
 

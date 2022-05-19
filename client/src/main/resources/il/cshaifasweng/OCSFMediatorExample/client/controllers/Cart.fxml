@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart">
    <children>
-      <TextField fx:id="title" layoutX="14.0" layoutY="64.0" style="-fx-background-color: none;" text="items">
+      <TextField fx:id="title" disable="true" layoutX="14.0" layoutY="64.0" style="-fx-background-color: none;" text="items">
          <font>
             <Font size="30.0" />
          </font>

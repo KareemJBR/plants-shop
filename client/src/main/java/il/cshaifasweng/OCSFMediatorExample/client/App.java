@@ -32,6 +32,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+       // EventBus.getDefault().register(this);
+        client = SimpleClient.getClient();
+        client.openConnection();
+        MsgClass msg =new MsgClass("#get customers",null);
+        client.sendToServer(msg);
         scene = new Scene(loadFXML("controllers/LogIN"), 640, 480);
         stage.setScene(scene);
         stage.show();

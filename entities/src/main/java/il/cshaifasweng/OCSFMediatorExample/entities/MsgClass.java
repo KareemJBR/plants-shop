@@ -7,11 +7,20 @@ public class MsgClass implements Serializable {
     private static final long serialVersionUID = -8224097662914849956L;
     private String msg;
     Object obj;
+//    private ArrayList<Customer> customers;
 
     public String getMsg() {
         return msg;
     }
 
+//    public void setCustomers(ArrayList<Customer> customers) {
+//        this.customers = customers;
+//    }
+
+//    public ArrayList<Customer> getCustomers() {
+//       return this.customers;
+//    }
+//
     public void setMsg(String msg) {
         this.msg = msg;
     }

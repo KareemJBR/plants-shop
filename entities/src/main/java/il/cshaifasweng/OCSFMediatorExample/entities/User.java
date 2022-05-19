@@ -1,6 +1,11 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-public class User {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
+public class User
+{
     private final int user_id;
     private String first_name;
     private String last_name;

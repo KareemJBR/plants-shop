@@ -11,7 +11,7 @@
 
 <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CustomizedOrder">
    <children>
-      <TextField fx:id="title" layoutX="176.0" layoutY="75.0" style="-fx-background-color: none;" text="Customized Order">
+      <TextField fx:id="title" disable="true" layoutX="176.0" layoutY="75.0" style="-fx-background-color: none;" text="Customized Order">
          <font>
             <Font size="30.0" />
          </font>
