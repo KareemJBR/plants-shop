@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CatalogForNoneRegisteredClients">
    <children>
-      <TextField fx:id="title" alignment="CENTER" layoutX="119.0" layoutY="48.0" style="-fx-background-color: none;" text="Catalog">
+      <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="119.0" layoutY="48.0" style="-fx-background-color: none;" text="Catalog">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>

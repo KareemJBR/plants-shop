@@ -13,7 +13,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="title" alignment="CENTER" layoutX="113.0" layoutY="49.0" style="-fx-background-color: none;" text="Catalog">
+      <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="113.0" layoutY="49.0" style="-fx-background-color: none;" text="Catalog">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>

@@ -1,10 +1,16 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
+import org.hibernate.cache.spi.support.CacheUtils;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -29,6 +35,10 @@ public class SimpleClient extends AbstractClient {
 						System.out.println("get all execption");
 						System.out.println(e);
 					}
+				}
+				if (myMsg.getMsg().equals("all customers"))
+				{
+					data = myMsg.getObj();
 				}
 		}
 			else{

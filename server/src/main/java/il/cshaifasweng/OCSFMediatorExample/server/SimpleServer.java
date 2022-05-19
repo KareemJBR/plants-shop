@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //my imports
-
+import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,20 +19,39 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class SimpleServer extends AbstractServer {
 
     private static Session session;
-
+    private static SessionFactory sessionFactory = getSessionFactory();
     private static List<Flower> getAllFlowers() throws Exception {
-
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flower> query = builder.createQuery(Flower.class);
         query.from(Flower.class);
         List<Flower> data = session.createQuery(query).getResultList();
         return data;
+    }
+    private static List<Customer> getAllCustomers() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
+        query.from(Customer.class);
+        List<Customer> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
+    private static void generateCustomers() {
+        /* ---------- Saving Customers To Data Base ---------- */
+        Customer customer1 = new Customer(123456789, "saeed","mahameed","saeed_mahamed20","saeed123","1234123412341234","network_account");
+        session.save(customer1);
+        Customer customer2 =  new Customer(208101458, "ons","jijini","ons_jijini","ons123123","0000111100001111","network_account");
+        session.save(customer2);
+        Customer customer3 =  new Customer(206522435, "bayan","swetat","bayan123","bayanswetat123","0000000011111111","network_account");
+        session.save(customer3);
+        session.flush();
     }
 
     private static void generateFlowers() {
@@ -63,13 +83,28 @@ public class SimpleServer extends AbstractServer {
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
-        // Add ALL of your entities here. You can also try adding a whole package.
         configuration.addAnnotatedClass(Flower.class);
+        configuration.addAnnotatedClass(Customer.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
                 .build();
         return configuration.buildSessionFactory(serviceRegistry);
+    }
+
+    public static void addDataToDB()
+    {
+        try {
+            generateFlowers();
+            generateCustomers();
+            session.getTransaction().commit();
+        } catch (Exception exception) {
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            System.err.println("An error occured, changes have been rolled back.");
+            exception.printStackTrace();
+        }
     }
 
 
@@ -79,8 +114,7 @@ public class SimpleServer extends AbstractServer {
         SessionFactory sessionFactory = getSessionFactory();
         session = sessionFactory.openSession();
         session.beginTransaction();
-        generateFlowers();
-        session.getTransaction().commit();
+        addDataToDB();
     }
 
     private static void updatePrice(Flower flower, int price) {
@@ -106,7 +140,27 @@ public class SimpleServer extends AbstractServer {
                         myMSg.setObj(getAllFlowers());
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
-                        System.out.println("eror hapend");
+                        System.out.println("error happened1");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get customers")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all customers");
+                        myMSg.setObj(getAllCustomers());
+                        System.out.println("all customers");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened2");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#add customer")) {
+                    try {
+                        System.out.println("in add customer");
+                        AddConsumer((Customer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened2");
                         System.out.println(e);
                     }
                 }
@@ -134,6 +188,17 @@ public class SimpleServer extends AbstractServer {
                 session.close();
             }
     }
+
+
+    private static void AddConsumer(Customer p) {
+        session.beginTransaction();
+        session.save(p);
+        session.flush();
+        session.getTransaction().commit();
+        session.clear();
+    }
+
+
 }
 
 
