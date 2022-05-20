@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,10 +18,14 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 /**
  * JavaFX App
@@ -64,6 +69,14 @@ public class App extends Application {
 
 	public static void main(String[] args) {
         launch();
+    }
+
+    public static  ArrayList<Customer> getAllCustomers() throws IOException {
+        ArrayList<Customer> customers=new ArrayList<Customer>();
+        MsgClass msg =new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg);
+        customers=(ArrayList<Customer>)data;
+        return customers;
     }
 
 }
