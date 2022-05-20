@@ -11,13 +11,17 @@ import javafx.scene.control.*;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
 
 public class LogIN {
-    boolean show_password=false;
+    public static  String Client_username;
+    String  current;
+    String password_status="invisible";
     @FXML // fx:id="showPassword"
     private CheckBox showPassword; // Value injected by FXMLLoader
     @FXML // fx:id="visiblePassword"
@@ -51,18 +55,28 @@ public class LogIN {
     @FXML
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
-        List<Customer> customers=new ArrayList<Customer>();
+        ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
         customers=(ArrayList<Customer>)data;
         if(customers!=null)
         {
+            if(password_status=="visible")
+            {
+                current=visiblePassword.getText();
+            }
+            else
+            {
+                current=Password.getText();
+            }
             for(int i=0;i<customers.size();i++)
             {
-               if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(Password.getText()))
+               if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(current))
                {
-                   showAlert("success","login success");
+                   //showAlert("success","login success");
                    login_success=true;
+                   Client_username=customers.get(i).getUser_name();
+                   App.setRoot("controllers/ClientMainPage");
                }
             }
         }
@@ -82,21 +96,25 @@ public class LogIN {
     void Show(ActionEvent event) {          ////////show checkbox //////////
         if(showPassword.isSelected())
         {
-            show_password=true;
-            visiblePassword.setVisible(true);
-            visiblePassword.setDisable(false);
+           // show_password=true;
+            password_status="visible";
+            current=Password.getText();
             Password.setDisable(true);
             Password.setVisible(false);
-            visiblePassword.setText(Password.getText());
+            visiblePassword.setVisible(true);
+            visiblePassword.setDisable(false);
+            visiblePassword.setText(current);
         }
         else
         {
-            show_password=false;
-            visiblePassword.setVisible(false);
+           // show_password=false;
+            password_status="invisible";
+            current=visiblePassword.getText();
             visiblePassword.setDisable(true);
+            visiblePassword.setVisible(false);
             Password.setDisable(false);
             Password.setVisible(true);
-            visiblePassword.setText(visiblePassword.getText());
+            Password.setText(current);
         }
     }
 
