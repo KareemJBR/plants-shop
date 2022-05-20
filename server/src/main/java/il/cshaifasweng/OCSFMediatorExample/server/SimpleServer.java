@@ -52,6 +52,9 @@ public class SimpleServer extends AbstractServer {
         Customer customer3 =  new Customer(206522435, "bayan","swetat","bayan123","bayanswetat123","0000000011111111","network_account");
         session.save(customer3);
         session.flush();
+        Customer customer4 =  new Customer(12312312, "bayann","swetatn","1","1","0000000011111111","network_account");
+        session.save(customer4);
+        session.flush();
     }
 
     private static void generateFlowers() {
