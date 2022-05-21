@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.CatalogForRegisteredClients">
+<AnchorPane prefHeight="585.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.RegisteredCatalogControl">
    <children>
       <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="124.0" layoutY="-2.0" prefHeight="86.0" prefWidth="564.0" style="-fx-background-color: none;" text="Catalog">
          <font>
@@ -17,7 +17,7 @@
       </TextField>
       <ScrollPane layoutX="-1.0" layoutY="85.0" prefHeight="500.0" prefWidth="810.0">
          <content>
-            <AnchorPane fx:id="itemsContainer" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="805.0">
+            <AnchorPane fx:id="itemsContainer" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="808.0">
                <children>
                   <AnchorPane layoutX="539.0" prefHeight="225.0" prefWidth="266.0">
                      <children>
