@@ -4,6 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +15,15 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
 
 public class LogIN {
     public static  String Client_username;
+    public static  String Worker_username;
     String  current;
     String password_status="invisible";
     @FXML // fx:id="showPassword"
@@ -57,10 +60,11 @@ public class LogIN {
     @FXML
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
-        ArrayList<Customer> customers=new ArrayList<Customer>();
-        MsgClass msg =new MsgClass("#get customers",null);
-        SimpleClient.getClient().sendToServer(msg);
-        customers=(ArrayList<Customer>)data;
+        ArrayList<Customer> customers=getAllCustomers();
+        ArrayList<Worker> workers=getAllWorkers();
+//        MsgClass msg =new MsgClass("#get customers",null);
+//        SimpleClient.getClient().sendToServer(msg);
+//        customers=(ArrayList<Customer>)data;
         if(customers!=null)
         {
             if(password_status=="visible")
@@ -80,6 +84,27 @@ public class LogIN {
                    Client_username=customers.get(i).getUser_name();
                    App.setRoot("controllers/ClientMainPage");
                }
+            }
+        }
+        if(workers!=null)
+        {
+            if(password_status=="visible")
+            {
+                current=visiblePassword.getText();
+            }
+            else
+            {
+                current=Password.getText();
+            }
+            for(int i=0;i<workers.size();i++)
+            {
+                if(workers.get(i).getUser_name().equals(userName.getText()) && workers.get(i).getPassword().equals(current))
+                {
+                    //showAlert("success","login success");
+                    login_success=true;
+                    Worker_username=workers.get(i).getUser_name();
+                    App.setRoot("controllers/WorkerHomePage");
+                }
             }
         }
         if(!login_success)
