@@ -3,10 +3,10 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,20 +14,24 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class SimpleServer extends AbstractServer {
 
     private static Session session;
     private static SessionFactory sessionFactory = getSessionFactory();
+    private static List<Shop> getAllShops() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Shop> query = builder.createQuery(Shop.class);
+        query.from(Shop.class);
+        List<Shop> data = session.createQuery(query).getResultList();
+        return data;
+    }
     private static List<Flower> getAllFlowers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flower> query = builder.createQuery(Flower.class);
@@ -41,6 +45,15 @@ public class SimpleServer extends AbstractServer {
         query.from(Customer.class);
         List<Customer> data = session.createQuery(query).getResultList();
         return data;
+    }
+
+    private static void generateShops() {
+        /* ---------- Saving Shops To Data Base ---------- */
+        Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
+        session.save(shop1);
+        Shop shop2 = new Shop("Hanamal 500, Haifa",123456789);
+        session.save(shop2);
+        session.flush();
     }
 
     private static void generateCustomers() {
@@ -83,6 +96,7 @@ public class SimpleServer extends AbstractServer {
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
+        configuration.addAnnotatedClass(Shop.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
 
@@ -95,6 +109,7 @@ public class SimpleServer extends AbstractServer {
     public static void addDataToDB()
     {
         try {
+            generateShops();
             generateFlowers();
             generateCustomers();
             session.getTransaction().commit();
@@ -152,6 +167,20 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened2");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get Shops")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all Shops");
+                        notify();
+                        myMSg.setObj(getAllShops());
+                       // ArrayList<Shop> s= (ArrayList<Shop>) getAllShops();
+                        //System.out.println(s.size());
+                        System.out.println("all Shops");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened3");
                         System.out.println(e);
                     }
                 }
