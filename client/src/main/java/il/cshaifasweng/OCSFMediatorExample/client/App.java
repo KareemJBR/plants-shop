@@ -94,7 +94,6 @@ public class App extends Application {
         //        System.out.println(shops.size());
         return shops;
     }
-        public static  ArrayList<Flower> getAllFlowers() throws IOException {
 
      public static  ArrayList<Flower> getAllFlowers() throws IOException {
 

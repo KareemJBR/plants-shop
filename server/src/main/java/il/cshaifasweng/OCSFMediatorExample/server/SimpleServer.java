@@ -211,7 +211,7 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#add customer")) {
                     try {
                         System.out.println("in add customer");
-                        AddConsumer((Customer) ((MsgClass) msg).getObj());
+                        AddCustomer((Customer) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened3");
                         System.out.println(e);
@@ -227,7 +227,7 @@ public class SimpleServer extends AbstractServer {
     }
 
 
-    private static void AddConsumer(Customer p) {
+    private static void AddCustomer(Customer p) {
         session.beginTransaction();
         session.save(p);
         session.flush();
