@@ -42,18 +42,17 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <ComboBox fx:id="AcountTypeCombo" layoutX="191.0" layoutY="274.0" onAction="#CheckComboStatus" prefHeight="36.0" prefWidth="255.0" promptText="Account Type" />
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ComboBox layoutX="191.0" layoutY="274.0" prefHeight="36.0" prefWidth="255.0" promptText="Account Type" />
       <TextField fx:id="creditCardNumber" layoutX="193.0" layoutY="225.0" prefHeight="36.0" prefWidth="255.0" promptText="Credit card  number" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <ComboBox layoutX="462.0" layoutY="274.0" prefHeight="36.0" prefWidth="150.0" promptText="Shops" />
       <TextField fx:id="firstNameTextBox" layoutX="191.0" layoutY="82.0" prefHeight="36.0" prefWidth="118.0" promptText="First name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
@@ -62,6 +61,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
+      <ComboBox fx:id="ShopsCombo" disable="true" layoutX="462.0" layoutY="274.0" prefHeight="36.0" prefWidth="150.0" promptText="Stores" visible="false" />
       <TextField fx:id="lastNameTextBox" layoutX="316.0" layoutY="82.0" prefHeight="36.0" prefWidth="128.0" promptText="Last Name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />

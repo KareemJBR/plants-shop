@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
@@ -16,6 +17,7 @@ public class SimpleClient extends AbstractClient {
 	
 	private static SimpleClient client = null;
 	public static  Object data;
+	public static  Object shopsdata;
 
 
 	private SimpleClient(String host, int port) {
@@ -41,7 +43,11 @@ public class SimpleClient extends AbstractClient {
 					System.out.println("in get customes client side");
 					data = myMsg.getObj();
 				}
-		}
+				if(myMsg.getMsg().equals("all Shops"))
+				{
+					shopsdata = myMsg.getObj();
+				}
+			}
 			else{
 				System.out.println("not done yet");
 			}

@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.shopsdata;
 
 /**
  * JavaFX App
@@ -76,14 +78,34 @@ public class App extends Application {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
+        while(data==null) {System.out.println("waiting for server");}
         customers=(ArrayList<Customer>)data;
         return customers;
     }
-  /*  public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
+    public static  ArrayList<Shop> getAllShops() throws IOException {
+        ArrayList<Shop> shops = new ArrayList<Shop>();
+        MsgClass msg = new MsgClass("#get Shops", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (shopsdata == null) {
+            System.out.println("waiting for server");
+        }
+        shops = (ArrayList<Shop>) shopsdata;
+        //        System.out.println(shops.size());
+        return shops;
+    }
+        public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
+     public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
         ArrayList<Flower> Flowers=new ArrayList<Flower>();
         MsgClass msg =new MsgClass("#get phots URL",null);
         SimpleClient.getClient().sendToServer(msg);
         Flowers=(ArrayList<Flower>)data;
         return Flowers;
-    }*/
+
+    }
+
+
+
 }
