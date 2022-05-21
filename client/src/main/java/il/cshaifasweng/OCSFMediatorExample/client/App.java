@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
+import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.application.Application;
@@ -82,12 +83,14 @@ public class App extends Application {
         return customers;
     }
     public static  ArrayList<Shop> getAllShops() throws IOException {
-        ArrayList<Shop> shops=new ArrayList<Shop>();
-        MsgClass msg =new MsgClass("#get Shops",null);
+        ArrayList<Shop> shops = new ArrayList<Shop>();
+        MsgClass msg = new MsgClass("#get Shops", null);
         SimpleClient.getClient().sendToServer(msg);
-          while(shopsdata==null) {System.out.println("waiting for server");}
-          shops=(ArrayList<Shop>)shopsdata;
-  //        System.out.println(shops.size());
+        while (shopsdata == null) {
+            System.out.println("waiting for server");
+        }
+        shops = (ArrayList<Shop>) shopsdata;
+        //        System.out.println(shops.size());
         return shops;
     }
 
