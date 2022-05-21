@@ -2,6 +2,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
+import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
+import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +28,8 @@ public class Cart {
 
     @FXML
     void Back(ActionEvent event) throws IOException {
+        MsgClass msg=new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg);
         App.setRoot("controllers/ClientMainPage");
     }
 }

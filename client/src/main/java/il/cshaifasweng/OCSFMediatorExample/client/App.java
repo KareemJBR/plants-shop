@@ -45,7 +45,7 @@ public class App extends Application {
         client.openConnection();
         MsgClass msg =new MsgClass("#get customers",null);
         client.sendToServer(msg);
-        scene = new Scene(loadFXML("controllers/LogIN"), 640, 480);
+        scene = new Scene(loadFXML("controllers/LogIN"));
         stage.setScene(scene);
         stage.show();
     }
@@ -82,6 +82,7 @@ public class App extends Application {
         customers=(ArrayList<Customer>)data;
         return customers;
     }
+
     public static  ArrayList<Shop> getAllShops() throws IOException {
         ArrayList<Shop> shops = new ArrayList<Shop>();
         MsgClass msg = new MsgClass("#get Shops", null);
@@ -94,11 +95,17 @@ public class App extends Application {
         return shops;
     }
         public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
+     public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
         ArrayList<Flower> Flowers=new ArrayList<Flower>();
         MsgClass msg =new MsgClass("#get phots URL",null);
         SimpleClient.getClient().sendToServer(msg);
         Flowers=(ArrayList<Flower>)data;
         return Flowers;
+
     }
+
+
 
 }

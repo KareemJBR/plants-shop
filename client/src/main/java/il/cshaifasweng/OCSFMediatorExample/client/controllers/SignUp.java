@@ -21,6 +21,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.shopsdata;
 
 public class SignUp {
+    public static boolean shop;
 
     @FXML // fx:id="AcountTypeCombo"
     private ComboBox<String> AcountTypeCombo; // Value injected by FXMLLoader
@@ -214,7 +215,12 @@ public class SignUp {
 
     @FXML
     void Back(ActionEvent event) throws IOException {
-        App.setRoot("controllers/LogIN");
+        if(shop==false) {
+            App.setRoot("controllers/LogIN");
+        }
+        else{
+            App.setRoot("controllers/publicCatalog");
+        }
     }
 
     @FXML
