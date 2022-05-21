@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.getClient;
@@ -49,6 +50,7 @@ public class LogIN {
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
+        shop=false;
        App.setRoot("controllers/SignUp");
         //SignUp.main(null);
     }
@@ -89,7 +91,11 @@ public class LogIN {
 
     @FXML
     void openCatalog(ActionEvent event) throws IOException {
-        App.setRoot("controllers/CatalogForNoneRegisteredClients");
+        MsgClass msg=new MsgClass("catalog for register",null);
+        SimpleClient.getClient().sendToServer(msg);
+        System.out.println("msg sent to got flowers");
+        App.setRoot("controllers/publicCatalog");
+
     }
 
     @FXML

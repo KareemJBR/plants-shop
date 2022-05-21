@@ -29,17 +29,18 @@ public class SimpleClient extends AbstractClient {
 			if (msg.getClass().equals(MsgClass.class)) {
 				MsgClass myMsg = (MsgClass) msg;
 				if (myMsg.getMsg().equals("all flowers")) {
+					System.out.println("in main client handler to get flowers  ");
 					data = myMsg.getObj();
-					try {
-						App.setRoot("primary");
-					}
-					catch (Exception e){
+				/*	try {
+						App.setRoot("controllers/CatalogForRegisteredClients");
+					}	catch (Exception e){
 						System.out.println("get all execption");
 						System.out.println(e);
-					}
+					}*/
 				}
 				if (myMsg.getMsg().equals("all customers"))
 				{
+					System.out.println("in get customes client side");
 					data = myMsg.getObj();
 				}
 				if(myMsg.getMsg().equals("all Shops"))

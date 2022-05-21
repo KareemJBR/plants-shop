@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.publicCatalogControl">
+   <children>
+      <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="123.0" layoutY="5.0" style="-fx-background-color: none;" text="Catalog">
+         <font>
+            <Font name="Arial Bold" size="30.0" />
+         </font>
+      </TextField>
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="backBtn1" layoutX="547.0" layoutY="8.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="sing up">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutY="89.0" prefHeight="400.0" prefWidth="640.0">
+         <children>
+            <AnchorPane layoutX="3.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text1" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img1" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="224.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text2" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img2" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="436.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text3" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img3" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="3.0" layoutY="228.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text4" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img4" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="224.0" layoutY="228.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text5" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img5" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="436.0" layoutY="230.0" prefHeight="222.0" prefWidth="172.0">
+               <children>
+                  <TextArea fx:id="text5" layoutX="3.0" layoutY="147.0" prefHeight="74.0" prefWidth="200.0" />
+                  <ImageView fx:id="img6" fitHeight="137.0" fitWidth="206.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/12342.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
