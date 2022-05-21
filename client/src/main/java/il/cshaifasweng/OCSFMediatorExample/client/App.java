@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
+import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -42,7 +43,7 @@ public class App extends Application {
         client.openConnection();
         MsgClass msg =new MsgClass("#get customers",null);
         client.sendToServer(msg);
-        scene = new Scene(loadFXML("controllers/LogIN"), 640, 480);
+        scene = new Scene(loadFXML("controllers/LogIN"));
         stage.setScene(scene);
         stage.show();
     }
@@ -78,5 +79,11 @@ public class App extends Application {
         customers=(ArrayList<Customer>)data;
         return customers;
     }
-
+  /*  public static  ArrayList<Flower> getAllFlowers() throws IOException {
+        ArrayList<Flower> Flowers=new ArrayList<Flower>();
+        MsgClass msg =new MsgClass("#get phots URL",null);
+        SimpleClient.getClient().sendToServer(msg);
+        Flowers=(ArrayList<Flower>)data;
+        return Flowers;
+    }*/
 }

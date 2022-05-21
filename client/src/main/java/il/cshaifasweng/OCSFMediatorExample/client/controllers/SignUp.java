@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class SignUp {
+    public static boolean shop;
 
     @FXML // fx:id="IDNumber"
     private TextField IDNumber; // Value injected by FXMLLoader
@@ -199,7 +200,12 @@ public class SignUp {
 
     @FXML
     void Back(ActionEvent event) throws IOException {
-        App.setRoot("controllers/LogIN");
+        if(shop==false) {
+            App.setRoot("controllers/LogIN");
+        }
+        else{
+            App.setRoot("controllers/publicCatalog");
+        }
     }
 
     @Subscribe

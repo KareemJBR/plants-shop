@@ -18,6 +18,7 @@ import java.util.List;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Client_username;
+import  il.cshaifasweng.OCSFMediatorExample.client.*;
 public class ClientMainPage {
 
     @FXML // fx:id="LogOutBtn"
@@ -40,8 +41,10 @@ public class ClientMainPage {
 
     @FXML
     void catalog(ActionEvent event) throws IOException {
-        App.setRoot("controllers/CatalogForRegisteredClients");
-
+         MsgClass msg=new MsgClass("#get shop items",null);
+         SimpleClient.getClient().sendToServer(msg);
+        System.out.println("msg sent to got flowers");
+        App.setRoot("controllers/RegisteredCatalog");
     }
 
     @FXML
@@ -56,6 +59,7 @@ public class ClientMainPage {
     @FXML
     void initialize() throws IOException {
         ArrayList<Customer> customers=getAllCustomers();
+        customers=getAllCustomers();
         if(customers!=null)
         {
             for(int i=0;i<customers.size();i++)

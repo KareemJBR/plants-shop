@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import com.mysql.cj.protocol.Warning;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
@@ -28,6 +29,7 @@ public class SimpleServer extends AbstractServer {
 
     private static Session session;
     private static SessionFactory sessionFactory = getSessionFactory();
+
     private static List<Flower> getAllFlowers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flower> query = builder.createQuery(Flower.class);
@@ -35,6 +37,7 @@ public class SimpleServer extends AbstractServer {
         List<Flower> data = session.createQuery(query).getResultList();
         return data;
     }
+
     private static List<Customer> getAllCustomers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
@@ -45,29 +48,35 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer(123456789, "saeed","mahameed","saeed_mahamed20","saeed123","1234123412341234","network_account");
+        Customer customer1 = new Customer(123456789, "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
         session.save(customer1);
-        Customer customer2 =  new Customer(208101458, "ons","jijini","ons_jijini","ons123123","0000111100001111","network_account");
+        Customer customer2 = new Customer(208101458, "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
         session.save(customer2);
-        Customer customer3 =  new Customer(206522435, "bayan","swetat","bayan123","bayanswetat123","0000000011111111","network_account");
+        Customer customer3 = new Customer(206522435, "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
         session.save(customer3);
+        session.flush();
+        Customer customer4 = new Customer(12312312, "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
+        session.save(customer4);
+        session.flush();
+        Customer customer5 = new Customer(12312312, "bayann", "swetatn", "2", "2", "0000000011111111", "network_account");
+        session.save(customer4);
         session.flush();
     }
 
     private static void generateFlowers() {
-        Flower flower1 = new Flower(50, "red","https://images.unsplash.com/photo-1569101315919-dafea4df33ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZmxvd2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
+        Flower flower1 = new Flower(50, "red", "https://images.unsplash.com/photo-1569101315919-dafea4df33ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZmxvd2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
         session.save(flower1);
         session.flush();
-        Flower flower2 = new Flower(45, "green","https://www.allaboutgardening.com/wp-content/uploads/2021/10/Carnation.jpg");
+        Flower flower2 = new Flower(45, "green", "https://www.allaboutgardening.com/wp-content/uploads/2021/10/Carnation.jpg");
         session.save(flower2);
         session.flush();
-        Flower flower3 = new Flower(30, "blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU");
+        Flower flower3 = new Flower(30, "blue", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU");
         session.save(flower3);
         session.flush();
-        Flower flower4 = new Flower(55, "purple","https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG");
+        Flower flower4 = new Flower(55, "purple", "https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG");
         session.save(flower4);
         session.flush();
-        Flower flower5 = new Flower(20, "yellow","https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/yellow-flower-dahlia-1587061007.jpg?crop=0.557xw:1.00xh;0.0569xw,0&resize=480:*");
+        Flower flower5 = new Flower(20, "yellow", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/yellow-flower-dahlia-1587061007.jpg?crop=0.557xw:1.00xh;0.0569xw,0&resize=480:*");
         session.save(flower5);
         session.flush();
     }
@@ -92,8 +101,7 @@ public class SimpleServer extends AbstractServer {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-    public static void addDataToDB()
-    {
+    public static void addDataToDB() {
         try {
             generateFlowers();
             generateCustomers();
@@ -106,7 +114,6 @@ public class SimpleServer extends AbstractServer {
             exception.printStackTrace();
         }
     }
-
 
 
     public SimpleServer(int port) {
@@ -132,20 +139,37 @@ public class SimpleServer extends AbstractServer {
         String msgString = msg.toString();
         if (msg.getClass().equals(MsgClass.class)) {
             MsgClass myMsg = (MsgClass) msg;
-            String msgtext=myMsg.getMsg();
+            String msgtext = myMsg.getMsg();
             try {
-                if (msgtext.equals("#get phots URL")) {
+                System.out.println(msgtext);
+                if (msgtext.equals("#get shop items")) {
                     try {
                         MsgClass myMSg = new MsgClass("all flowers");
+                        myMSg.setObj(null);
                         myMSg.setObj(getAllFlowers());
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
-                        System.out.println("error happened1");
+                        System.out.println("eror hapend");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.startsWith("#update")) {
+                    try {
+                        System.out.println("in update");
+                        int id = Integer.parseInt(String.valueOf(msgtext.charAt(9)));
+                        int price = Integer.parseInt(msgtext.substring(11));
+                        updatePrice(session.get(Flower.class, id), price);
+                        myMsg.setObj(getAllFlowers());
+                        myMsg.setMsg("all flowers");
+                        client.sendToClient(myMsg);
+                    } catch (Exception e) {
+                        System.out.println("in updete exception");
                         System.out.println(e);
                     }
                 }
                 if (msgtext.equals("#get customers")) {
                     try {
+                        System.out.println("was in customers");
                         MsgClass myMSg = new MsgClass("all customers");
                         myMSg.setObj(getAllCustomers());
                         System.out.println("all customers");
@@ -160,23 +184,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println("in add customer");
                         AddConsumer((Customer) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
-                        System.out.println("error happened2");
-                        System.out.println(e);
-                    }
-                }
-                if (msgtext.startsWith("#update")) {
-                    try {
-                        System.out.println("in update");
-                        int id = Integer.parseInt(String.valueOf(msgtext.charAt(9)));
-                        int price = Integer.parseInt(msgtext.substring(11));
-                        updatePrice(session.get(Flower.class, id), price);
-                        myMsg.setObj(getAllFlowers());
-                        myMsg.setMsg("all flowers");
-                        System.out.println("sent to update");
-                        client.sendToClient(myMsg);
-                        System.out.println("done sending update");
-                    } catch (Exception e) {
-                        System.out.println("in updete exception");
+                        System.out.println("error happened3");
                         System.out.println(e);
                     }
                 }
@@ -184,9 +192,9 @@ public class SimpleServer extends AbstractServer {
                 e.printStackTrace();
             }
         }
-            if (msgString.startsWith("#close")) {
-                session.close();
-            }
+        if (msgString.startsWith("#close")) {
+            session.close();
+        }
     }
 
 
