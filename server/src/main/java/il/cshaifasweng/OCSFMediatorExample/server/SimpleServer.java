@@ -1,10 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import com.mysql.cj.protocol.Warning;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
@@ -42,6 +39,14 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Worker> getAllWorkers() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Worker> query = builder.createQuery(Worker.class);
+        query.from(Worker.class);
+        List<Worker> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static List<Customer> getAllCustomers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
@@ -59,6 +64,15 @@ public class SimpleServer extends AbstractServer {
         session.flush();
     }
 
+    private static void generateWorkers() {
+        /* ---------- Saving Shops To Data Base ---------- */
+        Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
+        session.save(worker1);
+        Worker worker2 = new Worker(206384919,"mostafa","egbaria","mostafa_eg","mostafa123");
+        session.save(worker2);
+        session.flush();
+    }
+
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
         Customer customer1 = new Customer(123456789, "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
@@ -69,9 +83,6 @@ public class SimpleServer extends AbstractServer {
         session.save(customer3);
         session.flush();
         Customer customer4 = new Customer(12312312, "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
-        session.save(customer4);
-        session.flush();
-        Customer customer5 = new Customer(12312312, "bayann", "swetatn", "2", "2", "0000000011111111", "network_account");
         session.save(customer4);
         session.flush();
     }
@@ -106,6 +117,7 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
+        configuration.addAnnotatedClass(Worker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
 
@@ -118,6 +130,7 @@ public class SimpleServer extends AbstractServer {
     public static void addDataToDB() {
         try {
             generateShops();
+            generateWorkers();
             generateFlowers();
             generateCustomers();
             session.getTransaction().commit();
@@ -197,14 +210,24 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#get Shops")) {
                     try {
                         MsgClass myMSg = new MsgClass("all Shops");
-                        notify();
                         myMSg.setObj(getAllShops());
-                       // ArrayList<Shop> s= (ArrayList<Shop>) getAllShops();
-                        //System.out.println(s.size());
                         System.out.println("all Shops");
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened3");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get Workers")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all Workers");
+//                        List<Worker> y=getAllWorkers();
+//                        System.out.println(y.size());
+                        myMSg.setObj(getAllWorkers());
+                        System.out.println("all Workers");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened4");
                         System.out.println(e);
                     }
                 }

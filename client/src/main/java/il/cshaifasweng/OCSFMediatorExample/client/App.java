@@ -1,9 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -27,8 +24,7 @@ import java.util.List;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.shopsdata;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 
 /**
  * JavaFX App
@@ -87,11 +83,8 @@ public class App extends Application {
         ArrayList<Shop> shops = new ArrayList<Shop>();
         MsgClass msg = new MsgClass("#get Shops", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (shopsdata == null) {
-            System.out.println("waiting for server");
-        }
+        while (shopsdata == null) {System.out.println("waiting for server");}
         shops = (ArrayList<Shop>) shopsdata;
-        //        System.out.println(shops.size());
         return shops;
     }
 
@@ -102,7 +95,15 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
         Flowers=(ArrayList<Flower>)data;
         return Flowers;
+    }
 
+    public static  ArrayList<Worker> getAllWorkers() throws IOException {
+        ArrayList<Worker> workers = new ArrayList<Worker>();
+        MsgClass msg = new MsgClass("#get Workers", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (workersdata == null) {System.out.println("waiting for server");}
+        workers = (ArrayList<Worker>) workersdata;
+        return workers;
     }
 
 
