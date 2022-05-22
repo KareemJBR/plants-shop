@@ -3,6 +3,8 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import java.util.List;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
+import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
 import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
@@ -12,10 +14,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
+import java.util.concurrent.locks.Lock;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllWorkers;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.shopsdata;
 
 public class SignUp {
+    public static boolean shop;
 
+    @FXML // fx:id="AcountTypeCombo"
+    private ComboBox<String> AcountTypeCombo; // Value injected by FXMLLoader
+    @FXML // fx:id="ShopsCombo"
+    private ComboBox<String> ShopsCombo; // Value injected by FXMLLoader
     @FXML // fx:id="IDNumber"
     private TextField IDNumber; // Value injected by FXMLLoader
 
@@ -60,8 +72,10 @@ public class SignUp {
         String firstname=firstNameTextBox.getText();
         String lastname=lastNameTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
-        List<Customer> customers=new ArrayList<Customer>();
-        clean();
+        List<Customer> customers=getAllCustomers();
+        List<Worker> workers=getAllWorkers();
+        clear();
+        MsgClass msg;
 
         ///////////////////////////////// Input validation ///////////////////////////
 
@@ -99,10 +113,6 @@ public class SignUp {
             }
         }
 
-        MsgClass msg =new MsgClass("#get customers",null);
-        SimpleClient.getClient().sendToServer(msg);
-
-        customers=(ArrayList<Customer>)data;
         if(customers!=null)
         {
             for(int i=0;i<customers.size();i++)
@@ -124,6 +134,30 @@ public class SignUp {
                     break;
                 }
             }
+
+        }
+        if(workers!=null)
+        {
+            for(int i=0;i<workers.size();i++)
+            {
+                if(username.equals(workers.get(i).getUser_name()))
+                {
+                    errors.add("User Name already exists please try with another one");
+                    userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+            for(int i=0;i<workers.size();i++)
+            {
+
+                if(id.equals(Integer.toString(workers.get(i).getId())))
+                {
+                    errors.add("Id Numer already exists please try with another one");
+                    IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+
         }
 
       if(id.length()!=9 && id.length()>0)
@@ -160,10 +194,17 @@ public class SignUp {
       else      //no errors detected
       {
           msg = new MsgClass("#add customer");
-          msg.setObj(new Customer(Integer.parseInt(id),firstname,lastname,username,password,creditnumber,"network_acount"));
+          if(AcountTypeCombo.getValue().equals("Account for a particular store"))
+          {
+              msg.setObj(new Customer(Integer.parseInt(id),firstname,lastname,username,password,creditnumber,ShopsCombo.getValue()));
+
+          }
+          else
+          {
+              msg.setObj(new Customer(Integer.parseInt(id),firstname,lastname,username,password,creditnumber,AcountTypeCombo.getValue()));
+          }
           SimpleClient.getClient().sendToServer(msg);
-           msg =new MsgClass("#get customers",null);
-          SimpleClient.getClient().sendToServer(msg);
+           customers =getAllCustomers();
           showAlert("success","Congratulations, your account has been successfully created");
           App.setRoot("controllers/LogIN");
       }
@@ -173,7 +214,8 @@ public class SignUp {
 
     }
 
-    private void clean() {
+    private void clear() {
+        ShopsCombo.setStyle("-fx-background-radius:15;");
         userName.setStyle("-fx-background-radius:15;");
         lastNameTextBox.setStyle("-fx-background-radius:15;");
         firstNameTextBox.setStyle("-fx-background-radius:15;");
@@ -199,12 +241,53 @@ public class SignUp {
 
     @FXML
     void Back(ActionEvent event) throws IOException {
-        App.setRoot("controllers/LogIN");
+        if(shop==false) {
+            App.setRoot("controllers/LogIN");
+        }
+        else{
+            App.setRoot("controllers/publicCatalog");
+        }
+    }
+
+    @FXML
+    public void initialize() throws IOException, InterruptedException {
+       AcountTypeCombo.getItems().removeAll(AcountTypeCombo.getItems());
+        AcountTypeCombo.getItems().removeAll(AcountTypeCombo.getItems());
+        AcountTypeCombo.getItems().addAll("Network account", "Network account with 10% discount","Account for a particular store");
+        AcountTypeCombo.getSelectionModel().select(0);
+
+
+        ArrayList<Shop> shops=getAllShops();
+
+        if(shops!=null)
+        {
+            //System.out.println("notnull");
+            for(int i=0;i<shops.size();i++)
+            {
+                ShopsCombo.getItems().addAll(shops.get(i).getAddress());
+            }
+        }
+    }
+    @FXML
+    void CheckComboStatus(ActionEvent event) {
+        if(AcountTypeCombo.getValue().equals("Account for a particular store"))
+        {
+            ShopsCombo.setVisible(true);
+            ShopsCombo.setDisable(false);
+            ShopsCombo.getSelectionModel().select(0);
+        }
+        else
+        {
+            ShopsCombo.setVisible(false);
+            ShopsCombo.setDisable(true);
+        }
     }
 
     @Subscribe
     public void onMessageEvent(MsgClass msg) {
 
     }
+
+
 }
 

@@ -32,12 +32,12 @@
          </font>
       </Button>
       <Button fx:id="catalogBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCatalog" prefHeight="36.0" prefWidth="111.0" style="-fx-background-radius: 15;" text="Catalog" />
-      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="199.0" layoutY="204.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;">
+      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="200.0" layoutY="209.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </PasswordField>
-      <TextField fx:id="visiblePassword" disable="true" layoutX="200.0" layoutY="204.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
+      <TextField fx:id="visiblePassword" disable="true" layoutX="200.0" layoutY="209.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

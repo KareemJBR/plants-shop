@@ -1,6 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,10 +17,14 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 
 /**
  * JavaFX App
@@ -37,7 +41,7 @@ public class App extends Application {
         client.openConnection();
         MsgClass msg =new MsgClass("#get customers",null);
         client.sendToServer(msg);
-        scene = new Scene(loadFXML("controllers/LogIN"), 640, 480);
+        scene = new Scene(loadFXML("controllers/LogIN"));
         stage.setScene(scene);
         stage.show();
     }
@@ -65,5 +69,43 @@ public class App extends Application {
 	public static void main(String[] args) {
         launch();
     }
+
+    public static  ArrayList<Customer> getAllCustomers() throws IOException {
+        ArrayList<Customer> customers=new ArrayList<Customer>();
+        MsgClass msg =new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg);
+        while(data==null) {System.out.println("waiting for server");}
+        customers=(ArrayList<Customer>)data;
+        return customers;
+    }
+
+    public static  ArrayList<Shop> getAllShops() throws IOException {
+        ArrayList<Shop> shops = new ArrayList<Shop>();
+        MsgClass msg = new MsgClass("#get Shops", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (shopsdata == null) {System.out.println("waiting for server");}
+        shops = (ArrayList<Shop>) shopsdata;
+        return shops;
+    }
+
+     public static  ArrayList<Flower> getAllFlowers() throws IOException {
+
+        ArrayList<Flower> Flowers=new ArrayList<Flower>();
+        MsgClass msg =new MsgClass("#get phots URL",null);
+        SimpleClient.getClient().sendToServer(msg);
+        Flowers=(ArrayList<Flower>)data;
+        return Flowers;
+    }
+
+    public static  ArrayList<Worker> getAllWorkers() throws IOException {
+        ArrayList<Worker> workers = new ArrayList<Worker>();
+        MsgClass msg = new MsgClass("#get Workers", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (workersdata == null) {System.out.println("waiting for server");}
+        workers = (ArrayList<Worker>) workersdata;
+        return workers;
+    }
+
+
 
 }

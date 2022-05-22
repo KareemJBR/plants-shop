@@ -1,8 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
@@ -16,6 +14,8 @@ public class SimpleClient extends AbstractClient {
 	
 	private static SimpleClient client = null;
 	public static  Object data;
+	public static  Object shopsdata;
+	public static  Object workersdata;
 
 
 	private SimpleClient(String host, int port) {
@@ -27,20 +27,31 @@ public class SimpleClient extends AbstractClient {
 			if (msg.getClass().equals(MsgClass.class)) {
 				MsgClass myMsg = (MsgClass) msg;
 				if (myMsg.getMsg().equals("all flowers")) {
+					System.out.println("in main client handler to get flowers");
 					data = myMsg.getObj();
-					try {
-						App.setRoot("primary");
-					}
-					catch (Exception e){
+				/*	try {
+						App.setRoot("controllers/CatalogForRegisteredClients");
+					}	catch (Exception e){
 						System.out.println("get all execption");
 						System.out.println(e);
-					}
+					}*/
 				}
 				if (myMsg.getMsg().equals("all customers"))
 				{
+					System.out.println("in get customers client side");
 					data = myMsg.getObj();
 				}
-		}
+				if(myMsg.getMsg().equals("all Shops"))
+				{
+					System.out.println("in get Shops client side");
+					shopsdata = myMsg.getObj();
+				}
+				if(myMsg.getMsg().equals("all Workers"))
+				{
+					System.out.println("in get Workers client side");
+					workersdata = myMsg.getObj();
+				}
+			}
 			else{
 				System.out.println("not done yet");
 			}

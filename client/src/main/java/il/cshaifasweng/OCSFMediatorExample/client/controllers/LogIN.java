@@ -4,6 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +12,20 @@ import javafx.scene.control.*;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class LogIN {
-    boolean show_password=false;
+    public static  String Client_username;
+    public static  String Worker_username;
+    String  current;
+    String password_status="invisible";
     @FXML // fx:id="showPassword"
     private CheckBox showPassword; // Value injected by FXMLLoader
     @FXML // fx:id="visiblePassword"
@@ -45,25 +53,58 @@ public class LogIN {
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
+        shop=false;
        App.setRoot("controllers/SignUp");
         //SignUp.main(null);
     }
     @FXML
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
-        List<Customer> customers=new ArrayList<Customer>();
-        MsgClass msg =new MsgClass("#get customers",null);
-        SimpleClient.getClient().sendToServer(msg);
-        customers=(ArrayList<Customer>)data;
+        ArrayList<Customer> customers=getAllCustomers();
+        ArrayList<Worker> workers=getAllWorkers();
+//        MsgClass msg =new MsgClass("#get customers",null);
+//        SimpleClient.getClient().sendToServer(msg);
+//        customers=(ArrayList<Customer>)data;
         if(customers!=null)
         {
+            if(password_status=="visible")
+            {
+                current=visiblePassword.getText();
+            }
+            else
+            {
+                current=Password.getText();
+            }
             for(int i=0;i<customers.size();i++)
             {
-               if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(Password.getText()))
+               if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(current))
                {
-                   showAlert("success","login success");
+                   //showAlert("success","login success");
                    login_success=true;
+                   Client_username=customers.get(i).getUser_name();
+                   App.setRoot("controllers/ClientMainPage");
                }
+            }
+        }
+        if(workers!=null)
+        {
+            if(password_status=="visible")
+            {
+                current=visiblePassword.getText();
+            }
+            else
+            {
+                current=Password.getText();
+            }
+            for(int i=0;i<workers.size();i++)
+            {
+                if(workers.get(i).getUser_name().equals(userName.getText()) && workers.get(i).getPassword().equals(current))
+                {
+                    //showAlert("success","login success");
+                    login_success=true;
+                    Worker_username=workers.get(i).getUser_name();
+                    App.setRoot("controllers/WorkerHomePage");
+                }
             }
         }
         if(!login_success)
@@ -75,28 +116,36 @@ public class LogIN {
 
     @FXML
     void openCatalog(ActionEvent event) throws IOException {
-        App.setRoot("controllers/CatalogForNoneRegisteredClients");
+        MsgClass msg=new MsgClass("catalog for register",null);
+        SimpleClient.getClient().sendToServer(msg);
+        System.out.println("msg sent to got flowers");
+        App.setRoot("controllers/publicCatalog");
+
     }
 
     @FXML
     void Show(ActionEvent event) {          ////////show checkbox //////////
         if(showPassword.isSelected())
         {
-            show_password=true;
-            visiblePassword.setVisible(true);
-            visiblePassword.setDisable(false);
+           // show_password=true;
+            password_status="visible";
+            current=Password.getText();
             Password.setDisable(true);
             Password.setVisible(false);
-            visiblePassword.setText(Password.getText());
+            visiblePassword.setVisible(true);
+            visiblePassword.setDisable(false);
+            visiblePassword.setText(current);
         }
         else
         {
-            show_password=false;
-            visiblePassword.setVisible(false);
+           // show_password=false;
+            password_status="invisible";
+            current=visiblePassword.getText();
             visiblePassword.setDisable(true);
+            visiblePassword.setVisible(false);
             Password.setDisable(false);
             Password.setVisible(true);
-            visiblePassword.setText(visiblePassword.getText());
+            Password.setText(current);
         }
     }
 
