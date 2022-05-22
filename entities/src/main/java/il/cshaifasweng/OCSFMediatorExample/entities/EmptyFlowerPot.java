@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Empty_Flower_Pot")
-public class emptyFlowerPot implements Serializable{
+public class EmptyFlowerPot implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -47,13 +47,13 @@ public class emptyFlowerPot implements Serializable{
         this.imgURL = imgURL;
     }
 
-    public emptyFlowerPot(int price, String color, String imgURL) {
+    public EmptyFlowerPot(int price, String color, String imgURL) {
         this.price = price;
         this.color = color;
         this.imgURL = imgURL;
     }
 
-    public emptyFlowerPot(int id, int price, String color, String imgURL) {
+    public EmptyFlowerPot(int id, int price, String color, String imgURL) {
         super();
         this.id = id;
         this.price = price;
@@ -61,7 +61,7 @@ public class emptyFlowerPot implements Serializable{
         this.imgURL = imgURL;
     }
 
-    public emptyFlowerPot() {
+    public EmptyFlowerPot() {
     }
 
     @Override
