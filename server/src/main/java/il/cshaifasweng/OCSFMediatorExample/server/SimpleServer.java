@@ -120,6 +120,10 @@ public class SimpleServer extends AbstractServer {
         configuration.addAnnotatedClass(Worker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(report.class);
+        configuration.addAnnotatedClass(FlowerPotWithFlower.class);
+        configuration.addAnnotatedClass(flowerBouquet.class);
+        configuration.addAnnotatedClass(emptyFlowerPot.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())

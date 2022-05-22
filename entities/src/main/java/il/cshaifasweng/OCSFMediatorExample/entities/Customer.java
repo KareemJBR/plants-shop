@@ -1,8 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -26,6 +27,11 @@ public class Customer  implements Serializable {
     private double budget;
     @Column(name = "account_type")
     String acount_type;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+   // @JoinColumn(name="customerReport") // join column is in table for Order
+    private List<report> customerReports =new ArrayList<>();
+
+
 
 
 
@@ -93,4 +99,9 @@ public class Customer  implements Serializable {
     public String getPassword(){
         return this.password;
     }
+
+    public void addReport(report report){
+        customerReports.add(report);
+    }
+
 }
