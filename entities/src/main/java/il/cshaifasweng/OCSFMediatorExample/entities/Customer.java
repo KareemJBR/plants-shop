@@ -29,7 +29,7 @@ public class Customer  implements Serializable {
     String acount_type;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
    // @JoinColumn(name="customerReport") // join column is in table for Order
-    private List<report> customerReports =new ArrayList<>();
+    private List<Report> customerReports =new ArrayList<>();
 
 
 
@@ -100,7 +100,7 @@ public class Customer  implements Serializable {
         return this.password;
     }
 
-    public void addReport(report report){
+    public void addReport(Report report){
         customerReports.add(report);
     }
 

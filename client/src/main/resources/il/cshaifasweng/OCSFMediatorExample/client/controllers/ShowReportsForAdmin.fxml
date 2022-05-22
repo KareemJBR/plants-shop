@@ -24,10 +24,10 @@
       </Hyperlink>
       <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="125.0" />
       <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="173.0" />
-      <Text layoutX="23.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
-      <Text layoutX="25.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
-      <CheckBox fx:id="comparisonOn" layoutX="25.0" layoutY="223.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
-      <Text layoutX="25.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
+      <Text layoutX="17.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
+      <Text layoutX="19.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
+      <CheckBox fx:id="comparisonOn" layoutX="19.0" layoutY="255.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
+      <Text layoutX="16.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
       <ComboBox fx:id="shopsList1" layoutX="122.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" />
       <Line endX="-100.0" endY="198.20001220703125" layoutX="494.0" layoutY="65.0" startX="-100.0" />
       <Text layoutX="435.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
@@ -37,5 +37,7 @@
       <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="125.0" />
       <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="173.0" />
       <Button layoutX="348.0" layoutY="312.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="42.0" prefWidth="92.0" text="Show" />
+      <Text layoutX="18.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Type:" />
+      <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="215.0" prefHeight="26.0" prefWidth="175.0" />
    </children>
 </AnchorPane>

@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Flower_Bouquet")
-public class flowerBouquet implements Serializable {
+public class FlowerBouquet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,7 +14,7 @@ public class flowerBouquet implements Serializable {
     private String color;
     private String imgURL;
 
-    public flowerBouquet(int id, int price, String color, String imgURL) {
+    public FlowerBouquet(int id, int price, String color, String imgURL) {
         super();
         this.id = id;
         this.price = price;
@@ -22,10 +22,10 @@ public class flowerBouquet implements Serializable {
         this.imgURL = imgURL;
     }
 
-    public flowerBouquet() {
+    public FlowerBouquet() {
     }
 
-    public flowerBouquet(int price, String color, String imgURL) {
+    public FlowerBouquet(int price, String color, String imgURL) {
         this.price = price;
         this.color = color;
         this.imgURL = imgURL;

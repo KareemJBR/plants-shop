@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Reports")
-public class report implements Serializable {
+public class Report implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -20,17 +20,17 @@ public class report implements Serializable {
     private Customer customer;
 
 
-    public report() {
+    public Report() {
     }
 
-    public report(String content, boolean handled, boolean workingOnIT, String answer) {
+    public Report(String content, boolean handled, boolean workingOnIT, String answer) {
         this.content = content;
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
     }
 
-    public report(String content, boolean handled, boolean workingOnIT, String answer, Customer customer) {
+    public Report(String content, boolean handled, boolean workingOnIT, String answer, Customer customer) {
         this.content = content;
         this.handled = handled;
         this.workingOnIT = workingOnIT;
@@ -38,7 +38,7 @@ public class report implements Serializable {
         this.customer = customer;
     }
 
-    public report(String content, String answer, Customer customer) {
+    public Report(String content, String answer, Customer customer) {
         this.content = content;
         this.answer = answer;
         this.customer = customer;
