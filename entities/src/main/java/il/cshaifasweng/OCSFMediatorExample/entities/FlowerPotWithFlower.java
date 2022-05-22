@@ -1,47 +1,34 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
+
 import javax.persistence.*;
-import java.awt.*;
 import java.io.Serializable;
 
-
 @Entity
-@Table(name = "Flowers")
-public class Flower implements Serializable {
+@Table(name = "Flower_Pot_With_Flowers")
+public class FlowerPotWithFlower  implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int price;
-    @Column(name="Color")
+    @Column(name = "Color")
     private String color;
     private String imgURL;
 
-    public Flower(int price, String color, String imgURL) {
-        this.price = price;
-        this.color = color;
-        this.imgURL = imgURL;
-    }
-
-    public String getImgURL() {
-        return imgURL;
-    }
-
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
-    }
-
-    public Flower() {
-    }
-
-    public Flower(int id, int price, String color) {
+    public FlowerPotWithFlower(int id, int price, String color, String imgURL) {
         super();
         this.id = id;
         this.price = price;
         this.color = color;
+        this.imgURL = imgURL;
     }
 
-    public Flower(int price, String color) {
+    public FlowerPotWithFlower() {
+    }
+
+    public FlowerPotWithFlower(int price, String color, String imgURL) {
         this.price = price;
         this.color = color;
+        this.imgURL = imgURL;
     }
 
     public int getId() {
@@ -68,11 +55,19 @@ public class Flower implements Serializable {
         this.color = color;
     }
 
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
 
     @Override
     public String toString() {
-        String output="type: Flower"+"\n"+" price: "+this.price +"\n"
+        String output="type: Flower Pot With Flower"+"\n"+" price: "+this.price +"\n"
                 +"color: "+ this.color+"\n";
         return  output;
     }
+
 }

@@ -1,9 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import com.mysql.cj.protocol.Warning;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
@@ -94,6 +92,10 @@ public class SimpleServer extends AbstractServer {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(report.class);
+        configuration.addAnnotatedClass(FlowerPotWithFlower.class);
+        configuration.addAnnotatedClass(flowerBouquet.class);
+        configuration.addAnnotatedClass(emptyFlowerPot.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
