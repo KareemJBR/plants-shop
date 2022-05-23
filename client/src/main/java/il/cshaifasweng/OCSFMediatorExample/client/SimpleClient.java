@@ -14,8 +14,12 @@ public class SimpleClient extends AbstractClient {
 	
 	private static SimpleClient client = null;
 	public static  Object data;
+<<<<<<< HEAD
+	public static  Object currentCustomerData;
+=======
 	public static  Object shopsdata;
 	public static  Object workersdata;
+>>>>>>> main
 
 
 	private SimpleClient(String host, int port) {
@@ -41,6 +45,15 @@ public class SimpleClient extends AbstractClient {
 					System.out.println("in get customers client side");
 					data = myMsg.getObj();
 				}
+<<<<<<< HEAD
+				if (myMsg.getMsg().equals("your current customer"))
+				{
+					currentCustomerData = myMsg.getObj();
+					System.out.println("in get your current customer");
+					System.out.println(myMsg.getObj());
+				}
+		}
+=======
 				if(myMsg.getMsg().equals("all Shops"))
 				{
 					System.out.println("in get Shops client side");
@@ -52,6 +65,7 @@ public class SimpleClient extends AbstractClient {
 					workersdata = myMsg.getObj();
 				}
 			}
+>>>>>>> main
 			else{
 				System.out.println("not done yet");
 			}

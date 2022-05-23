@@ -73,16 +73,22 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer(123456789, "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
         session.save(customer1);
-        Customer customer2 = new Customer(208101458, "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
+        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
         session.save(customer2);
-        Customer customer3 = new Customer(206522435, "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
+        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
         session.save(customer3);
         session.flush();
-        Customer customer4 = new Customer(12312312, "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
         session.save(customer4);
         session.flush();
+<<<<<<< HEAD
+        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
+        session.save(customer5);
+        session.flush();
+=======
+>>>>>>> main
     }
 
     private static void generateFlowers() {
@@ -163,6 +169,16 @@ public class SimpleServer extends AbstractServer {
         System.out.println(flower);
         session.getTransaction().commit();
     }
+    private Customer getCustomer(String userName) throws Exception {
+        List<Customer> customers = getAllCustomers();
+        Customer out=null;
+        for (Customer customer : customers) {
+            if(customer.getUser_name().equals(userName)){
+                out=customer;
+            }
+        }
+        return out;
+    }
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
@@ -199,7 +215,6 @@ public class SimpleServer extends AbstractServer {
                 }
                 if (msgtext.equals("#get customers")) {
                     try {
-                        System.out.println("was in customers");
                         MsgClass myMSg = new MsgClass("all customers");
                         myMSg.setObj(getAllCustomers());
                         System.out.println("all customers");
@@ -242,6 +257,29 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e);
                     }
                 }
+                if (msgtext.equals("#add report")) {
+                    try {
+                        System.out.println("in add report");
+                        AddReport((report)((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened5");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get current customer")) {
+                    try {
+                        System.out.println("in get current customer");
+                        String user=(String)myMsg.getObj();
+                        System.out.println( "the user is" + user);
+                        System.out.println(getCustomer(user));
+                        MsgClass myMSg = new MsgClass("your current customer",getCustomer(user));
+                        client.sendToClient(myMSg);
+                        System.out.println("customer sent");
+                    } catch (Exception e) {
+                        System.out.println("error happened4");
+                        System.out.println(e);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -258,6 +296,15 @@ public class SimpleServer extends AbstractServer {
         session.flush();
         session.getTransaction().commit();
         session.clear();
+    }
+
+    private static void AddReport(report R) {
+        session.beginTransaction();
+        session.clear();
+        session.save(R);
+        session.flush();
+        session.getTransaction().commit();
+
     }
 
 
