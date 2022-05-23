@@ -39,8 +39,8 @@ public class App extends Application {
        // EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
-        MsgClass msg =new MsgClass("#get customers",null);
-        client.sendToServer(msg);
+//        MsgClass msg =new MsgClass("#get customers",null);
+//        client.sendToServer(msg);
         scene = new Scene(loadFXML("controllers/LogIN"));
         stage.setScene(scene);
         stage.show();

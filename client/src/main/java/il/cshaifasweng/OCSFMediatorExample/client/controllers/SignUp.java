@@ -19,7 +19,6 @@ import java.util.concurrent.locks.Lock;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllWorkers;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.shopsdata;
 
 public class SignUp {
     public static boolean shop;
