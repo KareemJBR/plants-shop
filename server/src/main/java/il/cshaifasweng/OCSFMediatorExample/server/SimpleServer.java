@@ -1,38 +1,47 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import com.mysql.cj.protocol.Warning;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 //my imports
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class SimpleServer extends AbstractServer {
 
     private static Session session;
     private static SessionFactory sessionFactory = getSessionFactory();
-
+    private static List<Shop> getAllShops() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Shop> query = builder.createQuery(Shop.class);
+        query.from(Shop.class);
+        List<Shop> data = session.createQuery(query).getResultList();
+        return data;
+    }
+  
     private static List<Flower> getAllFlowers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flower> query = builder.createQuery(Flower.class);
         query.from(Flower.class);
         List<Flower> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
+    private static List<Worker> getAllWorkers() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Worker> query = builder.createQuery(Worker.class);
+        query.from(Worker.class);
+        List<Worker> data = session.createQuery(query).getResultList();
         return data;
     }
 
@@ -42,6 +51,24 @@ public class SimpleServer extends AbstractServer {
         query.from(Customer.class);
         List<Customer> data = session.createQuery(query).getResultList();
         return data;
+    }
+
+    private static void generateShops() {
+        /* ---------- Saving Shops To Data Base ---------- */
+        Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
+        session.save(shop1);
+        Shop shop2 = new Shop("Hanamal 500, Haifa",123456789);
+        session.save(shop2);
+        session.flush();
+    }
+
+    private static void generateWorkers() {
+        /* ---------- Saving Shops To Data Base ---------- */
+        Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
+        session.save(worker1);
+        Worker worker2 = new Worker(206384919,"mostafa","egbaria","mostafa_eg","mostafa123");
+        session.save(worker2);
+        session.flush();
     }
 
     private static void generateCustomers() {
@@ -56,9 +83,12 @@ public class SimpleServer extends AbstractServer {
         Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
         session.save(customer4);
         session.flush();
+<<<<<<< HEAD
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
         session.save(customer5);
         session.flush();
+=======
+>>>>>>> main
     }
 
     private static void generateFlowers() {
@@ -90,12 +120,14 @@ public class SimpleServer extends AbstractServer {
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
+        configuration.addAnnotatedClass(Shop.class);
+        configuration.addAnnotatedClass(Worker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
-        configuration.addAnnotatedClass(report.class);
+        configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(FlowerPotWithFlower.class);
-        configuration.addAnnotatedClass(flowerBouquet.class);
-        configuration.addAnnotatedClass(emptyFlowerPot.class);
+        configuration.addAnnotatedClass(FlowerBouquet.class);
+        configuration.addAnnotatedClass(EmptyFlowerPot.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
@@ -105,6 +137,8 @@ public class SimpleServer extends AbstractServer {
 
     public static void addDataToDB() {
         try {
+            generateShops();
+            generateWorkers();
             generateFlowers();
             generateCustomers();
             session.getTransaction().commit();
@@ -190,10 +224,34 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e);
                     }
                 }
+                if (msgtext.equals("#get Shops")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all Shops");
+                        myMSg.setObj(getAllShops());
+                        System.out.println("all Shops");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened3");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get Workers")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all Workers");
+//                        List<Worker> y=getAllWorkers();
+//                        System.out.println(y.size());
+                        myMSg.setObj(getAllWorkers());
+                        System.out.println("all Workers");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened4");
+                        System.out.println(e);
+                    }
+                }
                 if (msgtext.equals("#add customer")) {
                     try {
                         System.out.println("in add customer");
-                        AddConsumer((Customer) ((MsgClass) msg).getObj());
+                        AddCustomer((Customer) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened3");
                         System.out.println(e);
@@ -232,7 +290,7 @@ public class SimpleServer extends AbstractServer {
     }
 
 
-    private static void AddConsumer(Customer p) {
+    private static void AddCustomer(Customer p) {
         session.beginTransaction();
         session.save(p);
         session.flush();
