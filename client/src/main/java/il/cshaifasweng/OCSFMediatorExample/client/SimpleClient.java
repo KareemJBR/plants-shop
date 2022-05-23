@@ -16,6 +16,7 @@ public class SimpleClient extends AbstractClient {
 	
 	private static SimpleClient client = null;
 	public static  Object data;
+	public static  Object currentCustomerData;
 
 
 	private SimpleClient(String host, int port) {
@@ -38,8 +39,14 @@ public class SimpleClient extends AbstractClient {
 				}
 				if (myMsg.getMsg().equals("all customers"))
 				{
-					System.out.println("in get customes client side");
+					System.out.println("in get customers client side");
 					data = myMsg.getObj();
+				}
+				if (myMsg.getMsg().equals("your current customer"))
+				{
+					currentCustomerData = myMsg.getObj();
+					System.out.println("in get your current customer");
+					System.out.println(myMsg.getObj());
 				}
 		}
 			else{

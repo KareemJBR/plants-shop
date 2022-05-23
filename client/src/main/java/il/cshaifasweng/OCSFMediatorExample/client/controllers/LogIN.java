@@ -85,6 +85,7 @@ public class LogIN {
         if(!login_success)
         {
             showAlert("error","Username or Password is incorrect");
+            System.out.println(Client_username);
         }
 
     }

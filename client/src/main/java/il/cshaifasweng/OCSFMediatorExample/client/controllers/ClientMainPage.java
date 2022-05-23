@@ -7,6 +7,9 @@ import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -19,6 +22,8 @@ import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Client_username;
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
+import javafx.stage.Stage;
+
 public class ClientMainPage {
 
     @FXML // fx:id="LogOutBtn"
@@ -33,6 +38,26 @@ public class ClientMainPage {
     private Button customizedOrderBtn;
     @FXML
     private TextField messagetextfield;
+
+    @FXML
+    private Button SendReportBtn;
+
+    @FXML
+    private Button viewReportBtn;
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+    @FXML
+    void CreateReport(ActionEvent event) throws IOException {
+        App.setRoot("controllers/CreateReport");
+    }
+
+    @FXML
+    void viewReport(ActionEvent event) {
+
+    }
 
     @FXML
     void Cart(ActionEvent event) throws IOException {
