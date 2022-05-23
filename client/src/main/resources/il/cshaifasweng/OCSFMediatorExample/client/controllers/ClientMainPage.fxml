@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
    <children>
-      <Button fx:id="catalogBtn" layoutX="236.0" layoutY="102.0" mnemonicParsing="false" onAction="#catalog" prefHeight="82.0" prefWidth="168.0" style="-fx-background-radius: 25;" text="Catalog">
+      <Button fx:id="catalogBtn" layoutX="240.0" layoutY="80.0" mnemonicParsing="false" onAction="#catalog" prefHeight="60.0" prefWidth="170.0" style="-fx-background-radius: 25;" text="Catalog">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="customizedOrderBtn" layoutX="236.0" layoutY="225.0" mnemonicParsing="false" onAction="#customizedOrder" prefHeight="82.0" prefWidth="168.0" style="-fx-background-radius: 25;" text="Customized Order">
+      <Button fx:id="customizedOrderBtn" layoutX="240.0" layoutY="160.0" mnemonicParsing="false" onAction="#customizedOrder" prefHeight="60.0" prefWidth="170.0" style="-fx-background-radius: 25;" text="Customized Order">
          <font>
             <Font size="15.0" />
          </font>
@@ -27,7 +27,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="customizedOrderBtn1" layoutX="236.0" layoutY="359.0" mnemonicParsing="false" onAction="#myOrders" prefHeight="82.0" prefWidth="168.0" style="-fx-background-radius: 25;" text="My Orders ">
+      <Button fx:id="customizedOrderBtn1" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" onAction="#myOrders" prefHeight="60.0" prefWidth="170.0" style="-fx-background-radius: 25;" text="My Orders ">
          <font>
             <Font size="15.0" />
          </font>
@@ -37,5 +37,15 @@
             <Font name="Arial" size="20.0" />
          </font>
       </TextField>
+      <Button fx:id="viewReportBtn" layoutX="240.0" layoutY="400.0" mnemonicParsing="false" onAction="#viewReport" prefHeight="60.0" prefWidth="170.0" style="-fx-background-radius: 25;" text="View My Reports">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="SendReportBtn" layoutX="240.0" layoutY="320.0" mnemonicParsing="false" onAction="#CreateReport" prefHeight="60.0" prefWidth="170.0" style="-fx-background-radius: 25;" text=" Create Report">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

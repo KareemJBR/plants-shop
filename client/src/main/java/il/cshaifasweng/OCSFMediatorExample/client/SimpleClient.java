@@ -14,6 +14,7 @@ public class SimpleClient extends AbstractClient {
 	
 	private static SimpleClient client = null;
 	public static  Object data;
+	public static  Object currentCustomerData;
 	public static  Object shopsdata;
 	public static  Object workersdata;
 
@@ -41,6 +42,13 @@ public class SimpleClient extends AbstractClient {
 					System.out.println("in get customers client side");
 					data = myMsg.getObj();
 				}
+				if (myMsg.getMsg().equals("your current customer"))
+				{
+					currentCustomerData = myMsg.getObj();
+					System.out.println("in get your current customer");
+					System.out.println(myMsg.getObj());
+				}
+
 				if(myMsg.getMsg().equals("all Shops"))
 				{
 					System.out.println("in get Shops client side");
