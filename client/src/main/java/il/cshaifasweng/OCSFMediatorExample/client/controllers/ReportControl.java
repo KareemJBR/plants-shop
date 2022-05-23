@@ -4,7 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.report;
+import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -60,7 +60,7 @@ public class ReportControl {
                 current=customers.get(i);
             }
         }
-        report newReport = new report(reportText.getText(),false,false,"");
+        Report newReport = new Report(reportText.getText(),false,false,"");
         newReport.setCustomer(current);
         MsgClass msg1=new MsgClass("#add report",newReport);
         SimpleClient.getClient().sendToServer(msg1);

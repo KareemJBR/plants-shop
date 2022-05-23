@@ -9,12 +9,9 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer  implements Serializable {
     @Id
-<<<<<<< HEAD
-    private final String id;
-=======
     @Column(name = "customer_id")
-    private final int id;
->>>>>>> main
+    private final String id;
+
 
     @Column(name = "customer_user_name")
     private String user_name;
