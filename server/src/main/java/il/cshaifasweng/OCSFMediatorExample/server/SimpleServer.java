@@ -83,12 +83,10 @@ public class SimpleServer extends AbstractServer {
         Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
         session.save(customer4);
         session.flush();
-<<<<<<< HEAD
+
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
         session.save(customer5);
         session.flush();
-=======
->>>>>>> main
     }
 
     private static void generateFlowers() {
@@ -260,7 +258,7 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#add report")) {
                     try {
                         System.out.println("in add report");
-                        AddReport((report)((MsgClass) msg).getObj());
+                        AddReport((Report)((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened5");
                         System.out.println(e);
@@ -298,7 +296,7 @@ public class SimpleServer extends AbstractServer {
         session.clear();
     }
 
-    private static void AddReport(report R) {
+    private static void AddReport(Report R) {
         session.beginTransaction();
         session.clear();
         session.save(R);
