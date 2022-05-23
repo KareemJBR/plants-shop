@@ -15,7 +15,7 @@ public class Report implements Serializable {
     private boolean handled=false;
     private  boolean workingOnIT=false;
     private String answer;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

@@ -9,8 +9,12 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer  implements Serializable {
     @Id
+<<<<<<< HEAD
+    private final String id;
+=======
     @Column(name = "customer_id")
     private final int id;
+>>>>>>> main
 
     @Column(name = "customer_user_name")
     private String user_name;
@@ -35,7 +39,7 @@ public class Customer  implements Serializable {
 
 
 
-    public Customer(int id, String first_name, String last_name, String user_name,String password,String credit_card,String account_type){
+    public Customer(String id, String first_name, String last_name, String user_name,String password,String credit_card,String account_type){
         budget = 0.0;
         this.id=id;
         this.first_name=first_name;
@@ -47,7 +51,7 @@ public class Customer  implements Serializable {
     }
 
     public Customer() {
-        this.id=123456789;
+        this.id="123456789";
     }
 
 
@@ -81,7 +85,7 @@ public class Customer  implements Serializable {
         this.user_name = user_name;
     }
 
-    public int getUser_id(){
+    public String getUser_id(){
         return id;
     }
 
