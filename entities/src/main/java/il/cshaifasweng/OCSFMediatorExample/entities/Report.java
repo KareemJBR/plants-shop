@@ -3,7 +3,9 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 @Entity
 @Table(name = "Reports")
 public class Report implements Serializable {
@@ -15,6 +17,8 @@ public class Report implements Serializable {
     private boolean handled=false;
     private  boolean workingOnIT=false;
     private String answer;
+    private String reportDate;
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -28,6 +32,7 @@ public class Report implements Serializable {
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
+        getdate();
     }
 
     public Report(String content, boolean handled, boolean workingOnIT, String answer, Customer customer) {
@@ -92,4 +97,12 @@ public class Report implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public void getdate(){
+        //Date date=new Date();
+        //this.reportDate=date.toString();
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        this.reportDate=timeStamp;
+    }
+
 }
