@@ -118,7 +118,7 @@ public class SignUp {
             for(int i=0;i<customers.size();i++)
             {
 
-                if(id.equals(Integer.toString(customers.get(i).getUser_id())))
+                if(id.equals((customers.get(i).getUser_id())))
                 {
                     errors.add("Id Numer already exists please try with another one");
                     IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
@@ -161,7 +161,7 @@ public class SignUp {
       else      //no errors detected
       {
           msg = new MsgClass("#add customer");
-          msg.setObj(new Customer(Integer.parseInt(id),firstname,lastname,username,password,creditnumber,"network_acount"));
+          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount"));
           SimpleClient.getClient().sendToServer(msg);
            msg =new MsgClass("#get customers",null);
           SimpleClient.getClient().sendToServer(msg);

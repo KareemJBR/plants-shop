@@ -46,17 +46,17 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer(123456789, "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
         session.save(customer1);
-        Customer customer2 = new Customer(208101458, "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
+        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
         session.save(customer2);
-        Customer customer3 = new Customer(206522435, "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
+        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
         session.save(customer3);
         session.flush();
-        Customer customer4 = new Customer(12312333, "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
         session.save(customer4);
         session.flush();
-        Customer customer5 = new Customer(12332312, "sewy", "sew", "2", "2", "0000000011141111", "network_account");
+        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
         session.save(customer5);
         session.flush();
     }

@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
@@ -30,6 +31,9 @@ public class ReportControl {
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
+        MsgClass msg=new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg);
+        App.setRoot("controllers/ClientMainPage");
     }
 
     @FXML
@@ -60,6 +64,9 @@ public class ReportControl {
         newReport.setCustomer(current);
         MsgClass msg1=new MsgClass("#add report",newReport);
         SimpleClient.getClient().sendToServer(msg1);
+        MsgClass msg3=new MsgClass("#get customers",null);
+        SimpleClient.getClient().sendToServer(msg3);
+        App.setRoot("controllers/ClientMainPage");
         showAlert("done", "report sent");
     }
     private void getCustomer(String userName) throws Exception {
