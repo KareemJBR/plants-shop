@@ -6,17 +6,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 
-public class ShowReportsForAdmin {
+public class ShowReportsForAdmin implements Initializable {
 
     @FXML
     private CheckBox comparisonOn;
@@ -41,29 +44,6 @@ public class ShowReportsForAdmin {
 
     @FXML
     private DatePicker untilDate2;
-
-    @FXML
-    public void initialize() throws IOException {
-        ArrayList<Shop> shops = getAllShops();
-        if(shops == null)
-            return;
-
-        ObservableList<String> shops_ids = FXCollections.observableArrayList();
-
-        for(int i=0;i<shops.size();i++){
-            shops_ids.add(shops_ids.get(i));
-        }
-
-        shopsList1.setItems(shops_ids);
-        shopsList2.setItems(shops_ids);
-
-        ObservableList<String> reports_types = FXCollections.observableArrayList();
-
-        reports_types.add("Orders");
-        reports_types.add("Complaints");
-
-        reportTypeComboBox.setItems(reports_types);
-    }
 
     @FXML
     void backToHomePage(ActionEvent event) throws IOException {
@@ -139,4 +119,32 @@ public class ShowReportsForAdmin {
         });
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ArrayList<Shop> shops = null;
+        try {
+            shops = getAllShops();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(shops == null)
+            return;
+
+        ObservableList<String> shops_ids = FXCollections.observableArrayList();
+
+        for(int i=0;i<shops.size();i++){
+            shops_ids.add(shops_ids.get(i));
+        }
+
+        shopsList1.setItems(shops_ids);
+        shopsList2.setItems(shops_ids);
+
+        ObservableList<String> reports_types = FXCollections.observableArrayList();
+
+        reports_types.add("Orders");
+        reports_types.add("Complaints");
+
+        reportTypeComboBox.setItems(reports_types);
+    }
 }
