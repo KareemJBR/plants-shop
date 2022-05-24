@@ -15,7 +15,7 @@ public class WorkerHomePage {
 
     @FXML
     void signOut(ActionEvent event) throws IOException {
-        App.setRoot("LogIN");
+        App.setRoot("controllers/LogIN");
     }
 
 }
