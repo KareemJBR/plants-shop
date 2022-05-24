@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer  implements Serializable {
     @Id
+    @Column(name = "customer_id")
     private final String id;
 
     @Column(name = "customer_user_name")

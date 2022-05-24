@@ -205,16 +205,27 @@ public class SignUp {
       {
           msg = new MsgClass("#add customer");
           msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
+          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount"));
+
           SimpleClient.getClient().sendToServer(msg);
            msg =new MsgClass("#get customers",null);
           if(AcountTypeCombo.getValue().equals("Account for a particular store"))
           {
+
               msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,ShopsCombo.getValue(),email));
           }
           else
           {
               msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,AcountTypeCombo.getValue(),email));
           }
+              msg.setObj(new Customer( id,firstname,lastname,username,password,creditnumber,ShopsCombo.getValue()));
+
+          }
+          else
+          {
+              msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,AcountTypeCombo.getValue()));
+          }
+
           SimpleClient.getClient().sendToServer(msg);
            customers =getAllCustomers();
           showAlert("success","Congratulations, your account has been successfully created");

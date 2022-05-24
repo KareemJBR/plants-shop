@@ -62,6 +62,7 @@ public class ReportControl {
             }
         }
         Report newReport = new Report(reportText.getText(),false,false,"");
+        Report newReport = new Report(reportText.getText(),false,false,null);
         newReport.setCustomer(current);
         MsgClass msg1=new MsgClass("#add report",newReport);
         SimpleClient.getClient().sendToServer(msg1);
