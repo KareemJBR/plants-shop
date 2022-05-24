@@ -205,7 +205,7 @@ public class SignUp {
       {
           msg = new MsgClass("#add customer");
           msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
-          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount"));
+          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
 
           SimpleClient.getClient().sendToServer(msg);
            msg =new MsgClass("#get customers",null);
@@ -217,13 +217,6 @@ public class SignUp {
           else
           {
               msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,AcountTypeCombo.getValue(),email));
-          }
-              msg.setObj(new Customer( id,firstname,lastname,username,password,creditnumber,ShopsCombo.getValue()));
-
-          }
-          else
-          {
-              msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,AcountTypeCombo.getValue()));
           }
 
           SimpleClient.getClient().sendToServer(msg);

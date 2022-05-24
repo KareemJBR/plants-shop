@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.publicCatalogControl">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.publicCatalogControl">
    <children>
       <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="123.0" layoutY="5.0" style="-fx-background-color: none;" text="Catalog">
          <font>
@@ -20,7 +20,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="backBtn1" layoutX="547.0" layoutY="8.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="sing up">
+      <Button fx:id="backBtn1" layoutX="547.0" layoutY="8.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Sign up">
          <font>
             <Font size="15.0" />
          </font>

@@ -130,7 +130,6 @@ public class SimpleServer extends AbstractServer {
         session.save(customer4);
         session.flush();
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account","email@gmail.com");
-        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
         session.save(customer5);
         session.flush();
     }
