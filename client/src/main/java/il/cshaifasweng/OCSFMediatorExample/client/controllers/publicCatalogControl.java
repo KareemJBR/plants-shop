@@ -97,10 +97,6 @@ public class publicCatalogControl {
             System.out.println("init exception for reg catalog");
             System.out.println(e);
         }
-        img1.setImage(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU"));
-        img2.setImage(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU"));
-        img3.setImage(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU"));
-
     }
 
 

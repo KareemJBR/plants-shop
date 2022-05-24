@@ -80,7 +80,7 @@ public class Cart<T> {
 
                            //////////////// details of the item //////////////
                                        ///////// price textfield ///////////
-                        TextField price=new TextField("price: "+ Integer.toString(cartItems.get(i).getPrice()));
+                        TextField price=new TextField("price: "+ cartItems.get(i).getPrice());
                         price.setStyle("-fx-background-color:none");
                         price.setLayoutX(100);
                         price.setLayoutY(8);
