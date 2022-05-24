@@ -114,8 +114,4 @@ public class App extends Application {
         cartItems = (ArrayList<CartItem>) CartItemsdata;
         return cartItems;
     }
-
-
-
-
 }
