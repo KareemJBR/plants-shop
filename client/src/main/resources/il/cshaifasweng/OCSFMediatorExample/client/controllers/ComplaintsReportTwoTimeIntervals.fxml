@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="686.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals">
+   <children>
+      <BarChart fx:id="complaintsChart2" layoutX="453.0" layoutY="272.0" prefHeight="400.0" prefWidth="438.0" title="Complaints Report">
+        <xAxis>
+          <CategoryAxis fx:id="dayAxes2" label="Day" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="complaintsNumAxes2" label="Complaints Number" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart fx:id="complaintsChart1" layoutX="14.0" layoutY="272.0" prefHeight="400.0" prefWidth="438.0" title="Complaints Report">
+         <xAxis>
+            <CategoryAxis fx:id="dayAxes1" label="Day" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="complaintsNumAxes1" label="Complaints Number" side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <Line endY="212.80001831054688" layoutX="453.0" layoutY="458.0" startY="-438.79998779296875" />
+      <Text layoutX="28.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop Address:" />
+      <Text layoutX="28.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
+      <Text layoutX="32.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
+      <Text layoutX="472.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop Address:" />
+      <Text layoutX="472.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
+      <Text layoutX="476.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
+      <TextArea fx:id="shopAddress1" layoutX="170.0" layoutY="81.0" prefHeight="34.0" prefWidth="200.0" />
+      <TextArea fx:id="shopAddress2" layoutX="617.0" layoutY="79.0" prefHeight="34.0" prefWidth="200.0" />
+      <TextArea fx:id="startDate2" layoutX="617.0" layoutY="142.0" prefHeight="34.0" prefWidth="200.0" />
+      <TextArea fx:id="endDate2" layoutX="617.0" layoutY="199.0" prefHeight="34.0" prefWidth="200.0" />
+      <TextArea fx:id="endDate1" layoutX="170.0" layoutY="199.0" prefHeight="16.0" prefWidth="200.0" />
+      <TextArea fx:id="startDate1" layoutX="170.0" layoutY="142.0" prefHeight="34.0" prefWidth="200.0" />
+      <Text layoutX="28.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop ID:" />
+      <TextArea fx:id="shopIDText1" layoutX="170.0" layoutY="28.0" prefHeight="34.0" prefWidth="200.0" />
+      <Text layoutX="479.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop ID:" />
+      <TextArea fx:id="shopIDText2" layoutX="617.0" layoutY="27.0" prefHeight="34.0" prefWidth="200.0" />
+   </children>
 </AnchorPane>
