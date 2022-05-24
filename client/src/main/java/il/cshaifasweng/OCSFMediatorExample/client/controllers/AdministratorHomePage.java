@@ -21,17 +21,17 @@ public class AdministratorHomePage {
 
     @FXML
     void showCustomers(ActionEvent event) throws IOException {
-        App.setRoot("ShowAllCustomers");
+        App.setRoot("controllers/ShowAllCustomers");
     }
 
     @FXML
     void showReports(ActionEvent event) throws IOException {
-        App.setRoot("ShowReportsForAdmin");
+        App.setRoot("controllers/ShowReportsForAdmin");
     }
 
     @FXML
     void signOut(ActionEvent event) throws IOException {
-        App.setRoot("LogIN");
+        App.setRoot("controllers/LogIN");
     }
 
 }

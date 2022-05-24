@@ -38,7 +38,7 @@ public class CustomerDetailsToEdit {
 
     @FXML
     void backToCustomersView(ActionEvent event) throws IOException {
-        App.setRoot("ShowAllCustomers.fxml");
+        App.setRoot("controllers/ShowAllCustomers");
     }
 
     @FXML
