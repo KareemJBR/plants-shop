@@ -39,8 +39,8 @@ public class App extends Application {
        // EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
-        MsgClass msg =new MsgClass("#get customers",null);
-        client.sendToServer(msg);
+//        MsgClass msg =new MsgClass("#get customers",null);
+//        client.sendToServer(msg);
         scene = new Scene(loadFXML("controllers/LogIN"));
         stage.setScene(scene);
         stage.show();
@@ -74,8 +74,8 @@ public class App extends Application {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
-        while(data==null) {System.out.println("waiting for server");}
-        customers=(ArrayList<Customer>)data;
+        while(Customersdata==null) {System.out.println("waiting for server");}
+        customers=(ArrayList<Customer>)Customersdata;
         return customers;
     }
 
@@ -105,6 +105,16 @@ public class App extends Application {
         workers = (ArrayList<Worker>) workersdata;
         return workers;
     }
+
+    public static  ArrayList<CartItem> getAllCartItems() throws IOException {
+        ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+        MsgClass msg = new MsgClass("#get CartItems", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        cartItems = (ArrayList<CartItem>) CartItemsdata;
+        return cartItems;
+    }
+
 
 
 
