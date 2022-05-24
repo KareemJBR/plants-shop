@@ -23,6 +23,8 @@ public class SimpleClient extends AbstractClient {
 
 	public static  Object Customersdata;
 
+	public static Object ShopAdminsData;
+
 	private SimpleClient(String host, int port) {
 		super(host, port);
 	}
@@ -95,9 +97,9 @@ public class SimpleClient extends AbstractClient {
 			System.out.println("in get Items client side");
 			Itemsdata = myMsg.getObj();
 		}
-
-		else{
-			System.out.println("not done yet");
+		if (myMsg.getMsg().equals("all shopAdmins")){
+			System.out.println("in get shopAdmins client side");
+			shopsdata = myMsg.getObj();
 		}
 	}
 	
