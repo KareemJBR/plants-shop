@@ -17,7 +17,7 @@ public class CartItem  implements Serializable {
     private Customer customer;
 
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "Item_id")
     private Item item;
 

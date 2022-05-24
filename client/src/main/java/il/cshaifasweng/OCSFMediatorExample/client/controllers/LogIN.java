@@ -87,6 +87,11 @@ public class LogIN {
                    App.setRoot("controllers/ClientMainPage");
                }
             }
+            if(userName.getText().equals("admin")&&current.equals("admin"))
+            {
+                login_success=true;
+                App.setRoot("controllers/AdministratorHomePage");
+            }
         }
         if(workers!=null)
         {

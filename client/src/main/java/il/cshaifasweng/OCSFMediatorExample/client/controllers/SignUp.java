@@ -127,7 +127,7 @@ public class SignUp {
         {
             for(int i=0;i<customers.size();i++)
             {
-                if(username.equals(customers.get(i).getUser_name()))
+                if(username.equals(customers.get(i).getUser_name()) || username.equals("admin"))
                 {
                     errors.add("User Name already exists please try with another one");
                     userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");

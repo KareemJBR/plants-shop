@@ -86,7 +86,7 @@ public class SimpleServer extends AbstractServer {
         Item item1=getAllItems().get(0);
         CartItem cartItem1 = new CartItem(customer1,item1);
         session.save(cartItem1);
-        Customer customer2=getAllCustomers().get(1);
+        Customer customer2=getAllCustomers().get(0);
         Item item2=getAllItems().get(1);
         CartItem cartItem2 = new CartItem(customer2,item2);
         session.save(cartItem2);
