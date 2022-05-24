@@ -21,6 +21,15 @@ public class SimpleServer extends AbstractServer {
 
     private static Session session;
     private static SessionFactory sessionFactory = getSessionFactory();
+
+    private static List<CartItem> getAllCartIetms() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CartItem> query = builder.createQuery(CartItem.class);
+        query.from(CartItem.class);
+        List<CartItem> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static List<Shop> getAllShops() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Shop> query = builder.createQuery(Shop.class);
@@ -45,6 +54,14 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Item> getAllItems() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Item> query = builder.createQuery(Item.class);
+        query.from(Item.class);
+        List<Item> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static List<Customer> getAllCustomers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
@@ -62,6 +79,35 @@ public class SimpleServer extends AbstractServer {
         session.flush();
     }
 
+    //////////// temporary data////////////
+    private static void generateCartItems() throws Exception {
+        /* ---------- Saving CartItems To Data Base ---------- */
+        Customer customer1=getAllCustomers().get(0);
+        Item item1=getAllItems().get(0);
+        CartItem cartItem1 = new CartItem(customer1,item1);
+        session.save(cartItem1);
+        Customer customer2=getAllCustomers().get(1);
+        Item item2=getAllItems().get(1);
+        CartItem cartItem2 = new CartItem(customer2,item2);
+        session.save(cartItem2);
+        Customer customer3=getAllCustomers().get(0);
+        Item item3=getAllItems().get(1);
+        CartItem cartItem3 = new CartItem(customer3,item3);
+        session.save(cartItem3);
+        session.flush();
+    }
+
+    private static void generateItems() throws Exception {
+        /* ---------- Saving Items To Data Base ---------- */
+        Item item1 = new Item(30,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","Flower");
+        session.save(item1);
+        Item item2 = new Item(25,"blue","https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG","FlowerBouquet");
+        session.save(item2);
+        Item item3 = new Item(20,"red","https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG","EmptyFlowerPot");
+        session.save(item3);
+        session.flush();
+    }
+
     private static void generateWorkers() {
         /* ---------- Saving Shops To Data Base ---------- */
         Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
@@ -73,18 +119,17 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account");
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account","saeed@gmail.com");
         session.save(customer1);
-        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account");
+        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account","ons@gmail.com");
         session.save(customer2);
-        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account");
+        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account","bayan@gmail.com");
         session.save(customer3);
         session.flush();
-        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account");
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account","bayann@gmail.com");
         session.save(customer4);
         session.flush();
-
-        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account");
+        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account","email@gmail.com");
         session.save(customer5);
         session.flush();
     }
@@ -122,6 +167,8 @@ public class SimpleServer extends AbstractServer {
         configuration.addAnnotatedClass(Worker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(CartItem.class);
+        configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(FlowerPotWithFlower.class);
         configuration.addAnnotatedClass(FlowerBouquet.class);
@@ -139,6 +186,8 @@ public class SimpleServer extends AbstractServer {
             generateWorkers();
             generateFlowers();
             generateCustomers();
+            generateItems();
+            generateCartItems();
             session.getTransaction().commit();
         } catch (Exception exception) {
             if (session != null) {
@@ -236,13 +285,33 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#get Workers")) {
                     try {
                         MsgClass myMSg = new MsgClass("all Workers");
-//                        List<Worker> y=getAllWorkers();
-//                        System.out.println(y.size());
                         myMSg.setObj(getAllWorkers());
                         System.out.println("all Workers");
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened4");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get CartItems")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all CartItems");
+                        myMSg.setObj(getAllCartIetms());
+                        System.out.println("all CartItems");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened6");
+                        System.out.println(e);
+                    }
+                }
+                if (msgtext.equals("#get Items")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all Items");
+                        myMSg.setObj(getAllItems());
+                        System.out.println("all Items");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened7");
                         System.out.println(e);
                     }
                 }

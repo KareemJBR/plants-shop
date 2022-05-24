@@ -84,7 +84,7 @@ public class publicCatalogControl {
             // ArrayList<Flower> flowers = getAllFlowers();
             System.out.println(((ArrayList<Flower>)data));
             text1.setText(((ArrayList<Flower>)data).get(0).toString());
-            img1.setImage(new Image(((ArrayList<Flower>)data).get(0).getImgURL()));
+            img1.setImage(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU"));
             text2.setText(((ArrayList<Flower>)data).get(1).toString());
             img2.setImage(new Image(((ArrayList<Flower>)data).get(1).getImgURL()));
             text3.setText(((ArrayList<Flower>)data).get(2).toString());

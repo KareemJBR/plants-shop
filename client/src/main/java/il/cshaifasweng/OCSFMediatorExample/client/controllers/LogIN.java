@@ -22,8 +22,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class LogIN {
-    public static  String Client_username;
-    public static  String Worker_username;
+    public static  String LoginClient_username;
+    public static  String LoginWorker_username;
+    public static  String LoginClient_userId;           //the login client id
     String  current;
     String password_status="invisible";
     @FXML // fx:id="showPassword"
@@ -81,7 +82,8 @@ public class LogIN {
                {
                    //showAlert("success","login success");
                    login_success=true;
-                   Client_username=customers.get(i).getUser_name();
+                   LoginClient_username=customers.get(i).getUser_name();
+                   LoginClient_userId=customers.get(i).getUser_id();
                    App.setRoot("controllers/ClientMainPage");
                }
             }
@@ -102,7 +104,7 @@ public class LogIN {
                 {
                     //showAlert("success","login success");
                     login_success=true;
-                    Worker_username=workers.get(i).getUser_name();
+                    LoginWorker_username=workers.get(i).getUser_name();
                     App.setRoot("controllers/WorkerHomePage");
                 }
             }
@@ -110,7 +112,6 @@ public class LogIN {
         if(!login_success)
         {
             showAlert("error","Username or Password is incorrect");
-            System.out.println(Client_username);
         }
 
     }

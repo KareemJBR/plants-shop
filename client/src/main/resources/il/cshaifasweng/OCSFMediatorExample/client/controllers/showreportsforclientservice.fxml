@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Showreportsforclientservice">
+   <children>
+      <TableView fx:id="reports" layoutY="61.0" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="id" />
+          <TableColumn prefWidth="142.66668701171875" text="purchase date" />
+            <TableColumn prefWidth="380.0" text="description" />
+        </columns>
+      </TableView>
+      <Text layoutX="226.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports :" wrappingWidth="206.86911010742188">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Text>
+      <Hyperlink layoutX="513.0" layoutY="317.0" onAction="#gotoclientservicepage" prefHeight="47.0" prefWidth="65.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>
