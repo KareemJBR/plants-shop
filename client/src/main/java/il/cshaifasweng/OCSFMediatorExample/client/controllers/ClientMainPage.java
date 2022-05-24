@@ -20,7 +20,7 @@ import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Client_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
 import javafx.stage.Stage;
 
@@ -89,7 +89,7 @@ public class ClientMainPage {
         {
             for(int i=0;i<customers.size();i++)
             {
-                if(customers.get(i).getUser_name().equals(Client_username))
+                if(customers.get(i).getUser_name().equals(LoginClient_username))
                 {
                     messagetextfield.setText("Welcome Back "+customers.get(i).getFirst_name());
                     break;

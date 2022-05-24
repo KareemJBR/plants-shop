@@ -13,11 +13,6 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <ScrollPane layoutX="25.0" layoutY="130.0" prefHeight="336.0" prefWidth="359.0">
-        <content>
-          <AnchorPane fx:id="itemsList" minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="370.0" />
-        </content>
-      </ScrollPane>
       <Button fx:id="CheckoutBtn" layoutX="434.0" layoutY="426.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25;" text="Checkout">
          <font>
             <Font size="15.0" />
@@ -28,10 +23,15 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="subtotal" alignment="TOP_LEFT" layoutX="433.0" layoutY="378.0" style="-fx-background-color: none;" text="Subtotal:">
+      <TextField fx:id="Subtotal" alignment="TOP_LEFT" layoutX="433.0" layoutY="378.0" style="-fx-background-color: none;" text="Subtotal:">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
+      <ScrollPane layoutX="33.0" layoutY="149.0" prefHeight="309.0" prefWidth="315.0">
+        <content>
+          <AnchorPane fx:id="itemscontainer" minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="318.0" />
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

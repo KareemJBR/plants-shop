@@ -4,7 +4,8 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.report;
+import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Client_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.currentCustomerData;
 public class ReportControl {
@@ -56,11 +57,11 @@ public class ReportControl {
         customers=(ArrayList<Customer>)data;
         Customer current = new Customer();
         for(int i=0;i<customers.size();i++) {
-            if (customers.get(i).getUser_name().equals(Client_username)){
+            if (customers.get(i).getUser_name().equals(LoginClient_username)){
                 current=customers.get(i);
             }
         }
-        report newReport = new report(reportText.getText(),false,false,"");
+        Report newReport = new Report(reportText.getText(),false,false,"");
         newReport.setCustomer(current);
         MsgClass msg1=new MsgClass("#add report",newReport);
         SimpleClient.getClient().sendToServer(msg1);
@@ -70,7 +71,7 @@ public class ReportControl {
         showAlert("done", "report sent");
     }
     private void getCustomer(String userName) throws Exception {
-        MsgClass msg1=new MsgClass("#get current customer",Client_username);
+        MsgClass msg1=new MsgClass("#get current customer",LoginClient_username);
         SimpleClient.getClient().sendToServer(msg1);
         System.out.println("custer data"+currentCustomerData);
     }
