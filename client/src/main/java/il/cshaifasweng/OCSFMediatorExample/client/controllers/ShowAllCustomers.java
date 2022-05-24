@@ -54,18 +54,18 @@ public class ShowAllCustomers implements Initializable {
         if(customers == null)
             return;
 
-        for(int i=0;i<customers.size();i++) {
+        for (Customer customer : customers) {
             customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getUser_id()));
+                    (customer.getUser_id()));
             customersFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getFirst_name()));
+                    (customer.getFirst_name()));
             customersLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getLast_name()));
+                    (customer.getLast_name()));
 
-            // TODO: add email
+            customersEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>(customer.getEmail()));
 
             customersBudget.setCellValueFactory(new PropertyValueFactory<Customer, Double>
-                    (Double.toString(customers.get(i).getBudget())));
+                    (Double.toString(customer.getBudget())));
         }
     }
 }
