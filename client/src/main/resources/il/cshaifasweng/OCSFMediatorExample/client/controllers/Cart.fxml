@@ -20,7 +20,7 @@
       </Button>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
          <font>
-            <Font size="15.0" />
+            <Font name="Arial" size="15.0" />
          </font>
       </Button>
       <TextField fx:id="Subtotal" alignment="TOP_LEFT" layoutX="433.0" layoutY="378.0" style="-fx-background-color: none;" text="Subtotal:">
