@@ -70,6 +70,14 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<ShopAdmin> getAllShopAdmins() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ShopAdmin> query = builder.createQuery(ShopAdmin.class);
+        query.from(ShopAdmin.class);
+        List<ShopAdmin> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
         Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
@@ -235,6 +243,19 @@ public class SimpleServer extends AbstractServer {
             String msgtext = myMsg.getMsg();
             try {
                 System.out.println(msgtext);
+
+                if (msgtext.equals("#get shopAdmins")){
+                    try{
+                        MsgClass myMSg = new MsgClass("all shopAdmins");
+                        myMSg.setObj(null);
+                        myMSg.setObj(getAllShopAdmins());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
                 if (msgtext.equals("#get shop items")) {
                     try {
                         MsgClass myMSg = new MsgClass("all flowers");
@@ -243,7 +264,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("eror hapend");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.startsWith("#update")) {
@@ -257,7 +278,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMsg);
                     } catch (Exception e) {
                         System.out.println("in updete exception");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get customers")) {
@@ -268,7 +289,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened2");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get Shops")) {
@@ -279,7 +300,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened3");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get Workers")) {
@@ -290,7 +311,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened4");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get CartItems")) {
@@ -301,7 +322,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened6");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get Items")) {
@@ -312,7 +333,7 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened7");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#add customer")) {
@@ -321,7 +342,7 @@ public class SimpleServer extends AbstractServer {
                         AddCustomer((Customer) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened3");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#add report")) {
@@ -330,7 +351,7 @@ public class SimpleServer extends AbstractServer {
                         AddReport((Report)((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened5");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
                 if (msgtext.equals("#get current customer")) {
@@ -344,7 +365,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println("customer sent");
                     } catch (Exception e) {
                         System.out.println("error happened4");
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                 }
             } catch (Exception e) {
