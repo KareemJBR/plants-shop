@@ -52,7 +52,7 @@ public class ComplaintsReportTwoTimeIntervals {
     @FXML
     private TextArea startDate2;
 
-    public void start_charts(int shop_id1, Date start_date1, Date end_date1, int shop_id2, Date start_date2,
+    public void start_charts(boolean is_admin, int shop_id1, Date start_date1, Date end_date1, Date start_date2,
                              Date end_date2) {
         // TODO: get all complaints in the time intervals and plot them in the chart reportsChart
     }

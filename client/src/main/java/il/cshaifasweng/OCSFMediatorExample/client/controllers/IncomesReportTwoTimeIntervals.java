@@ -6,6 +6,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.TextArea;
 
+import java.util.Date;
+
 public class IncomesReportTwoTimeIntervals {
 
     @FXML
@@ -38,7 +40,8 @@ public class IncomesReportTwoTimeIntervals {
     @FXML
     private TextArea startDate2;
 
-    public void start_controller() {
+    public void start_controller(boolean is_admin, int shop_id, Date start_date1, Date end_date1, Date start_date2,
+                                 Date end_date2) {
         // TODO: initialize controller
     }
 

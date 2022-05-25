@@ -78,6 +78,14 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Report> getAllReports() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Report> query = builder.createQuery(Report.class);
+        query.from(Report.class);
+        List<Report> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
         Shop shop1 = new Shop("Abba Houshi 199, Haifa","211406343");
@@ -242,6 +250,18 @@ public class SimpleServer extends AbstractServer {
             String msgtext = myMsg.getMsg();
             try {
                 System.out.println(msgtext);
+
+                if (msgtext.equals("#get reports")){
+                    try{
+                        MsgClass myMSg = new MsgClass("all reports");
+                        myMSg.setObj(null);
+                        myMSg.setObj(getAllReports());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
 
                 if (msgtext.equals("#get shopAdmins")){
                     try{
