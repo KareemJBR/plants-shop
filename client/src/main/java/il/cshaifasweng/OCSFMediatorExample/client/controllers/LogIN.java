@@ -4,22 +4,17 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
+import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
-
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class LogIN {
     public static  String LoginClient_username;
@@ -63,7 +58,7 @@ public class LogIN {
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
-        ArrayList<Worker> workers=getAllWorkers();
+        ArrayList<NetWorker> workers = getAllWorkers();
 //        MsgClass msg =new MsgClass("#get customers",null);
 //        SimpleClient.getClient().sendToServer(msg);
 //        customers=(ArrayList<Customer>)data;
@@ -129,11 +124,10 @@ public class LogIN {
 
     @FXML
     void openCatalog(ActionEvent event) throws IOException {
-        MsgClass msg=new MsgClass("catalog for register",null);
+        MsgClass msg=new MsgClass("#get Items",null);
         SimpleClient.getClient().sendToServer(msg);
-        System.out.println("msg sent to got flowers");
+        System.out.println("msg sent to got shop items");
         App.setRoot("controllers/publicCatalog");
-
     }
 
     @FXML

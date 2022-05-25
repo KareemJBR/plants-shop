@@ -2,7 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.util.Random;
 @Entity
 @Table(name = "Item")
 public class Item implements Serializable {
@@ -12,16 +12,33 @@ public class Item implements Serializable {
     private int price;
     @Column(name="Color")
     private String color;
+    private int catalogNumber;
+    boolean underSale=false;
 
     @Column(name="Item_Type")
     private String type;
     private String imgURL;
+    @Column(name="Item_name")
+    private String name;
 
-    public Item(int price, String color, String imgURL,String type) {
+
+    public Item(int price, String color, String type, String imgURL, String name) {
+        this.price = price;
+        this.color = color;
+        this.type = type;
+        this.imgURL = imgURL;
+        this.name = name;
+        Random rand =new Random();
+        this.catalogNumber= rand.nextInt(10000);
+    }
+
+    public Item(int price, String color, String imgURL, String type) {
         this.price = price;
         this.color = color;
         this.imgURL = imgURL;
         this.type=type;
+        Random rand =new Random();
+        this.catalogNumber= rand.nextInt(10000);
     }
 
     public String getImgURL() {
@@ -65,6 +82,33 @@ public class Item implements Serializable {
         this.color = color;
     }
 
+    public int getCatalogNumber() {
+        return catalogNumber;
+    }
+
+    public void setCatalogNumber(int catalogNumber) {
+        this.catalogNumber = catalogNumber;
+    }
+
+    public boolean isUnderSale() {
+        return underSale;
+    }
+
+    public void setUnderSale(boolean underSale) {
+        this.underSale = underSale;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString() {

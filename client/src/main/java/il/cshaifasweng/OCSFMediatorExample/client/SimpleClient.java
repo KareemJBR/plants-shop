@@ -1,14 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
-import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
-import org.hibernate.cache.spi.support.CacheUtils;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -16,14 +10,16 @@ public class SimpleClient extends AbstractClient {
 	public static  Object data;
 	public static  Object currentCustomerData;
 	public static  Object shopsdata;
-	public static  Object workersdata;
+	public static  Object NetWorkersData;
 
 	public static  Object CartItemsdata;
 	public static  Object Itemsdata;
-
+	public static  Object allItemsData;
 	public static  Object Customersdata;
 
+	public static Object ReportsData;
 	public static Object ShopAdminsData;
+
 
 	private SimpleClient(String host, int port) {
 		super(host, port);
@@ -34,8 +30,8 @@ public class SimpleClient extends AbstractClient {
 		MsgClass myMsg = null;
 		if (msg.getClass().equals(MsgClass.class)) {
 			myMsg = (MsgClass) msg;
-			if (myMsg.getMsg().equals("all flowers")) {
-				System.out.println("in main client handler to get flowers");
+			if (myMsg.getMsg().equals("all shop items")) {
+				System.out.println("in main client handler to get all items");
 				data = myMsg.getObj();
 				/*	try {
 						App.setRoot("controllers/CatalogForRegisteredClients");
@@ -74,7 +70,7 @@ public class SimpleClient extends AbstractClient {
 				if(myMsg.getMsg().equals("all Workers"))
 				{
 					System.out.println("in get Workers client side");
-					workersdata = myMsg.getObj();
+					NetWorkersData = myMsg.getObj();
 				}
 			else{
 				System.out.println("not done yet");
@@ -87,7 +83,7 @@ public class SimpleClient extends AbstractClient {
 		}
 		if (myMsg.getMsg().equals("all Workers")) {
 			System.out.println("in get Workers client side");
-			workersdata = myMsg.getObj();
+			NetWorkersData = myMsg.getObj();
 		}
 		if (myMsg.getMsg().equals("all CartItems")) {
 			System.out.println("in get CartItems client side");
@@ -99,6 +95,10 @@ public class SimpleClient extends AbstractClient {
 		}
 		if (myMsg.getMsg().equals("all shopAdmins")){
 			System.out.println("in get shopAdmins client side");
+			shopsdata = myMsg.getObj();
+		}
+		if (myMsg.getMsg().equals("all reports")){
+			System.out.println("in get reports client side");
 			shopsdata = myMsg.getObj();
 		}
 	}

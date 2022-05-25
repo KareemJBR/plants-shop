@@ -46,11 +46,11 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<Worker> getAllWorkers() throws Exception {
+    private static List<NetWorker> getAllWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Worker> query = builder.createQuery(Worker.class);
-        query.from(Worker.class);
-        List<Worker> data = session.createQuery(query).getResultList();
+        CriteriaQuery<NetWorker> query = builder.createQuery(NetWorker.class);
+        query.from(NetWorker.class);
+        List<NetWorker> data = session.createQuery(query).getResultList();
         return data;
     }
 
@@ -78,11 +78,19 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Report> getAllReports() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Report> query = builder.createQuery(Report.class);
+        query.from(Report.class);
+        List<Report> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
+        Shop shop1 = new Shop("Abba Houshi 199, Haifa","211406343");
         session.save(shop1);
-        Shop shop2 = new Shop("Hanamal 500, Haifa",123456789);
+        Shop shop2 = new Shop("Hanamal 500, Haifa","123456789");
         session.save(shop2);
         session.flush();
     }
@@ -107,20 +115,23 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateItems() throws Exception {
         /* ---------- Saving Items To Data Base ---------- */
-        Item item1 = new Item(30,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","Flower");
+        Item item1 = new Item(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
-        Item item2 = new Item(25,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","FlowerBouquet");
+        Item item2 = new Item(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
-        Item item3 = new Item(20,"red","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","EmptyFlowerPot");
+        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
         session.save(item3);
+        session.flush();
+        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
+        session.save(item4);
         session.flush();
     }
 
     private static void generateWorkers() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
+        NetWorker worker1 = new NetWorker("211406343","kareem","jabareen","kareem_jb","kareem123");
         session.save(worker1);
-        Worker worker2 = new Worker(206384919,"mostafa","egbaria","mostafa_eg","mostafa123");
+        NetWorker worker2 = new NetWorker("206384919","mostafa","egbaria","mostafa_eg","mostafa123");
         session.save(worker2);
         session.flush();
     }
@@ -171,7 +182,7 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-       configuration.addAnnotatedClass(Worker.class);
+       configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Customer.class);
@@ -243,6 +254,28 @@ public class SimpleServer extends AbstractServer {
             try {
                 System.out.println(msgtext);
 
+                if (msgtext.equals("#customerUpdate")){
+                    try{
+                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                        update_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#get reports")){
+                    try{
+                        MsgClass myMSg = new MsgClass("all reports");
+                        myMSg.setObj(null);
+                        myMSg.setObj(getAllReports());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
                 if (msgtext.equals("#get shopAdmins")){
                     try{
                         MsgClass myMSg = new MsgClass("all shopAdmins");
@@ -257,9 +290,9 @@ public class SimpleServer extends AbstractServer {
 
                 if (msgtext.equals("#get shop items")) {
                     try {
-                        MsgClass myMSg = new MsgClass("all flowers");
+                        MsgClass myMSg = new MsgClass("all shop items");
                         myMSg.setObj(null);
-                        myMSg.setObj(getAllFlowers());
+                        myMSg.setObj(getAllItems());
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("eror hapend");
@@ -326,7 +359,7 @@ public class SimpleServer extends AbstractServer {
                 }
                 if (msgtext.equals("#get Items")) {
                     try {
-                        MsgClass myMSg = new MsgClass("all Items");
+                        MsgClass myMSg = new MsgClass("Items");
                         myMSg.setObj(getAllItems());
                         System.out.println("all Items");
                         client.sendToClient(myMSg);
@@ -394,7 +427,15 @@ public class SimpleServer extends AbstractServer {
 
     }
 
+    private static void update_customer(Customer customer) {
+        session.beginTransaction();
+        session.update(customer);
+        session.getTransaction().commit();
+    }
 
+    private static void delete_customer(Customer customer) {
+        // TODO: what if the customer is involved in some orders or complaints ?
+    }
 }
 
 
