@@ -41,7 +41,7 @@ public class ShowAllCustomers implements Initializable {
 
     @FXML
     void backToHomePage(ActionEvent event) throws IOException {
-        App.setRoot("AdministratorHomePage");
+        App.setRoot("controllers/AdministratorHomePage");
     }
 
     @Override
@@ -88,7 +88,7 @@ public class ShowAllCustomers implements Initializable {
         CustomerDetailsToEdit customerDetailsToEdit = loader.getController();
         customerDetailsToEdit.start_controller(customer_id);
 
-        App.setRoot("CustomerDetailsToEdit.fxml");      // TODO: make sure this works!
+        App.setRoot("controllers/CustomerDetailsToEdit");      // TODO: make sure this works!
 
     }
 }
