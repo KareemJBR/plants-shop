@@ -20,7 +20,7 @@ public class SimpleClient extends AbstractClient {
 
 	public static  Object CartItemsdata;
 	public static  Object Itemsdata;
-
+	public static  Object allItemsData;
 	public static  Object Customersdata;
 
 	public static Object ShopAdminsData;
@@ -34,8 +34,8 @@ public class SimpleClient extends AbstractClient {
 		MsgClass myMsg = null;
 		if (msg.getClass().equals(MsgClass.class)) {
 			myMsg = (MsgClass) msg;
-			if (myMsg.getMsg().equals("all flowers")) {
-				System.out.println("in main client handler to get flowers");
+			if (myMsg.getMsg().equals("all shop items")) {
+				System.out.println("in main client handler to get all items");
 				data = myMsg.getObj();
 				/*	try {
 						App.setRoot("controllers/CatalogForRegisteredClients");

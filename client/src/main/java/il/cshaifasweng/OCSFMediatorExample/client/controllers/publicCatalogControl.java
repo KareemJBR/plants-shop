@@ -3,15 +3,21 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
+import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+
+
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,40 +33,10 @@ public class publicCatalogControl {
     private Button backBtn1;
 
     @FXML
-    private ImageView img1;
-
-    @FXML
-    private ImageView img2;
-
-    @FXML
-    private ImageView img3;
-
-    @FXML
-    private ImageView img4;
-
-    @FXML
-    private ImageView img5;
-
-    @FXML
-    private ImageView img6;
-
-    @FXML
-    private TextArea text1;
-
-    @FXML
-    private TextArea text2;
-
-    @FXML
-    private TextArea text3;
-
-    @FXML
-    private TextArea text4;
-
-    @FXML
-    private TextArea text5;
-
-    @FXML
     private TextField title;
+
+    @FXML
+    private TableView table=new TableView<Item>();
 
 
     @FXML
@@ -69,6 +45,7 @@ public class publicCatalogControl {
         SimpleClient.getClient().sendToServer(msg);
         App.setRoot("controllers/LogIN");
     }
+
     @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=true;
@@ -83,7 +60,7 @@ public class publicCatalogControl {
             System.out.println("in init for catalog");
             // ArrayList<Flower> flowers = getAllFlowers();
             System.out.println(((ArrayList<Flower>)data));
-            text1.setText(((ArrayList<Flower>)data).get(0).toString());
+            /*text1.setText(((ArrayList<Flower>)data).get(0).toString());
             img1.setImage(new Image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU"));
             text2.setText(((ArrayList<Flower>)data).get(1).toString());
             img2.setImage(new Image(((ArrayList<Flower>)data).get(1).getImgURL()));
@@ -92,7 +69,7 @@ public class publicCatalogControl {
             text4.setText(((ArrayList<Flower>)data).get(3).toString());
             img4.setImage(new Image(((ArrayList<Flower>)data).get(3).getImgURL()));
             text5.setText(((ArrayList<Flower>)data).get(4).toString());
-            img5.setImage(new Image(((ArrayList<Flower>)data).get(4).getImgURL()));
+            img5.setImage(new Image(((ArrayList<Flower>)data).get(4).getImgURL()));*/
         } catch (Exception e) {
             System.out.println("init exception for reg catalog");
             System.out.println(e);
