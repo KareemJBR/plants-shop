@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="284.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.WorkerHomePage">
+<AnchorPane prefHeight="284.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.NetWorkerHomePage">
    <children>
       <Text layoutX="116.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!">
          <font>

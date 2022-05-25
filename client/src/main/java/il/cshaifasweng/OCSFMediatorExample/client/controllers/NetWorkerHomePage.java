@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class WorkerHomePage {
+public class NetWorkerHomePage {
 
     @FXML
     void openCatalogue(ActionEvent event) {
