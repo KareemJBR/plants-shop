@@ -1,14 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
-import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
-import org.hibernate.cache.spi.support.CacheUtils;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SimpleClient extends AbstractClient {
 	
@@ -16,7 +10,7 @@ public class SimpleClient extends AbstractClient {
 	public static  Object data;
 	public static  Object currentCustomerData;
 	public static  Object shopsdata;
-	public static  Object workersdata;
+	public static  Object NetWorkersData;
 
 	public static  Object CartItemsdata;
 	public static  Object Itemsdata;
@@ -74,7 +68,7 @@ public class SimpleClient extends AbstractClient {
 				if(myMsg.getMsg().equals("all Workers"))
 				{
 					System.out.println("in get Workers client side");
-					workersdata = myMsg.getObj();
+					NetWorkersData = myMsg.getObj();
 				}
 			else{
 				System.out.println("not done yet");
@@ -87,7 +81,7 @@ public class SimpleClient extends AbstractClient {
 		}
 		if (myMsg.getMsg().equals("all Workers")) {
 			System.out.println("in get Workers client side");
-			workersdata = myMsg.getObj();
+			NetWorkersData = myMsg.getObj();
 		}
 		if (myMsg.getMsg().equals("all CartItems")) {
 			System.out.println("in get CartItems client side");
