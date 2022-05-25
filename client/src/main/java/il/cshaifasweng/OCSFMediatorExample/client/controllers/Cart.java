@@ -65,6 +65,7 @@ public class Cart<T> {
         int subtotal=0;
         if (cartItems != null) {
             if (cartItems.size() != 0) {
+
                     itemscontainer.setMinHeight(cartItems.size()*80);      ///the height of the container is related to the amount of the items
               ArrayList<ImageView> arr=new ArrayList<ImageView>();
                     for(int i=0;i<cartItems.size();i++)
@@ -121,8 +122,26 @@ public class Cart<T> {
 
                         subtotal+=(cartItems.get(i).getPrice()*(itemamount));
                     }
-            }
 
+            }
+        });
+    }
+
+
+    ////////////////// return the Caritems of client whose idnumber=ClientId;
+    public ArrayList<Item> searchCartItems(String ClientId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+        ArrayList<Item> returnedcartitems=new ArrayList<Item>();
+
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
+                {
+                    returnedcartitems.add(allcartitems.get(i).getItem());
+                }
+            }
         }
         System.out.println(LoginClient_acount_type);
         if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
@@ -136,36 +155,36 @@ public class Cart<T> {
             Subtotal.setText("Subtotal: "+ subtotal);
         }
     }
-        public void showAlert(String title, String head) {
-            Platform.runLater(new Runnable() {
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle(title);
-                    alert.setHeaderText(null);
-                    alert.setContentText(head);
-                    alert.showAndWait();
-                }
-            });
-        }
+    public CartItem searchCartItem(int ItemId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
 
-
-        ////////////////// return the Caritems of client whose idnumber=ClientId;
-        public ArrayList<Item> searchCartItems(String ClientId) throws IOException {
-            ArrayList<CartItem> allcartitems=getAllCartItems();
-            ArrayList<Item> returnedcartitems=new ArrayList<Item>();
-
-            if(allcartitems !=null)
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
             {
-                for(int i=0;i<allcartitems.size();i++)
+                if(allcartitems.get(i).getItem().getId()==ItemId)
                 {
-                    if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
-                    {
-                        returnedcartitems.add(allcartitems.get(i).getItem());
-                    }
+                    return allcartitems.get(i);
                 }
             }
+        }
 
-           return  returnedcartitems;
+        return  null;
+    }
+
+    public ArrayList<Integer> getamount(String ClientId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+        ArrayList<Integer> returnedcartitems=new ArrayList<Integer>();
+
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
+                {
+                    returnedcartitems.add(allcartitems.get(i).getAmount());
+                }
+            }
         }
     public CartItem searchCartItem(int ItemId) throws IOException {
         ArrayList<CartItem> allcartitems=getAllCartItems();
@@ -198,7 +217,6 @@ public class Cart<T> {
                 }
             }
         }
-
         return  returnedcartitems;
     }
 }

@@ -115,12 +115,15 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateItems() throws Exception {
         /* ---------- Saving Items To Data Base ---------- */
-        Item item1 = new Item(30,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","Flower");
+        Item item1 = new Item(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
-        Item item2 = new Item(25,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","FlowerBouquet");
+        Item item2 = new Item(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
-        Item item3 = new Item(20,"red","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","EmptyFlowerPot");
+        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
         session.save(item3);
+        session.flush();
+        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
+        session.save(item4);
         session.flush();
     }
 
@@ -287,9 +290,9 @@ public class SimpleServer extends AbstractServer {
 
                 if (msgtext.equals("#get shop items")) {
                     try {
-                        MsgClass myMSg = new MsgClass("all flowers");
+                        MsgClass myMSg = new MsgClass("all shop items");
                         myMSg.setObj(null);
-                        myMSg.setObj(getAllFlowers());
+                        myMSg.setObj(getAllItems());
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("eror hapend");
@@ -356,7 +359,7 @@ public class SimpleServer extends AbstractServer {
                 }
                 if (msgtext.equals("#get Items")) {
                     try {
-                        MsgClass myMSg = new MsgClass("all Items");
+                        MsgClass myMSg = new MsgClass("Items");
                         myMSg.setObj(getAllItems());
                         System.out.println("all Items");
                         client.sendToClient(myMSg);

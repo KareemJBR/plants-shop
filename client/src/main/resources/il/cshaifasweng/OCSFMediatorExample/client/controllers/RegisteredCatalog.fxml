@@ -1,132 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="585.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.RegisteredCatalogControl">
+<AnchorPane fx:id="itemsContainer" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.RegisteredCatalogControl">
    <children>
-      <TextField fx:id="title" alignment="CENTER" disable="true" layoutX="124.0" layoutY="-2.0" prefHeight="86.0" prefWidth="564.0" style="-fx-background-color: none;" text="Catalog">
+      <Button fx:id="goToCartBut" layoutX="512.0" layoutY="13.0" mnemonicParsing="false" onAction="#goCart" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Go To Cart">
          <font>
-            <Font name="Arial Bold" size="30.0" />
+            <Font size="15.0" />
          </font>
-      </TextField>
-      <ScrollPane layoutX="-1.0" layoutY="85.0" prefHeight="500.0" prefWidth="810.0">
-         <content>
-            <AnchorPane fx:id="itemsContainer" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="808.0">
-               <children>
-                  <AnchorPane layoutX="539.0" prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt3" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton3" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text3" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView3" fitHeight="125.0" fitWidth="170.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="269.0" prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt2" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton2" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text2" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView2" fitHeight="125.0" fitWidth="170.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt1" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton1" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text1" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView1" fitHeight="125.0" fitWidth="170.0" layoutX="-7.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutY="240.0" prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt4" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton4" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text4" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView4" fitHeight="125.0" fitWidth="170.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="269.0" layoutY="240.0" prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt5" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton5" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text5" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView5" fitHeight="125.0" fitWidth="170.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="539.0" layoutY="240.0" prefHeight="225.0" prefWidth="266.0">
-                     <children>
-                        <Button fx:id="addToCartButt6" layoutX="171.0" layoutY="14.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="add to cart">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="buyButton6" layoutX="171.0" layoutY="67.0" mnemonicParsing="false" onAction="#BuyNow" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Buy Now">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Button>
-                        <TextArea fx:id="text6" layoutY="117.0" prefHeight="106.0" prefWidth="266.0" />
-                        <ImageView fx:id="imgView6" fitHeight="125.0" fitWidth="170.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-               </children></AnchorPane>
-         </content>
+      </Button>
+      <Button fx:id="goBack" layoutX="28.0" layoutY="13.0" mnemonicParsing="false" onAction="#Back" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ScrollPane layoutX="2.5" layoutY="80.0" prefHeight="400.0" prefWidth="635.0">
+        <content>
+          <AnchorPane fx:id="itemscontainer" layoutX="2.5" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="615.0" />
+        </content>
       </ScrollPane>
-      <Button fx:id="goToCartBut" layoutX="689.0" layoutY="14.0" mnemonicParsing="false" onAction="#goCart" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Go To Cart">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="12.0" prefHeight="58.0" prefWidth="282.0" text="Catalog" textAlignment="RIGHT">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font>
-      </Button>
-      <Button fx:id="goBack" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Back">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
+      </Label>
    </children>
 </AnchorPane>
