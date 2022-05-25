@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportOneTimeInterval"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportOneTimeInterval">
+    <children>
+        <BarChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Orders Report">
+            <xAxis>
+                <CategoryAxis fx:id="dayAxes" label="Day" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="ordersNumAxes" label="Number of Orders" side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </children>
 </AnchorPane>

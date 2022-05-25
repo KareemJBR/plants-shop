@@ -24,7 +24,8 @@ import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 public class LogIN {
     public static  String LoginClient_username;
     public static  String LoginWorker_username;
-    public static  String LoginClient_userId;           //the login client id
+    public static  String LoginClient_userId;
+    public static  String LoginClient_acount_type;
     String  current;
     String password_status="invisible";
     @FXML // fx:id="showPassword"
@@ -84,6 +85,7 @@ public class LogIN {
                    login_success=true;
                    LoginClient_username=customers.get(i).getUser_name();
                    LoginClient_userId=customers.get(i).getUser_id();
+                   LoginClient_acount_type=customers.get(i).getAcount_type();
                    App.setRoot("controllers/ClientMainPage");
                }
             }
@@ -112,6 +114,10 @@ public class LogIN {
                     LoginWorker_username=workers.get(i).getUser_name();
                     App.setRoot("controllers/WorkerHomePage");
                 }
+            }
+            if(userName.getText().equals("admin"))
+            {
+                App.setRoot("controllers/AdministratorHomePage");
             }
         }
         if(!login_success)

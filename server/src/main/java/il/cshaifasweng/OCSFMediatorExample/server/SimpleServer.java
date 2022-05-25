@@ -84,15 +84,15 @@ public class SimpleServer extends AbstractServer {
         /* ---------- Saving CartItems To Data Base ---------- */
         Customer customer1=getAllCustomers().get(0);
         Item item1=getAllItems().get(0);
-        CartItem cartItem1 = new CartItem(customer1,item1);
+        CartItem cartItem1 = new CartItem(customer1,item1,3);
         session.save(cartItem1);
         Customer customer2=getAllCustomers().get(0);
         Item item2=getAllItems().get(1);
-        CartItem cartItem2 = new CartItem(customer2,item2);
+        CartItem cartItem2 = new CartItem(customer2,item2,1);
         session.save(cartItem2);
         Customer customer3=getAllCustomers().get(0);
         Item item3=getAllItems().get(1);
-        CartItem cartItem3 = new CartItem(customer3,item3);
+        CartItem cartItem3 = new CartItem(customer3,item3,2);
         session.save(cartItem3);
         session.flush();
     }
@@ -101,9 +101,9 @@ public class SimpleServer extends AbstractServer {
         /* ---------- Saving Items To Data Base ---------- */
         Item item1 = new Item(30,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","Flower");
         session.save(item1);
-        Item item2 = new Item(25,"blue","https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG","FlowerBouquet");
+        Item item2 = new Item(25,"blue","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","FlowerBouquet");
         session.save(item2);
-        Item item3 = new Item(20,"red","https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG","EmptyFlowerPot");
+        Item item3 = new Item(20,"red","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU","EmptyFlowerPot");
         session.save(item3);
         session.flush();
     }
@@ -126,9 +126,8 @@ public class SimpleServer extends AbstractServer {
         Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account","bayan@gmail.com");
         session.save(customer3);
         session.flush();
-        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account","bayann@gmail.com");
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "Network account with 10% discount","bayann@gmail.com");
         session.save(customer4);
-        session.flush();
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account","email@gmail.com");
         session.save(customer5);
         session.flush();
@@ -164,12 +163,12 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-        configuration.addAnnotatedClass(Worker.class);
+       configuration.addAnnotatedClass(Worker.class);
         configuration.addAnnotatedClass(Flower.class);
-        configuration.addAnnotatedClass(Customer.class);
-        configuration.addAnnotatedClass(CartItem.class);
-        configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(Report.class);
+        configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(Item.class);
+        configuration.addAnnotatedClass(CartItem.class);
         configuration.addAnnotatedClass(FlowerPotWithFlower.class);
         configuration.addAnnotatedClass(FlowerBouquet.class);
         configuration.addAnnotatedClass(EmptyFlowerPot.class);

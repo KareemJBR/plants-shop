@@ -4,6 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,6 +18,8 @@ import java.util.ResourceBundle;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 
 public class ShowAllCustomers implements Initializable {
+
+    private ArrayList<Customer> customers = null;
 
     @FXML
     private TableView<Customer> customersTable;
@@ -43,8 +46,6 @@ public class ShowAllCustomers implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Customer> customers = null;
-
         try {
             customers = getAllCustomers();
         } catch (IOException e) {
@@ -54,18 +55,40 @@ public class ShowAllCustomers implements Initializable {
         if(customers == null)
             return;
 
-        for(int i=0;i<customers.size();i++) {
+        for (Customer customer : customers) {
             customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getUser_id()));
+                    (customer.getUser_id()));
             customersFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getFirst_name()));
+                    (customer.getFirst_name()));
             customersLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customers.get(i).getLast_name()));
+                    (customer.getLast_name()));
 
-            // TODO: add email
+            customersEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>(customer.getEmail()));
 
             customersBudget.setCellValueFactory(new PropertyValueFactory<Customer, Double>
-                    (Double.toString(customers.get(i).getBudget())));
+                    (Double.toString(customer.getBudget())));
         }
+    }
+
+    @FXML
+    public void rowClicked(javafx.scene.input.MouseEvent event) throws IOException {
+        if(event.getClickCount() != 2)
+            return;
+
+        // else: a row has been clicked twice, and we need to open a new controller for editing the selected
+        // customer's data
+
+        Object object =  customersTable.getSelectionModel().selectedItemProperty().get();
+        int index = customersTable.getSelectionModel().selectedIndexProperty().get();
+
+        String customer_id = customers.get(index).getUser_id();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerDetailsToEdit.fxml"));
+
+        CustomerDetailsToEdit customerDetailsToEdit = loader.getController();
+        customerDetailsToEdit.start_controller(customer_id);
+
+        App.setRoot("CustomerDetailsToEdit.fxml");      // TODO: make sure this works!
+
     }
 }

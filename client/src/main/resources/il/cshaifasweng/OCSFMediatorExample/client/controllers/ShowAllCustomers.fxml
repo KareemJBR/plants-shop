@@ -15,7 +15,7 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <TableView fx:id="customersTable" layoutY="48.0" prefHeight="474.0" prefWidth="723.0">
+      <TableView fx:id="customersTable" layoutY="48.0" onMouseClicked="#rowClicked" prefHeight="474.0" prefWidth="723.0">
         <columns>
           <TableColumn fx:id="customersID" prefWidth="140.79999387264252" text="ID" />
           <TableColumn fx:id="customersFirstName" prefWidth="127.199951171875" text="First Name" />
