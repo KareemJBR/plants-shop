@@ -13,7 +13,7 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <Button fx:id="CheckoutBtn" layoutX="402.0" layoutY="418.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25;" text="Checkout">
+      <Button fx:id="CheckoutBtn" layoutX="402.0" layoutY="418.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: green;" text="Proceed to Checkout" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
