@@ -22,14 +22,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCartItems;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllFlowers;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 public class Cart<T> {
 
@@ -53,7 +53,7 @@ public class Cart<T> {
 
     @FXML
     void Back(ActionEvent event) throws IOException {
-        MsgClass msg = new MsgClass("#get customers", null);
+        MsgClass msg=new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
         App.setRoot("controllers/ClientMainPage");
     }
@@ -61,52 +61,81 @@ public class Cart<T> {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         ArrayList<Item> cartItems = searchCartItems(LoginClient_userId);
-        int subtotal = 0;
+        ArrayList<Integer> amountOfItems= getamount(LoginClient_userId);
+        int subtotal=0;
         if (cartItems != null) {
             if (cartItems.size() != 0) {
-                itemscontainer.setMinHeight(cartItems.size() * 80);      ///the height of the container is related to the amount of the items
-                ArrayList<ImageView> arr = new ArrayList<ImageView>();
-                for (int i = 0; i < cartItems.size(); i++) {
-                    Pane p = new Pane();            //container of each item
+                itemscontainer.setMinHeight(cartItems.size()*80);      ///the height of the container is related to the amount of the items
+                ArrayList<ImageView> arr=new ArrayList<ImageView>();
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    int itemamount=amountOfItems.get(i);
+                    Pane p=new Pane();            //container of each item
 
                     ////////////// img /////////////
-                    ImageView imageview = new ImageView();
+                    ImageView imageview=new ImageView();
                     imageview.setFitWidth(72);   //width of img
                     imageview.setFitHeight(72); //height of img
+//                        System.out.println(cartItems.get(i).getUrl());
                     imageview.setImage(new Image(cartItems.get(i).getUrl()));
                     imageview.setX(8);           //x & y coordinate related in the pane
                     imageview.setY(8);
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
-                    TextField price = new TextField("price: " + cartItems.get(i).getPrice());
+                    TextField price=new TextField("price: "+ cartItems.get(i).getPrice());
                     price.setStyle("-fx-background-color:none");
                     price.setLayoutX(100);
                     price.setLayoutY(8);
 
                     ///////// type textfield ///////////
-                    TextField type = new TextField("type: " + cartItems.get(i).getType());
+                    TextField type=new TextField("type: "+ cartItems.get(i).getType());
                     type.setStyle("-fx-background-color:none");
                     type.setLayoutX(100);
                     type.setLayoutY(28);
+
+                    ///////// amount textfield ///////////
+                    TextField amount=new TextField("amount: "+ itemamount);
+                    amount.setStyle("-fx-background-color:none");
+                    amount.setLayoutX(100);
+                    amount.setLayoutY(48);
+
+                    ///////// delete button ///////////
+                    Button btn=new Button();
+                    btn.setLayoutX(255);
+                    btn.setLayoutY(23);
+                    btn.setMaxWidth(40);
+                    btn.setText("X");
+                    btn.setStyle("-fx-font-size:11;-fx-background-radius:2");
 
                     /////////////// adding components to the pane /////////////
                     p.getChildren().add(imageview);
                     p.getChildren().add(price);
                     p.getChildren().add(type);
+                    p.getChildren().add(amount);
+                    p.getChildren().add(btn);
 
-                    p.setLayoutY(85 * i);
+                    p.setLayoutY(85*i);
 
                     itemscontainer.getChildren().add(p);
 
-                    subtotal += cartItems.get(i).getPrice();
+                    subtotal+=(cartItems.get(i).getPrice()*(itemamount));
                 }
             }
 
         }
-        Subtotal.setText("Subtotal: " + subtotal);
+        System.out.println(LoginClient_acount_type);
+        if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
+        {
+            Subtotal.setText("Subtotal after 10% discount: "+ subtotal*0.9);
+            Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
+            Subtotal.setMinWidth(225);
+        }
+        else
+        {
+            Subtotal.setText("Subtotal: "+ subtotal);
+        }
     }
-
     public void showAlert(String title, String head) {
         Platform.runLater(new Runnable() {
             public void run() {
@@ -122,17 +151,54 @@ public class Cart<T> {
 
     ////////////////// return the Caritems of client whose idnumber=ClientId;
     public ArrayList<Item> searchCartItems(String ClientId) throws IOException {
-        ArrayList<CartItem> allcartitems = getAllCartItems();
-        ArrayList<Item> returnedcartitems = new ArrayList<Item>();
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+        ArrayList<Item> returnedcartitems=new ArrayList<Item>();
 
-        if (allcartitems != null) {
-            for (int i = 0; i < allcartitems.size(); i++) {
-                if (allcartitems.get(i).getCustomer().getUser_id().equals(ClientId)) {
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
+                {
                     returnedcartitems.add(allcartitems.get(i).getItem());
                 }
             }
         }
 
-        return returnedcartitems;
+        return  returnedcartitems;
+    }
+    public CartItem searchCartItem(int ItemId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getItem().getId()==ItemId)
+                {
+                    return allcartitems.get(i);
+                }
+            }
+        }
+
+        return  null;
+    }
+
+    public ArrayList<Integer> getamount(String ClientId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+        ArrayList<Integer> returnedcartitems=new ArrayList<Integer>();
+
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
+                {
+                    returnedcartitems.add(allcartitems.get(i).getAmount());
+                }
+            }
+        }
+
+        return  returnedcartitems;
     }
 }

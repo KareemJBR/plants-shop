@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 
 @Entity
-@Table(name = "CartItem")
+@Table(name = "cartitems")
 public class CartItem  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    private int amount;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -22,10 +24,11 @@ public class CartItem  implements Serializable {
     private Item item;
 
 
-    public CartItem(Customer customer,Item item)
+    public CartItem(Customer customer,Item item,int amount)
     {
         this.item=item;
         this.customer=customer;
+        this.amount=amount;
     }
 
     public CartItem() {
@@ -36,5 +39,8 @@ public class CartItem  implements Serializable {
     }
 
     public Item getItem(){return this.item;}
+
+    public int getAmount(){return this.amount;}
+    public int getId(){return this.id;}
 
 }
