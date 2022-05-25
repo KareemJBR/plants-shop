@@ -117,5 +117,6 @@ public class Customer  implements Serializable {
     public String getEmail(){
         return this.email;
     }
-}
 
+    public String getCredit_card() { return credit_card; }
+}
