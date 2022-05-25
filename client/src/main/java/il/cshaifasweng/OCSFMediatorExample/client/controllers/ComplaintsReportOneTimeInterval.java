@@ -8,8 +8,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,18 +38,57 @@ public class ComplaintsReportOneTimeInterval {
         List<Report> reports_to_show = new ArrayList<>();
         int num_of_days = 0;
 
-        // TODO: specify which reports we should show + num_of_days between the start adn end date
+        if (is_admin) {
+            for (int i=0;i<reports_to_show.size();i++){
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(reports_to_show.get(i).getdate());
 
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+                    reports_to_show.add(all_reports.get(i));
+            }
+        }
 
-        // TODO: create an array of the length of the number of days in the interval
+        else {
+            for (int i=0;i<reports_to_show.size();i++) {
+
+                if (reports_to_show.get(i).getShopID == shop_id)     // TODO: check what shop had the complaint
+                    continue;
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(reports_to_show.get(i).getdate());
+
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+                    reports_to_show.add(all_reports.get(i));
+            }
+        }
 
         int number_of_days = get_num_of_days_in_time_interval(start_date, end_date);
 
-        for (int i=0;i<reports_to_show.size();i++){
-            if(reports_to_show.get(i).getdate().)
+        int[] arr = new int[number_of_days];
+        for (int i=0;i<num_of_days;i++)
+            arr[i] = 0;
 
+        for (Report report : reports_to_show) {
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(report.getdate());
+
+            int col_num = get_num_of_days_in_time_interval(start_date, calendar);
+
+            arr[col_num]++;
         }
 
+        for (int i=0;i<arr.length;i++) {
+
+            if (i != 0)
+                start_date.add(Calendar.DAY_OF_MONTH, 1);
+
+            String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
+                    start_date.get(Calendar.YEAR);
+
+            series.getData().add(new XYChart.Data<>(arr[i], col_name));
+            reportsChart.getData().add(series);
+        }
     }
 
     private static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
