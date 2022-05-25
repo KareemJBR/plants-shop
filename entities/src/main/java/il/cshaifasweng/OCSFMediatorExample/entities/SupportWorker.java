@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "net_workers")
-public class NetWorker implements Serializable {
+@Table(name = "support_workers")
+public class SupportWorker implements Serializable {
     @Id
     @Column(name = "worker_id")
     private final String worker_id;
@@ -24,16 +24,17 @@ public class NetWorker implements Serializable {
 
     @Column(name = "worker_password")
     private String password;
-    public NetWorker(String worker_id, String first_name, String last_name, String username, String password){
-        this.worker_id=worker_id;
-        this.first_name=first_name;
-        this.last_name=last_name;
-        this.username=username;
-        this.password=password;
+
+    public SupportWorker(String worker_id, String first_name, String last_name, String username, String password){
+        this.worker_id = worker_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.username = username;
+        this.password = password;
     }
 
     @Deprecated
-    public NetWorker() {
+    public SupportWorker() {
         this.worker_id = null;
     }
 
