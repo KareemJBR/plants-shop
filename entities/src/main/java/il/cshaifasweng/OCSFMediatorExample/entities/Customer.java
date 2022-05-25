@@ -86,6 +86,10 @@ public class Customer  implements Serializable {
         this.user_name = user_name;
     }
 
+    public void setEmail(String email){
+        this.email = email;
+    }
+
     public String getUser_id(){
         return id;
     }
@@ -109,7 +113,8 @@ public class Customer  implements Serializable {
         customerReports.add(report);
     }
 
-    public String getEmail() {
+    public String getEmail(){
         return this.email;
     }
 }
+

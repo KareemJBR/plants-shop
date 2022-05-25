@@ -47,7 +47,7 @@ public class ShowReportsForAdmin implements Initializable {
 
     @FXML
     void backToHomePage(ActionEvent event) throws IOException {
-        App.setRoot("AdministratorHomePage");
+        App.setRoot("controllers/AdministratorHomePage");
     }
 
     @FXML
