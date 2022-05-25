@@ -32,7 +32,7 @@ public class Report implements Serializable {
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
-        getdate();
+        setdate();
     }
 
     public Report(String content, boolean handled, boolean workingOnIT, String answer, Customer customer) {
@@ -98,11 +98,17 @@ public class Report implements Serializable {
         this.customer = customer;
     }
 
-    public void getdate(){
+    public void setdate(){
         //Date date=new Date();
         //this.reportDate=date.toString();
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
         this.reportDate=timeStamp;
     }
+
+    public Date getdate(){
+        Date date = new Date(this.reportDate)  ;
+        return date;
+    }
+
 
 }
