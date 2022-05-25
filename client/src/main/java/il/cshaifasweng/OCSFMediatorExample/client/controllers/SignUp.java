@@ -3,8 +3,8 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import java.util.List;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
 import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
-import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
 import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllWorkers;
@@ -75,7 +74,7 @@ public class SignUp {
         String email=EmailTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
         List<Customer> customers=getAllCustomers();
-        List<Worker> workers=getAllWorkers();
+        List<NetWorker> workers = getAllWorkers();
         clear();
         MsgClass msg;
 
@@ -160,7 +159,7 @@ public class SignUp {
             for(int i=0;i<workers.size();i++)
             {
 
-                if(id.equals(Integer.toString(workers.get(i).getId())))
+                if(id.equals(workers.get(i).getId()))
                 {
                     errors.add("Id Numer already exists please try with another one");
                     IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");

@@ -7,11 +7,11 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "workers")
-public class Worker implements Serializable {
+@Table(name = "support_workers")
+public class SupportWorker implements Serializable {
     @Id
     @Column(name = "worker_id")
-    private final int id;
+    private final String worker_id;
 
     @Column(name = "worker_first_name")
     private String first_name;
@@ -24,19 +24,22 @@ public class Worker implements Serializable {
 
     @Column(name = "worker_password")
     private String password;
-    public Worker(int id, String first_name, String last_name, String username,String password){
-        this.id=id;
-        this.first_name=first_name;
-        this.last_name=last_name;
-        this.username=username;
-        this.password=password;
+
+    public SupportWorker(String worker_id, String first_name, String last_name, String username, String password){
+        this.worker_id = worker_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.username = username;
+        this.password = password;
     }
 
-    public Worker() {
-        this.id=123123123;
+    @Deprecated
+    public SupportWorker() {
+        this.worker_id = null;
     }
-    public int getId(){
-        return this.id;
+
+    public String getId(){
+        return this.worker_id;
     }
     public String getUser_name(){
         return this.username;

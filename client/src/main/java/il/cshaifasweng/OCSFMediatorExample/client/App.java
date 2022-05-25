@@ -2,27 +2,16 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 
@@ -97,12 +86,12 @@ public class App extends Application {
         return Flowers;
     }
 
-    public static  ArrayList<Worker> getAllWorkers() throws IOException {
-        ArrayList<Worker> workers = new ArrayList<Worker>();
+    public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
+        ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get Workers", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (workersdata == null) {System.out.println("waiting for server");}
-        workers = (ArrayList<Worker>) workersdata;
+        while (NetWorkersData == null) {System.out.println("waiting for server");}
+        workers = (ArrayList<NetWorker>) NetWorkersData;
         return workers;
     }
 

@@ -46,11 +46,11 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<Worker> getAllWorkers() throws Exception {
+    private static List<NetWorker> getAllWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Worker> query = builder.createQuery(Worker.class);
-        query.from(Worker.class);
-        List<Worker> data = session.createQuery(query).getResultList();
+        CriteriaQuery<NetWorker> query = builder.createQuery(NetWorker.class);
+        query.from(NetWorker.class);
+        List<NetWorker> data = session.createQuery(query).getResultList();
         return data;
     }
 
@@ -118,9 +118,9 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateWorkers() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
+        NetWorker worker1 = new NetWorker("211406343","kareem","jabareen","kareem_jb","kareem123");
         session.save(worker1);
-        Worker worker2 = new Worker(206384919,"mostafa","egbaria","mostafa_eg","mostafa123");
+        NetWorker worker2 = new NetWorker("206384919","mostafa","egbaria","mostafa_eg","mostafa123");
         session.save(worker2);
         session.flush();
     }
@@ -171,7 +171,7 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-       configuration.addAnnotatedClass(Worker.class);
+       configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Customer.class);
