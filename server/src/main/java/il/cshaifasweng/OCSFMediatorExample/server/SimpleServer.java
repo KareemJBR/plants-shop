@@ -251,6 +251,16 @@ public class SimpleServer extends AbstractServer {
             try {
                 System.out.println(msgtext);
 
+                if (msgtext.equals("#customerUpdate")){
+                    try{
+                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                        update_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
                 if (msgtext.equals("#get reports")){
                     try{
                         MsgClass myMSg = new MsgClass("all reports");
@@ -414,7 +424,15 @@ public class SimpleServer extends AbstractServer {
 
     }
 
+    private static void update_customer(Customer customer) {
+        session.beginTransaction();
+        session.update(customer);
+        session.getTransaction().commit();
+    }
 
+    private static void delete_customer(Customer customer) {
+        // TODO: what if the customer is involved in some orders or complaints ?
+    }
 }
 
 

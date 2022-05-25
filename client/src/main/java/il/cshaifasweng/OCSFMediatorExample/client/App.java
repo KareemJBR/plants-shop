@@ -59,6 +59,16 @@ public class App extends Application {
         launch();
     }
 
+    public static void updateCustomer(Customer customer) throws IOException {
+        MsgClass msg = new MsgClass("#customerUpdate", customer);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void deleteCustomer(Customer customer) throws IOException {
+        MsgClass msg = new MsgClass("#customerDelete", customer);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);

@@ -52,6 +52,20 @@ public class Customer  implements Serializable {
     }
 
     @Deprecated
+    public Customer(Customer customer) {
+        this.id = customer.id;
+        this.first_name = customer.first_name;
+        this.last_name = customer.last_name;
+        this.budget = customer.budget;
+        this.user_name = customer.user_name;
+        this.password = customer.password;
+        this.credit_card = customer.credit_card;
+        this.acount_type = customer.acount_type;
+        this.email = customer.email;
+        this.customerReports = customer.customerReports;
+    }
+
+    @Deprecated
     public Customer() {
         this.id="123456789";
     }
