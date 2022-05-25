@@ -65,9 +65,9 @@ public class Cart<T> {
         ArrayList<Item> cartItems = searchCartItems(LoginClient_userId);
         ArrayList<Integer> amountOfItems= getamount(LoginClient_userId);
         double subtotal=0;
+        System.out.println();
         if (cartItems != null) {
             if (cartItems.size() != 0) {
-
                     itemscontainer.setMinHeight(cartItems.size()*80);      ///the height of the container is related to the amount of the items
               ArrayList<ImageView> arr=new ArrayList<ImageView>();
                     for(int i=0;i<cartItems.size();i++)
@@ -123,6 +123,18 @@ public class Cart<T> {
                         itemscontainer.getChildren().add(p);
 
                         subtotal+=(cartItems.get(i).getPrice()*(itemamount));
+                        if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
+                        {
+                            Subtotal.setText("Subtotal after 10% discount: "+subtotal *0.9);
+                            Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
+                            Subtotal.setMinWidth(225);
+                            OrderSubtotal=  subtotal*0.9;
+                        }
+                        else
+                        {
+                            Subtotal.setText("Subtotal: "+ subtotal);
+                            OrderSubtotal=subtotal;
+                        }
                     }
 
             }
@@ -130,7 +142,7 @@ public class Cart<T> {
             {
                 CheckoutBtn.setDisable(true);
             }
-        });
+        }
     }
 
 
@@ -149,19 +161,8 @@ public class Cart<T> {
                 }
             }
         }
-        System.out.println(LoginClient_acount_type);
-        if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
-        {
-            Subtotal.setText("Subtotal after 10% discount: "+ subtotal*0.9);
-            Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
-            Subtotal.setMinWidth(225);
-            OrderSubtotal=  subtotal*0.9;
-        }
-        else
-        {
-            Subtotal.setText("Subtotal: "+ subtotal);
-            OrderSubtotal=subtotal;
-        }
+
+        return returnedcartitems;
     }
     public CartItem searchCartItem(int ItemId) throws IOException {
         ArrayList<CartItem> allcartitems=getAllCartItems();
@@ -180,20 +181,6 @@ public class Cart<T> {
         return  null;
     }
 
-    public ArrayList<Integer> getamount(String ClientId) throws IOException {
-        ArrayList<CartItem> allcartitems=getAllCartItems();
-        ArrayList<Integer> returnedcartitems=new ArrayList<Integer>();
-
-        if(allcartitems !=null)
-        {
-            for(int i=0;i<allcartitems.size();i++)
-            {
-                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
-                {
-                    returnedcartitems.add(allcartitems.get(i).getAmount());
-                }
-            }
-        }
 
     public ArrayList<Integer> getamount(String ClientId) throws IOException {
         ArrayList<CartItem> allcartitems=getAllCartItems();
