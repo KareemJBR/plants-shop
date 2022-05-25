@@ -14,15 +14,18 @@ public class Shop implements Serializable {
     private String address ;
 
     @Column(name = "admin_id")
-    private int admin_id;
+    private String admin_id;
 
-    public Shop(String address, int admin_id) {
-        this.address=address;
-        this.admin_id=admin_id;
+    public Shop(String address, String admin_id) {
+        this.address = address;
+        this.admin_id = admin_id;
     }
 
+    @Deprecated
     public Shop() {
-
+        id = -1;
+        address = null;
+        admin_id = null;
     }
 
 
@@ -36,7 +39,7 @@ public class Shop implements Serializable {
         return this.address;
     }
 
-    public int getAdminId(){
+    public String getAdminId(){
         return this.admin_id;
     }
 }

@@ -80,9 +80,9 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
+        Shop shop1 = new Shop("Abba Houshi 199, Haifa","211406343");
         session.save(shop1);
-        Shop shop2 = new Shop("Hanamal 500, Haifa",123456789);
+        Shop shop2 = new Shop("Hanamal 500, Haifa","123456789");
         session.save(shop2);
         session.flush();
     }
