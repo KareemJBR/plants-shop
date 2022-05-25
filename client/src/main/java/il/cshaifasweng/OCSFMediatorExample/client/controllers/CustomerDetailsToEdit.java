@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.updateCustomer;
 
 public class CustomerDetailsToEdit {
 
@@ -43,8 +44,9 @@ public class CustomerDetailsToEdit {
     }
 
     @FXML
-    void deleteCustomer(ActionEvent event) {
-
+    void deleteCustomer(ActionEvent event) throws IOException {
+        App.deleteCustomer(base_customer);
+        backToCustomersView(event);
     }
 
     @FXML
@@ -53,8 +55,14 @@ public class CustomerDetailsToEdit {
     }
 
     @FXML
-    void saveChanges(ActionEvent event) {
+    void saveChanges(ActionEvent event) throws IOException {
+        Customer new_cutomer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
+                customerLastNameTextField.getText(), customerUsernameTextField.getText(),
+                customerPasswordTextField.getText(), base_customer.getCredit_card(),
+                customerAccountTypeTextField.getTypeSelector(), customerEmailTextField.getText());
 
+        updateCustomer(new_cutomer);
+        base_customer = new Customer(new_cutomer);
     }
 
     public void start_controller(String customer_id) throws IOException {
@@ -67,7 +75,7 @@ public class CustomerDetailsToEdit {
                         customer.getEmail());
 
                 fill_with_base_customer();
-                break;
+                return;
             }
         }
     }
