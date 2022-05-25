@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="403.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
+<AnchorPane prefHeight="383.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
    <children>
-      <Text layoutX="365.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
+      <Text layoutX="353.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
          <font>
             <Font size="17.0" />
          </font>
@@ -22,22 +22,18 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
-      <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="125.0" />
-      <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="173.0" />
-      <Text layoutX="17.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
-      <Text layoutX="19.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
-      <CheckBox fx:id="comparisonOn" layoutX="19.0" layoutY="255.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
-      <Text layoutX="16.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
-      <ComboBox fx:id="shopsList1" layoutX="122.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" />
-      <Line endX="-100.0" endY="198.20001220703125" layoutX="494.0" layoutY="65.0" startX="-100.0" />
-      <Text layoutX="435.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Shop:" />
-      <ComboBox fx:id="shopsList2" disable="true" layoutX="540.0" layoutY="81.0" prefHeight="26.0" prefWidth="175.0" />
-      <Text layoutX="435.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
-      <Text layoutX="436.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
-      <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="125.0" />
-      <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="173.0" />
-      <Button layoutX="348.0" layoutY="312.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="42.0" prefWidth="92.0" text="Show" />
-      <Text layoutX="18.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Type:" />
-      <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="215.0" prefHeight="26.0" prefWidth="175.0" />
+      <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="82.0" />
+      <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="138.0" />
+      <Text layoutX="17.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
+      <Text layoutX="18.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
+      <CheckBox fx:id="comparisonOn" layoutX="18.0" layoutY="246.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
+      <Line endX="-100.0" endY="161.40000915527344" layoutX="481.0" layoutY="61.0" startX="-100.0" />
+      <Text layoutX="434.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
+      <Text layoutX="435.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
+      <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="82.0" />
+      <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="138.0" />
+      <Button layoutX="334.0" layoutY="284.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="42.0" prefWidth="92.0" text="Show" />
+      <Text layoutX="18.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Type:" />
+      <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="188.0" prefHeight="26.0" prefWidth="175.0" />
    </children>
 </AnchorPane>

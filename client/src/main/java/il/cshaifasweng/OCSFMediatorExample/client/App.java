@@ -104,6 +104,15 @@ public class App extends Application {
         return cartItems;
     }
 
+    public static  ArrayList<Report> getAllReports() throws IOException {
+        ArrayList<Report> cartItems = new ArrayList<Report>();
+        MsgClass msg = new MsgClass("#get Reports", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        cartItems = (ArrayList<Report>) ReportsData;
+        return cartItems;
+    }
+
     public static ArrayList<ShopAdmin> getAllShopAdmins() throws IOException {
         ArrayList<ShopAdmin> shopAdmins = new ArrayList<ShopAdmin>();
         MsgClass msg = new MsgClass("#get shopAdmins", null);

@@ -7,18 +7,18 @@ import javafx.scene.chart.NumberAxis;
 
 import java.util.Date;
 
-public class OrdersReportOneTimeInterval {
+public class IncomesReportOneTimeInterval {
 
     @FXML
     private CategoryAxis dayAxes;
 
     @FXML
-    private NumberAxis ordersNumAxes;
+    private NumberAxis incomesNumAxes;
 
     @FXML
     private BarChart<String, Integer> reportsChart;
 
-    public void start_chart(int shop_id, Date start_date, Date end_date){
+    public void start_chart(boolean is_admin, int shop_id, Date start_date, Date end_date){
         // TODO: initialize the chart
     }
 }

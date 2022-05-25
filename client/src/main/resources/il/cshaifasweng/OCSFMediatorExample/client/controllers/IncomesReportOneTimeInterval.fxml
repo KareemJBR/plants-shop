@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportOneTimeInterval">
+    <children>
+        <BarChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Incomes Report">
+            <xAxis>
+                <CategoryAxis fx:id="dayAxes" label="Day" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="incomesNumAxes" label="Incomes" side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </children>
+</AnchorPane>
