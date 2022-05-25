@@ -5,7 +5,6 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
-import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,6 +19,7 @@ import java.util.List;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.currentCustomerData;
+
 public class ReportControl {
     @FXML
     private Button back;
@@ -48,7 +48,6 @@ public class ReportControl {
        /* getCustomer(Client_username);
        Customer customer = (Customer) currentCustomerData;
        System.out.println("the customer is  "+customer);
-
         customer.addReport(newReport);
         ;*/
         ArrayList<Customer> customers=new ArrayList<Customer>();
@@ -61,7 +60,7 @@ public class ReportControl {
                 current=customers.get(i);
             }
         }
-        Report newReport = new Report(reportText.getText(),false,false,"");
+        Report newReport = new Report(reportText.getText(),false,false,null);
         newReport.setCustomer(current);
         MsgClass msg1=new MsgClass("#add report",newReport);
         SimpleClient.getClient().sendToServer(msg1);

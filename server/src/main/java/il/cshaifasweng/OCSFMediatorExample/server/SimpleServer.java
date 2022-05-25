@@ -46,11 +46,11 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<Worker> getAllWorkers() throws Exception {
+    private static List<NetWorker> getAllWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Worker> query = builder.createQuery(Worker.class);
-        query.from(Worker.class);
-        List<Worker> data = session.createQuery(query).getResultList();
+        CriteriaQuery<NetWorker> query = builder.createQuery(NetWorker.class);
+        query.from(NetWorker.class);
+        List<NetWorker> data = session.createQuery(query).getResultList();
         return data;
     }
 
@@ -78,11 +78,19 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Report> getAllReports() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Report> query = builder.createQuery(Report.class);
+        query.from(Report.class);
+        List<Report> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("Abba Houshi 199, Haifa",211406343);
+        Shop shop1 = new Shop("Abba Houshi 199, Haifa","211406343");
         session.save(shop1);
-        Shop shop2 = new Shop("Hanamal 500, Haifa",123456789);
+        Shop shop2 = new Shop("Hanamal 500, Haifa","123456789");
         session.save(shop2);
         session.flush();
     }
@@ -92,15 +100,15 @@ public class SimpleServer extends AbstractServer {
         /* ---------- Saving CartItems To Data Base ---------- */
         Customer customer1=getAllCustomers().get(0);
         Item item1=getAllItems().get(0);
-        CartItem cartItem1 = new CartItem(customer1,item1);
+        CartItem cartItem1 = new CartItem(customer1,item1,3);
         session.save(cartItem1);
         Customer customer2=getAllCustomers().get(0);
         Item item2=getAllItems().get(1);
-        CartItem cartItem2 = new CartItem(customer2,item2);
+        CartItem cartItem2 = new CartItem(customer2,item2,1);
         session.save(cartItem2);
         Customer customer3=getAllCustomers().get(0);
         Item item3=getAllItems().get(1);
-        CartItem cartItem3 = new CartItem(customer3,item3);
+        CartItem cartItem3 = new CartItem(customer3,item3,2);
         session.save(cartItem3);
         session.flush();
     }
@@ -121,9 +129,9 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateWorkers() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Worker worker1 = new Worker(211406343,"kareem","jabareen","kareem_jb","kareem123");
+        NetWorker worker1 = new NetWorker("211406343","kareem","jabareen","kareem_jb","kareem123");
         session.save(worker1);
-        Worker worker2 = new Worker(206384919,"mostafa","egbaria","mostafa_eg","mostafa123");
+        NetWorker worker2 = new NetWorker("206384919","mostafa","egbaria","mostafa_eg","mostafa123");
         session.save(worker2);
         session.flush();
     }
@@ -137,9 +145,8 @@ public class SimpleServer extends AbstractServer {
         Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account","bayan@gmail.com");
         session.save(customer3);
         session.flush();
-        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "network_account","bayann@gmail.com");
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "Network account with 10% discount","bayann@gmail.com");
         session.save(customer4);
-        session.flush();
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account","email@gmail.com");
         session.save(customer5);
         session.flush();
@@ -175,12 +182,12 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-        configuration.addAnnotatedClass(Worker.class);
+       configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(Flower.class);
-        configuration.addAnnotatedClass(Customer.class);
-        configuration.addAnnotatedClass(CartItem.class);
-        configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(Report.class);
+        configuration.addAnnotatedClass(Customer.class);
+        configuration.addAnnotatedClass(Item.class);
+        configuration.addAnnotatedClass(CartItem.class);
         configuration.addAnnotatedClass(FlowerPotWithFlower.class);
         configuration.addAnnotatedClass(FlowerBouquet.class);
         configuration.addAnnotatedClass(EmptyFlowerPot.class);
@@ -246,6 +253,28 @@ public class SimpleServer extends AbstractServer {
             String msgtext = myMsg.getMsg();
             try {
                 System.out.println(msgtext);
+
+                if (msgtext.equals("#customerUpdate")){
+                    try{
+                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                        update_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#get reports")){
+                    try{
+                        MsgClass myMSg = new MsgClass("all reports");
+                        myMSg.setObj(null);
+                        myMSg.setObj(getAllReports());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
 
                 if (msgtext.equals("#get shopAdmins")){
                     try{
@@ -398,7 +427,15 @@ public class SimpleServer extends AbstractServer {
 
     }
 
+    private static void update_customer(Customer customer) {
+        session.beginTransaction();
+        session.update(customer);
+        session.getTransaction().commit();
+    }
 
+    private static void delete_customer(Customer customer) {
+        // TODO: what if the customer is involved in some orders or complaints ?
+    }
 }
 
 

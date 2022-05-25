@@ -5,16 +5,15 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportOneTimeInterval">
-   <children>
-      <BarChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Complaints Report">
-        <xAxis>
-          <CategoryAxis fx:id="dayAxes" label="Day" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="complaintsNumAxes" label="Number of Complaints" side="LEFT" />
-        </yAxis>
-      </BarChart>
-   </children>
+    <children>
+        <BarChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Complaints Report">
+            <xAxis>
+                <CategoryAxis fx:id="dayAxes" label="Day" side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="complaintsNumAxes" label="Complaints" side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </children>
 </AnchorPane>

@@ -12,11 +12,9 @@ public class Customer  implements Serializable {
     @Column(name = "customer_id")
     private final String id;
 
+
     @Column(name = "customer_user_name")
     private String user_name;
-
-    @Column(name = "customer_email")
-    private String email;
 
     @Column(name = "customer_first_name")
     private String first_name;
@@ -30,8 +28,11 @@ public class Customer  implements Serializable {
     private double budget;
     @Column(name = "account_type")
     String acount_type;
+
+    @Column(name = "customer_emil")
+    String email;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-   // @JoinColumn(name="customerReport") // join column is in table for Order
+    // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
 
 
@@ -50,6 +51,21 @@ public class Customer  implements Serializable {
         this.email=email;
     }
 
+    @Deprecated
+    public Customer(Customer customer) {
+        this.id = customer.id;
+        this.first_name = customer.first_name;
+        this.last_name = customer.last_name;
+        this.budget = customer.budget;
+        this.user_name = customer.user_name;
+        this.password = customer.password;
+        this.credit_card = customer.credit_card;
+        this.acount_type = customer.acount_type;
+        this.email = customer.email;
+        this.customerReports = customer.customerReports;
+    }
+
+    @Deprecated
     public Customer() {
         this.id="123456789";
     }
@@ -113,6 +129,8 @@ public class Customer  implements Serializable {
     }
 
     public String getEmail(){
-        return email;
+        return this.email;
     }
+
+    public String getCredit_card() { return credit_card; }
 }

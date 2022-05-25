@@ -4,27 +4,23 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.Worker;
+import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-
 public class LogIN {
     public static  String LoginClient_username;
     public static  String LoginWorker_username;
-    public static  String LoginClient_userId;           //the login client id
+    public static  String LoginClient_userId;
+    public static  String LoginClient_acount_type;
     String  current;
     String password_status="invisible";
     @FXML // fx:id="showPassword"
@@ -62,7 +58,7 @@ public class LogIN {
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
-        ArrayList<Worker> workers=getAllWorkers();
+        ArrayList<NetWorker> workers = getAllWorkers();
 //        MsgClass msg =new MsgClass("#get customers",null);
 //        SimpleClient.getClient().sendToServer(msg);
 //        customers=(ArrayList<Customer>)data;
@@ -84,6 +80,7 @@ public class LogIN {
                    login_success=true;
                    LoginClient_username=customers.get(i).getUser_name();
                    LoginClient_userId=customers.get(i).getUser_id();
+                   LoginClient_acount_type=customers.get(i).getAcount_type();
                    App.setRoot("controllers/ClientMainPage");
                }
             }
@@ -112,6 +109,10 @@ public class LogIN {
                     LoginWorker_username=workers.get(i).getUser_name();
                     App.setRoot("controllers/WorkerHomePage");
                 }
+            }
+            if(userName.getText().equals("admin"))
+            {
+                App.setRoot("controllers/AdministratorHomePage");
             }
         }
         if(!login_success)

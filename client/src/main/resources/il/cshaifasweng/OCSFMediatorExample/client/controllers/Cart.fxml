@@ -13,7 +13,7 @@
             <Font size="30.0" />
          </font>
       </TextField>
-      <Button fx:id="CheckoutBtn" layoutX="434.0" layoutY="426.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25;" text="Checkout">
+      <Button fx:id="CheckoutBtn" layoutX="402.0" layoutY="418.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25;" text="Checkout">
          <font>
             <Font size="15.0" />
          </font>
@@ -23,7 +23,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="Subtotal" alignment="TOP_LEFT" layoutX="433.0" layoutY="378.0" style="-fx-background-color: none;" text="Subtotal:">
+      <TextField fx:id="Subtotal" alignment="TOP_LEFT" layoutX="372.0" layoutY="360.0" prefHeight="29.0" prefWidth="254.0" style="-fx-background-color: none;" text="Subtotal:">
          <font>
             <Font size="14.0" />
          </font>
