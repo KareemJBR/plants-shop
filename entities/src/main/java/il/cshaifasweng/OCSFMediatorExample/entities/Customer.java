@@ -51,6 +51,7 @@ public class Customer  implements Serializable {
         this.email=email;
     }
 
+    @Deprecated
     public Customer() {
         this.id="123456789";
     }

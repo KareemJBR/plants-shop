@@ -54,6 +54,18 @@ public class CustomerDetailsToEdit {
 
     @FXML
     void saveChanges(ActionEvent event) {
+        String update_customer_query = "update customers set customer_first_name=" +
+                customerFirstNameTextField.getText() + ", customer_last_name=" + customerLastNameTextField.getText() +
+                ", customer_user_name=" + customerUsernameTextField.getText() + ", customer_password=" +
+                customerPasswordTextField.getText() + ", account_type=" + customerAccountTypeTextField.getText() +
+                ", customer_emil=" + customerEmailTextField.getText() + " where cutomer_id=" +
+                customerIDTextField.getText();
+
+        Customer new_cutomer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
+                customerLastNameTextField.getText(), customerUsernameTextField.getText(),
+                customerPasswordTextField.getText(), base_customer.getCr)
+
+        update_customer()
 
     }
 
@@ -67,7 +79,7 @@ public class CustomerDetailsToEdit {
                         customer.getEmail());
 
                 fill_with_base_customer();
-                break;
+                return;
             }
         }
     }
