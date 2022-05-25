@@ -12,11 +12,9 @@ public class Customer  implements Serializable {
     @Column(name = "customer_id")
     private final String id;
 
+
     @Column(name = "customer_user_name")
     private String user_name;
-
-    @Column(name = "customer_email")
-    private String email;
 
     @Column(name = "customer_first_name")
     private String first_name;
@@ -30,8 +28,11 @@ public class Customer  implements Serializable {
     private double budget;
     @Column(name = "account_type")
     String acount_type;
+
+    @Column(name = "customer_emil")
+    String email;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-   // @JoinColumn(name="customerReport") // join column is in table for Order
+    // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
 
 
@@ -113,6 +114,7 @@ public class Customer  implements Serializable {
     }
 
     public String getEmail(){
-        return email;
+        return this.email;
     }
 }
+

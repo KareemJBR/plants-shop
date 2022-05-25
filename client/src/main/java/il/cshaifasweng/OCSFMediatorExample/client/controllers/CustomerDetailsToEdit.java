@@ -39,6 +39,7 @@ public class CustomerDetailsToEdit {
     @FXML
     void backToCustomersView(ActionEvent event) throws IOException {
         App.setRoot("controllers/ShowAllCustomers");
+
     }
 
     @FXML
