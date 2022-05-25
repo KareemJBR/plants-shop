@@ -123,11 +123,10 @@ public class LogIN {
 
     @FXML
     void openCatalog(ActionEvent event) throws IOException {
-        MsgClass msg=new MsgClass("catalog for register",null);
+        MsgClass msg=new MsgClass("#get Items",null);
         SimpleClient.getClient().sendToServer(msg);
-        System.out.println("msg sent to got flowers");
+        System.out.println("msg sent to got shop items");
         App.setRoot("controllers/publicCatalog");
-
     }
 
     @FXML
