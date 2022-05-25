@@ -1,4 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
+
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.application.Platform;
@@ -11,7 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,12 +34,6 @@ public class ShowReportsForAdmin implements Initializable {
     private ComboBox<String> reportTypeComboBox;
 
     @FXML
-    private ComboBox<String> shopsList1;
-
-    @FXML
-    private ComboBox<String> shopsList2;
-
-    @FXML
     private DatePicker untilDate1;
 
     @FXML
@@ -54,7 +48,6 @@ public class ShowReportsForAdmin implements Initializable {
     void compareButtonPressed(ActionEvent event) {
         fromDate2.disableProperty().set(!fromDate2.isDisabled());
         untilDate2.disableProperty().set(!untilDate2.isDisabled());
-        shopsList2.disableProperty().set(!shopsList2.isDisabled());
     }
 
     @FXML
@@ -66,31 +59,35 @@ public class ShowReportsForAdmin implements Initializable {
             if(reportTypeComboBox.getValue().equals("Orders")){
                 // TODO: we shall compare orders in two time intervals
             }
-            else {      // complaints
+            else if(reportTypeComboBox.getValue().equals("Complaints")) {
+
+            }
+            else {      // incomes
 
             }
         }
 
         else{
             if(reportTypeComboBox.getValue().equals("Orders")){
-                // orders in one time interval
+
             }
-            else{
+            else if(reportTypeComboBox.getValue().equals("Complaints")) {
+
+            }
+            else {      // incomes
 
             }
         }
     }
 
     public boolean legalFields() {
-        if(fromDate1.getValue() == null || untilDate1.getValue() == null || shopsList1.getValue() == null ||
-                reportTypeComboBox.getValue() == null) {
+        if(fromDate1.getValue() == null || untilDate1.getValue() == null || reportTypeComboBox.getValue() == null) {
             showAlert("Error", "Please fill all needed fields.");
             return false;
         }
 
         if(comparisonOn.isSelected())
-            if(fromDate2.getValue() == null || untilDate2.getValue() == null || shopsList2.getValue() == null ||
-                    reportTypeComboBox.getValue() == null) {
+            if(fromDate2.getValue() == null || untilDate2.getValue() == null || reportTypeComboBox.getValue() == null) {
                 showAlert("Error", "Please fill all needed fields.");
                 return false;
             }
@@ -137,12 +134,10 @@ public class ShowReportsForAdmin implements Initializable {
             shops_ids.add(shops_ids.get(i));
         }
 
-        shopsList1.setItems(shops_ids);
-        shopsList2.setItems(shops_ids);
-
         ObservableList<String> reports_types = FXCollections.observableArrayList();
 
         reports_types.add("Orders");
+        reports_types.add("Incomes");
         reports_types.add("Complaints");
 
         reportTypeComboBox.setItems(reports_types);

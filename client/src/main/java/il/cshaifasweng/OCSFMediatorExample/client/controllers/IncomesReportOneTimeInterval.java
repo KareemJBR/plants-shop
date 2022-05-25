@@ -7,13 +7,13 @@ import javafx.scene.chart.NumberAxis;
 
 import java.util.Date;
 
-public class OrdersReportOneTimeInterval {
+public class IncomesReportOneTimeInterval {
 
     @FXML
     private CategoryAxis dayAxes;
 
     @FXML
-    private NumberAxis ordersNumAxes;
+    private NumberAxis incomesNumAxes;
 
     @FXML
     private BarChart<String, Integer> reportsChart;
