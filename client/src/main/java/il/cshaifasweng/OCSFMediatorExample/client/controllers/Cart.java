@@ -20,6 +20,7 @@ import javax.swing.text.Element;
 //import javax.swing.text.html.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import org.hibernate.criterion.Order;
 
 import java.awt.*;
 import java.io.File;
@@ -32,6 +33,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllFlowers;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 public class Cart<T> {
+    public static double OrderSubtotal;
 
     @FXML // fx:id="scrollbar"
     private ScrollPane scrollbar; // Value injected by FXMLLoader
@@ -62,7 +64,7 @@ public class Cart<T> {
     public void initialize() throws IOException, InterruptedException {
         ArrayList<Item> cartItems = searchCartItems(LoginClient_userId);
         ArrayList<Integer> amountOfItems= getamount(LoginClient_userId);
-        int subtotal=0;
+        double subtotal=0;
         if (cartItems != null) {
             if (cartItems.size() != 0) {
 
@@ -79,7 +81,7 @@ public class Cart<T> {
                         imageview.setFitHeight(72); //height of img
 //                        System.out.println(cartItems.get(i).getUrl());
                         imageview.setImage(new Image(cartItems.get(i).getUrl()));
-                        imageview.setX(8);           //x & y coordinate related in the pane
+                        imageview.setX(8);           //x & y coordinate related to the pane
                         imageview.setY(8);
 
                            //////////////// details of the item //////////////
@@ -107,8 +109,8 @@ public class Cart<T> {
                         btn.setLayoutY(23);
                         btn.setMaxWidth(40);
                         btn.setText("X");
-                        btn.setStyle("-fx-font-size:11;-fx-background-radius:2");
-                        
+                        btn.setStyle("-fx-font-size:11;-fx-background-radius:2;");
+
                         /////////////// adding components to the pane /////////////
                         p.getChildren().add(imageview);
                         p.getChildren().add(price);
@@ -123,6 +125,10 @@ public class Cart<T> {
                         subtotal+=(cartItems.get(i).getPrice()*(itemamount));
                     }
 
+            }
+            else           /////////   if the cart is empty
+            {
+                CheckoutBtn.setDisable(true);
             }
         });
     }
@@ -149,10 +155,12 @@ public class Cart<T> {
             Subtotal.setText("Subtotal after 10% discount: "+ subtotal*0.9);
             Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
             Subtotal.setMinWidth(225);
+            OrderSubtotal=  subtotal*0.9;
         }
         else
         {
             Subtotal.setText("Subtotal: "+ subtotal);
+            OrderSubtotal=subtotal;
         }
     }
     public CartItem searchCartItem(int ItemId) throws IOException {
@@ -186,22 +194,6 @@ public class Cart<T> {
                 }
             }
         }
-    public CartItem searchCartItem(int ItemId) throws IOException {
-        ArrayList<CartItem> allcartitems=getAllCartItems();
-
-        if(allcartitems !=null)
-        {
-            for(int i=0;i<allcartitems.size();i++)
-            {
-                if(allcartitems.get(i).getItem().getId()==ItemId)
-                {
-                    return allcartitems.get(i);
-                }
-            }
-        }
-
-        return  null;
-    }
 
     public ArrayList<Integer> getamount(String ClientId) throws IOException {
         ArrayList<CartItem> allcartitems=getAllCartItems();
@@ -218,5 +210,10 @@ public class Cart<T> {
             }
         }
         return  returnedcartitems;
+    }
+
+    @FXML
+    void Checkout(ActionEvent event) throws IOException {
+        App.setRoot("controllers/Checkout");
     }
 }

@@ -30,7 +30,7 @@ public class App extends Application {
         client.openConnection();
 //        MsgClass msg =new MsgClass("#get customers",null);
 //        client.sendToServer(msg);
-        scene = new Scene(loadFXML("controllers/LogIN"));
+        scene = new Scene(loadFXML("controllers/Login"));
         stage.setScene(scene);
         stage.show();
     }
