@@ -6,6 +6,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.TextArea;
 
+import java.io.IOException;
+import java.util.Calendar;
+
 public class OrdersReportTwoTimeIntervals {
 
     @FXML
@@ -21,10 +24,10 @@ public class OrdersReportTwoTimeIntervals {
     private CategoryAxis itemAxes2;
 
     @FXML
-    private BarChart<?, ?> ordersChart1;
+    private BarChart<Integer, String> ordersChart1;
 
     @FXML
-    private BarChart<?, ?> ordersChart2;
+    private BarChart<Integer, String> ordersChart2;
 
     @FXML
     private NumberAxis ordersNumAxes1;
@@ -37,5 +40,13 @@ public class OrdersReportTwoTimeIntervals {
 
     @FXML
     private TextArea startDate2;
+
+    public void start_charts(boolean is_admin, Calendar start_date1, Calendar end_date1,
+                             Calendar start_date2, Calendar end_date2) throws IOException {
+
+        for (int i=0;i<2;i++) {
+            // TODO: display the two charts !
+        }
+    }
 
 }

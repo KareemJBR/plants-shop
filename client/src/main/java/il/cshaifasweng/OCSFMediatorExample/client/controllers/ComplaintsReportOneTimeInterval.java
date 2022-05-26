@@ -9,11 +9,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllReports;
 
 public class ComplaintsReportOneTimeInterval {
 
@@ -31,37 +29,12 @@ public class ComplaintsReportOneTimeInterval {
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Complaints Report");
 
-        List<Report> all_reports = getAllReports();
-        List<Report> reports_to_show = new ArrayList<>();
-        int num_of_days = 0;
+        List<Report> reports_to_show = App.getRelevantReports(is_admin, shop_id, start_date, end_date);
 
-        if (is_admin) {
-            for (int i=0;i<reports_to_show.size();i++){
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(reports_to_show.get(i).getdate());
+        int num_of_days = App.get_num_of_days_in_time_interval(start_date, end_date);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_reports.get(i));
-            }
-        }
+        int[] arr = new int[num_of_days];
 
-        else {
-            for (int i=0;i<reports_to_show.size();i++) {
-
-                if (reports_to_show.get(i).getShopID != shop_id)
-                    continue;
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(reports_to_show.get(i).getdate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_reports.get(i));
-            }
-        }
-
-        int number_of_days = App.get_num_of_days_in_time_interval(start_date, end_date);
-
-        int[] arr = new int[number_of_days];
         for (int i=0;i<num_of_days;i++)
             arr[i] = 0;
 
