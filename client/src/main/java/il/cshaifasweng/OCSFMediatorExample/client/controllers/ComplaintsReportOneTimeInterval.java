@@ -33,35 +33,35 @@ public class ComplaintsReportOneTimeInterval {
 
         List<Report> all_reports = getAllReports();
         List<Report> reports_to_show = new ArrayList<>();
-        int num_of_days = 0;
 
         if (is_admin) {
-            for (int i=0;i<reports_to_show.size();i++){
+            for (Report all_report : all_reports) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(reports_to_show.get(i).getdate());
+                calendar.setTime(all_report.getdate());
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_reports.get(i));
+                    reports_to_show.add(all_report);
             }
         }
 
         else {
-            for (int i=0;i<reports_to_show.size();i++) {
+            for (Report all_report : all_reports) {
 
-                if (reports_to_show.get(i).getShopID != shop_id)
+                if (all_report.getShopID != shop_id)
                     continue;
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(reports_to_show.get(i).getdate());
+                calendar.setTime(all_report.getdate());
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_reports.get(i));
+                    reports_to_show.add(all_report);
             }
         }
 
-        int number_of_days = App.get_num_of_days_in_time_interval(start_date, end_date);
+        int num_of_days = App.get_num_of_days_in_time_interval(start_date, end_date);
 
-        int[] arr = new int[number_of_days];
+        int[] arr = new int[num_of_days];
+
         for (int i=0;i<num_of_days;i++)
             arr[i] = 0;
 

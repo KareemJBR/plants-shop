@@ -19,6 +19,7 @@ public class SimpleClient extends AbstractClient {
 
 	public static Object ReportsData;
 	public static Object ShopAdminsData;
+	public static Object OrdersData;
 
 
 	private SimpleClient(String host, int port) {
@@ -77,12 +78,16 @@ public class SimpleClient extends AbstractClient {
 
 			}
 		}
+		if (myMsg.getMsg().equals("all orders")) {
+			System.out.println("in get Orders client side");
+			OrdersData = myMsg.getObj();
+		}
 		if (myMsg.getMsg().equals("all Shops")) {
 			System.out.println("in get Shops client side");
 			shopsdata = myMsg.getObj();
 		}
-		if (myMsg.getMsg().equals("all Workers")) {
-			System.out.println("in get Workers client side");
+		if (myMsg.getMsg().equals("all NetWorkers")) {
+			System.out.println("in get NetWorkers client side");
 			NetWorkersData = myMsg.getObj();
 		}
 		if (myMsg.getMsg().equals("all CartItems")) {
@@ -95,11 +100,11 @@ public class SimpleClient extends AbstractClient {
 		}
 		if (myMsg.getMsg().equals("all shopAdmins")){
 			System.out.println("in get shopAdmins client side");
-			shopsdata = myMsg.getObj();
+			ShopAdminsData = myMsg.getObj();
 		}
 		if (myMsg.getMsg().equals("all reports")){
 			System.out.println("in get reports client side");
-			shopsdata = myMsg.getObj();
+			ReportsData = myMsg.getObj();
 		}
 	}
 	

@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -137,6 +138,15 @@ public class App extends Application {
         return shopAdmins;
     }
 
+    public static ArrayList<Order> getAllOrders() throws IOException {
+        ArrayList<Order> shopAdmins = new ArrayList<Order>();
+        MsgClass msg = new MsgClass("#get Orders", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        shopAdmins = (ArrayList<Order>) OrdersData;
+        return shopAdmins;
+    }
+
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
 
@@ -159,6 +169,40 @@ public class App extends Application {
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 
         return (int)daysBetween + 1;    // containing the first day
+    }
+
+    public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
+            throws IOException {
+
+        List<Order> all_orders = getAllOrders();
+        List<Order> orders_to_show = new ArrayList<>();
+
+        if (is_admin) {
+            for (Order all_order : all_orders) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(all_order.getDate());
+
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
+                        !all_order.gotCancelled())
+                    orders_to_show.add(all_order);
+            }
+        }
+
+        else {
+            for (Order all_order : all_orders) {
+
+                if (all_order.getShopID != shop_id || all_order.gotCancelled())
+                    continue;
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(all_order.getDate());
+
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+                    orders_to_show.add(all_order);
+            }
+        }
+
+        return orders_to_show;
     }
 
 }
