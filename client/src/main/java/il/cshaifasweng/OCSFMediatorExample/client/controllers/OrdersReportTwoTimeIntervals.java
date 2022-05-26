@@ -44,6 +44,9 @@ public class OrdersReportTwoTimeIntervals {
     public void start_charts(boolean is_admin, Calendar start_date1, Calendar end_date1,
                              Calendar start_date2, Calendar end_date2) throws IOException {
 
+        for (int i=0;i<2;i++) {
+            // TODO: display the two charts !
+        }
     }
 
 }
