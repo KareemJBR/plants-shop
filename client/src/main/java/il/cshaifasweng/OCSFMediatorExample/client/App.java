@@ -205,4 +205,36 @@ public class App extends Application {
         return orders_to_show;
     }
 
+    public static List<Report> getRelevantReports(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
+            throws IOException{
+
+        List<Report> all_reports = getAllReports();
+        List<Report> reports_to_show = new ArrayList<>();
+
+        if (is_admin) {
+            for (Report report : all_reports) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(report.getdate());
+
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+                    reports_to_show.add(report);
+            }
+        }
+
+        else {
+            for (Report report : all_reports) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(report.getdate());
+
+                if (report.getShopID != shop_id)
+                    continue;
+
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+                    reports_to_show.add(report);
+            }
+        }
+
+        return reports_to_show;
+    }
+
 }

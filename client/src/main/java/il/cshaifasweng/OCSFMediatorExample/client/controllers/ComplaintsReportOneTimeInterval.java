@@ -9,11 +9,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllReports;
 
 public class ComplaintsReportOneTimeInterval {
 
@@ -31,32 +29,7 @@ public class ComplaintsReportOneTimeInterval {
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Complaints Report");
 
-        List<Report> all_reports = getAllReports();
-        List<Report> reports_to_show = new ArrayList<>();
-
-        if (is_admin) {
-            for (Report all_report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_report.getdate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_report);
-            }
-        }
-
-        else {
-            for (Report all_report : all_reports) {
-
-                if (all_report.getShopID != shop_id)
-                    continue;
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_report.getdate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(all_report);
-            }
-        }
+        List<Report> reports_to_show = App.getRelevantReports(is_admin, shop_id, start_date, end_date);
 
         int num_of_days = App.get_num_of_days_in_time_interval(start_date, end_date);
 
