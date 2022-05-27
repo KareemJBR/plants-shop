@@ -8,7 +8,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,7 +80,7 @@ public class App extends Application {
         MsgClass msg =new MsgClass("#get customers",null);
         Customersdata=null;
         SimpleClient.getClient().sendToServer(msg);
-        while(Customersdata==null) {System.out.println("waiting for server");}
+        while(Customersdata==null) {System.out.println("waiting for server in get customers");}
         customers=(ArrayList<Customer>)Customersdata;
         return customers;
     }
@@ -84,17 +90,17 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get Shops", null);
         shopsdata=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (shopsdata == null) {System.out.println("waiting for server");}
+        while (shopsdata == null) {System.out.println("waiting for server in get Shops");}
         shops = (ArrayList<Shop>) shopsdata;
         return shops;
     }
 
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
-        MsgClass msg = new MsgClass("#get Workers", null);
+        MsgClass msg = new MsgClass("#get NetWorkers", null);
         NetWorkersData=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (NetWorkersData == null) {System.out.println("waiting for server");}
+        while (NetWorkersData == null) {System.out.println("waiting for server in get NetWorkers");}
         workers = (ArrayList<NetWorker>) NetWorkersData;
         return workers;
     }
@@ -104,7 +110,7 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get CartItems", null);
         CartItemsdata=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (CartItemsdata == null) {System.out.println("waiting for server in get CartItems");}
         cartItems = (ArrayList<CartItem>) CartItemsdata;
         return cartItems;
     }
@@ -130,6 +136,7 @@ public class App extends Application {
     }
 
     public static ArrayList<Order> getAllOrders() throws IOException {
+
         ArrayList<Order> orders = new ArrayList<Order>();
         MsgClass msg = new MsgClass("#get Orders", null);
         OrdersData=null;

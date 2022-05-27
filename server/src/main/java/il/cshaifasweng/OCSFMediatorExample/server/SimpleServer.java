@@ -40,7 +40,7 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<NetWorker> getAllWorkers() throws Exception {
+    private static List<NetWorker> getAllNetWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<NetWorker> query = builder.createQuery(NetWorker.class);
         query.from(NetWorker.class);
@@ -129,7 +129,7 @@ public class SimpleServer extends AbstractServer {
         session.flush();
     }
 
-    private static void generateWorkers() {
+    private static void generateNetWorkers() {
         /* ---------- Saving Shops To Data Base ---------- */
         NetWorker worker1 = new NetWorker("211406343","kareem","jabareen","kareem_jb","kareem123");
         session.save(worker1);
@@ -182,7 +182,7 @@ public class SimpleServer extends AbstractServer {
     public static void addDataToDB() {
         try {
             generateShops();
-            generateWorkers();
+            generateNetWorkers();
             generateCustomers();
             generateItems();
             generateCartItems();
@@ -247,6 +247,16 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
+                if (msgtext.equals("#customerDelete")){
+                    try{
+                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                        delete_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
                 if (msgtext.equals("#get reports")){
                     try{
                         MsgClass myMSg = new MsgClass("all reports");
@@ -304,11 +314,11 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
-                if (msgtext.equals("#get Workers")) {
+                if (msgtext.equals("cdcd ")) {
                     try {
-                        MsgClass myMSg = new MsgClass("all Workers");
-                        myMSg.setObj(getAllWorkers());
-                        System.out.println("all Workers");
+                        MsgClass myMSg = new MsgClass("all NetWorkers");
+                        myMSg.setObj(getAllNetWorkers());
+                        System.out.println("all NetWorkers");
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened4");
@@ -526,6 +536,3 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
     }
 }
-
-
-

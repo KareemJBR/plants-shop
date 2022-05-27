@@ -58,9 +58,6 @@ public class LogIN {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
         ArrayList<NetWorker> workers = getAllWorkers();
-//        MsgClass msg =new MsgClass("#get customers",null);
-//        SimpleClient.getClient().sendToServer(msg);
-//        customers=(ArrayList<Customer>)data;
         if(customers!=null)
         {
             if(password_status=="visible")
