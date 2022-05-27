@@ -64,34 +64,34 @@ public class ComplaintsReportTwoTimeIntervals {
                 end_date = end_date2;
             }
 
-            List<Report> reports_to_show = App.getRelevantReports(is_admin, -1, start_date, end_date);
+//            List<Report> reports_to_show = App.getRelevantReports(is_admin, -1, start_date, end_date);
+//
+//            int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
 
-            int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
-
-            for (Report report : reports_to_show) {
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
-
-                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
-
-                arr[col_num]++;
-            }
+//            for (Report report : reports_to_show) {
+//
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(report.getdate());
+//
+//                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+//
+//                arr[col_num]++;
+//            }
 
             start_date.add(Calendar.DAY_OF_MONTH, -1);
 
-            for (int k : arr) {
-
-                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
-                        start_date.get(Calendar.YEAR);
-
-                series.getData().add(new XYChart.Data<>(k, col_name));
-
-                if (i == 0)
-                    complaintsChart1.getData().add(series);
-                else
-                    complaintsChart2.getData().add(series);
-            }
+//            for (int k : arr) {
+//
+//                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
+//                        start_date.get(Calendar.YEAR);
+//
+//                series.getData().add(new XYChart.Data<>(k, col_name));
+//
+//                if (i == 0)
+//                    complaintsChart1.getData().add(series);
+//                else
+//                    complaintsChart2.getData().add(series);
+//            }
         }
 */
     }

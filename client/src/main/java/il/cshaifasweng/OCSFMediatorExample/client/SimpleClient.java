@@ -17,6 +17,7 @@ public class SimpleClient extends AbstractClient {
     public static  Object allItemsData;
     public static  Object Customersdata;
 
+
     public static Object ReportsData;
     public static Object ShopAdminsData;
     public static Object OrdersData;
@@ -40,28 +41,17 @@ public class SimpleClient extends AbstractClient {
 						System.out.println(e);
 					}*/
 
-            }
-            if (myMsg.getMsg().equals("all customers")) {
-                System.out.println("in get customers client side");
-                Customersdata = myMsg.getObj();
-            }
-            if (myMsg.getMsg().equals("your current customer")) {
-                currentCustomerData = myMsg.getObj();
-                System.out.println("in get your current customer");
-                System.out.println(myMsg.getObj());
-            }
-            if (myMsg.getMsg().equals("all customers"))
-            {
-                System.out.println("in get customers client side");
-                data = myMsg.getObj();
-            }
-            if (myMsg.getMsg().equals("your current customer"))
-            {
-                currentCustomerData = myMsg.getObj();
-                System.out.println("in get your current customer");
-                System.out.println(myMsg.getObj());
-            }
-
+			}
+			if (myMsg.getMsg().equals("all customers")) {
+				System.out.println("in get customers client side");
+				Customersdata = myMsg.getObj();
+			}
+			if (myMsg.getMsg().equals("your current customer")) {
+				currentCustomerData = myMsg.getObj();
+				System.out.println("in get your current customer");
+				System.out.println(myMsg.getObj());
+				}
+       
             if(myMsg.getMsg().equals("all Shops"))
             {
                 System.out.println("in get Shops client side");

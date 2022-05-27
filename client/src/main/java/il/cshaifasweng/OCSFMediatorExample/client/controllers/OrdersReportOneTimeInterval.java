@@ -30,7 +30,8 @@ public class OrdersReportOneTimeInterval {
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Orders Report");
 
-        List<Order> orders_to_show = App.getRelevantOrders(is_admin, shop_id, start_date, end_date);
+
+//        List<Order> orders_to_show = App.getRelevantOrders(is_admin, shop_id, start_date, end_date);
         List<Item> all_items = App.getAllItems();
 
         // TODO: get all flowers and display the chart!

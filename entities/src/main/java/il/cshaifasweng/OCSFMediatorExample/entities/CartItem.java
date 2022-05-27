@@ -42,6 +42,7 @@ public class CartItem  implements Serializable {
 
     public int getAmount(){return this.amount;}
     public int getId(){return this.id;}
+  
     public void addAmount(){
         this.amount=this.amount++;
     }

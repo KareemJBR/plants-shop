@@ -66,30 +66,30 @@ public class IncomesReportTwoTimeIntervals {
                 end_date = end_date2;
             }
 
-            List<Order> orders_to_show = App.getRelevantOrders(is_admin, -1, start_date, end_date);
-
-            Double[] arr = new Double[App.get_num_of_days_in_time_interval(start_date, end_date)];
-
-            Arrays.fill(arr, 0.0);
-
-            for (Order order : orders_to_show) {
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(order.getDate());
-                arr[App.get_num_of_days_in_time_interval(start_date, calendar)] += order.getPrice();
-            }
+//            List<Order> orders_to_show = App.getRelevantOrders(is_admin, -1, start_date, end_date);
+//
+//            Double[] arr = new Double[App.get_num_of_days_in_time_interval(start_date, end_date)];
+//
+//            Arrays.fill(arr, 0.0);
+//
+//            for (Order order : orders_to_show) {
+//
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(order.getDate());
+//                arr[App.get_num_of_days_in_time_interval(start_date, calendar)] += order.getPrice();
+//            }
 
             start_date.add(Calendar.DAY_OF_MONTH, -1);
 
-            for (Double aDouble : arr) {
-                series.getData().add(new XYChart.Data<>(aDouble, start_date.get(Calendar.DAY_OF_MONTH) + "/" +
-                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR)));
-
-                if (i == 0)
-                    incomesChart1.getData().add(series);
-                else
-                    incomesChart2.getData().add(series);
-            }
+//            for (Double aDouble : arr) {
+//                series.getData().add(new XYChart.Data<>(aDouble, start_date.get(Calendar.DAY_OF_MONTH) + "/" +
+//                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR)));
+//
+//                if (i == 0)
+//                    incomesChart1.getData().add(series);
+//                else
+//                    incomesChart2.getData().add(series);
+//            }
         }
 */
     }

@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+
 
 /**
  * JavaFX App
@@ -53,8 +53,8 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    
+
+
 
     @Override
 	public void stop() throws Exception {
@@ -119,7 +119,6 @@ public class App extends Application {
     }
 
 
-
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get Workers", null);
@@ -131,8 +130,6 @@ public class App extends Application {
     }
 
     public static  ArrayList<CartItem> getAllCartItems() throws IOException {
-        ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
-        MsgClass msg = new MsgClass("#get CartItems", null);
         CartItemsdata = null;
         SimpleClient.getClient().sendToServer(msg);
         while (CartItemsdata == null) {System.out.println("waiting for server4");}
@@ -166,7 +163,7 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get Orders", null);
         OrdersData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (OrdersData == null) {System.out.println("waiting rer for server");}
+        while (OrdersData == null) {System.out.println("waiting for server7");}
         orders = (ArrayList<Order>) OrdersData;
         return orders;
     }
@@ -174,9 +171,9 @@ public class App extends Application {
     public static ArrayList<Item> getAllItems() throws IOException {
         ArrayList<Item> items = new ArrayList<Item>();
         MsgClass msg = new MsgClass("#get allItems", null);
-        SimpleClient.getClient().sendToServer(msg);
         allItemsData = null;
-        while (allItemsData == null) {System.out.println("waiting rer for server");}
+        SimpleClient.getClient().sendToServer(msg);
+        while (allItemsData == null) {System.out.println("waiting rer for server8");}
         items = (ArrayList<Item>) allItemsData;
         return items;
     }
@@ -187,6 +184,18 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
+
+    public static void deleteCartitem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#delete CartItem", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void decrementAmountofCartItem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#decrement amount", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+        
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
 
