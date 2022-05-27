@@ -83,38 +83,26 @@ public class ShowReportsForAdmin implements Initializable {
 
     public boolean legalFields() {
         if(fromDate1.getValue() == null || untilDate1.getValue() == null || reportTypeComboBox.getValue() == null) {
-            showAlert("Error", "Please fill all needed fields.");
+            App.showAlert("Error", "Please fill all needed fields.");
             return false;
         }
 
         if(comparisonOn.isSelected())
             if(fromDate2.getValue() == null || untilDate2.getValue() == null || reportTypeComboBox.getValue() == null) {
-                showAlert("Error", "Please fill all needed fields.");
+                App.showAlert("Error", "Please fill all needed fields.");
                 return false;
             }
             else if(fromDate2.getValue().isAfter(untilDate2.getValue())){
-                showAlert("Error", "Invalid time interval!");
+                App.showAlert("Error", "Invalid time interval!");
                 return false;
             }
 
         if(fromDate1.getValue().isAfter(untilDate1.getValue())) {
-            showAlert("Error", "Invalid time interval!");
+            App.showAlert("Error", "Invalid time interval!");
             return false;
         }
 
         return true;
-    }
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
     }
 
     @Override

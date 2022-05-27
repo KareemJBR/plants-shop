@@ -49,7 +49,7 @@ public class IncomesReportTwoTimeIntervals {
 
     public void start_controller(boolean is_admin, Calendar start_date1, Calendar end_date1, Calendar start_date2,
                                  Calendar end_date2) throws IOException {
-
+/*
         for (int i=0;i<2;i++) {
             XYChart.Series<Double, String> series = new XYChart.Series<>();
             series.setName("Incomes Report");
@@ -91,7 +91,7 @@ public class IncomesReportTwoTimeIntervals {
 //                    incomesChart2.getData().add(series);
 //            }
         }
-
+*/
     }
 
 }
