@@ -18,6 +18,7 @@ public class Report implements Serializable {
     private  boolean workingOnIT=false;
     private String answer;
     private String reportDate;
+    private int MoneyBack;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -100,6 +101,14 @@ public class Report implements Serializable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public int getMoneyBack() {
+        return MoneyBack;
+    }
+
+    public void setMoneyBack(int moneyBack) {
+        MoneyBack = moneyBack;
     }
 
     public void setdate(){
