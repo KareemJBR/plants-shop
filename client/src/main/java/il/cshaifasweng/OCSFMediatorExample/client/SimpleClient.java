@@ -21,6 +21,8 @@ public class SimpleClient extends AbstractClient {
 	public static Object ShopAdminsData;
 	public static Object OrdersData;
 
+	public static Object OrdersData;
+
 
 	private SimpleClient(String host, int port) {
 		super(host, port);

@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 @Entity
 @Table(name = "Item")
@@ -20,6 +22,11 @@ public class Item implements Serializable {
     private String imgURL;
     @Column(name="Item_name")
     private String name;
+
+    @ManyToMany(mappedBy = "items")
+    private List<Order> orders = new ArrayList<>();
+
+
 
 
     public Item(int price, String color, String type, String imgURL, String name) {

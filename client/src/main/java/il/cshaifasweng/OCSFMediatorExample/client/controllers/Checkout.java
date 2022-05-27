@@ -1,6 +1,8 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
+import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,53 +10,86 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart.OrderSubtotal;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 public class Checkout {
+    @FXML
+    private TextField AddressTextFeild;
 
-    @FXML // fx:id="AddressTextFeild"
-    private TextField AddressTextFeild; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton CashRadioBtn;
 
-    @FXML // fx:id="CashRadioBtn"
-    private RadioButton CashRadioBtn; // Value injected by FXMLLoader
+    @FXML
+    private Button CheckoutBtn;
 
-    @FXML // fx:id="CheckoutBtn"
-    private Button CheckoutBtn; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton CreditcardRadioBtn;
 
-    @FXML // fx:id="CreditcardRadioBtn"
-    private RadioButton CreditcardRadioBtn; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton DeliveryRadioBtn;
 
-    @FXML // fx:id="DeliveryRadioBtn"
-    private RadioButton DeliveryRadioBtn; // Value injected by FXMLLoader
+    @FXML
+    private TextField Greeting;
 
-    @FXML // fx:id="NameTextFeild"
-    private TextField NameTextFeild; // Value injected by FXMLLoader
+    @FXML
+    private TextField NameTextFeild;
 
-    @FXML // fx:id="PhoneTextFeild"
-    private TextField PhoneTextFeild; // Value injected by FXMLLoader
+    @FXML
+    private TextField PhoneTextFeild;
 
-    @FXML // fx:id="PickupRadioBtn"
-    private RadioButton PickupRadioBtn; // Value injected by FXMLLoader
+    @FXML
+    private RadioButton PickupRadioBtn;
 
-    @FXML // fx:id="ReceiverDetailsLabel"
-    private Label ReceiverDetailsLabel; // Value injected by FXMLLoader
+    @FXML
+    private Label ReceiverDetailsLabel;
 
-    @FXML // fx:id="SubtotalLabel"
-    private Label SubtotalLabel; // Value injected by FXMLLoader
+    @FXML
+    private Label ReceiverDetailsLabel1;
 
-    @FXML // fx:id="backBtn"
-    private Button backBtn; // Value injected by FXMLLoader
+    @FXML
+    private Label ReceiverDetailsLabel2;
 
-    @FXML // fx:id="datew"
-    private DatePicker datew; // Value injected by FXMLLoader
+    @FXML
+    private Label SubtotalLabel;
+
+    @FXML
+    private Button backBtn;
+
+    @FXML
+    private Label dateLabel;
+
+    @FXML
+    private DatePicker datew;
+
+    @FXML
+    private ComboBox<String> Hour;
+
+    @FXML
+    private ComboBox<String> Minute;
 
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
       SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
+
+        Hour.getItems().removeAll(Hour.getItems());
+        Minute.getItems().removeAll(Minute.getItems());
+        Hour.getItems().addAll("08","09","10","11","12","13","14","15","16","17","18","19","20");
+        Minute.getItems().addAll("00","01","02","03","04","05","06","07","08","09");
+        for(int i=10;i<60;i++)
+        {
+            Minute.getItems().add(String.valueOf(i));
+        }
+        Hour.getSelectionModel().select(0);
+        Minute.getSelectionModel().select(0);
+
     }
 
     @FXML
@@ -86,7 +121,8 @@ public class Checkout {
     }
 
     @FXML
-    void Checkout(ActionEvent event) {
+    void Checkout(ActionEvent event) throws IOException {
+        clear();
         if(DeliveryRadioBtn.isSelected())
         {
             if(NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals(""))
@@ -104,21 +140,44 @@ public class Checkout {
                 {
                     AddressTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
-                if(datew.getValue().equals(""))
-                {
-                    datew.setStyle("-fx-background-color:#f5c0c0;");
-                }
             }
             else
             {
-
+                String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
+                String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
+                int hour= Integer.parseInt(Hour.getValue());
+                int minute= Integer.parseInt(Minute.getValue());
+                MsgClass msg = new MsgClass("#add order");
+                Order order=new Order(searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText());
+                order.setItems(searchCartItems(LoginClient_userId));
+                msg.setObj(order);
+                SimpleClient.getClient().sendToServer(msg);
+                deleteCart(LoginClient_userId);
             }
 
         }
         else
         {
-
+            String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
+            String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
+            int hour= Integer.parseInt(Hour.getValue());
+            int minute= Integer.parseInt(Minute.getValue());
+            MsgClass msg = new MsgClass("#add order");
+            Order order=new Order(searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText());
+            order.setItems(searchCartItems(LoginClient_userId));
+            msg.setObj(order);
+            SimpleClient.getClient().sendToServer(msg);
+            deleteCart(LoginClient_userId);
+            showAlert("order success","success");
+            App.setRoot("controllers/ClientMainPage");
         }
+
+    }
+
+    private void clear() {
+        AddressTextFeild.setStyle("-fx-background-radius:15;");
+        PhoneTextFeild.setStyle("-fx-background-radius:15;");
+        NameTextFeild.setStyle("-fx-background-radius:15;");
     }
 
     @FXML
@@ -145,7 +204,6 @@ public class Checkout {
             PhoneTextFeild.setVisible(true);
             NameTextFeild.setVisible(true);
             AddressTextFeild.setVisible(true);
-            datew.setVisible(true);
         }
         else
         {
@@ -155,7 +213,6 @@ public class Checkout {
             PhoneTextFeild.setVisible(false);
             NameTextFeild.setVisible(false);
             AddressTextFeild.setVisible(false);
-            datew.setVisible(false);
         }
     }
 
@@ -169,7 +226,6 @@ public class Checkout {
             PhoneTextFeild.setVisible(false);
             NameTextFeild.setVisible(false);
             AddressTextFeild.setVisible(false);
-            datew.setVisible(false);
         }
         else
         {
@@ -179,7 +235,6 @@ public class Checkout {
             PhoneTextFeild.setVisible(true);
             NameTextFeild.setVisible(true);
             AddressTextFeild.setVisible(true);
-            datew.setVisible(true);
         }
     }
 
@@ -194,5 +249,44 @@ public class Checkout {
             }
         });
     }
+
+    public Customer searchCustomer(String customerId) throws IOException {
+        ArrayList<Customer> customers=getAllCustomers();
+        if(customers!=null)
+        {
+            if(customers.size()!=0)
+            {
+                for(int i=0;i<customers.size();i++)
+                {
+                    if(customers.get(i).getUser_id().equals(customerId))
+                    {
+                        return customers.get(i);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Item> searchCartItems(String ClientId) throws IOException {
+        ArrayList<CartItem> allcartitems=getAllCartItems();
+        ArrayList<Item> returnedcartitems=new ArrayList<Item>();
+
+        if(allcartitems !=null)
+        {
+            for(int i=0;i<allcartitems.size();i++)
+            {
+                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
+                {
+                    returnedcartitems.add(allcartitems.get(i).getItem());
+                }
+            }
+        }
+
+        return returnedcartitems;
+    }
+
+
+
 
 }

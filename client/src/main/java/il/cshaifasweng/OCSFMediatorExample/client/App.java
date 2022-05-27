@@ -20,6 +20,7 @@ import java.util.List;
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 /**
  * JavaFX App
@@ -139,12 +140,19 @@ public class App extends Application {
     }
 
     public static ArrayList<Order> getAllOrders() throws IOException {
-        ArrayList<Order> shopAdmins = new ArrayList<Order>();
+
+        ArrayList<Order> orders = new ArrayList<Order>();
         MsgClass msg = new MsgClass("#get Orders", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
-        shopAdmins = (ArrayList<Order>) OrdersData;
-        return shopAdmins;
+        while (OrdersData == null) {System.out.println("waiting rer for server");}
+        orders = (ArrayList<Order>) OrdersData;
+        return orders;
+    }
+
+    public static void deleteCart(String clientId) throws IOException {
+        MsgClass msg = new MsgClass("#delete Cart", null);
+        msg.setObj(clientId);
+        SimpleClient.getClient().sendToServer(msg);
     }
 
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
