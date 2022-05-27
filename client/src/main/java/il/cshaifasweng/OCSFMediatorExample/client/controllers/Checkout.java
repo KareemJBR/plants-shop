@@ -77,7 +77,7 @@ public class Checkout {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
-      SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
+        SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
 
         Hour.getItems().removeAll(Hour.getItems());
         Minute.getItems().removeAll(Minute.getItems());
@@ -94,10 +94,10 @@ public class Checkout {
 
     @FXML
     void Checkdate(ActionEvent event) {
-       if(LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
-       {
-           datew.setValue(LocalDate.now());
-       }
+        if(LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
+        {
+            datew.setValue(LocalDate.now());
+        }
     }
 
     @FXML
@@ -108,16 +108,16 @@ public class Checkout {
 
     @FXML
     void CashRadioBtnChange(ActionEvent event) {
-           if(CashRadioBtn.isSelected())
-           {
-               CashRadioBtn.setSelected(true);
-               CreditcardRadioBtn.setSelected(false);
-           }
-           else
-           {
-               CashRadioBtn.setSelected(false);
-               CreditcardRadioBtn.setSelected(true);
-           }
+        if(CashRadioBtn.isSelected())
+        {
+            CashRadioBtn.setSelected(true);
+            CreditcardRadioBtn.setSelected(false);
+        }
+        else
+        {
+            CashRadioBtn.setSelected(false);
+            CreditcardRadioBtn.setSelected(true);
+        }
     }
 
     @FXML

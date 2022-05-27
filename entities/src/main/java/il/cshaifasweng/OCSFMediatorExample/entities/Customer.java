@@ -32,18 +32,20 @@ public class Customer  implements Serializable {
     @Column(name = "customer_emil")
     String email;
 
+
     @OneToMany(mappedBy = "orderCustomer")
     // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Order> customerOrders =new ArrayList<>();
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
+    @OneToMany(mappedBy = "customer")
+    // @JoinColumn(name="customerReport") // join column is in table for Order
+    private List<CartItem> customerItems =new ArrayList<>();
 
 
 
-
-
-    public Customer(String id, String first_name, String last_name, String user_name,String password,String credit_card,String account_type,String email){
+    public Customer(String id, String first_name, String last_name, String user_name, String password, String credit_card, String account_type, String email){
         budget = 0.0;
         this.id=id;
         this.first_name=first_name;
@@ -66,7 +68,6 @@ public class Customer  implements Serializable {
         this.credit_card = customer.credit_card;
         this.acount_type = customer.acount_type;
         this.email = customer.email;
-        this.customerReports = customer.customerReports;
     }
 
     @Deprecated
@@ -128,12 +129,43 @@ public class Customer  implements Serializable {
         return this.password;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setCredit_card(String credit_card) {
+        this.credit_card = credit_card;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
+
+    public void setAcount_type(String acount_type) {
+        this.acount_type = acount_type;
+    }
+
+    public List<Report> getCustomerReports() {
+        return this.customerReports;
+    }
+
     public void addReport(Report report){
-        customerReports.add(report);
+        this.customerReports.add(report);
+    }
+    public void removeReport(Report report){
+        this.customerReports.remove(report);
     }
 
     public String getEmail(){
         return this.email;
+    }
+
+    public void addItem(Report report){
+        this.customerReports.add(report);
     }
 
     public String getCredit_card() { return credit_card; }

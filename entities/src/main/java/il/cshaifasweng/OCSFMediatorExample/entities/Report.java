@@ -18,10 +18,15 @@ public class Report implements Serializable {
     private  boolean workingOnIT=false;
     private String answer;
     private String reportDate;
+    private int MoneyBack;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Shop_id")
+    private  Shop shop;
 
 
     public Report() {
@@ -98,11 +103,27 @@ public class Report implements Serializable {
         this.customer = customer;
     }
 
+    public int getMoneyBack() {
+        return MoneyBack;
+    }
+
+    public void setMoneyBack(int moneyBack) {
+        MoneyBack = moneyBack;
+    }
+
     public void setdate(){
         //Date date=new Date();
         //this.reportDate=date.toString();
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
         this.reportDate=timeStamp;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public Date getdate(){

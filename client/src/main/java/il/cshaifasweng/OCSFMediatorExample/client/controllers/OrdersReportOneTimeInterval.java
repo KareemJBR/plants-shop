@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
+import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -29,7 +30,9 @@ public class OrdersReportOneTimeInterval {
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Orders Report");
 
+
 //        List<Order> orders_to_show = App.getRelevantOrders(is_admin, shop_id, start_date, end_date);
+        List<Item> all_items = App.getAllItems();
 
         // TODO: get all flowers and display the chart!
 
