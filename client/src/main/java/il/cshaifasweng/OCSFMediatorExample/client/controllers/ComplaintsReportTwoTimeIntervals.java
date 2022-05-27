@@ -48,7 +48,7 @@ public class ComplaintsReportTwoTimeIntervals {
 
     public void start_charts(boolean is_admin, Calendar start_date1, Calendar end_date1,
                              Calendar start_date2, Calendar end_date2) throws IOException {
-
+/*
         for (int i=0; i<2; i++) {
             XYChart.Series<Integer, String> series = new XYChart.Series<>();
             series.setName("Complaints Report");
@@ -93,7 +93,7 @@ public class ComplaintsReportTwoTimeIntervals {
                     complaintsChart2.getData().add(series);
             }
         }
-
+*/
     }
 
 }

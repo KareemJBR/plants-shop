@@ -92,9 +92,9 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("Abba Houshi 199, Haifa","211406343");
+        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","211406343");
         session.save(shop1);
-        Shop shop2 = new Shop("Hanamal 500, Haifa","123456789");
+        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
         session.save(shop2);
         session.flush();
     }
@@ -229,6 +229,17 @@ public class SimpleServer extends AbstractServer {
         return out;
     }
 
+    private Shop findShop(String shopName) throws Exception {
+        List<Shop> shops = getAllShops();
+        Shop out=null;
+        for (Shop s : shops) {
+            if(s.getName().equals(shopName)){
+                out=s;
+            }
+        }
+        return out;
+    }
+
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         String msgString = msg.toString();
@@ -341,6 +352,17 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#get selected Shop")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("selected shop");
+                        myMSg.setObj(findShop((String) (((MsgClass) msg).getObj())));
+                        System.out.println("all Shops");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened3");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgtext.equals("#get NetWorkers")) {
                     try {
                         MsgClass myMSg = new MsgClass("all NetWorkers");
@@ -411,6 +433,15 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#delete Report")) {
+                    try {
+                        System.out.println("in delete report");
+                        deleteReport((Report)((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in delete report");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgtext.equals("#get current customer")) {
                     try {
                         System.out.println("in get current customer");
@@ -433,6 +464,7 @@ public class SimpleServer extends AbstractServer {
             session.close();
         }
     }
+
 
 
     private static void AddCustomer(Customer p) {
@@ -490,6 +522,12 @@ public class SimpleServer extends AbstractServer {
     private static void delete_customer(Customer customer) {
         session.beginTransaction();
         session.delete(customer);
+        session.getTransaction().commit();
+    }
+    private static void deleteReport(Report report) {
+        session.beginTransaction();
+        session.clear();
+        session.delete(report);
         session.getTransaction().commit();
     }
 }

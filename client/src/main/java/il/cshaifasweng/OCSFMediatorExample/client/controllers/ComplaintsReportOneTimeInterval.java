@@ -25,7 +25,7 @@ public class ComplaintsReportOneTimeInterval {
     private BarChart<Integer, String> reportsChart;
 
     public void start_chart(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date) throws IOException {
-
+/*
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Complaints Report");
 
@@ -59,5 +59,6 @@ public class ComplaintsReportOneTimeInterval {
             series.getData().add(new XYChart.Data<>(arr[i], col_name));
             reportsChart.getData().add(series);
         }
+        */
     }
 }

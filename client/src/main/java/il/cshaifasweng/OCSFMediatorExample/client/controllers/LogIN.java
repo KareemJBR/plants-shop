@@ -58,7 +58,8 @@ public class LogIN {
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
-        ArrayList<NetWorker> workers = getAllWorkers();
+      //  ArrayList<NetWorker> workers = getAllWorkers();
+        ArrayList<NetWorker> workers=null;
 //        MsgClass msg =new MsgClass("#get customers",null);
 //        SimpleClient.getClient().sendToServer(msg);
 //        customers=(ArrayList<Customer>)data;

@@ -20,6 +20,7 @@ public class SimpleClient extends AbstractClient {
     public static Object ReportsData;
     public static Object ShopAdminsData;
     public static Object OrdersData;
+    public static Object selectedShopData;
     private SimpleClient(String host, int port) {
         super(host, port);
     }
@@ -103,6 +104,10 @@ public class SimpleClient extends AbstractClient {
         if (myMsg.getMsg().equals("all reports")){
             System.out.println("in get reports client side");
             ReportsData = myMsg.getObj();
+        }
+        if (myMsg.getMsg().equals("selected shop")){
+            System.out.println("in get selected shop client side");
+            selectedShopData = myMsg.getObj();
         }
     }
 

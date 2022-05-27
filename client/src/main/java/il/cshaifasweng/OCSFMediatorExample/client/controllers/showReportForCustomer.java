@@ -71,7 +71,7 @@ public class showReportForCustomer {
         if (cheaked == 0) {
             showAlert("error", "pls select report to be deleted");
         }
-       // App.setRoot("controllers/showReportForCustomer");
+        App.setRoot("controllers/showReportForCustomer");
     }
 
     @FXML

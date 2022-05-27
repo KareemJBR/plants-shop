@@ -5,7 +5,9 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -13,11 +15,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
@@ -26,12 +30,22 @@ public class ReportControl {
     private Button back;
 
     @FXML
+    private Label decriprinLabel;
+
+    @FXML
+    private AnchorPane mainPane;
+
+    @FXML
     private TextArea reportText;
 
     @FXML
+    private ChoiceBox<String> selectMe;
+
+    @FXML
+    private Label selectText;
+
+    @FXML
     private Button sentBtn;
-
-
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -46,21 +60,39 @@ public class ReportControl {
             showAlert("error", "are u stupid ? report is empty");
             return;
         }
-        MsgClass msg=new MsgClass("#get current customer",LoginClient_username);
+        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
         SimpleClient.getClient().sendToServer(msg);
-        while (currentCustomerData == null) {System.out.println("waiting for server");}
-        System.out.println("before the eroro shit  "+currentCustomerData);
+        while (currentCustomerData == null) {
+            System.out.println("waiting for server");
+        }
+
+        System.out.println("before the eroro shit  " + currentCustomerData);
         Customer customer = (Customer) currentCustomerData;
         System.out.println("the customer is  " + customer);
+
+
+        String value = (String) selectMe.getValue();
+        if(value==null){
+            showAlert("error","select a store pls ");
+            return;
+        }
+        MsgClass msg2 = new MsgClass("#get selected Shop", value);
+        SimpleClient.getClient().sendToServer(msg2);
+        while (selectedShopData == null) {
+            System.out.println("waiting for server to get shop");
+        }
         Report newReport = new Report(reportText.getText(), false, false, null);
+
         //customer.addReport(newReport);
         newReport.setCustomer(customer);
+        newReport.setShop((Shop)selectedShopData);
         MsgClass msg1 = new MsgClass("#add report", newReport);
         SimpleClient.getClient().sendToServer(msg1);
-        MsgClass msg3=new MsgClass("#get customers",null);
+        MsgClass msg3 = new MsgClass("#get customers", null);
         SimpleClient.getClient().sendToServer(msg3);
         App.setRoot("controllers/ClientMainPage");
-        currentCustomerData=null;
+        currentCustomerData = null;
+        selectedShopData=null;
         showAlert("done", "report sent");
 
        /* ArrayList<Customer> customers=new ArrayList<Customer>();
@@ -96,6 +128,25 @@ public class ReportControl {
                 alert.showAndWait();
             }
         });
+    }
+
+    public void initialize() throws IOException, InterruptedException {
+        mainPane.setStyle("-fx-background-color:#222831");
+        back.setStyle("-fx-background-color:#00ADB5");
+        decriprinLabel.setStyle("-fx-background-color: #393E46");
+        reportText.setStyle("-fx-background-color: #393E46");
+        decriprinLabel.setTextFill(Color.WHITE);
+        selectMe.setStyle("-fx-background-color:#00ADB5");
+        selectText.setStyle("-fx-background-color: #393E46");
+        selectText.setTextFill(Color.WHITE);
+        sentBtn.setStyle("-fx-background-color:#00ADB5");
+
+        ArrayList<Shop> shopArr=new ArrayList<>(getAllShops());
+        ArrayList<String> shops = new ArrayList<>();
+        for(int i=0;i<shopArr.size();i++){
+            shops.add(shopArr.get(i).getName());
+        }
+        selectMe.getItems().addAll(shops);
     }
 
 }

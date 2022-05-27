@@ -77,6 +77,7 @@ private List<Item> items = new ArrayList<>();
         this.order_year=order_year;
         this.order_month=order_month;
         this.order_day=order_day;
+        this.order_day=order_day;
         this.order_minute=order_minute;
         this.order_hour=order_hour;
         this.receipt_year=order_year;
@@ -226,4 +227,6 @@ private List<Item> items = new ArrayList<>();
     public List<Item> getItems() {
         return items;
     }
+
+
 }

@@ -23,6 +23,10 @@ public class Report implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Shop_id")
+    private  Shop shop;
+
 
     public Report() {
     }
@@ -103,6 +107,14 @@ public class Report implements Serializable {
         //this.reportDate=date.toString();
         String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
         this.reportDate=timeStamp;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public Date getdate(){
