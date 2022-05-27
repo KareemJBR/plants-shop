@@ -270,6 +270,14 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#update cartIrem")){
+                    try{
+                        updateCartIrem((CartItem)((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
 
                 if (msgtext.equals("#customerDelete")){
                     try{
@@ -424,6 +432,15 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#add cartItem")) {
+                    try {
+                        System.out.println("in add cartItem");
+                        AddCartItem((CartItem) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened12");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgtext.equals("#delete Cart")) {
                     try {
                         System.out.println("in delete Cart");
@@ -491,6 +508,14 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
 
     }
+    private static void AddCartItem(CartItem I) {
+        session.beginTransaction();
+        session.clear();
+        session.save(I);
+        session.flush();
+        session.getTransaction().commit();
+
+    }
 
     public static void deleteCart(String clientId) throws Exception {
         ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
@@ -515,6 +540,13 @@ public class SimpleServer extends AbstractServer {
     private static void update_customer(Customer customer) {
         session.beginTransaction();
         session.update(customer);
+        session.getTransaction().commit();
+    }
+
+    private static void updateCartIrem(CartItem item) {
+        session.beginTransaction();
+        session.clear();
+        session.update(item);
         session.getTransaction().commit();
     }
 
