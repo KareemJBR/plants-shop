@@ -6,7 +6,12 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class WorkerHomePage {
+public class NetWorkerHomePage {
+
+    @FXML
+    void addSale(ActionEvent event) throws IOException {
+        App.setRoot("controllers/AddSale");
+    }
 
     @FXML
     void openCatalogue(ActionEvent event) {

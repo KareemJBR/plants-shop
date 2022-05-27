@@ -14,12 +14,12 @@ public class CartItem  implements Serializable {
 
     private int amount;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "Item_id")
     private Item item;
 
