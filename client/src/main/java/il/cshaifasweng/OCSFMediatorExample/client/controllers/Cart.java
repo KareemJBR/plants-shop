@@ -57,81 +57,81 @@ public class Cart<T> {
         System.out.println();
         if (cartItems != null) {
             if (cartItems.size() != 0) {
-                    itemscontainer.setMinHeight(cartItems.size()*90);      ///the height of the container is related to the amount of the items
-              ArrayList<ImageView> arr=new ArrayList<ImageView>();
-                    for(int i=0;i<cartItems.size();i++)
-                    {
-                        int itemamount=amountOfItems.get(i);
-                        Pane p=new Pane();            //container of each item
+                itemscontainer.setMinHeight(cartItems.size()*90);      ///the height of the container is related to the amount of the items
+                ArrayList<ImageView> arr=new ArrayList<ImageView>();
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    int itemamount=amountOfItems.get(i);
+                    Pane p=new Pane();            //container of each item
 
-                        ////////////// img /////////////
-                        ImageView imageview=new ImageView();
-                        imageview.setFitWidth(78);   //width of img
-                        imageview.setFitHeight(78); //height of img
+                    ////////////// img /////////////
+                    ImageView imageview=new ImageView();
+                    imageview.setFitWidth(78);   //width of img
+                    imageview.setFitHeight(78); //height of img
 //                        System.out.println(cartItems.get(i).getUrl());
-                        imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
-                        imageview.setX(8);           //x & y coordinate related to the pane
-                        imageview.setY(8);
+                    imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
+                    imageview.setX(8);           //x & y coordinate related to the pane
+                    imageview.setY(8);
 
-                           //////////////// details of the item //////////////
+                    //////////////// details of the item //////////////
 
-                                        ///////// name textfield ///////////
-                        TextField name=new TextField("Name: "+ cartItems.get(i).getItem().getName());
-                        name.setStyle("-fx-background-color:none");
-                        name.setLayoutX(100);
-                        name.setLayoutY(8);
-                                       ///////// price textfield ///////////
-                        TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
-                        price.setStyle("-fx-background-color:none");
-                        price.setLayoutX(100);
-                        price.setLayoutY(28);
+                    ///////// name textfield ///////////
+                    TextField name=new TextField("Name: "+ cartItems.get(i).getItem().getName());
+                    name.setStyle("-fx-background-color:none");
+                    name.setLayoutX(100);
+                    name.setLayoutY(8);
+                    ///////// price textfield ///////////
+                    TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
+                    price.setStyle("-fx-background-color:none");
+                    price.setLayoutX(100);
+                    price.setLayoutY(28);
 
-                                     ///////// type textfield ///////////
-                        TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice());
-                        type.setStyle("-fx-background-color:none");
-                        type.setLayoutX(100);
-                        type.setLayoutY(48);
+                    ///////// type textfield ///////////
+                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice());
+                    type.setStyle("-fx-background-color:none");
+                    type.setLayoutX(100);
+                    type.setLayoutY(48);
 
-                                     ///////// amount textfield ///////////
-                        TextField amount=new TextField("Amount: "+ itemamount);
-                        amount.setStyle("-fx-background-color:none");
-                        amount.setLayoutX(100);
-                        amount.setLayoutY(68);
+                    ///////// amount textfield ///////////
+                    TextField amount=new TextField("Amount: "+ itemamount);
+                    amount.setStyle("-fx-background-color:none");
+                    amount.setLayoutX(100);
+                    amount.setLayoutY(68);
 
-                                     ///////// delete button ///////////
-                        Button btn=new Button();
-                        btn.setLayoutX(255);
-                        btn.setLayoutY(34);
-                        btn.setMaxWidth(40);
-                        btn.setText("X");
-                        btn.setStyle("-fx-font-size:11;-fx-background-radius:2;");
+                    ///////// delete button ///////////
+                    Button btn=new Button();
+                    btn.setLayoutX(255);
+                    btn.setLayoutY(34);
+                    btn.setMaxWidth(40);
+                    btn.setText("X");
+                    btn.setStyle("-fx-font-size:11;-fx-background-radius:2;");
 
-                        /////////////// adding components to the pane /////////////
-                        p.getChildren().add(imageview);
-                        p.getChildren().add(name);
-                        p.getChildren().add(price);
-                        p.getChildren().add(type);
-                        p.getChildren().add(amount);
-                        p.getChildren().add(btn);
+                    /////////////// adding components to the pane /////////////
+                    p.getChildren().add(imageview);
+                    p.getChildren().add(name);
+                    p.getChildren().add(price);
+                    p.getChildren().add(type);
+                    p.getChildren().add(amount);
+                    p.getChildren().add(btn);
 
-                        p.setLayoutY(90*i);
+                    p.setLayoutY(90*i);
 
-                        itemscontainer.getChildren().add(p);
+                    itemscontainer.getChildren().add(p);
 
-                        subtotal+=(cartItems.get(i).getItem().getPrice()*(itemamount));
-                        if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
-                        {
-                            Subtotal.setText("Subtotal after 10% discount: "+subtotal *0.9);
-                            Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
-                            Subtotal.setMinWidth(225);
-                            OrderSubtotal=  subtotal*0.9;
-                        }
-                        else
-                        {
-                            Subtotal.setText("Subtotal: "+ subtotal);
-                            OrderSubtotal=subtotal;
-                        }
+                    subtotal+=(cartItems.get(i).getItem().getPrice()*(itemamount));
+                    if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
+                    {
+                        Subtotal.setText("Subtotal after 10% discount: "+subtotal *0.9);
+                        Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
+                        Subtotal.setMinWidth(225);
+                        OrderSubtotal=  subtotal*0.9;
                     }
+                    else
+                    {
+                        Subtotal.setText("Subtotal: "+ subtotal);
+                        OrderSubtotal=subtotal;
+                    }
+                }
 
             }
             else           /////////   if the cart is empty

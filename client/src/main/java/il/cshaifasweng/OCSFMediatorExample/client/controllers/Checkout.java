@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
@@ -75,12 +74,10 @@ public class Checkout {
     private ComboBox<String> Minute;
 
 
-
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
-      SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
-
+        SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
 
         Hour.getItems().removeAll(Hour.getItems());
         Minute.getItems().removeAll(Minute.getItems());
@@ -93,15 +90,14 @@ public class Checkout {
         Hour.getSelectionModel().select(0);
         Minute.getSelectionModel().select(0);
 
-
     }
 
     @FXML
     void Checkdate(ActionEvent event) {
-       if(LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
-       {
-           datew.setValue(LocalDate.now());
-       }
+        if(LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
+        {
+            datew.setValue(LocalDate.now());
+        }
     }
 
     @FXML
@@ -112,20 +108,19 @@ public class Checkout {
 
     @FXML
     void CashRadioBtnChange(ActionEvent event) {
-           if(CashRadioBtn.isSelected())
-           {
-               CashRadioBtn.setSelected(true);
-               CreditcardRadioBtn.setSelected(false);
-           }
-           else
-           {
-               CashRadioBtn.setSelected(false);
-               CreditcardRadioBtn.setSelected(true);
-           }
+        if(CashRadioBtn.isSelected())
+        {
+            CashRadioBtn.setSelected(true);
+            CreditcardRadioBtn.setSelected(false);
+        }
+        else
+        {
+            CashRadioBtn.setSelected(false);
+            CreditcardRadioBtn.setSelected(true);
+        }
     }
 
     @FXML
-
     void Checkout(ActionEvent event) throws IOException {
         clear();
         if(DeliveryRadioBtn.isSelected())
@@ -145,11 +140,7 @@ public class Checkout {
                 {
                     AddressTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
-
-                if(datew.getValue().equals(""))
-                {
-                    datew.setStyle("-fx-background-color:#f5c0c0;");
-                }
+            }
             else
             {
                 String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
@@ -187,7 +178,6 @@ public class Checkout {
         AddressTextFeild.setStyle("-fx-background-radius:15;");
         PhoneTextFeild.setStyle("-fx-background-radius:15;");
         NameTextFeild.setStyle("-fx-background-radius:15;");
-
     }
 
     @FXML
@@ -295,4 +285,8 @@ public class Checkout {
 
         return returnedcartitems;
     }
+
+
+
+
 }
