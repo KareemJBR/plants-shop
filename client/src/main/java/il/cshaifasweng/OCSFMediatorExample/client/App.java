@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 /**
  * JavaFX App
@@ -131,4 +132,20 @@ public class App extends Application {
         shopAdmins = (ArrayList<ShopAdmin>) ShopAdminsData;
         return shopAdmins;
     }
+
+    public static ArrayList<Order> getAllOrders() throws IOException {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        MsgClass msg = new MsgClass("#get Orders", null);
+        SimpleClient.getClient().sendToServer(msg);
+        while (OrdersData == null) {System.out.println("waiting rer for server");}
+        orders = (ArrayList<Order>) OrdersData;
+        return orders;
+    }
+
+    public static void deleteCart(String clientId) throws IOException {
+        MsgClass msg = new MsgClass("#delete Cart", null);
+        msg.setObj(clientId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
 }

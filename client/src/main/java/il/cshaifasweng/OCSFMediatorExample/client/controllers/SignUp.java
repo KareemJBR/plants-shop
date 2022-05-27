@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllWorkers;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
+import static  il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.Customersdata;
+import static  il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.NetWorkersData;
 
 public class SignUp {
     public static boolean shop;
@@ -74,7 +76,9 @@ public class SignUp {
         String email=EmailTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
         List<Customer> customers=getAllCustomers();
+        Customersdata=null;
         List<NetWorker> workers = getAllWorkers();
+        NetWorkersData=null;
         clear();
         MsgClass msg;
 
@@ -203,11 +207,8 @@ public class SignUp {
       else      //no errors detected
       {
           msg = new MsgClass("#add customer");
-          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
-          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
+//          msg.setObj(new Customer(id,firstname,lastname,username,password,creditnumber,"network_acount",email));
 
-          SimpleClient.getClient().sendToServer(msg);
-           msg =new MsgClass("#get customers",null);
           if(AcountTypeCombo.getValue().equals("Account for a particular store"))
           {
 

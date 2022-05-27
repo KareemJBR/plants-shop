@@ -4,6 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllOrders;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
@@ -77,8 +79,21 @@ public class ClientMainPage {
         App.setRoot("controllers/CustomizedOrder");
     }
     @FXML
-    void myOrders(ActionEvent event) {
+    void myOrders(ActionEvent event) throws IOException {
         //showAlert("username","username: "+ Client_username);
+
+        ArrayList<Order> orders=getAllOrders();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+
+                for(int i=0;i<orders.size();i++)
+                {
+                    System.out.println(orders.get(i).getItems().size());
+                }
+            }
+        }
     }
 
     @FXML
