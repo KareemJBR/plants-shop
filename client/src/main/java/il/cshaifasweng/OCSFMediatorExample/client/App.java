@@ -202,71 +202,71 @@ public class App extends Application {
         return (int)daysBetween + 1;    // containing the first day
     }
 
-    public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
-           throws IOException {
+//    public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
+//           throws IOException {
+//
+//        List<Order> all_orders = getAllOrders();
+//        List<Order> orders_to_show = new ArrayList<>();
+//
+//        if (is_admin) {
+//            for (Order all_order : all_orders) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(all_order.getDate());
+//
+//                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
+//                        !all_order.gotCancelled())
+//                    orders_to_show.add(all_order);
+//            }
+//        }
+//
+//        else {
+//            for (Order all_order : all_orders) {
+//
+//                if (all_order.getShopID != shop_id || all_order.gotCancelled())
+//                    continue;
+//
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(all_order.getDate());
+//
+//                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+//                    orders_to_show.add(all_order);
+//            }
+//        }
+//
+//        return orders_to_show;
+//    }
 
-        List<Order> all_orders = getAllOrders();
-        List<Order> orders_to_show = new ArrayList<>();
-
-        if (is_admin) {
-            for (Order all_order : all_orders) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_order.getDate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
-                        !all_order.gotCancelled())
-                    orders_to_show.add(all_order);
-            }
-        }
-
-        else {
-            for (Order all_order : all_orders) {
-
-                if (all_order.getShopID != shop_id || all_order.gotCancelled())
-                    continue;
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_order.getDate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    orders_to_show.add(all_order);
-            }
-        }
-
-        return orders_to_show;
-    }
-
-    public static List<Report> getRelevantReports(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
-            throws IOException{
-
-        List<Report> all_reports = getAllReports();
-        List<Report> reports_to_show = new ArrayList<>();
-
-        if (is_admin) {
-            for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(report);
-            }
-        }
-
-        else {
-            for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
-
-                if (report.getShopID != shop_id)
-                    continue;
-
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
-                    reports_to_show.add(report);
-            }
-        }
-
-        return reports_to_show;
-    }
+//    public static List<Report> getRelevantReports(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
+//            throws IOException{
+//
+//        List<Report> all_reports = getAllReports();
+//        List<Report> reports_to_show = new ArrayList<>();
+//
+//        if (is_admin) {
+//            for (Report report : all_reports) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(report.getdate());
+//
+//                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+//                    reports_to_show.add(report);
+//            }
+//        }
+//
+//        else {
+//            for (Report report : all_reports) {
+//                Calendar calendar = Calendar.getInstance();
+//                calendar.setTime(report.getdate());
+//
+//                if (report.getShopID != shop_id)
+//                    continue;
+//
+//                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
+//                    reports_to_show.add(report);
+//            }
+//        }
+//
+//        return reports_to_show;
+//    }
 
     public static void showAlert(String title, String head) {
         Platform.runLater(new Runnable() {
