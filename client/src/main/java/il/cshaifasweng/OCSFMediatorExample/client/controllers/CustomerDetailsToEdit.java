@@ -40,7 +40,6 @@ public class CustomerDetailsToEdit {
     @FXML
     void backToCustomersView(ActionEvent event) throws IOException {
         App.setRoot("controllers/ShowAllCustomers");
-
     }
 
     @FXML
@@ -91,5 +90,4 @@ public class CustomerDetailsToEdit {
         customerPasswordTextField.textProperty().set(base_customer.getPassword());
         customerAccountTypeTextField.textProperty().set(base_customer.getAcount_type());
     }
-
 }
