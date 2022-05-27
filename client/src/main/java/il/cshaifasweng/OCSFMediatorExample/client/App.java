@@ -244,7 +244,7 @@ public class App extends Application {
 //        else {
 //            for (Order all_order : all_orders) {
 //
-//                if (all_order.getShopID != shop_id || all_order.gotCancelled())
+//                if (all_order.getShopID() != shop_id || all_order.gotCancelled())
 //                    continue;
 //
 //                Calendar calendar = Calendar.getInstance();
@@ -257,7 +257,7 @@ public class App extends Application {
 //
 //        return orders_to_show;
 //    }
-
+//
 //    public static List<Report> getRelevantReports(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
 //            throws IOException{
 //
