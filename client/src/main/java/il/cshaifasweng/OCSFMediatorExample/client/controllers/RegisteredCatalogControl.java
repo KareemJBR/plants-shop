@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Flower;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -135,16 +134,22 @@ public class RegisteredCatalogControl {
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
-                    TextField name = new TextField("Name: " + cartItems.get(i).getName());
+                    TextField name = new TextField("Name: " + cartItems.get(i).getName()  //"\n"
+                          //  + "Catalog Number: " + cartItems.get(i).getCatalogNumber() + "\n"
+                          //  + "Type: " + cartItems.get(i).getType() + "\n"
+                          //  + "Price: " + cartItems.get(i).getPrice() + "\n"
+                    );
                     name.setStyle("-fx-background-color:#00ADB5");
                     name.setLayoutX(140);
                     name.setLayoutY(5);
+                    name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + cartItems.get(i).getCatalogNumber());
                     catologNum.setStyle("-fx-background-color:#00ADB5");
                     catologNum.setLayoutX(140);
                     catologNum.setLayoutY(25);
+                    name.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("type: " + cartItems.get(i).getType());

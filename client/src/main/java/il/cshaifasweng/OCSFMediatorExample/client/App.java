@@ -80,7 +80,8 @@ public class App extends Application {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
-        while(Customersdata==null) {System.out.println("waiting for server");}
+        Customersdata = null;
+        while(Customersdata==null) {System.out.println("waiting for server1");}
         customers=(ArrayList<Customer>)Customersdata;
         return customers;
     }
@@ -89,25 +90,20 @@ public class App extends Application {
         ArrayList<Shop> shops = new ArrayList<Shop>();
         MsgClass msg = new MsgClass("#get Shops", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (shopsdata == null) {System.out.println("waiting for server");}
+        shopsdata = null;
+        while (shopsdata == null) {System.out.println("waiting for server2");}
         shops = (ArrayList<Shop>) shopsdata;
         return shops;
     }
 
-     public static  ArrayList<Flower> getAllFlowers() throws IOException {
 
-        ArrayList<Flower> Flowers=new ArrayList<Flower>();
-        MsgClass msg =new MsgClass("#get phots URL",null);
-        SimpleClient.getClient().sendToServer(msg);
-        Flowers=(ArrayList<Flower>)data;
-        return Flowers;
-    }
 
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get Workers", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (NetWorkersData == null) {System.out.println("waiting for server");}
+        NetWorkersData = null;
+        while (NetWorkersData == null) {System.out.println("waiting for server3");}
         workers = (ArrayList<NetWorker>) NetWorkersData;
         return workers;
     }
@@ -116,16 +112,18 @@ public class App extends Application {
         ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
         MsgClass msg = new MsgClass("#get CartItems", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        CartItemsdata = null;
+        while (CartItemsdata == null) {System.out.println("waiting for server4");}
         cartItems = (ArrayList<CartItem>) CartItemsdata;
         return cartItems;
     }
 
     public static  ArrayList<Report> getAllReports() throws IOException {
         ArrayList<Report> cartItems = new ArrayList<Report>();
-        MsgClass msg = new MsgClass("#get Reports", null);
+        MsgClass msg = new MsgClass("#get reports", null);
+        ReportsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (ReportsData == null) {System.out.println("waiting for server5");}
         cartItems = (ArrayList<Report>) ReportsData;
         return cartItems;
     }
@@ -134,7 +132,8 @@ public class App extends Application {
         ArrayList<ShopAdmin> shopAdmins = new ArrayList<ShopAdmin>();
         MsgClass msg = new MsgClass("#get shopAdmins", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        ShopAdminsData = null;
+        while (CartItemsdata == null) {System.out.println("waiting for server6");}
         shopAdmins = (ArrayList<ShopAdmin>) ShopAdminsData;
         return shopAdmins;
     }
@@ -144,6 +143,7 @@ public class App extends Application {
         ArrayList<Order> orders = new ArrayList<Order>();
         MsgClass msg = new MsgClass("#get Orders", null);
         SimpleClient.getClient().sendToServer(msg);
+        OrdersData = null;
         while (OrdersData == null) {System.out.println("waiting rer for server");}
         orders = (ArrayList<Order>) OrdersData;
         return orders;
@@ -180,8 +180,8 @@ public class App extends Application {
     }
 
     public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
-            throws IOException {
-
+           throws IOException {
+/*
         List<Order> all_orders = getAllOrders();
         List<Order> orders_to_show = new ArrayList<>();
 
@@ -242,7 +242,10 @@ public class App extends Application {
             }
         }
 
+
         return reports_to_show;
+        */
+     return null;
     }
 
 }

@@ -42,7 +42,7 @@ public class IncomesReportOneTimeInterval {
         for (Order order : orders_to_show) {
 
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(order.getDate());
+           // calendar.setTime(order.getDate());
 
             int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
 
