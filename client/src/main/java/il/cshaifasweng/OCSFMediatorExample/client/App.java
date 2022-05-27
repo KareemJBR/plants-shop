@@ -73,7 +73,7 @@ public class App extends Application {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
-        while(Customersdata==null) {System.out.println("waiting for server");}
+        while(Customersdata==null) {System.out.println("waiting for server1");}
         customers=(ArrayList<Customer>)Customersdata;
         return customers;
     }
@@ -82,7 +82,7 @@ public class App extends Application {
         ArrayList<Shop> shops = new ArrayList<Shop>();
         MsgClass msg = new MsgClass("#get Shops", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (shopsdata == null) {System.out.println("waiting for server");}
+        while (shopsdata == null) {System.out.println("waiting for server2");}
         shops = (ArrayList<Shop>) shopsdata;
         return shops;
     }
@@ -100,7 +100,7 @@ public class App extends Application {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get Workers", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (NetWorkersData == null) {System.out.println("waiting for server");}
+        while (NetWorkersData == null) {System.out.println("waiting for server3");}
         workers = (ArrayList<NetWorker>) NetWorkersData;
         return workers;
     }
@@ -109,16 +109,16 @@ public class App extends Application {
         ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
         MsgClass msg = new MsgClass("#get CartItems", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (CartItemsdata == null) {System.out.println("waiting for server4");}
         cartItems = (ArrayList<CartItem>) CartItemsdata;
         return cartItems;
     }
 
     public static  ArrayList<Report> getAllReports() throws IOException {
         ArrayList<Report> cartItems = new ArrayList<Report>();
-        MsgClass msg = new MsgClass("#get Reports", null);
+        MsgClass msg = new MsgClass("#get reports", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (ReportsData == null) {System.out.println("waiting for server5");}
         cartItems = (ArrayList<Report>) ReportsData;
         return cartItems;
     }
@@ -127,7 +127,7 @@ public class App extends Application {
         ArrayList<ShopAdmin> shopAdmins = new ArrayList<ShopAdmin>();
         MsgClass msg = new MsgClass("#get shopAdmins", null);
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (CartItemsdata == null) {System.out.println("waiting for server6");}
         shopAdmins = (ArrayList<ShopAdmin>) ShopAdminsData;
         return shopAdmins;
     }

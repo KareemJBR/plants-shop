@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
 import javafx.stage.Stage;
@@ -55,8 +55,12 @@ public class ClientMainPage {
     }
 
     @FXML
-    void viewReport(ActionEvent event) {
-
+    void viewReport(ActionEvent event) throws IOException {
+        MsgClass msg=new MsgClass("#get current customer",LoginClient_username);
+        SimpleClient.getClient().sendToServer(msg);
+        System.out.println("msg sent to get current customer");
+        System.out.println("no reports for customr"+(Customer)currentCustomerData);
+        App.setRoot("controllers/showReportForCustomer");
     }
 
     @FXML

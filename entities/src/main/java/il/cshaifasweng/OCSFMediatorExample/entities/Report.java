@@ -19,7 +19,7 @@ public class Report implements Serializable {
     private String answer;
     private String reportDate;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
