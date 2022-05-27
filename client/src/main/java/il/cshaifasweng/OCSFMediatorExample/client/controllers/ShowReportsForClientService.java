@@ -1,5 +1,5 @@
 /**
- * Sample Skeleton for 'showreportsforclientservice.fxml' Controller Class
+ * Sample Skeleton for 'ShowReportsForClientService.fxml' Controller Class
  */
 
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
@@ -12,15 +12,14 @@ import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
-public class Showreportsforclientservice {
+public class ShowReportsForClientService {
 
     @FXML // fx:id="reports"
     private TableView<Report> reports; // Value injected by FXMLLoader
 
     @FXML
-    void gotoclientservicepage(ActionEvent event) throws IOException {
+    void gotClientServicePage(ActionEvent event) throws IOException {
         App.setRoot("Clientservicehomepage");
-
     }
 
 }
