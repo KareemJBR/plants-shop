@@ -237,7 +237,7 @@ public class SimpleServer extends AbstractServer {
                 System.out.println(msgtext);
 
                 if (msgtext.equals("#get Orders")) {
-                    try{
+                    try {
                         MsgClass myMSg = new MsgClass("all orders");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllOrders());
@@ -248,27 +248,27 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#customerUpdate")){
-                    try{
-                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                if (msgtext.equals("#customerUpdate")) {
+                    try {
+                        Customer temp = (Customer) (((MsgClass) msg).getObj());
                         update_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
                     }
                 }
-                if (msgtext.equals("#update cartIrem")){
-                    try{
-                        updateCartIrem((CartItem)((MsgClass) msg).getObj());
+                if (msgtext.equals("#update cartIrem")) {
+                    try {
+                        updateCartIrem((CartItem) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
                     }
                 }
 
-                if (msgtext.equals("#customerDelete")){
-                    try{
-                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                if (msgtext.equals("#customerDelete")) {
+                    try {
+                        Customer temp = (Customer) (((MsgClass) msg).getObj());
                         delete_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
@@ -276,8 +276,8 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#get reports")){
-                    try{
+                if (msgtext.equals("#get reports")) {
+                    try {
                         MsgClass myMSg = new MsgClass("all reports");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllReports());
@@ -288,8 +288,8 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#get shopAdmins")){
-                    try{
+                if (msgtext.equals("#get shopAdmins")) {
+                    try {
                         MsgClass myMSg = new MsgClass("all shopAdmins");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllShopAdmins());
@@ -300,8 +300,8 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#get allItems")){
-                    try{
+                if (msgtext.equals("#get allItems")) {
+                    try {
                         MsgClass myMSg = new MsgClass("allItems");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllItems());
@@ -401,7 +401,7 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#add report")) {
                     try {
                         System.out.println("in add report");
-                        AddReport((Report)((MsgClass) msg).getObj());
+                        AddReport((Report) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened5");
                         System.out.println(e.getMessage());
@@ -425,6 +425,29 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#get current customer")) {
+                    try {
+                        System.out.println("in get current customer");
+                        String user = (String) myMsg.getObj();
+                        System.out.println("the user is" + user);
+                        System.out.println(getCustomer(user));
+                        MsgClass myMSg = new MsgClass("your current customer", getCustomer(user));
+                        client.sendToClient(myMSg);
+                        System.out.println("customer sent");
+                    } catch (Exception e) {
+                        System.out.println("error happened4");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#delete Report")) {
+                    try {
+                        System.out.println("in delete report");
+                        deleteReport((Report) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in delete report");
+                        System.out.println(e.getMessage());
+                    }
+                }
 
                 if (msgtext.equals("#delete CartItem")) {
                     try {
@@ -441,28 +464,11 @@ public class SimpleServer extends AbstractServer {
                         decrementAmountofCartItem((Integer) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened in decrement amount");
-                if (msgtext.equals("#delete Report")) {
-                    try {
-                        System.out.println("in delete report");
-                        deleteReport((Report)((MsgClass) msg).getObj());
-                    } catch (Exception e) {
-                        System.out.println("error happened in delete report");
-                        System.out.println(e.getMessage());
                     }
+
                 }
-                if (msgtext.equals("#get current customer")) {
-                    try {
-                        System.out.println("in get current customer");
-                        String user=(String)myMsg.getObj();
-                        System.out.println( "the user is" + user);
-                        System.out.println(getCustomer(user));
-                        MsgClass myMSg = new MsgClass("your current customer",getCustomer(user));
-                        client.sendToClient(myMSg);
-                        System.out.println("customer sent");
-                    } catch (Exception e) {
-                        System.out.println("error happened4");
-                        System.out.println(e.getMessage());
-                    }
+                if (msgString.startsWith("#close")) {
+                    session.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -472,6 +478,7 @@ public class SimpleServer extends AbstractServer {
             session.close();
         }
     }
+
 
 
 

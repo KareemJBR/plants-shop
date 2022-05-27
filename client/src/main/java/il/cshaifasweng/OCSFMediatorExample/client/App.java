@@ -23,6 +23,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
 
 /**
@@ -121,7 +122,7 @@ public class App extends Application {
 
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
-        MsgClass msg = new MsgClass("#get Workers", null);
+        MsgClass msg = new MsgClass("#get NetWorkers", null);
         NetWorkersData = null;
         SimpleClient.getClient().sendToServer(msg);
         while (NetWorkersData == null) {System.out.println("waiting for server3");}
@@ -130,6 +131,8 @@ public class App extends Application {
     }
 
     public static  ArrayList<CartItem> getAllCartItems() throws IOException {
+        ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+        MsgClass msg = new MsgClass("#get CartItems", null);
         CartItemsdata = null;
         SimpleClient.getClient().sendToServer(msg);
         while (CartItemsdata == null) {System.out.println("waiting for server4");}
@@ -195,30 +198,31 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#decrement amount", null);
         msg.setObj(cartitemId);
         SimpleClient.getClient().sendToServer(msg);
-        
-    public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
-        // interval must be valid
-
-        int s_day = start_date.get(Calendar.DAY_OF_MONTH);
-        int s_month = start_date.get(Calendar.MONTH);
-        int s_year = start_date.get(Calendar.YEAR);
-
-        int t_day = end_date.get(Calendar.DAY_OF_MONTH);
-        int t_month = end_date.get(Calendar.MONTH);
-        int t_year = end_date.get(Calendar.YEAR);
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-
-        String str1 = s_day + " " + s_month + " " + s_year;
-        String str2 = t_day + " " + t_month + " " + t_year;
-
-        LocalDateTime date1 = LocalDateTime.from(LocalDate.parse(str1, dtf));
-        LocalDateTime date2 = LocalDateTime.from(LocalDate.parse(str2, dtf));
-
-        long daysBetween = ChronoUnit.DAYS.between(date1, date2);
-
-        return (int)daysBetween + 1;    // containing the first day
     }
+        
+//    public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
+//        // interval must be valid
+//
+//        int s_day = start_date.get(Calendar.DAY_OF_MONTH);
+//        int s_month = start_date.get(Calendar.MONTH);
+//        int s_year = start_date.get(Calendar.YEAR);
+//
+//        int t_day = end_date.get(Calendar.DAY_OF_MONTH);
+//        int t_month = end_date.get(Calendar.MONTH);
+//        int t_year = end_date.get(Calendar.YEAR);
+//
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
+//
+//        String str1 = s_day + " " + s_month + " " + s_year;
+//        String str2 = t_day + " " + t_month + " " + t_year;
+//
+//        LocalDateTime date1 = LocalDateTime.from(LocalDate.parse(str1, dtf));
+//        LocalDateTime date2 = LocalDateTime.from(LocalDate.parse(str2, dtf));
+//
+//        long daysBetween = ChronoUnit.DAYS.between(date1, date2);
+//
+//        return (int)daysBetween + 1;    // containing the first day
+//    }
 
 //    public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
 //           throws IOException {
