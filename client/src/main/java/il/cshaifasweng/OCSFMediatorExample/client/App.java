@@ -2,9 +2,11 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +22,6 @@ import java.util.List;
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 /**
  * JavaFX App
@@ -149,6 +150,16 @@ public class App extends Application {
         return orders;
     }
 
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get allItems", null);
+        SimpleClient.getClient().sendToServer(msg);
+        allItemsData = null;
+        while (allItemsData == null) {System.out.println("waiting rer for server");}
+        items = (ArrayList<Item>) allItemsData;
+        return items;
+    }
+
     public static void deleteCart(String clientId) throws IOException {
         MsgClass msg = new MsgClass("#delete Cart", null);
         msg.setObj(clientId);
@@ -181,7 +192,7 @@ public class App extends Application {
 
     public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
            throws IOException {
-/*
+
         List<Order> all_orders = getAllOrders();
         List<Order> orders_to_show = new ArrayList<>();
 
@@ -242,10 +253,19 @@ public class App extends Application {
             }
         }
 
-
         return reports_to_show;
-        */
-     return null;
+    }
+
+    public static void showAlert(String title, String head) {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(title);
+                alert.setHeaderText(null);
+                alert.setContentText(head);
+                alert.showAndWait();
+            }
+        });
     }
 
 }
