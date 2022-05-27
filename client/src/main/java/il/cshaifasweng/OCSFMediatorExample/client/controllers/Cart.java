@@ -146,7 +146,7 @@ public class Cart<T> {
 
     ////////////////// return the Caritems of client whose idnumber=ClientId;
     public ArrayList<CartItem> searchCartItems(String ClientId) throws IOException {
-        CartItemsdata=null;
+        //CartItemsdata=null;
         ArrayList<CartItem> allcartitems=getAllCartItems();
         ArrayList<CartItem> returnedcartitems=new ArrayList<CartItem>();
 

@@ -39,6 +39,9 @@ public class Customer  implements Serializable {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
+    @OneToMany(mappedBy = "customer")
+    // @JoinColumn(name="customerReport") // join column is in table for Order
+    private List<CartItem> customerItems =new ArrayList<>();
 
 
 
@@ -159,6 +162,10 @@ public class Customer  implements Serializable {
 
     public String getEmail(){
         return this.email;
+    }
+
+    public void addItem(Report report){
+        this.customerReports.add(report);
     }
 
     public String getCredit_card() { return credit_card; }

@@ -20,9 +20,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -35,8 +37,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.Itemsdata;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 public class RegisteredCatalogControl {
@@ -100,9 +101,25 @@ public class RegisteredCatalogControl {
               System.out.println(e);
           }
       }*/
-    public void initialize() throws IOException, InterruptedException {
+    public ArrayList<CartItem> searchCartItems(String ClientId) throws IOException {
+        CartItemsdata = null;
+        ArrayList<CartItem> allcartitems = getAllCartItems();
+        ArrayList<CartItem> returnedcartitems = new ArrayList<CartItem>();
 
-        ArrayList<Item> cartItems = (ArrayList<Item>) Itemsdata;
+        if (allcartitems != null) {
+            for (int i = 0; i < allcartitems.size(); i++) {
+                if (allcartitems.get(i).getCustomer().getUser_id().equals(ClientId)) {
+                    returnedcartitems.add(allcartitems.get(i));
+                }
+            }
+        }
+
+        return returnedcartitems;
+    }
+
+    public void initialize() throws IOException {
+
+        ArrayList<Item> allItems = (ArrayList<Item>) Itemsdata;
         itemscontainer.setStyle("-fx-background-color: #222831");
         goBack.setStyle("-fx-background-color:#EEEEEE");
         goToCartBut.setStyle("-fx-background-color:#EEEEEE");
@@ -110,11 +127,14 @@ public class RegisteredCatalogControl {
         itemsContainer.setStyle("-fx-background-color:#222831");
         boolean moveRight = false;
         int j = 0;
-        if (cartItems != null) {
-            if (cartItems.size() != 0) {
-                itemscontainer.setMinHeight(cartItems.size() * 80);      ///the height of the container is related to the amount of the items
-                ArrayList<ImageView> arr = new ArrayList<ImageView>();
-                for (int i = 0; i < cartItems.size(); i++) {
+        if (allItems != null) {
+            if (allItems.size() != 0) {
+                itemscontainer.setMinHeight(allItems.size() * 80);      ///the height of the container is related to the amount of the items
+                ArrayList<Button> addtocartBTNS = new ArrayList<>();
+                for (int i = 0; i < allItems.size(); i++) {
+                    addtocartBTNS.add(new Button());
+                }
+                for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #393E46");
                     p.setMinSize(295, 140);
@@ -128,16 +148,16 @@ public class RegisteredCatalogControl {
                     imageview.setFitWidth(130);   //width of img
                     imageview.setFitHeight(130); //height of img
                     System.out.println(i);
-                    imageview.setImage(new Image(cartItems.get(i).getUrl()));
+                    imageview.setImage(new Image(allItems.get(i).getUrl()));
                     imageview.setLayoutX(5);           //x & y coordinate related in the pane
                     imageview.setLayoutY(5);
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
-                    TextField name = new TextField("Name: " + cartItems.get(i).getName()  //"\n"
-                          //  + "Catalog Number: " + cartItems.get(i).getCatalogNumber() + "\n"
-                          //  + "Type: " + cartItems.get(i).getType() + "\n"
-                          //  + "Price: " + cartItems.get(i).getPrice() + "\n"
+                    TextField name = new TextField("Name: " + allItems.get(i).getName()  //"\n"
+                            //  + "Catalog Number: " + cartItems.get(i).getCatalogNumber() + "\n"
+                            //  + "Type: " + cartItems.get(i).getType() + "\n"
+                            //  + "Price: " + cartItems.get(i).getPrice() + "\n"
                     );
                     name.setStyle("-fx-background-color:#00ADB5");
                     name.setLayoutX(140);
@@ -145,20 +165,20 @@ public class RegisteredCatalogControl {
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
-                    TextField catologNum = new TextField("Catalog Number: " + cartItems.get(i).getCatalogNumber());
+                    TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
                     catologNum.setStyle("-fx-background-color:#00ADB5");
                     catologNum.setLayoutX(140);
                     catologNum.setLayoutY(25);
                     name.setEditable(false);
 
                     ///////// type textfield ///////////
-                    TextField type = new TextField("type: " + cartItems.get(i).getType());
+                    TextField type = new TextField("type: " + allItems.get(i).getType());
                     type.setStyle("-fx-background-color:#00ADB5");
                     type.setLayoutX(140);           //x & y coordinate related in the pane
                     type.setLayoutY(45);
 
                     ///////// type textfield ///////////
-                    TextField price = new TextField("type: " + cartItems.get(i).getPrice());
+                    TextField price = new TextField("type: " + allItems.get(i).getPrice());
                     price.setStyle("-fx-background-color:#00ADB5");
                     price.setLayoutX(140);           //x & y coordinate related in the pane
                     price.setLayoutY(65);
@@ -166,14 +186,38 @@ public class RegisteredCatalogControl {
 
                     ////////////////////// buttons ///////////////////
                     Button addToCartbtn = new Button();
+
                     addToCartbtn.setText("Add To Cart");
                     addToCartbtn.setOnAction(e -> {
-                        System.out.println("dont press me  pls");
+                        try {
+                            //  boolean add=false;
+                            getCurrentCustomer();
+                            int num = Integer.parseInt(((Button) e.getTarget()).getId());
+                            ArrayList<CartItem> incart = searchCartItems(((Customer) currentCustomerData).getId());
+                            for (int k = 0; k < incart.size(); k++) {
+                                if (k == num) {
+                                    int increase=(incart.get(k).getAmount()+1);
+                                    incart.get(k).setAmount(increase);
+                                    MsgClass update = new MsgClass("#update cartIrem", incart.get(k));
+                                    SimpleClient.getClient().sendToServer(update);
+                                    System.out.println("the amount of shit"+ incart.get(k).getAmount());
+                                    return;
+                                }
+                            }
+                            CartItem newItem = new CartItem(getCurrentCustomer(), allItems.get(num), 1);
+                            MsgClass addCartItm = new MsgClass("#add cartItem", newItem);
+                            SimpleClient.getClient().sendToServer(addCartItm);
+                            System.out.println("the item you whant is " + num);
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+
 
                     });
                     addToCartbtn.setStyle("-fx-background-color:#EEEEEE");
                     addToCartbtn.setLayoutX(140);
                     addToCartbtn.setLayoutY(105);
+                    addToCartbtn.setId(String.valueOf(i));
 
                     ///////////////////////////////////////////////////////
                     Button buyNow = new Button();
