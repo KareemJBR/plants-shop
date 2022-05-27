@@ -80,7 +80,6 @@ public class App extends Application {
     }
     public static  Customer getCurrentCustomer() throws IOException {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
-
         currentCustomerData = null;
         SimpleClient.getClient().sendToServer(msg);
         while (currentCustomerData == null) {System.out.println("waiting for current customer");}
@@ -88,6 +87,16 @@ public class App extends Application {
     }
 
 
+
+    public static  ArrayList<Item> getAllitems() throws IOException {
+        ArrayList<Item> items=new ArrayList<Item>();
+        MsgClass msg =new MsgClass("#get shop items",null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while(allItemsData==null) {System.out.println("waiting for server13");}
+        items=(ArrayList<Item>)allItemsData;
+        return items;
+    }
 
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();
@@ -132,13 +141,13 @@ public class App extends Application {
     }
 
     public static  ArrayList<Report> getAllReports() throws IOException {
-        ArrayList<Report> cartItems = new ArrayList<Report>();
+        ArrayList<Report> allReports = new ArrayList<Report>();
         ReportsData = null;
         MsgClass msg = new MsgClass("#get reports", null);
         SimpleClient.getClient().sendToServer(msg);
         while (ReportsData == null) {System.out.println("waiting for server5");}
-        cartItems = (ArrayList<Report>) ReportsData;
-        return cartItems;
+        allReports = (ArrayList<Report>) ReportsData;
+        return allReports;
     }
 
     public static ArrayList<ShopAdmin> getAllShopAdmins() throws IOException {
@@ -146,7 +155,7 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get shopAdmins", null);
         ShopAdminsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server6");}
+        while (ShopAdminsData == null) {System.out.println("waiting for server6");}
         shopAdmins = (ArrayList<ShopAdmin>) ShopAdminsData;
         return shopAdmins;
     }

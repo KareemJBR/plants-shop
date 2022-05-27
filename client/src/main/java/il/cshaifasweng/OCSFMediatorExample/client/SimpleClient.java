@@ -32,7 +32,7 @@ public class SimpleClient extends AbstractClient {
             myMsg = (MsgClass) msg;
             if (myMsg.getMsg().equals("all shop items")) {
                 System.out.println("in main client handler to get all items");
-                data = myMsg.getObj();
+                allItemsData = myMsg.getObj();
 				/*	try {
 						App.setRoot("controllers/CatalogForRegisteredClients");
 					}	catch (Exception e){
