@@ -1,25 +1,40 @@
-/**
- * Sample Skeleton for 'ShowReportsForClientService.fxml' Controller Class
- */
-
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ShowReportsForClientService {
-
-    @FXML // fx:id="reports"
-    private TableView<Report> reports; // Value injected by FXMLLoader
+public class ShowReportsForClientService implements Initializable {
 
     @FXML
-    void gotClientServicePage(ActionEvent event) throws IOException {
-        App.setRoot("Clientservicehomepage");
+    private TableColumn<?, ?> clientIDColumn;
+
+    @FXML
+    private TableColumn<?, ?> reportDateColumn;
+
+    @FXML
+    private TableColumn<?, ?> reportIDColumn;
+
+    @FXML
+    private TableView<?> reports;
+
+    @FXML
+    private TableColumn<?, ?> shopIDColumn;
+
+    @FXML
+    void backToHomePage(ActionEvent event) throws IOException {
+        App.setRoot("controllers/SupportWorkerHomePage");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // TODO: load unsolved reports sorted from the oldest to the newest
+    }
 }
