@@ -42,5 +42,21 @@ public class CartItem  implements Serializable {
 
     public int getAmount(){return this.amount;}
     public int getId(){return this.id;}
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }
 

@@ -39,14 +39,6 @@ public class SimpleServer extends AbstractServer {
         List<Shop> data = session.createQuery(query).getResultList();
         return data;
     }
-  
-    private static List<Flower> getAllFlowers() throws Exception {
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flower> query = builder.createQuery(Flower.class);
-        query.from(Flower.class);
-        List<Flower> data = session.createQuery(query).getResultList();
-        return data;
-    }
 
     private static List<NetWorker> getAllWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -117,7 +109,7 @@ public class SimpleServer extends AbstractServer {
         CartItem cartItem2 = new CartItem(customer2,item2,1);
         session.save(cartItem2);
         Customer customer3=getAllCustomers().get(0);
-        Item item3=getAllItems().get(1);
+        Item item3=getAllItems().get(2);
         CartItem cartItem3 = new CartItem(customer3,item3,2);
         session.save(cartItem3);
         session.flush();
@@ -162,24 +154,6 @@ public class SimpleServer extends AbstractServer {
         session.flush();
     }
 
-    private static void generateFlowers() {
-        Flower flower1 = new Flower(50, "red", "https://images.unsplash.com/photo-1569101315919-dafea4df33ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwZmxvd2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80");
-        session.save(flower1);
-        session.flush();
-        Flower flower2 = new Flower(45, "green", "https://www.allaboutgardening.com/wp-content/uploads/2021/10/Carnation.jpg");
-        session.save(flower2);
-        session.flush();
-        Flower flower3 = new Flower(30, "blue", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzjZZ9dDZzh6zb3fbq8g4MpK8ybBNNQ9TzEg&usqp=CAU");
-        session.save(flower3);
-        session.flush();
-        Flower flower4 = new Flower(55, "purple", "https://upload.wikimedia.org/wikipedia/commons/9/9c/Purple_Flower_%22Pensamiento%22_Viola_%C3%97_wittrockiana.JPG");
-        session.save(flower4);
-        session.flush();
-        Flower flower5 = new Flower(20, "yellow", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/yellow-flower-dahlia-1587061007.jpg?crop=0.557xw:1.00xh;0.0569xw,0&resize=480:*");
-        session.save(flower5);
-        session.flush();
-    }
-
     public static Session getSession() {
         return session;
     }
@@ -193,15 +167,11 @@ public class SimpleServer extends AbstractServer {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
        configuration.addAnnotatedClass(NetWorker.class);
-        configuration.addAnnotatedClass(Flower.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(CartItem.class);
         configuration.addAnnotatedClass(Order.class);
-        configuration.addAnnotatedClass(FlowerPotWithFlower.class);
-        configuration.addAnnotatedClass(FlowerBouquet.class);
-        configuration.addAnnotatedClass(EmptyFlowerPot.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
@@ -213,7 +183,6 @@ public class SimpleServer extends AbstractServer {
         try {
             generateShops();
             generateWorkers();
-            generateFlowers();
             generateCustomers();
             generateItems();
             generateCartItems();
@@ -236,15 +205,6 @@ public class SimpleServer extends AbstractServer {
         addDataToDB();
     }
 
-    private static void updatePrice(Flower flower, int price) {
-        System.out.println(price);
-        System.out.println(flower);
-        session.beginTransaction();
-        flower.setPrice(price);
-        session.update(flower);
-        System.out.println(flower);
-        session.getTransaction().commit();
-    }
     private Customer getCustomer(String userName) throws Exception {
         List<Customer> customers = getAllCustomers();
         Customer out=null;
@@ -319,20 +279,6 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("eror hapend");
-                        System.out.println(e.getMessage());
-                    }
-                }
-                if (msgtext.startsWith("#update")) {
-                    try {
-                        System.out.println("in update");
-                        int id = Integer.parseInt(String.valueOf(msgtext.charAt(9)));
-                        int price = Integer.parseInt(msgtext.substring(11));
-                        updatePrice(session.get(Flower.class, id), price);
-                        myMsg.setObj(getAllFlowers());
-                        myMsg.setMsg("all flowers");
-                        client.sendToClient(myMsg);
-                    } catch (Exception e) {
-                        System.out.println("in updete exception");
                         System.out.println(e.getMessage());
                     }
                 }
@@ -428,6 +374,24 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#delete CartItem")) {
+                    try {
+                        System.out.println("in delete CartItem");
+                        deleteCartitem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in delete CartItem");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#decrement amount")) {
+                    try {
+                        System.out.println("in decrement amount");
+                        decrementAmountofCartItem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in decrement amount");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgtext.equals("#get current customer")) {
                     try {
                         System.out.println("in get current customer");
@@ -495,6 +459,58 @@ public class SimpleServer extends AbstractServer {
         }
         session.flush();
         session.getTransaction().commit();
+    }
+
+    public static void deleteCartitem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        session.delete(cartItems.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+    }
+
+    public static void decrementAmountofCartItem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        int amount= cartItems.get(i).getAmount();
+                        if(amount==1)
+                        {
+                            session.delete(cartItems.get(i));
+                        }
+                        else
+                        {
+                            cartItems.get(i).setAmount(amount-1);
+                            session.update(cartItems.get(i));
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+
     }
 
     private static void update_customer(Customer customer) {

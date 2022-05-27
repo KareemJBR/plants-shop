@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 /**
  * JavaFX App
@@ -44,8 +43,8 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    
+
+
 
     @Override
 	public void stop() throws Exception {
@@ -73,6 +72,7 @@ public class App extends Application {
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();
         MsgClass msg =new MsgClass("#get customers",null);
+        Customersdata=null;
         SimpleClient.getClient().sendToServer(msg);
         while(Customersdata==null) {System.out.println("waiting for server");}
         customers=(ArrayList<Customer>)Customersdata;
@@ -82,24 +82,17 @@ public class App extends Application {
     public static  ArrayList<Shop> getAllShops() throws IOException {
         ArrayList<Shop> shops = new ArrayList<Shop>();
         MsgClass msg = new MsgClass("#get Shops", null);
+        shopsdata=null;
         SimpleClient.getClient().sendToServer(msg);
         while (shopsdata == null) {System.out.println("waiting for server");}
         shops = (ArrayList<Shop>) shopsdata;
         return shops;
     }
 
-     public static  ArrayList<Flower> getAllFlowers() throws IOException {
-
-        ArrayList<Flower> Flowers=new ArrayList<Flower>();
-        MsgClass msg =new MsgClass("#get phots URL",null);
-        SimpleClient.getClient().sendToServer(msg);
-        Flowers=(ArrayList<Flower>)data;
-        return Flowers;
-    }
-
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get Workers", null);
+        NetWorkersData=null;
         SimpleClient.getClient().sendToServer(msg);
         while (NetWorkersData == null) {System.out.println("waiting for server");}
         workers = (ArrayList<NetWorker>) NetWorkersData;
@@ -109,6 +102,7 @@ public class App extends Application {
     public static  ArrayList<CartItem> getAllCartItems() throws IOException {
         ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
         MsgClass msg = new MsgClass("#get CartItems", null);
+        CartItemsdata=null;
         SimpleClient.getClient().sendToServer(msg);
         while (CartItemsdata == null) {System.out.println("waiting for server");}
         cartItems = (ArrayList<CartItem>) CartItemsdata;
@@ -118,8 +112,9 @@ public class App extends Application {
     public static  ArrayList<Report> getAllReports() throws IOException {
         ArrayList<Report> cartItems = new ArrayList<Report>();
         MsgClass msg = new MsgClass("#get Reports", null);
+        ReportsData=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (ReportsData == null) {System.out.println("waiting for server");}
         cartItems = (ArrayList<Report>) ReportsData;
         return cartItems;
     }
@@ -127,8 +122,9 @@ public class App extends Application {
     public static ArrayList<ShopAdmin> getAllShopAdmins() throws IOException {
         ArrayList<ShopAdmin> shopAdmins = new ArrayList<ShopAdmin>();
         MsgClass msg = new MsgClass("#get shopAdmins", null);
+        ShopAdminsData=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (CartItemsdata == null) {System.out.println("waiting for server");}
+        while (ShopAdminsData == null) {System.out.println("waiting for server");}
         shopAdmins = (ArrayList<ShopAdmin>) ShopAdminsData;
         return shopAdmins;
     }
@@ -136,8 +132,9 @@ public class App extends Application {
     public static ArrayList<Order> getAllOrders() throws IOException {
         ArrayList<Order> orders = new ArrayList<Order>();
         MsgClass msg = new MsgClass("#get Orders", null);
+        OrdersData=null;
         SimpleClient.getClient().sendToServer(msg);
-        while (OrdersData == null) {System.out.println("waiting rer for server");}
+        while (OrdersData == null) {System.out.println("waiting for server");}
         orders = (ArrayList<Order>) OrdersData;
         return orders;
     }
@@ -145,6 +142,18 @@ public class App extends Application {
     public static void deleteCart(String clientId) throws IOException {
         MsgClass msg = new MsgClass("#delete Cart", null);
         msg.setObj(clientId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void deleteCartitem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#delete CartItem", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void decrementAmountofCartItem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#decrement amount", null);
+        msg.setObj(cartitemId);
         SimpleClient.getClient().sendToServer(msg);
     }
 

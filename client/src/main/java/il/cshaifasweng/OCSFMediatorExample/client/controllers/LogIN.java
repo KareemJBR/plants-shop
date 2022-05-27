@@ -23,10 +23,6 @@ public class LogIN {
     public static  String LoginClient_acount_type;
     String  current;
     String password_status="invisible";
-    @FXML // fx:id="showPassword"
-    private CheckBox showPassword; // Value injected by FXMLLoader
-    @FXML // fx:id="visiblePassword"
-    private TextField visiblePassword; // Value injected by FXMLLoader
     @FXML // fx:id="Password"
     private PasswordField Password; // Value injected by FXMLLoader
 
@@ -42,11 +38,14 @@ public class LogIN {
     @FXML // fx:id="notmemberLabel"
     private Label notmemberLabel; // Value injected by FXMLLoader
 
-    @FXML // fx:id="title"
-    private TextField title; // Value injected by FXMLLoader
+    @FXML // fx:id="showPassword"
+    private CheckBox showPassword; // Value injected by FXMLLoader
 
     @FXML // fx:id="userName"
     private TextField userName; // Value injected by FXMLLoader
+
+    @FXML // fx:id="visiblePassword"
+    private TextField visiblePassword; // Value injected by FXMLLoader
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
