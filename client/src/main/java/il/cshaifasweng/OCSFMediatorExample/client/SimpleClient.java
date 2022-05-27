@@ -93,7 +93,7 @@ public class SimpleClient extends AbstractClient {
             System.out.println("in get CartItems client side");
             CartItemsdata = myMsg.getObj();
         }
-        if (myMsg.getMsg().equals("Items")) {
+        if (myMsg.getMsg().equals("allItems")) {
             System.out.println("in get Items client side");
             Itemsdata = myMsg.getObj();
         }
