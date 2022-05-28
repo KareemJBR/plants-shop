@@ -56,8 +56,6 @@ public class ShowAllCustomers implements Initializable {
             e.printStackTrace();
         }
 
-        System.out.println(customers.get(0).getEmail());
-
         if (customers == null)
             return;
 
@@ -85,16 +83,9 @@ public class ShowAllCustomers implements Initializable {
         // else: a row has been clicked twice, and we need to open a new controller for editing the selected
         // customer's data
 
-        Object object =  customersTable.getSelectionModel().selectedItemProperty().get();
         int index = customersTable.getSelectionModel().selectedIndexProperty().get();
-
         String customer_id = customers.get(index).getUser_id();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustomerDetailsToEdit.fxml"));
-
-        CustomerDetailsToEdit customerDetailsToEdit = loader.getController();
-        customerDetailsToEdit.start_controller(customer_id);
-
+        App.setCustomerIDForAdminView(customer_id);
         App.setRoot("controllers/CustomerDetailsToEdit");      // TODO: make sure this works!
 
     }

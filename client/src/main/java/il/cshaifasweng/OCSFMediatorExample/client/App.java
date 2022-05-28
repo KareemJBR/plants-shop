@@ -30,6 +30,8 @@ public class App extends Application {
     private static Scene scene;
     private SimpleClient client;
 
+    private static String customer_id_for_admin_view;
+
     @Override
     public void start(Stage stage) throws IOException {
        // EventBus.getDefault().register(this);
@@ -305,6 +307,14 @@ public class App extends Application {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar;
+    }
+
+    public static void setCustomerIDForAdminView(String customer_id) {
+        customer_id_for_admin_view = customer_id;
+    }
+
+    public static String getCustomer_id_for_admin_view() {
+        return customer_id_for_admin_view;
     }
 
 }
