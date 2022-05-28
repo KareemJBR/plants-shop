@@ -3,7 +3,6 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.application.Platform;
@@ -12,25 +11,21 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllReports;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.Itemsdata;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.currentCustomerData;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.ReportsData;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
-public class showReportForCustomer {
+public class ShowReportForCustomer {
 
 
     @FXML

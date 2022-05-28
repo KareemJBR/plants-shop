@@ -6,19 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="339.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AdministratorHomePage">
+<AnchorPane prefHeight="452.0" prefWidth="466.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AdministratorHomePage">
    <children>
-      <TextField fx:id="page_head_text" editable="false" layoutX="78.0" layoutY="22.0" prefHeight="51.0" prefWidth="195.0" text="Admin HomePage">
+      <TextField editable="false" layoutX="135.0" layoutY="20.0" prefHeight="51.0" prefWidth="195.0" text="Admin HomePage">
          <font>
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="customers_button" layoutX="105.0" layoutY="110.0" mnemonicParsing="false" onAction="#showCustomers" prefHeight="59.0" prefWidth="141.0" text="Customers" />
-      <Button fx:id="reports_button" layoutX="105.0" layoutY="205.0" mnemonicParsing="false" onAction="#showReports" prefHeight="59.0" prefWidth="141.0" text="Reports" />
-      <Hyperlink layoutX="286.0" layoutY="301.0" onAction="#signOut" text="Sign out">
+      <Button layoutX="162.0" layoutY="104.0" mnemonicParsing="false" onAction="#showCustomers" prefHeight="59.0" prefWidth="141.0" text="Customers" />
+      <Button layoutX="162.0" layoutY="347.0" mnemonicParsing="false" onAction="#showReports" prefHeight="59.0" prefWidth="141.0" text="Reports" />
+      <Hyperlink layoutX="400.0" layoutY="20.0" onAction="#signOut" text="Sign out">
          <font>
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
+      <Button layoutX="162.0" layoutY="183.0" mnemonicParsing="false" onAction="#showNetWorkers" prefHeight="59.0" prefWidth="141.0" text="Net Workers" />
+      <Button layoutX="162.0" layoutY="264.0" mnemonicParsing="false" onAction="#showSupportWorkers" prefHeight="59.0" prefWidth="141.0" text="Support Workers" />
    </children>
 </AnchorPane>
