@@ -33,15 +33,11 @@ public class Customer  implements Serializable {
     private String customer_email;
 
 
-    @OneToMany(mappedBy = "orderCustomer")
-    // @JoinColumn(name="customerReport") // join column is in table for Order
+    @OneToMany(mappedBy = "customer")
     private List<Order> customerOrders =new ArrayList<>();
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
-    @OneToMany(mappedBy = "customer")
-    // @JoinColumn(name="customerReport") // join column is in table for Order
-    private List<CartItem> customerItems =new ArrayList<>();
+
 
 
 

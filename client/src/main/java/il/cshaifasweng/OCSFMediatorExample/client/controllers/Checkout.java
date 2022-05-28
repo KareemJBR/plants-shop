@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart.OrderShop;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart.OrderSubtotal;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
@@ -123,6 +124,38 @@ public class Checkout {
     @FXML
     void Checkout(ActionEvent event) throws IOException {
         clear();
+        ArrayList<Shop> allshops=getAllShops();
+        Shop shop=null;
+        if(allshops!=null)
+        {
+            if(allshops.size()!=0)
+            {
+                for(int i=0;i<allshops.size();i++)
+                {
+                    if(allshops.get(i).getAddress().equals(OrderShop))
+                    {
+                        shop=allshops.get(i);
+                    }
+                }
+            }
+        }
+        ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
+        ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
+        String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
+        String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
+        int hour= Integer.parseInt(Hour.getValue());
+        int minute= Integer.parseInt(Minute.getValue());
+        MsgClass msg = new MsgClass("#add order");
+        Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText());
+        for(int i=0;i<cartItems.size();i++)
+        {
+            OrderItem orderItem=new OrderItem(cartItems.get(i));
+            AddOrderIem(orderItem);
+            orderItems.add(orderItem);
+        }
+//            order.setOrderitems(searchCartItems(LoginClient_userId));
+        order.setOrderitems(orderItems);
+        msg.setObj(order);
         if(DeliveryRadioBtn.isSelected())
         {
             if(NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals(""))
@@ -143,29 +176,16 @@ public class Checkout {
             }
             else
             {
-                String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
-                String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
-                int hour= Integer.parseInt(Hour.getValue());
-                int minute= Integer.parseInt(Minute.getValue());
-                MsgClass msg = new MsgClass("#add order");
-                Order order=new Order(searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText());
-                order.setItems(searchCartItems(LoginClient_userId));
-                msg.setObj(order);
                 SimpleClient.getClient().sendToServer(msg);
                 deleteCart(LoginClient_userId);
+                showAlert("order success","success");
+                App.setRoot("controllers/ClientMainPage");
             }
 
         }
         else
         {
-            String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
-            String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
-            int hour= Integer.parseInt(Hour.getValue());
-            int minute= Integer.parseInt(Minute.getValue());
-            MsgClass msg = new MsgClass("#add order");
-            Order order=new Order(searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText());
-            order.setItems(searchCartItems(LoginClient_userId));
-            msg.setObj(order);
+
             SimpleClient.getClient().sendToServer(msg);
             deleteCart(LoginClient_userId);
             showAlert("order success","success");
@@ -268,9 +288,9 @@ public class Checkout {
         return null;
     }
 
-    public ArrayList<Item> searchCartItems(String ClientId) throws IOException {
+    public ArrayList<CartItem> searchCartItems(String ClientId) throws IOException {
         ArrayList<CartItem> allcartitems=getAllCartItems();
-        ArrayList<Item> returnedcartitems=new ArrayList<Item>();
+        ArrayList<CartItem> returnedcartitems=new ArrayList<CartItem>();
 
         if(allcartitems !=null)
         {
@@ -278,7 +298,7 @@ public class Checkout {
             {
                 if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
                 {
-                    returnedcartitems.add(allcartitems.get(i).getItem());
+                    returnedcartitems.add(allcartitems.get(i));
                 }
             }
         }

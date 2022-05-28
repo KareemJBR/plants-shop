@@ -7,10 +7,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -28,7 +25,10 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 public class Cart<T> {
     public static double OrderSubtotal;
+    public static String OrderShop;
 
+    @FXML // fx:id="AccountTypeLabel"
+    private Label AccountTypeLabel; // Value injected by FXMLLoader
     @FXML // fx:id="CheckoutBtn"
     private Button CheckoutBtn; // Value injected by FXMLLoader
 
@@ -44,6 +44,9 @@ public class Cart<T> {
     @FXML // fx:id="itemscontainer"
     private AnchorPane itemscontainer; // Value injected by FXMLLoader
 
+    @FXML // fx:id="stores"
+    private ComboBox<String> stores; // Value injected by FXMLLoader
+
     @FXML
     void Back(ActionEvent event) throws IOException {
         MsgClass msg=new MsgClass("#get customers",null);
@@ -53,6 +56,30 @@ public class Cart<T> {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
+        if(LoginClient_acount_type.equals("Network account")||LoginClient_acount_type.equals("Network account with 10% discount"))
+        {
+            stores.setDisable(false);
+            stores.setVisible(true);
+            stores.getItems().removeAll(stores.getItems());
+            ArrayList<Shop> shops=getAllShops();
+
+            if(shops!=null)
+            {
+                //   System.out.println("notnull");
+                for(int i=0;i<shops.size();i++)
+                {
+                    stores.getItems().addAll(shops.get(i).getAddress());
+                }
+            }
+            stores.getSelectionModel().select(0);
+            AccountTypeLabel.setText("Choose Store");
+            OrderShop=stores.getValue();
+        }
+        else
+        {
+            AccountTypeLabel.setText(LoginClient_acount_type);
+            OrderShop=LoginClient_acount_type;
+        }
         loadPage();
     }
 
@@ -119,7 +146,7 @@ public class Cart<T> {
         double subtotal=0;
         if (cartItems != null) {
             if (cartItems.size() != 0) {
-                itemscontainer.setMinHeight(cartItems.size()*90);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(cartItems.size()*98);      ///the height of the container is related to the amount of the items
                 ArrayList<ImageView> arr=new ArrayList<ImageView>();
                 for(int i=0;i<cartItems.size();i++)
                 {
@@ -162,8 +189,8 @@ public class Cart<T> {
 
                     ///////// delete button ///////////
                     Button btn=new Button();
-                    btn.setLayoutX(255);
-                    btn.setLayoutY(21);
+                    btn.setLayoutX(270);
+                    btn.setLayoutY(16);
                     btn.setText("X");
                     btn.setStyle("-fx-font-size:11;-fx-background-radius:2;");
                     btn.setId(Integer.toString(cartItems.get(i).getId()));
@@ -179,8 +206,8 @@ public class Cart<T> {
 
                     ///////// decrement button ///////////
                     Button btn2=new Button();
-                    btn2.setLayoutX(255);
-                    btn2.setLayoutY(52);
+                    btn2.setLayoutX(270);
+                    btn2.setLayoutY(58);
                     btn2.setText("-");
                     btn2.setId(Integer.toString(cartItems.get(i).getId()));
                     btn2.setStyle("-fx-font-size:12.1;-fx-background-radius:2;");
@@ -228,11 +255,16 @@ public class Cart<T> {
             {
                 CheckoutBtn.setDisable(true);
                 EmptyCartLabel.setVisible(true);
+                stores.setDisable(true);
                 Subtotal.setText("Please add some item in your cart first");
             }
         }
     }
 
+    @FXML
+    void ComboChange(ActionEvent event) {
+        OrderShop=stores.getValue();
+    }
 
 
 }
