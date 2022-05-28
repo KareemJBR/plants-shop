@@ -16,6 +16,7 @@ public class SimpleClient extends AbstractClient {
     public static  Object Itemsdata;
     public static  Object allItemsData;
     public static  Object Customersdata;
+    public static  Object OrderItemData;
 
 
     public static Object ReportsData;
@@ -51,6 +52,11 @@ public class SimpleClient extends AbstractClient {
 				System.out.println("in get your current customer");
 				System.out.println(myMsg.getObj());
 				}
+            if (myMsg.getMsg().equals("all orderItems")) {
+                System.out.println("asdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                OrderItemData = myMsg.getObj();
+                System.out.println("in get orderItems");
+            }
        
             if(myMsg.getMsg().equals("all Shops"))
             {

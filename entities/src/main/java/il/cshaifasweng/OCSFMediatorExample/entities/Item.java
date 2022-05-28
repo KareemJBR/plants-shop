@@ -23,8 +23,11 @@ public class Item implements Serializable {
     @Column(name="Item_name")
     private String name;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Order> orders = new ArrayList<>();
+//    @ManyToMany(mappedBy = "items")
+//    private List<Order> orders = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "item")
+//    private CartItem
 
 
 

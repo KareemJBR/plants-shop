@@ -15,7 +15,11 @@ public class Order implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private Customer orderCustomer;
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Shop_id")
+    private Shop shop;
 
     @Column(name="receipt_year")
     private int receipt_year;
@@ -59,21 +63,26 @@ public class Order implements Serializable {
     @Column(name="greeting")
     private String greeting;
 
-@ManyToMany(cascade = { CascadeType.ALL })
-@JoinTable(
-        name = "Order_Item",
-        joinColumns = { @JoinColumn(name = "order_id") },
-        inverseJoinColumns = { @JoinColumn(name = "item_id") }
-)
-private List<Item> items = new ArrayList<>();
+//@ManyToMany(cascade = { CascadeType.ALL })
+//@JoinTable(
+//        name = "Order_Item",
+//        joinColumns = { @JoinColumn(name = "order_id") },
+//        inverseJoinColumns = { @JoinColumn(name = "item_id") }
+//)
+//private List<Item> items = new ArrayList<>();
 
-    public Order(Customer customer,int order_year,int order_month,int order_day,int receipt_year,int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,double price,String pay_method,String shipping_method,String greeting)
+//    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<OrderItem> orderitems =new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderitems =new ArrayList<>();
+    public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,double price,String pay_method,String shipping_method,String greeting)
     {
         this.greeting=greeting;
         this.shipping_method=shipping_method;
         this.pay_method=pay_method;
         this.price=price;
-        this.orderCustomer=customer;
+        this.customer=customer;
         this.order_year=order_year;
         this.order_month=order_month;
         this.order_day=order_day;
@@ -85,6 +94,7 @@ private List<Item> items = new ArrayList<>();
         this.receipt_day=receipt_day;
         this.receipt_minute=receipt_minute;
         this.receipt_hour=receipt_hour;
+        this.shop=shop;
     }
 
     public Order() {
@@ -97,7 +107,15 @@ private List<Item> items = new ArrayList<>();
     }
 
     public void setCustomer(Customer customer) {
-        this.orderCustomer = customer;
+        this.customer = customer;
+    }
+
+    public void setOrderitems(List<OrderItem> orderitems) {
+        this.orderitems = orderitems;
+    }
+
+    public List<OrderItem> getOrderitems() {
+        return orderitems;
     }
 
     public void setReceipt_year(int receipt_year) {
@@ -156,16 +174,16 @@ private List<Item> items = new ArrayList<>();
         this.greeting = greeting;
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
+//    public void setItems(ArrayList<Item> items) {
+//        this.items = items;
+//    }
 
     public int getId() {
         return id;
     }
 
     public Customer getCustomer() {
-        return orderCustomer;
+        return customer;
     }
 
     public int getReceipt_year() {
@@ -224,9 +242,9 @@ private List<Item> items = new ArrayList<>();
         return greeting;
     }
 
-    public List<Item> getItems() {
-        return items;
-    }
+//    public List<Item> getItems() {
+//        return items;
+//    }
 
 
 }

@@ -160,6 +160,7 @@ public class App extends Application {
         return shopAdmins;
     }
 
+
     public static ArrayList<Order> getAllOrders() throws IOException {
 
         ArrayList<Order> orders = new ArrayList<Order>();
@@ -176,9 +177,46 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get allItems", null);
         allItemsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting rer for server8");}
+        while (allItemsData == null) {System.out.println("waiting  for server8");}
         items = (ArrayList<Item>) allItemsData;
         return items;
+    }
+
+    public static   ArrayList<Order> getClientOrders(String clientId) throws IOException {
+        ArrayList<Order> orders=getAllOrders();
+        ArrayList<Order> returnedorders=new ArrayList<Order>();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i<orders.size();i++)
+                {
+                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
+                    {
+                        returnedorders.add(orders.get(i));
+                    }
+                }
+            }
+        }
+
+        return orders;
+    }
+
+    public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
+        List<OrderItem> orderitems=new ArrayList<OrderItem>();
+        MsgClass msg = new MsgClass("#get orderItems", null);
+        OrderItemData=null;
+        msg.setObj(orderId);
+        SimpleClient.getClient().sendToServer(msg);
+        while (OrderItemData == null) {System.out.println("waiting for server9");}
+        orderitems = (List<OrderItem>) OrderItemData;
+        return orderitems;
+    }
+
+    public static void AddOrderIem(OrderItem orderItem) throws IOException {
+        MsgClass msg = new MsgClass("#add orderitem", null);
+        msg.setObj(orderItem);
+        SimpleClient.getClient().sendToServer(msg);
     }
 
     public static void deleteCart(String clientId) throws IOException {
@@ -199,6 +237,7 @@ public class App extends Application {
         msg.setObj(cartitemId);
         SimpleClient.getClient().sendToServer(msg);
     }
+
         
 //    public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
 //        // interval must be valid

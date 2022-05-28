@@ -5,6 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderItem;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,13 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllOrders;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
 import javafx.stage.Stage;
+
+import javax.transaction.Transactional;
 
 public class ClientMainPage {
 
@@ -84,19 +87,22 @@ public class ClientMainPage {
     void customizedOrder(ActionEvent event) throws IOException {
         App.setRoot("controllers/CustomizedOrder");
     }
+
+
     @FXML
     void myOrders(ActionEvent event) throws IOException {
         //showAlert("username","username: "+ Client_username);
 
-        ArrayList<Order> orders=getAllOrders();
+        ArrayList<Order> orders=getClientOrders(LoginClient_userId);
+        List<OrderItem> orderItems=getOrderitems(orders.get(0).getId());
+       System.out.println(orderItems.size());
         if(orders!=null)
         {
             if(orders.size()!=0)
             {
-
                 for(int i=0;i<orders.size();i++)
                 {
-                    System.out.println(orders.get(i).getItems().size());
+                 //   System.out.println(getOrderitems(orders.get(i).getId()).size());
                 }
             }
         }
