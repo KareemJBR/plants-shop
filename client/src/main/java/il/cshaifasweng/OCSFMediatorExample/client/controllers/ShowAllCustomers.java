@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,28 +48,33 @@ public class ShowAllCustomers implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Customer> customersToShow = null;
         try {
             customers = getAllCustomers();
+            customersToShow = FXCollections.observableArrayList(customers);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if(customers == null)
+        System.out.println(customers.get(0).getEmail());
+
+        if (customers == null)
             return;
 
-        for (Customer customer : customers) {
-            customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customer.getUser_id()));
-            customersFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customer.getFirst_name()));
-            customersLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                    (customer.getLast_name()));
+        customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
+                ("id"));
+        customersFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>
+                ("first_name"));
+        customersLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>
+                ("last_name"));
 
-            customersEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>(customer.getEmail()));
+        customersEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>("Email"));
 
-            customersBudget.setCellValueFactory(new PropertyValueFactory<Customer, Double>
-                    (Double.toString(customer.getBudget())));
-        }
+        customersBudget.setCellValueFactory(new PropertyValueFactory<Customer, Double>
+                ("Budget"));
+
+        customersTable.setItems(customersToShow);
+
     }
 
     @FXML

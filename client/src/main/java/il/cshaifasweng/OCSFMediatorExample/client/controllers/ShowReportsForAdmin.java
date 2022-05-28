@@ -63,7 +63,7 @@ public class ShowReportsForAdmin implements Initializable {
         if(comparisonOn.isSelected()){  // we need to compare two time intervals
             if(reportTypeComboBox.getValue().equals("Orders")){
                 // TODO: we shall compare orders in two time intervals
-                
+
             }
             else if(reportTypeComboBox.getValue().equals("Complaints")) {
 
