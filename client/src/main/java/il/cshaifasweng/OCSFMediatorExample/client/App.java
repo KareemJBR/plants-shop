@@ -10,19 +10,15 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
 
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
 
@@ -33,6 +29,8 @@ public class App extends Application {
 
     private static Scene scene;
     private SimpleClient client;
+
+    private static String customer_id_for_admin_view;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -223,7 +221,7 @@ public class App extends Application {
 //
 //        return (int)daysBetween + 1;    // containing the first day
 //    }
-
+//
 //    public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
 //           throws IOException {
 //
@@ -300,6 +298,23 @@ public class App extends Application {
                 alert.showAndWait();
             }
         });
+    }
+
+    public static Calendar localDateToCalendar(LocalDate localDate) {
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        Instant instant = zonedDateTime.toInstant();
+        Date date = Date.from(instant);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public static void setCustomerIDForAdminView(String customer_id) {
+        customer_id_for_admin_view = customer_id;
+    }
+
+    public static String getCustomer_id_for_admin_view() {
+        return customer_id_for_admin_view;
     }
 
 }
