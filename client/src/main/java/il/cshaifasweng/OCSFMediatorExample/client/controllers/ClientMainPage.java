@@ -94,8 +94,8 @@ public class ClientMainPage {
         //showAlert("username","username: "+ Client_username);
 
         ArrayList<Order> orders=getClientOrders(LoginClient_userId);
-        List<OrderItem> orderItems=getOrderitems(orders.get(0).getId());
-       System.out.println(orderItems.size());
+//        List<OrderItem> orderItems=getOrderitems(orders.get(0).getId());
+//       System.out.println(orderItems.size());
         if(orders!=null)
         {
             if(orders.size()!=0)

@@ -23,15 +23,6 @@ public class Item implements Serializable {
     @Column(name="Item_name")
     private String name;
 
-//    @ManyToMany(mappedBy = "items")
-//    private List<Order> orders = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "item")
-//    private CartItem
-
-
-
-
     public Item(int price, String color, String type, String imgURL, String name) {
         this.price = price;
         this.color = color;
