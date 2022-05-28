@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.showReportForCustomer">
+<AnchorPane fx:id="mainPane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportForCustomer">
    <children>
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="38.0" prefWidth="66.0" text="Back" />
       <ScrollPane layoutX="23.0" layoutY="179.0" prefHeight="286.0" prefWidth="594.0">

@@ -2,19 +2,19 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
@@ -51,9 +51,14 @@ public class ShowReportsForAdmin implements Initializable {
     }
 
     @FXML
-    void showButtonPressed(ActionEvent event) {
+    void showButtonPressed(ActionEvent event) throws IOException {
         if(!legalFields())
             return;
+
+        Calendar fromC1 = App.localDateToCalendar(fromDate1.getValue());
+        Calendar fromC2 = App.localDateToCalendar(fromDate2.getValue());
+        Calendar untilC1 = App.localDateToCalendar(untilDate1.getValue());
+        Calendar untilC2 = App.localDateToCalendar(untilDate2.getValue());
 
         if(comparisonOn.isSelected()){  // we need to compare two time intervals
             if(reportTypeComboBox.getValue().equals("Orders")){

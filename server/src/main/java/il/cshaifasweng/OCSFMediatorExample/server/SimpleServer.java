@@ -627,7 +627,6 @@ public class SimpleServer extends AbstractServer {
 
         @Transactional
         private static List<OrderItem> getorderitems(int orderId) throws Exception {
-//        session.beginTransaction();
         ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
         if(orders!=null)
         {
@@ -637,8 +636,6 @@ public class SimpleServer extends AbstractServer {
                 {
                     if(orders.get(i).getId()==orderId)
                     {
-                         //System.out.println(orders.get(i).getOrderitems().get(0).getAmount());
-                        System.out.println(orders.get(i).getOrderitems().size());
                          return  orders.get(i).getOrderitems();
                     }
                 }
