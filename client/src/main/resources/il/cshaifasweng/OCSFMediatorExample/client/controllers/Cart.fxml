@@ -35,7 +35,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Label fx:id="AccountTypeLabel" layoutX="450.0" layoutY="121.0" prefHeight="55.0" prefWidth="97.0" text="Account Type">
+      <Label fx:id="AccountTypeLabel" layoutX="372.0" layoutY="121.0" prefHeight="55.0" prefWidth="254.0" text="Account Type">
          <font>
             <Font size="14.0" />
          </font>
@@ -45,6 +45,6 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="stores" disable="true" layoutX="413.0" layoutY="170.0" onAction="#ComboChange" prefWidth="150.0" visible="false" />
+      <ComboBox fx:id="stores" disable="true" layoutX="368.0" layoutY="176.0" onAction="#ComboChange" prefWidth="150.0" visible="false" />
    </children>
 </AnchorPane>

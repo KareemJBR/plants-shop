@@ -17,6 +17,10 @@ public class Order implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    public Shop getShop() {
+        return shop;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Shop_id")
     private Shop shop;
@@ -62,17 +66,6 @@ public class Order implements Serializable {
 
     @Column(name="greeting")
     private String greeting;
-
-//@ManyToMany(cascade = { CascadeType.ALL })
-//@JoinTable(
-//        name = "Order_Item",
-//        joinColumns = { @JoinColumn(name = "order_id") },
-//        inverseJoinColumns = { @JoinColumn(name = "item_id") }
-//)
-//private List<Item> items = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<OrderItem> orderitems =new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderitems =new ArrayList<>();
