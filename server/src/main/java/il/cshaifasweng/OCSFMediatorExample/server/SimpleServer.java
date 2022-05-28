@@ -140,7 +140,7 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account","saeed@gmail.com");
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account", "saeed@gmail.com");
         session.save(customer1);
         Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account","ons@gmail.com");
         session.save(customer2);
