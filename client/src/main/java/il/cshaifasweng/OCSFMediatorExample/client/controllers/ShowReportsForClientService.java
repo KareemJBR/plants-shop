@@ -23,7 +23,7 @@ public class ShowReportsForClientService implements Initializable {
     private TableColumn<Report, String> clientIDColumn;
 
     @FXML
-    private TableColumn<Integer, String> reportDateColumn;
+    private TableColumn<Report, String> reportDateColumn;
 
     @FXML
     private TableColumn<Report, Integer> reportIDColumn;
