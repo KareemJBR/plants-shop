@@ -79,7 +79,6 @@ public class Order implements Serializable {
         this.order_year=order_year;
         this.order_month=order_month;
         this.order_day=order_day;
-        this.order_day=order_day;
         this.order_minute=order_minute;
         this.order_hour=order_hour;
         this.receipt_year=order_year;
@@ -90,6 +89,7 @@ public class Order implements Serializable {
         this.shop=shop;
     }
 
+    @Deprecated
     public Order() {
 
     }
