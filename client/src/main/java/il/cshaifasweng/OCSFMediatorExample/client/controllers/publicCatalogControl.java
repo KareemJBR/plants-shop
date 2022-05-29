@@ -88,6 +88,14 @@ public class publicCatalogControl {
                     imageview.setImage(new Image(allItems.get(i).getUrl()));
                     imageview.setLayoutX(5);           //x & y coordinate related in the pane
                     imageview.setLayoutY(5);
+                    ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
+
+                    if(allItems.get(i).isUnderSale()){
+                        saleImg.setFitWidth(20);   //width of img
+                        saleImg.setFitHeight(20); //height of img
+                        saleImg.setLayoutX(270);           //x & y coordinate related in the pane
+                        saleImg.setLayoutY(5);
+                    }
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
@@ -112,11 +120,24 @@ public class publicCatalogControl {
                     type.setEditable(false);
 
                     ///////// type textfield ///////////
-                    TextField price = new TextField("Price: " + allItems.get(i).getPrice());
+                    TextField price = new TextField();
+                    TextField priceAfterSale = new TextField();
+                    if(allItems.get(i).isUnderSale()) {
+                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
+                        priceAfterSale.setText("Price After "+allItems.get(i).getOriginal_price()+"% sale is:"+allItems.get(i).getPriceAfterSale());
+                    }
+                    else{
+                        price.setText("Price :"+allItems.get(i).getOriginal_price());
+                    }
                     price.setStyle("-fx-background-color:#00ADB5");
                     price.setLayoutX(140);           //x & y coordinate related in the pane
                     price.setLayoutY(90);
+                    priceAfterSale.setStyle("-fx-background-color:#00ADB5");
+                    priceAfterSale.setLayoutX(140);
+                    priceAfterSale.setLayoutY(110);
                     price.setEditable(false);
+                    priceAfterSale.setEditable(false);
+
 
                     /////////////// adding components to the pane /////////////
                     p.getChildren().add(imageview);
@@ -124,6 +145,10 @@ public class publicCatalogControl {
                     p.getChildren().add(type);
                     p.getChildren().add(name);
                     p.getChildren().add(catologNum);
+                    if(allItems.get(i).isUnderSale()){
+                        p.getChildren().add(saleImg);
+                        p.getChildren().add(priceAfterSale);
+                    }
                     if (moveRight) {
                         p.setLayoutY(170 * j);
                         p.setLayoutX(320);
