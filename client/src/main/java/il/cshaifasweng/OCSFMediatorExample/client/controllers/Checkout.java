@@ -178,7 +178,7 @@ public class Checkout {
             {
                 SimpleClient.getClient().sendToServer(msg);
                 deleteCart(LoginClient_userId);
-                showAlert("order success","success");
+                showAlert("Order successful","Order Successfully placed");
                 App.setRoot("controllers/ClientMainPage");
             }
 
@@ -188,7 +188,7 @@ public class Checkout {
 
             SimpleClient.getClient().sendToServer(msg);
             deleteCart(LoginClient_userId);
-            showAlert("order success","success");
+            showAlert("Order successful","Order Successfully placed");
             App.setRoot("controllers/ClientMainPage");
         }
 
