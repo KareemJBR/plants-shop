@@ -3,11 +3,12 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-@Table(name = "cartitems")
-public class CartItem  implements Serializable {
+@Table(name = "orderitems")
+public class OrderItem  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,20 +19,25 @@ public class CartItem  implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+//    @ManyToOne
+//    @JoinColumn(name = "order_id",insertable = false, updatable = false)
+//    private Order order;
 
     @ManyToOne()
     @JoinColumn(name = "Item_id")
     private Item item;
 
 
-    public CartItem(Customer customer,Item item,int amount)
+
+
+    public OrderItem(CartItem cartItem)
     {
-        this.item=item;
-        this.customer=customer;
-        this.amount=amount;
+        this.item=cartItem.getItem();
+        this.customer=cartItem.getCustomer();
+        this.amount=cartItem.getAmount();
     }
 
-    public CartItem() {
+    public OrderItem() {
 
     }
     public Customer getCustomer(){
@@ -42,7 +48,7 @@ public class CartItem  implements Serializable {
 
     public int getAmount(){return this.amount;}
     public int getId(){return this.id;}
-  
+
     public void addAmount(){
         this.amount=this.amount++;
     }

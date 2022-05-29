@@ -27,25 +27,22 @@ public class Customer  implements Serializable {
     @Column(name = "customer_budget")
     private double budget;
     @Column(name = "account_type")
-    String acount_type;
+    private String acount_type;
 
-    @Column(name = "customer_emil")
-    String email;
+    @Column(name = "customer_email")
+    private String customer_email;
 
 
-    @OneToMany(mappedBy = "orderCustomer")
-    // @JoinColumn(name="customerReport") // join column is in table for Order
+    @OneToMany(mappedBy = "customer")
     private List<Order> customerOrders =new ArrayList<>();
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    // @JoinColumn(name="customerReport") // join column is in table for Order
     private List<Report> customerReports =new ArrayList<>();
-    @OneToMany(mappedBy = "customer")
-    // @JoinColumn(name="customerReport") // join column is in table for Order
-    private List<CartItem> customerItems =new ArrayList<>();
 
 
 
-    public Customer(String id, String first_name, String last_name, String user_name, String password, String credit_card, String account_type, String email){
+
+    public Customer(String id, String first_name, String last_name, String user_name, String password,
+                    String credit_card, String account_type, String customer_email){
         budget = 0.0;
         this.id=id;
         this.first_name=first_name;
@@ -54,7 +51,7 @@ public class Customer  implements Serializable {
         this.password=password;
         this.credit_card=credit_card;
         this.acount_type=account_type;
-        this.email=email;
+        this.customer_email=customer_email;
     }
 
     @Deprecated
@@ -67,7 +64,7 @@ public class Customer  implements Serializable {
         this.password = customer.password;
         this.credit_card = customer.credit_card;
         this.acount_type = customer.acount_type;
-        this.email = customer.email;
+        this.customer_email = customer.customer_email;
     }
 
     @Deprecated
@@ -107,7 +104,7 @@ public class Customer  implements Serializable {
     }
 
     public void setEmail(String email){
-        this.email = email;
+        this.customer_email = email;
     }
 
     public String getUser_id(){
@@ -161,7 +158,7 @@ public class Customer  implements Serializable {
     }
 
     public String getEmail(){
-        return this.email;
+        return this.customer_email;
     }
 
     public void addItem(Report report){
