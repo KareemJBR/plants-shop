@@ -67,9 +67,17 @@ public class Order implements Serializable {
     @Column(name="greeting")
     private String greeting;
 
+    @Column(name="got_cancelled")
+    private boolean got_cancelled;
+
+    @Column(name="refund")
+    private Double refund;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderitems =new ArrayList<>();
-    public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,double price,String pay_method,String shipping_method,String greeting)
+    public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,
+                 int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,
+                 double price,String pay_method,String shipping_method,String greeting)
     {
         this.greeting=greeting;
         this.shipping_method=shipping_method;
@@ -87,11 +95,30 @@ public class Order implements Serializable {
         this.receipt_minute=receipt_minute;
         this.receipt_hour=receipt_hour;
         this.shop=shop;
+
+        this.got_cancelled = false;
+        this.refund = 0.0;
     }
 
     @Deprecated
     public Order() {
 
+    }
+
+    public void cancel_order() {
+        got_cancelled = true;
+    }
+
+    public void setRefund(double refund) {
+        this.refund = refund;
+    }
+
+    public boolean isGot_cancelled() {
+        return got_cancelled;
+    }
+
+    public double getRefund() {
+        return refund;
     }
 
 
