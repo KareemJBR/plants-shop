@@ -14,4 +14,4 @@ The project aims to develop a software for managing a chain store for selling pl
 
 The software uses TCP/IP protoccol to connect clients to the user and is supposed to run clients on the same LAN as the server side. We let many clients connect at the same time to the server without any problem.
 
-For more information about the project please check the [Here](/'Project Description - Hebrew'.pdf).
+For more information about the project please check the description PDF file.
