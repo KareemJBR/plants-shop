@@ -119,16 +119,18 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateItems() throws Exception {
         /* ---------- Saving Items To Data Base ---------- */
-        Item item1 = new Item(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
+        Item item1 = new Item("red",true,0.3,30,"flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
-        Item item2 = new Item(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+        session.flush();
+        Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
-        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
-        session.save(item3);
         session.flush();
-        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
-        session.save(item4);
-        session.flush();
+//        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
+//        session.save(item3);
+//        session.flush();
+//        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
+//        session.save(item4);
+//        session.flush();
     }
 
     private static void generateNetWorkers() {
@@ -213,7 +215,10 @@ public class SimpleServer extends AbstractServer {
         System.out.println(price);
         System.out.println(flower);
         session.beginTransaction();
-        flower.setPrice(price);
+        flower.setOriginal_price(price);
+        if(flower.isUnderSale()){
+            flower.setPriceAfterSale((int)(flower.getOriginal_price()* (1-flower.getSalePercent())));
+        }
         session.update(flower);
         System.out.println(flower);
         session.getTransaction().commit();
