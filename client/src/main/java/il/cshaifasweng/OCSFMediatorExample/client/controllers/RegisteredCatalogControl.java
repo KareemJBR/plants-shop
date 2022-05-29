@@ -47,7 +47,7 @@ public class RegisteredCatalogControl {
     private Button filterBTN;
 
     @FXML
-    private ChoiceBox<?> filterSelect;
+    private ChoiceBox<String> filterSelect;
 
     @FXML
     private Label textFilter;
@@ -143,7 +143,7 @@ public class RegisteredCatalogControl {
         textFilter.setStyle("-fx-background-color:#00ADB5");
         filterBTN.setStyle("-fx-background-color:#EEEEEE");
         filterSelect.setStyle("-fx-background-color:#EEEEEE");
-
+        filterSelect.getItems().addAll("All Items","Under Sale","BY Type","By Color");
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
