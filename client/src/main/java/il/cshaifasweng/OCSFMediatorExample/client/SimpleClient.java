@@ -57,7 +57,32 @@ public class SimpleClient extends AbstractClient {
                 OrderItemData = myMsg.getObj();
                 System.out.println("in get orderItems");
             }
-       
+            if (myMsg.getMsg().equals("all shop items that under sale")) {
+                System.out.println("in main client handler to get all items");
+                allItemsData = myMsg.getObj();
+            }
+
+            if (myMsg.getMsg().equals("all customers")) {
+                System.out.println("in get customers client side");
+                Customersdata = myMsg.getObj();
+            }
+            if (myMsg.getMsg().equals("your current customer")) {
+                currentCustomerData = myMsg.getObj();
+                System.out.println("in get your current customer");
+                System.out.println(myMsg.getObj());
+            }
+            if (myMsg.getMsg().equals("all customers"))
+            {
+                System.out.println("in get customers client side");
+                data = myMsg.getObj();
+            }
+            if (myMsg.getMsg().equals("your current customer"))
+            {
+                currentCustomerData = myMsg.getObj();
+                System.out.println("in get your current customer");
+                System.out.println(myMsg.getObj());
+            }
+
             if(myMsg.getMsg().equals("all Shops"))
             {
                 System.out.println("in get Shops client side");

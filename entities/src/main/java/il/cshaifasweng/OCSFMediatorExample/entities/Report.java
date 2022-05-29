@@ -15,7 +15,7 @@ public class Report implements Serializable {
     private int id;
     private String content;
     private boolean handled=false;
-    private  boolean workingOnIT=false;
+    private boolean workingOnIT=false;
     private String answer;
     private String reportDate;
     private Double MoneyBack;

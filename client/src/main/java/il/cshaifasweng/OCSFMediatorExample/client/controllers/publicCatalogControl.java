@@ -28,7 +28,11 @@ public class publicCatalogControl {
     @FXML
     private Button singUp;
 
+    @FXML
+    private Button filterBTN;
 
+    @FXML
+    private ChoiceBox<String> filterSelect;
 
     @FXML
     private TableView table=new TableView<Item>();
@@ -37,8 +41,10 @@ public class publicCatalogControl {
     private AnchorPane itemscontainer;
 
     @FXML
-    private TextField title;
+    private Label title;
 
+    @FXML
+    private Label textFilter;
 
     @FXML
     private AnchorPane itemsContainer;
@@ -61,11 +67,15 @@ public class publicCatalogControl {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         ArrayList<Item> allItems = getAllitems();
-        itemscontainer.setStyle("-fx-background-color: #222831");
-        backBtn.setStyle("-fx-background-color:#EEEEEE");
-        singUp.setStyle("-fx-background-color:#EEEEEE");
-        title.setStyle("-fx-background-color:#00ADB5");
-        itemsContainer.setStyle("-fx-background-color:#222831");
+        itemscontainer.setStyle("-fx-background-color: #404B69");
+        backBtn.setStyle("-fx-background-color:#DBEDF3");
+        singUp.setStyle("-fx-background-color:#DBEDF3");
+        title.setStyle("-fx-background-color:#DBEDF3");
+        itemsContainer.setStyle("-fx-background-color:#283149");
+        textFilter.setStyle("-fx-background-color:#DBEDF3");
+        filterBTN.setStyle("-fx-background-color:#DBEDF3");
+        filterSelect.setStyle("-fx-background-color:#DBEDF3");
+        filterSelect.getItems().addAll("All Items","Under Sale");
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
@@ -73,7 +83,7 @@ public class publicCatalogControl {
                 itemscontainer.setMinHeight(allItems.size() * 80);      ///the height of the container is related to the amount of the items
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
-                    p.setStyle("-fx-background-color: #393E46");
+                    p.setStyle("-fx-background-color: #283149");
                     p.setMinSize(295, 140);
                     if (i % 2 == 1) {
                         moveRight = true;
@@ -100,21 +110,21 @@ public class publicCatalogControl {
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
                     TextField name = new TextField("Name: " + allItems.get(i).getName());
-                    name.setStyle("-fx-background-color:#00ADB5");
+                    name.setStyle("-fx-background-color:#EC610A");
                     name.setLayoutX(140);
                     name.setLayoutY(30);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
-                    catologNum.setStyle("-fx-background-color:#00ADB5");
+                    catologNum.setStyle("-fx-background-color:#EC610A");
                     catologNum.setLayoutX(140);
                     catologNum.setLayoutY(50);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("Type: " + allItems.get(i).getType());
-                    type.setStyle("-fx-background-color:#00ADB5");
+                    type.setStyle("-fx-background-color:#EC610A");
                     type.setLayoutX(140);           //x & y coordinate related in the pane
                     type.setLayoutY(70);
                     type.setEditable(false);
@@ -129,10 +139,10 @@ public class publicCatalogControl {
                     else{
                         price.setText("Price :"+allItems.get(i).getOriginal_price());
                     }
-                    price.setStyle("-fx-background-color:#00ADB5");
+                    price.setStyle("-fx-background-color:#EC610A");
                     price.setLayoutX(140);           //x & y coordinate related in the pane
                     price.setLayoutY(90);
-                    priceAfterSale.setStyle("-fx-background-color:#00ADB5");
+                    priceAfterSale.setStyle("-fx-background-color:#EC610A");
                     priceAfterSale.setLayoutX(140);
                     priceAfterSale.setLayoutY(110);
                     price.setEditable(false);

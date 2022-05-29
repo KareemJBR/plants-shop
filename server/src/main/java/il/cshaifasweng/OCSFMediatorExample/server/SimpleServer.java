@@ -57,6 +57,21 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<Item> getItemsUnderSale() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Item> query = builder.createQuery(Item.class);
+        query.from(Item.class);
+        List<Item> temp = session.createQuery(query).getResultList();
+        List<Item> data =new ArrayList<>();
+        for(int i=0;i<temp.size();i++){
+            if(temp.get(i).isUnderSale()){
+                data.add(temp.get(i));
+            }
+        }
+        return data;
+    }
+
+
     private static List<Customer> getAllCustomers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
@@ -107,12 +122,12 @@ public class SimpleServer extends AbstractServer {
         Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
         session.flush();
-//        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
-//        session.save(item3);
-//        session.flush();
-//        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
-//        session.save(item4);
-//        session.flush();
+       Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
+        session.save(item3);
+        session.flush();
+        Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
+        session.save(item4);
+        session.flush();
     }
 
     private static void generateNetWorkers() {
@@ -310,8 +325,20 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#get shop items that under sale")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all shop items that under sale");
+                        myMSg.setObj(getItemsUnderSale());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("eror hapend");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
 
                 if (msgtext.equals("#get shop items")) {
+
                     try {
                         MsgClass myMSg = new MsgClass("all shop items");
                         myMSg.setObj(null);
