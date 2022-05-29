@@ -34,15 +34,14 @@ public class App extends Application {
     private SimpleClient client;
 
     private static String customer_id_for_admin_view;
-
     private static Calendar report_start_date1;
     private static Calendar report_start_date2;
-
     private static Calendar report_end_date1;
     private static Calendar report_end_date2;
-
     private static boolean is_admin;
     private static int shop_id;
+    private static int report_id_for_client_service;
+    private static String support_worker_id_for_report;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -446,6 +445,22 @@ public class App extends Application {
 
     public static int getShopID() {
         return shop_id;
+    }
+
+    public static int getReport_id_for_client_service() {
+        return report_id_for_client_service;
+    }
+
+    public static void setReport_id_for_client_service(int report_id) {
+        report_id_for_client_service = report_id;
+    }
+
+    public static String getSupport_worker_id_for_report() {
+        return support_worker_id_for_report;
+    }
+
+    public static void setSupport_worker_id_for_report(String temp_id) {
+        support_worker_id_for_report = temp_id;
     }
 
     public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,

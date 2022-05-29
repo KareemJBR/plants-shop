@@ -84,9 +84,30 @@ public class ShowReportsForClientService implements Initializable {
     }
 
     @FXML
-    void openReport(MouseEvent event) {
-        int index = reports.getSelectionModel().selectedIndexProperty().get();
+    void openReport(MouseEvent event) throws IOException {
+        if (event.getClickCount() != 2)
+            return;
 
+        int index = reports.getSelectionModel().selectedIndexProperty().get();
+        int report_id = reports.getItems().get(index).getId();
+
+        ArrayList<Report> all_reports = App.getAllReports();
+
+        for (Report all_report : all_reports)
+            if (all_report.getId() == report_id) {
+                if (all_report.isWorkingOnIT()) {
+                    App.showAlert("Error", "Complaint is already being handled by another worker.");
+                    return;
+                }
+                all_report.setWorkingOnIT(true);
+            }
+
+        App.setReport_id_for_client_service(report_id);
+
+        // we need to set workingOnIt to true making the process of responding to a report atomic, this way we avoid
+        // refunding the same report more than one time
+
+        App.setRoot("controllers/ShowSelectedReportForSupportWorker");
 
     }
 

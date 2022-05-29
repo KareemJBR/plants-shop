@@ -20,6 +20,9 @@ public class Report implements Serializable {
     private String reportDate;
     private Double MoneyBack;
 
+    @Column(name="handled_by_id")
+    private String handled_by_id;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -37,6 +40,7 @@ public class Report implements Serializable {
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
+        this.handled_by_id = null;
         setdate();
     }
 
@@ -46,12 +50,22 @@ public class Report implements Serializable {
         this.workingOnIT = workingOnIT;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
     }
 
     public Report(String content, String answer, Customer customer) {
         this.content = content;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
+    }
+
+    public String getHandled_by_id() {
+        return handled_by_id;
+    }
+
+    public void setHandled_by_id(String handled_by_id) {
+        this.handled_by_id = handled_by_id;
     }
 
 
