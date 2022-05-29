@@ -20,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllOrders;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
@@ -74,8 +73,11 @@ public class ClientMainPage {
 
     @FXML
     void catalog(ActionEvent event) throws IOException {
-        MsgClass msg=new MsgClass("#get Items",null);
-        SimpleClient.getClient().sendToServer(msg);
+       // MsgClass msg=new MsgClass("#get Items",null);
+      //  allItemsData=null;
+       // SimpleClient.getClient().sendToServer(msg);
+      //  while(allItemsData==null){System.out.println("waiting");}
+        getAllitems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/RegisteredCatalog");
     }

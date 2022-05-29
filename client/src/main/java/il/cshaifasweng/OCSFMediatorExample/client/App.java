@@ -95,6 +95,16 @@ public class App extends Application {
         items=(ArrayList<Item>)allItemsData;
         return items;
     }
+    public static  ArrayList<Item> getAllitemsUnderSale() throws IOException {
+        ArrayList<Item> items=new ArrayList<Item>();
+        MsgClass msg =new MsgClass("#get shop items that under sale",null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while(allItemsData==null) {System.out.println("waiting for server15");}
+        items=(ArrayList<Item>)allItemsData;
+        return items;
+    }
+
 
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();

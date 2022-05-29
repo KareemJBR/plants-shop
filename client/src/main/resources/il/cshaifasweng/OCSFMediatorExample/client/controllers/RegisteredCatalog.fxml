@@ -24,14 +24,14 @@
           <AnchorPane fx:id="itemscontainer" layoutX="2.5" minHeight="0.0" minWidth="0.0" prefHeight="694.0" prefWidth="620.0" />
         </content>
       </ScrollPane>
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="10.0" prefHeight="58.0" prefWidth="282.0" text="Catalog" textAlignment="RIGHT">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="1.0" prefHeight="58.0" prefWidth="282.0" text="Catalog" textAlignment="RIGHT">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="filterBTN" layoutX="168.0" layoutY="95.0" mnemonicParsing="false" onAction="#filter" text="Filter" />
       <ChoiceBox fx:id="filterSelect" layoutX="18.0" layoutY="95.0" prefWidth="150.0" />
-      <Label fx:id="textFilter" alignment="CENTER" layoutX="57.0" layoutY="68.0" prefHeight="26.0" prefWidth="71.0" text="Filter By">
+      <Label fx:id="textFilter" alignment="CENTER" layoutX="57.0" layoutY="68.0" prefHeight="26.0" prefWidth="71.0" text="Show">
          <font>
             <Font size="16.0" />
          </font>
