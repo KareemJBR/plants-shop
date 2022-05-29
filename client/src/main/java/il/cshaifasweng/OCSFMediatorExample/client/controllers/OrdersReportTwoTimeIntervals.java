@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import il.cshaifasweng.OCSFMediatorExample.client.App;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -46,6 +47,14 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        boolean is_admin = App.getIsAdmin();
+        int shop_id = App.getShopID();
+
+        Calendar start_date1 = App.getReport_start_date1();
+        Calendar end_date1 = App.getReport_end_date1();
+        Calendar start_date2 = App.getReport_start_date2();
+        Calendar end_date2 = App.getReport_end_date2();
 
     }
 }
