@@ -2,26 +2,28 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+
 
 /**
  * JavaFX App
@@ -30,6 +32,17 @@ public class App extends Application {
 
     private static Scene scene;
     private SimpleClient client;
+
+    private static String customer_id_for_admin_view;
+
+    private static Calendar report_start_date1;
+    private static Calendar report_start_date2;
+
+    private static Calendar report_end_date1;
+    private static Calendar report_end_date2;
+
+    private static boolean is_admin;
+    private static int shop_id;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -51,8 +64,8 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    
+
+
 
     @Override
 	public void stop() throws Exception {
@@ -127,10 +140,9 @@ public class App extends Application {
     }
 
 
-
     public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
-        MsgClass msg = new MsgClass("#get Workers", null);
+        MsgClass msg = new MsgClass("#get NetWorkers", null);
         NetWorkersData = null;
         SimpleClient.getClient().sendToServer(msg);
         while (NetWorkersData == null) {System.out.println("waiting for server3");}
@@ -168,15 +180,63 @@ public class App extends Application {
         return shopAdmins;
     }
 
+
     public static ArrayList<Order> getAllOrders() throws IOException {
 
         ArrayList<Order> orders = new ArrayList<Order>();
         MsgClass msg = new MsgClass("#get Orders", null);
         OrdersData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (OrdersData == null) {System.out.println("waiting rer for server");}
+        while (OrdersData == null) {System.out.println("waiting for server7");}
         orders = (ArrayList<Order>) OrdersData;
         return orders;
+    }
+
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get allItems", null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (allItemsData == null) {System.out.println("waiting  for server8");}
+        items = (ArrayList<Item>) allItemsData;
+        return items;
+    }
+
+    public static   ArrayList<Order> getClientOrders(String clientId) throws IOException {
+        ArrayList<Order> orders=getAllOrders();
+        ArrayList<Order> returnedorders=new ArrayList<Order>();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i<orders.size();i++)
+                {
+                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
+                    {
+                        returnedorders.add(orders.get(i));
+                    }
+                }
+            }
+        }
+
+        return orders;
+    }
+
+    public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
+        List<OrderItem> orderitems=new ArrayList<OrderItem>();
+        MsgClass msg = new MsgClass("#get orderItems", null);
+        OrderItemData=null;
+        msg.setObj(orderId);
+        SimpleClient.getClient().sendToServer(msg);
+        while (OrderItemData == null) {System.out.println("waiting for server9");}
+        orderitems = (List<OrderItem>) OrderItemData;
+        return orderitems;
+    }
+
+    public static void AddOrderIem(OrderItem orderItem) throws IOException {
+        MsgClass msg = new MsgClass("#add orderitem", null);
+        msg.setObj(orderItem);
+        SimpleClient.getClient().sendToServer(msg);
     }
 
     public static void deleteCart(String clientId) throws IOException {
@@ -185,6 +245,20 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
+
+    public static void deleteCartitem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#delete CartItem", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void decrementAmountofCartItem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#decrement amount", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+        
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
 
@@ -211,14 +285,15 @@ public class App extends Application {
 
     public static List<Order> getRelevantOrders(boolean is_admin, int shop_id, Calendar start_date, Calendar end_date)
            throws IOException {
-/*
+
         List<Order> all_orders = getAllOrders();
         List<Order> orders_to_show = new ArrayList<>();
 
         if (is_admin) {
             for (Order all_order : all_orders) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_order.getDate());
+                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                        all_order.getOrder_day(), all_order.getOrder_hour(),
+                        all_order.getOrder_minute(), 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
                         !all_order.gotCancelled())
@@ -229,11 +304,12 @@ public class App extends Application {
         else {
             for (Order all_order : all_orders) {
 
-                if (all_order.getShopID != shop_id || all_order.gotCancelled())
+                if (all_order.getShop().getId() != shop_id || all_order.gotCancelled())
                     continue;
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(all_order.getDate());
+                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                        all_order.getOrder_day(), all_order.getOrder_hour(),
+                        all_order.getOrder_minute(), 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
                     orders_to_show.add(all_order);
@@ -264,7 +340,7 @@ public class App extends Application {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(report.getdate());
 
-                if (report.getShopID != shop_id)
+                if (report.getShop().getId() != shop_id)
                     continue;
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
@@ -272,10 +348,98 @@ public class App extends Application {
             }
         }
 
-
         return reports_to_show;
-        */
-     return null;
+    }
+
+    public static void showAlert(String title, String head) {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(title);
+                alert.setHeaderText(null);
+                alert.setContentText(head);
+                alert.showAndWait();
+            }
+        });
+    }
+
+    public static Calendar localDateToCalendar(LocalDate localDate) {
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        Instant instant = zonedDateTime.toInstant();
+        Date date = Date.from(instant);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public static void setCustomerIDForAdminView(String customer_id) {
+        customer_id_for_admin_view = customer_id;
+    }
+
+    public static String getCustomer_id_for_admin_view() {
+        return customer_id_for_admin_view;
+    }
+
+    public static void setReport_start_date1(Calendar start_date1) {
+        report_start_date1 = start_date1;
+    }
+
+    public static void setReport_start_date2(Calendar start_date2) {
+        report_start_date2 = start_date2;
+    }
+
+    public static void setReport_end_date1(Calendar end_date1) {
+        report_end_date1 = end_date1;
+    }
+
+    public static void setReport_end_date2(Calendar end_date2) {
+        report_end_date2 = end_date2;
+    }
+
+    public static void setIs_admin(boolean admin_v) {
+        is_admin = admin_v;
+    }
+
+    public static void setShop_id(int p_shop_id) {
+        shop_id = p_shop_id;
+    }
+
+    public static Calendar getReport_start_date1() {
+        return report_start_date1;
+    }
+
+    public static Calendar getReport_start_date2() {
+        return report_start_date2;
+    }
+
+    public static Calendar getReport_end_date1() {
+        return report_end_date1;
+    }
+
+    public static Calendar getReport_end_date2() {
+        return report_end_date2;
+    }
+
+    public static boolean getIsAdmin() {
+        return is_admin;
+    }
+
+    public static int getShopID() {
+        return shop_id;
+    }
+
+    public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,
+                                               int millisecond) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, second);
+        calendar.set(Calendar.MILLISECOND, millisecond);
+
+        return calendar;
     }
 
 }

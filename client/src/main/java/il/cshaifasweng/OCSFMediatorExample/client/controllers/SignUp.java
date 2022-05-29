@@ -76,9 +76,7 @@ public class SignUp {
         String email=EmailTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
         List<Customer> customers=getAllCustomers();
-        Customersdata=null;
         List<NetWorker> workers = getAllWorkers();
-        NetWorkersData=null;
         clear();
         MsgClass msg;
 
