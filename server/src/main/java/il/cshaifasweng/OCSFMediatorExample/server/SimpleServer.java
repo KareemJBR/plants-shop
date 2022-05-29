@@ -18,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 public class SimpleServer extends AbstractServer {
 
@@ -39,8 +40,6 @@ public class SimpleServer extends AbstractServer {
         List<Shop> data = session.createQuery(query).getResultList();
         return data;
     }
-
-
 
     private static List<NetWorker> getAllNetWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -82,6 +81,7 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+
     private static List<Order> getAllOrders() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
@@ -96,24 +96,6 @@ public class SimpleServer extends AbstractServer {
         session.save(shop1);
         Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
         session.save(shop2);
-        session.flush();
-    }
-
-    //////////// temporary data////////////
-    private static void generateCartItems() throws Exception {
-        /* ---------- Saving CartItems To Data Base ---------- */
-        Customer customer1=getAllCustomers().get(0);
-        Item item1=getAllItems().get(0);
-        CartItem cartItem1 = new CartItem(customer1,item1,3);
-        session.save(cartItem1);
-        Customer customer2=getAllCustomers().get(0);
-        Item item2=getAllItems().get(1);
-        CartItem cartItem2 = new CartItem(customer2,item2,1);
-        session.save(cartItem2);
-        Customer customer3=getAllCustomers().get(0);
-        Item item3=getAllItems().get(1);
-        CartItem cartItem3 = new CartItem(customer3,item3,2);
-        session.save(cartItem3);
         session.flush();
     }
 
@@ -144,21 +126,19 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateCustomers() {
         /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "network_account","saeed@gmail.com");
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "Network account","saeed@gmail.com");
         session.save(customer1);
-        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "network_account","ons@gmail.com");
+        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "Network account","ons@gmail.com");
         session.save(customer2);
-        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "network_account","bayan@gmail.com");
+        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "Network account","bayan@gmail.com");
         session.save(customer3);
         session.flush();
         Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "Network account with 10% discount","bayann@gmail.com");
         session.save(customer4);
-        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "network_account","email@gmail.com");
+        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "Network account","email@gmail.com");
         session.save(customer5);
         session.flush();
     }
-
-
 
     public static Session getSession() {
         return session;
@@ -172,12 +152,13 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-        configuration.addAnnotatedClass(NetWorker.class);
+       configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Item.class);
         configuration.addAnnotatedClass(CartItem.class);
         configuration.addAnnotatedClass(Order.class);
+        configuration.addAnnotatedClass(OrderItem.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
@@ -191,7 +172,6 @@ public class SimpleServer extends AbstractServer {
             generateNetWorkers();
             generateCustomers();
             generateItems();
-            generateCartItems();
             session.getTransaction().commit();
         } catch (Exception exception) {
             if (session != null) {
@@ -223,6 +203,7 @@ public class SimpleServer extends AbstractServer {
         System.out.println(flower);
         session.getTransaction().commit();
     }
+
     private Customer getCustomer(String userName) throws Exception {
         List<Customer> customers = getAllCustomers();
         Customer out=null;
@@ -255,7 +236,7 @@ public class SimpleServer extends AbstractServer {
                 System.out.println(msgtext);
 
                 if (msgtext.equals("#get Orders")) {
-                    try{
+                    try {
                         MsgClass myMSg = new MsgClass("all orders");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllOrders());
@@ -266,27 +247,27 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#customerUpdate")){
-                    try{
-                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                if (msgtext.equals("#customerUpdate")) {
+                    try {
+                        Customer temp = (Customer) (((MsgClass) msg).getObj());
                         update_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
                     }
                 }
-                if (msgtext.equals("#update cartIrem")){
-                    try{
-                        updateCartIrem((CartItem)((MsgClass) msg).getObj());
+                if (msgtext.equals("#update cartIrem")) {
+                    try {
+                        updateCartIrem((CartItem) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
                     }
                 }
 
-                if (msgtext.equals("#customerDelete")){
-                    try{
-                        Customer temp = (Customer)(((MsgClass) msg).getObj());
+                if (msgtext.equals("#customerDelete")) {
+                    try {
+                        Customer temp = (Customer) (((MsgClass) msg).getObj());
                         delete_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
@@ -294,8 +275,8 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#get reports")){
-                    try{
+                if (msgtext.equals("#get reports")) {
+                    try {
                         MsgClass myMSg = new MsgClass("all reports");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllReports());
@@ -306,11 +287,23 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
-                if (msgtext.equals("#get shopAdmins")){
-                    try{
+                if (msgtext.equals("#get shopAdmins")) {
+                    try {
                         MsgClass myMSg = new MsgClass("all shopAdmins");
                         myMSg.setObj(null);
                         myMSg.setObj(getAllShopAdmins());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#get allItems")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("allItems");
+                        myMSg.setObj(null);
+                        myMSg.setObj(getAllItems());
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error occurred");
@@ -329,20 +322,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
-                if (msgtext.startsWith("#update")) {
-                    try {
-                        System.out.println("in update");
-                        int id = Integer.parseInt(String.valueOf(msgtext.charAt(9)));
-                        int price = Integer.parseInt(msgtext.substring(11));
-                        updatePrice(session.get(Item.class, id), price);
-                        myMsg.setObj(getAllItems());
-                        myMsg.setMsg("all flowers");
-                        client.sendToClient(myMsg);
-                    } catch (Exception e) {
-                        System.out.println("in updete exception");
-                        System.out.println(e.getMessage());
-                    }
-                }
+
                 if (msgtext.equals("#get customers")) {
                     try {
                         MsgClass myMSg = new MsgClass("all customers");
@@ -365,6 +345,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 if (msgtext.equals("#get selected Shop")) {
                     try {
                         MsgClass myMSg = new MsgClass("selected shop");
@@ -387,6 +368,16 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#get orderItems")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all orderItems");
+                        myMSg.setObj(getorderitems((Integer) ((MsgClass) msg).getObj()));
+                        System.out.println("in get orderItems");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened in get orderItems");
+                    }
+                }
                 if (msgtext.equals("#get CartItems")) {
                     try {
                         MsgClass myMSg = new MsgClass("all CartItems");
@@ -395,18 +386,6 @@ public class SimpleServer extends AbstractServer {
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened6");
-                        System.out.println(e.getMessage());
-                    }
-                }
-
-                if (msgtext.equals("#get Items")) {
-                    try {
-                        MsgClass myMSg = new MsgClass("Items");
-                        myMSg.setObj(getAllItems());
-                        System.out.println("all Items");
-                        client.sendToClient(myMSg);
-                    } catch (Exception e) {
-                        System.out.println("error happened7");
                         System.out.println(e.getMessage());
                     }
                 }
@@ -431,7 +410,7 @@ public class SimpleServer extends AbstractServer {
                 if (msgtext.equals("#add report")) {
                     try {
                         System.out.println("in add report");
-                        AddReport((Report)((MsgClass) msg).getObj());
+                        AddReport((Report) ((MsgClass) msg).getObj());
                     } catch (Exception e) {
                         System.out.println("error happened5");
                         System.out.println(e.getMessage());
@@ -446,6 +425,15 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#add orderitem")) {
+                    try {
+                        System.out.println("in add orderitem");
+                        AddOrderItem((OrderItem) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in add orderitem");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgtext.equals("#delete Cart")) {
                     try {
                         System.out.println("in delete Cart");
@@ -455,28 +443,50 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
-                if (msgtext.equals("#delete Report")) {
-                    try {
-                        System.out.println("in delete report");
-                        deleteReport((Report)((MsgClass) msg).getObj());
-                    } catch (Exception e) {
-                        System.out.println("error happened in delete report");
-                        System.out.println(e.getMessage());
-                    }
-                }
                 if (msgtext.equals("#get current customer")) {
                     try {
                         System.out.println("in get current customer");
-                        String user=(String)myMsg.getObj();
-                        System.out.println( "the user is" + user);
+                        String user = (String) myMsg.getObj();
+                        System.out.println("the user is" + user);
                         System.out.println(getCustomer(user));
-                        MsgClass myMSg = new MsgClass("your current customer",getCustomer(user));
+                        MsgClass myMSg = new MsgClass("your current customer", getCustomer(user));
                         client.sendToClient(myMSg);
                         System.out.println("customer sent");
                     } catch (Exception e) {
                         System.out.println("error happened4");
                         System.out.println(e.getMessage());
                     }
+                }
+                if (msgtext.equals("#delete Report")) {
+                    try {
+                        System.out.println("in delete report");
+                        deleteReport((Report) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in delete report");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#delete CartItem")) {
+                    try {
+                        System.out.println("in delete CartItem");
+                        deleteCartitem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in delete CartItem");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#decrement amount")) {
+                    try {
+                        System.out.println("in decrement amount");
+                        decrementAmountofCartItem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in decrement amount");
+                    }
+
+                }
+                if (msgString.startsWith("#close")) {
+                    session.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -486,6 +496,7 @@ public class SimpleServer extends AbstractServer {
             session.close();
         }
     }
+
 
 
 
@@ -522,6 +533,15 @@ public class SimpleServer extends AbstractServer {
 
     }
 
+    private static void AddOrderItem(OrderItem I) {
+        session.beginTransaction();
+        session.clear();
+        session.save(I);
+        session.flush();
+        session.getTransaction().commit();
+
+    }
+
     public static void deleteCart(String clientId) throws Exception {
         ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
         session.beginTransaction();
@@ -540,6 +560,58 @@ public class SimpleServer extends AbstractServer {
         }
         session.flush();
         session.getTransaction().commit();
+    }
+
+    public static void deleteCartitem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        session.delete(cartItems.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+    }
+
+    public static void decrementAmountofCartItem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        int amount= cartItems.get(i).getAmount();
+                        if(amount==1)
+                        {
+                            session.delete(cartItems.get(i));
+                        }
+                        else
+                        {
+                            cartItems.get(i).setAmount(amount-1);
+                            session.update(cartItems.get(i));
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+
     }
 
     private static void update_customer(Customer customer) {
@@ -567,4 +639,25 @@ public class SimpleServer extends AbstractServer {
         session.delete(report);
         session.getTransaction().commit();
     }
+
+        @Transactional
+        private static List<OrderItem> getorderitems(int orderId) throws Exception {
+        ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i<orders.size();i++)
+                {
+                    if(orders.get(i).getId()==orderId)
+                    {
+                         return  orders.get(i).getOrderitems();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
 }

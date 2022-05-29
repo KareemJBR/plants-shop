@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -10,12 +11,14 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
-public class IncomesReportTwoTimeIntervals {
+public class IncomesReportTwoTimeIntervals implements Initializable {
 
     @FXML
     private CategoryAxis dayAxes1;
@@ -47,10 +50,17 @@ public class IncomesReportTwoTimeIntervals {
     @FXML
     private TextArea startDate2;
 
-    public void start_controller(boolean is_admin, Calendar start_date1, Calendar end_date1, Calendar start_date2,
-                                 Calendar end_date2) throws IOException {
-/*
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         for (int i=0;i<2;i++) {
+
+            boolean is_admin = App.getIsAdmin();
+
+            Calendar start_date1 = App.getReport_start_date1();
+            Calendar end_date1 = App.getReport_end_date1();
+            Calendar start_date2 = App.getReport_start_date2();
+            Calendar end_date2 = App.getReport_end_date2();
+
             XYChart.Series<Double, String> series = new XYChart.Series<>();
             series.setName("Incomes Report");
 
@@ -66,16 +76,23 @@ public class IncomesReportTwoTimeIntervals {
                 end_date = end_date2;
             }
 
-            List<Order> orders_to_show = App.getRelevantOrders(is_admin, -1, start_date, end_date);
+            List<Order> orders_to_show = null;
+            try {
+                orders_to_show = App.getRelevantOrders(is_admin, -1, start_date, end_date);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             Double[] arr = new Double[App.get_num_of_days_in_time_interval(start_date, end_date)];
 
             Arrays.fill(arr, 0.0);
 
+            assert orders_to_show != null;
             for (Order order : orders_to_show) {
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(order.getDate());
+                Calendar calendar = App.getCalendarOfOrder(order.getOrder_year(), order.getOrder_month(),
+                        order.getOrder_day(), order.getOrder_hour(), order.getOrder_minute(), 0, 0);
+
                 arr[App.get_num_of_days_in_time_interval(start_date, calendar)] += order.getPrice();
             }
 
@@ -91,7 +108,5 @@ public class IncomesReportTwoTimeIntervals {
                     incomesChart2.getData().add(series);
             }
         }
-*/
     }
-
 }
