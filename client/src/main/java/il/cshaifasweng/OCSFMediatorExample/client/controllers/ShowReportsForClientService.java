@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -81,4 +82,12 @@ public class ShowReportsForClientService implements Initializable {
         reports.setItems(reportsToShow);
 
     }
+
+    @FXML
+    void openReport(MouseEvent event) {
+        int index = reports.getSelectionModel().selectedIndexProperty().get();
+
+
+    }
+
 }
