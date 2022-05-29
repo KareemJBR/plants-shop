@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -56,33 +55,37 @@ public class ShowReportsForAdmin implements Initializable {
             return;
 
         Calendar fromC1 = App.localDateToCalendar(fromDate1.getValue());
-        Calendar fromC2 = App.localDateToCalendar(fromDate2.getValue());
         Calendar untilC1 = App.localDateToCalendar(untilDate1.getValue());
-        Calendar untilC2 = App.localDateToCalendar(untilDate2.getValue());
+
+        Calendar fromC2 = null;
+        Calendar untilC2 = null;
+
+        if (comparisonOn.isSelected()) {
+            fromC2 = App.localDateToCalendar(fromDate2.getValue());
+            untilC2 = App.localDateToCalendar(untilDate2.getValue());
+        }
+
+        App.setReport_start_date1(fromC1);
+        App.setReport_end_date1(untilC1);
+        App.setReport_start_date2(fromC2);
+        App.setReport_end_date2(untilC2);
 
         if(comparisonOn.isSelected()){  // we need to compare two time intervals
-            if(reportTypeComboBox.getValue().equals("Orders")){
-                // TODO: we shall compare orders in two time intervals
-
-            }
-            else if(reportTypeComboBox.getValue().equals("Complaints")) {
-
-            }
-            else {      // incomes
-
-            }
+            if(reportTypeComboBox.getValue().equals("Orders"))
+                App.setRoot("controllers/OrdersReportTwoTimeIntervals");
+            else if(reportTypeComboBox.getValue().equals("Complaints"))
+                App.setRoot("controllers/ComplaintsReportTwoTimeIntervals");
+            else      // incomes
+                App.setRoot("controllers/IncomesReportTwoTimeIntervals");
         }
 
         else{
-            if(reportTypeComboBox.getValue().equals("Orders")){
-
-            }
-            else if(reportTypeComboBox.getValue().equals("Complaints")) {
-
-            }
-            else {      // incomes
-
-            }
+            if(reportTypeComboBox.getValue().equals("Orders"))
+                App.setRoot("controllers/OrdersReportOneTimeInterval");
+            else if(reportTypeComboBox.getValue().equals("Complaints"))
+                App.setRoot("controllers/ComplaintsReportOneTimeInterval");
+            else      // incomes
+                App.setRoot("controllers/IncomesReportOneTimeInterval");
         }
     }
 
@@ -112,6 +115,7 @@ public class ShowReportsForAdmin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         ArrayList<Shop> shops = null;
         try {
             shops = getAllShops();
@@ -136,4 +140,5 @@ public class ShowReportsForAdmin implements Initializable {
 
         reportTypeComboBox.setItems(reports_types);
     }
+
 }
