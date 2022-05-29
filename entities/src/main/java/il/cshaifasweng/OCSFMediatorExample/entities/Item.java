@@ -1,5 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
+import javafx.scene.Parent;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,11 +13,13 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int price;
     @Column(name="Color")
     private String color;
     private int catalogNumber;
-    boolean underSale=false;
+    private boolean underSale=false;
+    private double salePercent;
+    private int price;//Price after the sale
+    private int Original_price;
 
     @Column(name="Item_Type")
     private String type;
@@ -23,24 +27,30 @@ public class Item implements Serializable {
     @Column(name="Item_name")
     private String name;
 
-    public Item(int price, String color, String type, String imgURL, String name) {
-        this.price = price;
+    @ManyToMany(mappedBy = "items")
+    private List<Order> orders = new ArrayList<>();
+
+
+    public Item(String color, boolean underSale, double salePercent, int original_price, String type, String imgURL, String name) {
         this.color = color;
+        Random rand =new Random();
+        this.catalogNumber= rand.nextInt(10000);
+        this.underSale = underSale;
+        this.salePercent = salePercent;
+        this.Original_price = original_price;
+        if(underSale){
+            this.price=(int)(original_price*(1-salePercent));
+        }
+        else {
+            this.price = original_price;
+        }
+
         this.type = type;
         this.imgURL = imgURL;
         this.name = name;
-        Random rand =new Random();
-        this.catalogNumber= rand.nextInt(10000);
     }
 
-    public Item(int price, String color, String imgURL, String type) {
-        this.price = price;
-        this.color = color;
-        this.imgURL = imgURL;
-        this.type=type;
-        Random rand =new Random();
-        this.catalogNumber= rand.nextInt(10000);
-    }
+
 
     public String getImgURL() {
         return this.imgURL;
@@ -65,13 +75,6 @@ public class Item implements Serializable {
         this.id = id;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
     public String getUrl() {
         return this.imgURL;
     }
@@ -97,6 +100,9 @@ public class Item implements Serializable {
 
     public void setUnderSale(boolean underSale) {
         this.underSale = underSale;
+        if(underSale==false){
+            this.price=this.Original_price;
+        }
     }
 
     public void setType(String type) {
@@ -111,9 +117,43 @@ public class Item implements Serializable {
         this.name = name;
     }
 
+    public double getSalePercent() {
+        return salePercent;
+    }
+
+    public void setSalePercent(int salePercent) {
+        this.salePercent = salePercent;
+        this.price=this.Original_price*(1-salePercent);
+    }
+
+    public int getPriceAfterSale() {
+        return price;
+    }
+
+    public void setPriceAfterSale(int priceAfterSale) {
+        this.price = priceAfterSale;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getOriginal_price() {
+        return Original_price;
+    }
+
+    public void setOriginal_price(int original_price) {
+        Original_price = original_price;
+    }
+
+
     @Override
     public String toString() {
-        String output="type: "+this.type+"\n"+" price: "+this.price +"\n"
+        String output="type: "+this.type+"\n"+" price: "+this.orders +"\n"
                 +"color: "+ this.color+"\n";
         return  output;
     }

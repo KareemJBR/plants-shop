@@ -176,7 +176,7 @@ public class Cart<T> {
                     price.setLayoutY(28);
 
                     ///////// type textfield ///////////
-                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice());
+                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getOriginal_price());
                     type.setStyle("-fx-background-color:none");
                     type.setLayoutX(100);
                     type.setLayoutY(48);
