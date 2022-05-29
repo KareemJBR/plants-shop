@@ -212,6 +212,26 @@ public class App extends Application {
         return orderitems;
     }
 
+    public static ArrayList<Order> getAllClientOrders(String clientId) throws IOException {
+
+        ArrayList<Order> orders =getAllOrders();
+        ArrayList<Order> clientorders =new ArrayList<Order>();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i< orders.size();i++)
+                {
+                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
+                    {
+                        clientorders.add(orders.get(i));
+                    }
+                }
+            }
+        }
+      return clientorders;
+    }
+
     public static void AddOrderIem(OrderItem orderItem) throws IOException {
         MsgClass msg = new MsgClass("#add orderitem", null);
         msg.setObj(orderItem);
