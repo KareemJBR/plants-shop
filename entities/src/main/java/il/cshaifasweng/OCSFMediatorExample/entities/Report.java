@@ -26,9 +26,9 @@ public class Report implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Shop_id")
-    private  Shop shop;
+    private Shop shop;
 
-
+    @Deprecated
     public Report() {
     }
 
