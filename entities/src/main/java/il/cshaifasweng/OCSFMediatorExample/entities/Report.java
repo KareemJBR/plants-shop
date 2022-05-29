@@ -18,7 +18,7 @@ public class Report implements Serializable {
     private  boolean workingOnIT=false;
     private String answer;
     private String reportDate;
-    private int MoneyBack;
+    private Double MoneyBack;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -103,11 +103,11 @@ public class Report implements Serializable {
         this.customer = customer;
     }
 
-    public int getMoneyBack() {
+    public Double getMoneyBack() {
         return MoneyBack;
     }
 
-    public void setMoneyBack(int moneyBack) {
+    public void setMoneyBack(Double moneyBack) {
         MoneyBack = moneyBack;
     }
 
