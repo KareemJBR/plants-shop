@@ -56,7 +56,7 @@ public class ShowAllCustomers implements Initializable {
             e.printStackTrace();
         }
 
-        if (customers == null)
+        if (customersToShow == null)
             return;
 
         customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
