@@ -15,6 +15,12 @@
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
+      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="200.0" layoutY="209.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </PasswordField>
+      <CheckBox fx:id="showPassword" layoutX="467.0" layoutY="198.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
       <Button fx:id="logInBtn" layoutX="269.0" layoutY="273.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Login">
          <font>
             <Font size="15.0" />
@@ -27,17 +33,11 @@
          </font>
       </Button>
       <Button fx:id="catalogBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCatalog" prefHeight="36.0" prefWidth="111.0" style="-fx-background-radius: 15;" text="Catalog" />
-      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="200.0" layoutY="209.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font>
-      </PasswordField>
       <TextField fx:id="visiblePassword" disable="true" layoutX="200.0" layoutY="209.0" prefHeight="36.0" prefWidth="255.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <CheckBox fx:id="showPassword" layoutX="467.0" layoutY="198.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
       <Label layoutX="281.0" layoutY="75.0" prefHeight="47.0" prefWidth="163.0" text="Login">
          <font>
             <Font name="Arial Bold" size="30.0" />
