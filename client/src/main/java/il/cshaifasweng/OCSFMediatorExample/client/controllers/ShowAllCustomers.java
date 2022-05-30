@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -56,7 +55,7 @@ public class ShowAllCustomers implements Initializable {
             e.printStackTrace();
         }
 
-        if (customers == null)
+        if (customersToShow == null)
             return;
 
         customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
@@ -86,7 +85,7 @@ public class ShowAllCustomers implements Initializable {
         int index = customersTable.getSelectionModel().selectedIndexProperty().get();
         String customer_id = customers.get(index).getUser_id();
         App.setCustomerIDForAdminView(customer_id);
-        App.setRoot("controllers/CustomerDetailsToEdit");      // TODO: make sure this works!
+        App.setRoot("controllers/CustomerDetailsToEdit");
 
     }
 }

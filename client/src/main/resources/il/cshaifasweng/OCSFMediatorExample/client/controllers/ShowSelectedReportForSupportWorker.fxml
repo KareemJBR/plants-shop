@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="553.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowSelectedReportForSupportWorker">
+   <children>
+      <TextArea fx:id="responseText" layoutX="467.0" layoutY="107.0" prefHeight="241.0" prefWidth="237.0" promptText="Respond to Client" />
+      <Text layoutX="276.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Respond">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="348.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respond Message:" />
+      <Text layoutX="358.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund Value:" />
+      <TextField fx:id="refundValueText" disable="true" layoutX="467.0" layoutY="404.0" />
+      <CheckBox fx:id="refundCheckBox" layoutX="358.0" layoutY="365.0" mnemonicParsing="false" onAction="#checkBoxClicked" text="Refund?" />
+      <Button layoutX="398.0" layoutY="483.0" mnemonicParsing="false" onAction="#sendResponse" prefHeight="34.0" prefWidth="66.0" text="Send" />
+      <Button layoutX="552.0" layoutY="483.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="66.0" text="Cancel" />
+      <Hyperlink layoutX="669.0" layoutY="15.0" onAction="#goBack" text="Back" underline="true">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Text layoutX="14.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report ID:" />
+      <Text layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Body:" />
+      <TextArea fx:id="reportBody" editable="false" layoutX="15.0" layoutY="253.0" prefHeight="286.0" prefWidth="316.0" />
+      <Text layoutX="14.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cleint ID:" />
+      <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop ID:" />
+      <TextField fx:id="shopIDText" layoutX="181.0" layoutY="184.0" />
+      <TextField fx:id="clientIDText" layoutX="181.0" layoutY="143.0" />
+      <TextField fx:id="reportIDText" layoutX="181.0" layoutY="103.0" />
+   </children>
+</AnchorPane>

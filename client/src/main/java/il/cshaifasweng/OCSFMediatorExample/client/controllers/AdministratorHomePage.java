@@ -20,6 +20,8 @@ public class AdministratorHomePage {
 
     @FXML
     void showReports(ActionEvent event) throws IOException {
+        App.setIs_admin(true);
+        App.setShop_id(-1);
         App.setRoot("controllers/ShowReportsForAdmin");
     }
 

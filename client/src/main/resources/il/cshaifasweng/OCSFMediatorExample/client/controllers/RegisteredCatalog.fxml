@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,24 +9,31 @@
 
 <AnchorPane fx:id="itemsContainer" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.RegisteredCatalogControl">
    <children>
-      <Button fx:id="goToCartBut" layoutX="512.0" layoutY="13.0" mnemonicParsing="false" onAction="#goCart" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Go To Cart">
+      <Button fx:id="goToCartBut" layoutX="530.0" layoutY="10.0" mnemonicParsing="false" onAction="#goCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Go To Cart">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="goBack" layoutX="28.0" layoutY="13.0" mnemonicParsing="false" onAction="#Back" prefHeight="57.0" prefWidth="100.0" style="-fx-background-radius: 25;" text="Back">
+      <Button fx:id="goBack" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#Back" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25;" text="Back">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="2.5" layoutY="80.0" prefHeight="400.0" prefWidth="635.0">
+      <ScrollPane layoutX="3.0" layoutY="134.0" prefHeight="346.0" prefWidth="635.0">
         <content>
-          <AnchorPane fx:id="itemscontainer" layoutX="2.5" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="615.0" />
+          <AnchorPane fx:id="itemscontainer" layoutX="2.5" minHeight="0.0" minWidth="0.0" prefHeight="694.0" prefWidth="620.0" />
         </content>
       </ScrollPane>
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="178.0" layoutY="12.0" prefHeight="58.0" prefWidth="282.0" text="Catalog" textAlignment="RIGHT">
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="179.0" layoutY="1.0" prefHeight="58.0" prefWidth="282.0" text="Catalog" textAlignment="RIGHT">
          <font>
             <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="filterBTN" layoutX="168.0" layoutY="95.0" mnemonicParsing="false" onAction="#filter" text="Filter" />
+      <ChoiceBox fx:id="filterSelect" layoutX="18.0" layoutY="95.0" prefWidth="150.0" />
+      <Label fx:id="textFilter" alignment="CENTER" layoutX="57.0" layoutY="68.0" prefHeight="26.0" prefWidth="71.0" text="Show">
+         <font>
+            <Font size="16.0" />
          </font>
       </Label>
    </children>

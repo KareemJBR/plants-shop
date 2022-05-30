@@ -48,6 +48,14 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static List<SupportWorker> getAllSupportWorkers() throws IOException {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<SupportWorker> query = builder.createQuery(SupportWorker.class);
+        query.from(SupportWorker.class);
+        List<SupportWorker> data = session.createQuery(query).getResultList();
+        return data;
+    }
+
     private static List<Item> getAllItems() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Item> query = builder.createQuery(Item.class);
@@ -55,6 +63,21 @@ public class SimpleServer extends AbstractServer {
         List<Item> data = session.createQuery(query).getResultList();
         return data;
     }
+
+    private static List<Item> getItemsUnderSale() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Item> query = builder.createQuery(Item.class);
+        query.from(Item.class);
+        List<Item> temp = session.createQuery(query).getResultList();
+        List<Item> data =new ArrayList<>();
+        for(int i=0;i<temp.size();i++){
+            if(temp.get(i).isUnderSale()){
+                data.add(temp.get(i));
+            }
+        }
+        return data;
+    }
+
 
     private static List<Customer> getAllCustomers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -100,14 +123,16 @@ public class SimpleServer extends AbstractServer {
 
     private static void generateItems() throws Exception {
         /* ---------- Saving Items To Data Base ---------- */
-        Item item1 = new Item(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
+        Item item1 = new Item("red",true,0.3,30,"flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
-        Item item2 = new Item(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+        session.flush();
+        Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
-        Item item3 = new Item(20,"red","EmptyFlowerPot","https://bulkquotesnow.com/wp-content/uploads/2021/08/The-Worlds-Most-Beautiful-and-Popular-Flowers.jpg","bad item");
+        session.flush();
+       Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
         session.save(item3);
         session.flush();
-        Item item4 = new Item(20,"yellow","EmptyFlowerPot","https://5.imimg.com/data5/KJ/MG/KC/SELLER-38773420/red-rose-flower-500x500.jpg","expensive");
+        Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
         session.save(item4);
         session.flush();
     }
@@ -117,6 +142,16 @@ public class SimpleServer extends AbstractServer {
         NetWorker worker1 = new NetWorker("211406343","kareem","jabareen","kareem_jb","kareem123");
         session.save(worker1);
         NetWorker worker2 = new NetWorker("206384919","mostafa","egbaria","mostafa_eg","mostafa123");
+        session.save(worker2);
+        session.flush();
+    }
+
+    private static void generateSupportWorkers() {
+        SupportWorker worker1 = new SupportWorker("2836582283", "ahmad",
+                "jabareen", "ahmad_jabareen", "ahmad123456789");
+        session.save(worker1);
+        SupportWorker worker2 = new SupportWorker("284449200", "mohammad", "mahameed",
+                "mohammad_mahameed", "mohammad123456789");
         session.save(worker2);
         session.flush();
     }
@@ -150,7 +185,7 @@ public class SimpleServer extends AbstractServer {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
         configuration.addAnnotatedClass(ShopAdmin.class);
-       configuration.addAnnotatedClass(NetWorker.class);
+        configuration.addAnnotatedClass(SupportWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Item.class);
@@ -168,6 +203,7 @@ public class SimpleServer extends AbstractServer {
         try {
             generateShops();
             generateNetWorkers();
+            generateSupportWorkers();
             generateCustomers();
             generateItems();
             session.getTransaction().commit();
@@ -187,6 +223,19 @@ public class SimpleServer extends AbstractServer {
         session = sessionFactory.openSession();
         session.beginTransaction();
         addDataToDB();
+    }
+
+    private static void updatePrice(Item flower, int price) {
+        System.out.println(price);
+        System.out.println(flower);
+        session.beginTransaction();
+        flower.setOriginal_price(price);
+        if(flower.isUnderSale()){
+            flower.setPriceAfterSale((int)(flower.getOriginal_price()* (1-flower.getSalePercent())));
+        }
+        session.update(flower);
+        System.out.println(flower);
+        session.getTransaction().commit();
     }
 
     private Customer getCustomer(String userName) throws Exception {
@@ -261,6 +310,15 @@ public class SimpleServer extends AbstractServer {
                     }
                 }
 
+                if (msgtext.equals("#update report")) {
+                    try {
+                        UpdateReport((Report) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
                 if (msgtext.equals("#customerDelete")) {
                     try {
                         Customer temp = (Customer) (((MsgClass) msg).getObj());
@@ -306,8 +364,20 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+                if (msgtext.equals("#get shop items that under sale")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all shop items that under sale");
+                        myMSg.setObj(getItemsUnderSale());
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("eror hapend");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
 
                 if (msgtext.equals("#get shop items")) {
+
                     try {
                         MsgClass myMSg = new MsgClass("all shop items");
                         myMSg.setObj(null);
@@ -358,6 +428,17 @@ public class SimpleServer extends AbstractServer {
                         MsgClass myMSg = new MsgClass("all NetWorkers");
                         myMSg.setObj(getAllNetWorkers());
                         System.out.println("all NetWorkers");
+                        client.sendToClient(myMSg);
+                    } catch (Exception e) {
+                        System.out.println("error happened4");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#get SupportWorkers")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("all SupportWorkers");
+                        myMSg.setObj(getAllSupportWorkers());
+                        System.out.println("all SupportWorkers");
                         client.sendToClient(myMSg);
                     } catch (Exception e) {
                         System.out.println("error happened4");
@@ -623,6 +704,12 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
     }
 
+    private static void UpdateReport(Report report) {
+        session.beginTransaction();
+        session.clear();
+        session.update(report);
+        session.getTransaction().commit();
+    }
 
     private static void delete_customer(Customer customer) {
         session.beginTransaction();

@@ -73,6 +73,7 @@ public class Order implements Serializable {
     @Column(name="shipping_address")
     private String shipping_address;
 
+
     @Column(name="got_cancelled")
     private boolean got_cancelled;
 
@@ -83,15 +84,10 @@ public class Order implements Serializable {
     private List<OrderItem> orderitems =new ArrayList<>();
 
 
-    public boolean isDelivery_for_Client() {
-        return delivery_for_Client;
-    }
+    public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,
+                 int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,
+                 double price,String pay_method,String shipping_method,String greeting)
 
-    public String getShipping_address() {
-        return shipping_address;
-    }
-
-    public Order(Shop shop, Customer customer, int order_year, int order_month, int order_day, int receipt_year, int receipt_month, int receipt_day, int order_hour, int order_minute, int receipt_hour, int receipt_minute, double price, String pay_method, String shipping_method, String greeting, boolean delivery_for_Client, String shipping_address)
     {
         this.shipping_address=shipping_address;
         this.delivery_for_Client=delivery_for_Client;
@@ -103,7 +99,6 @@ public class Order implements Serializable {
         this.order_year=order_year;
         this.order_month=order_month;
         this.order_day=order_day;
-        this.order_day=order_day;
         this.order_minute=order_minute;
         this.order_hour=order_hour;
         this.receipt_year=order_year;
@@ -112,17 +107,32 @@ public class Order implements Serializable {
         this.receipt_minute=receipt_minute;
         this.receipt_hour=receipt_hour;
         this.shop=shop;
-        got_cancelled=false;
-        this.refund= Double.valueOf(0);
+        this.got_cancelled = false;
+        this.refund = 0.0;
+    }
+  
+    @Deprecated
+    public Order() {
+    }
+    
+    public boolean isDelivery_for_Client() {
+        return delivery_for_Client;
     }
 
-
-    public Order() {
-
+    public String getShipping_address() {
+        return shipping_address;
     }
 
     public void setGot_cancelled(boolean got_cancelled) {
         this.got_cancelled = got_cancelled;
+
+    public void cancel_order() {
+        got_cancelled = true;
+    }
+
+    public void setRefund(double refund) {
+        this.refund = refund;
+
     }
 
     public boolean isGot_cancelled() {
@@ -131,6 +141,10 @@ public class Order implements Serializable {
 
     public void addRefund(Double refund) {
         this.refund += refund;
+    }
+
+    public double getRefund() {
+        return refund;
     }
 
     public void setId(int id) {
@@ -205,9 +219,6 @@ public class Order implements Serializable {
         this.greeting = greeting;
     }
 
-//    public void setItems(ArrayList<Item> items) {
-//        this.items = items;
-//    }
 
     public int getId() {
         return id;
@@ -272,10 +283,6 @@ public class Order implements Serializable {
     public String getGreeting() {
         return greeting;
     }
-
-//    public List<Item> getItems() {
-//        return items;
-//    }
 
 
 }

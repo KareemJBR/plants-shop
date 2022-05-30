@@ -77,8 +77,11 @@ public class ClientMainPage {
 
     @FXML
     void catalog(ActionEvent event) throws IOException {
-        MsgClass msg=new MsgClass("#get Items",null);
-        SimpleClient.getClient().sendToServer(msg);
+       // MsgClass msg=new MsgClass("#get Items",null);
+      //  allItemsData=null;
+       // SimpleClient.getClient().sendToServer(msg);
+      //  while(allItemsData==null){System.out.println("waiting");}
+        getAllitems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/RegisteredCatalog");
     }
