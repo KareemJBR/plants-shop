@@ -35,6 +35,20 @@ public class Report implements Serializable {
     public Report() {
     }
 
+    @Deprecated
+    public Report(Report other) {
+        this.id = other.id;
+        this.content = other.content;
+        this.handled = other.handled;
+        this.workingOnIT = other.workingOnIT;
+        this.answer = other.answer;
+        this.reportDate = other.reportDate;
+        this.MoneyBack = other.MoneyBack;
+        this.handled_by_id = other.handled_by_id;
+        this.customer = other.customer;
+        this.shop = other.shop;
+    }
+
     public Report(String content, boolean handled, boolean workingOnIT, String answer) {
         this.content = content;
         this.handled = handled;

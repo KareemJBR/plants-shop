@@ -5,13 +5,14 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
-import javafx.application.Platform;
+import il.cshaifasweng.OCSFMediatorExample.entities.SupportWorker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
@@ -55,67 +56,55 @@ public class LogIN {
     }
     @FXML
     void logIN(ActionEvent event) throws IOException {
-        boolean login_success=false;
+
         ArrayList<Customer> customers=getAllCustomers();
-        ArrayList<NetWorker> workers = getAllWorkers();
-        if(customers!=null)
-        {
-            if(password_status=="visible")
-            {
-                current=visiblePassword.getText();
-            }
-            else
-            {
-                current=Password.getText();
-            }
-            for(int i=0;i<customers.size();i++)
-            {
-               if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(current))
-               {
-                   //showAlert("success","login success");
-                   login_success=true;
-                   LoginClient_username=customers.get(i).getUser_name();
-                   LoginClient_userId=customers.get(i).getUser_id();
-                   LoginClient_acount_type=customers.get(i).getAcount_type();
-                   App.setRoot("controllers/ClientMainPage");
-               }
-            }
-            if(userName.getText().equals("admin")&&current.equals("admin"))
-            {
-                login_success=true;
-                App.setRoot("controllers/AdministratorHomePage");
-            }
-        }
-        if(workers!=null)
-        {
-            if(password_status=="visible")
-            {
-                current=visiblePassword.getText();
-            }
-            else
-            {
-                current=Password.getText();
-            }
-            for(int i=0;i<workers.size();i++)
-            {
-                if(workers.get(i).getUser_name().equals(userName.getText()) && workers.get(i).getPassword().equals(current))
-                {
-                    //showAlert("success","login success");
-                    login_success=true;
-                    LoginWorker_username=workers.get(i).getUser_name();
-                    App.setRoot("controllers/WorkerHomePage");
-                }
-            }
-            if(userName.getText().equals("admin"))
-            {
-                App.setRoot("controllers/AdministratorHomePage");
-            }
-        }
-        if(!login_success)
-        {
-            showAlert("error","Username or Password is incorrect");
+        ArrayList<NetWorker> net_workers = getAllNetWorkers();
+        ArrayList<SupportWorker> support_workers = getAllSupportWorkers();
+
+        if(Objects.equals(password_status, "visible"))
+            current=visiblePassword.getText();
+        else
+            current=Password.getText();
+
+        if(userName.getText().equals("admin")&&current.equals("admin")) {
+            App.setRoot("controllers/AdministratorHomePage");
+            return;
         }
 
+        if(customers!=null) {
+            for (Customer customer : customers) {
+                if (customer.getUser_name().equals(userName.getText()) && customer.getPassword().equals(current)) {
+                    LoginClient_username = customer.getUser_name();
+                    LoginClient_userId = customer.getUser_id();
+                    LoginClient_acount_type = customer.getAcount_type();
+                    App.setRoot("controllers/ClientMainPage");
+                    return;
+                }
+            }
+        }
+
+        if(net_workers!=null) {
+            for (NetWorker net_worker : net_workers) {
+                if (net_worker.getUser_name().equals(userName.getText()) && net_worker.getPassword().equals(current)) {
+                    LoginWorker_username = net_worker.getUser_name();
+                    App.setRoot("controllers/NetWorkerHomePage");
+                    return;
+                }
+            }
+        }
+
+        if(support_workers!=null) {
+            for (SupportWorker support_worker : support_workers) {
+                if (support_worker.getUser_name().equals(userName.getText()) &&
+                        support_worker.getPassword().equals(current)) {
+                    LoginWorker_username = support_worker.getUser_name();
+                    App.setRoot("controllers/SupportWorkerHomePage");
+                    return;
+                }
+            }
+        }
+
+        showAlert("error","Username or Password is incorrect");
     }
 
     @FXML
@@ -150,18 +139,5 @@ public class LogIN {
             Password.setVisible(true);
             Password.setText(current);
         }
-    }
-
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
     }
 }
