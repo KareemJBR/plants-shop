@@ -125,12 +125,17 @@ public class Order implements Serializable {
         this.got_cancelled = got_cancelled;
     }
 
+    public void cancel_order() {
+        got_cancelled = true;
+    }
+
     public boolean isGot_cancelled() {
         return got_cancelled;
     }
 
-    public void addRefund(Double refund) {
-        this.refund += refund;
+    public void setRefund(double refund) {
+        this.refund = refund;
+
     }
 
     public void setId(int id) {

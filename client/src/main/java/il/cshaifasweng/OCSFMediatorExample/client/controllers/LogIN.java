@@ -81,7 +81,6 @@ public class LogIN {
             {
                if(customers.get(i).getUser_name().equals(userName.getText()) && customers.get(i).getPassword().equals(current))
                {
-                   //showAlert("success","login success");
                    login_success=true;
                    LoginClient_username=customers.get(i).getUser_name();
                    LoginClient_userId=customers.get(i).getUser_id();

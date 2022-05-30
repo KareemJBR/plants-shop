@@ -667,8 +667,8 @@ public class SimpleServer extends AbstractServer {
                 {
                     if(orders.get(i).getId()==id)
                     {
-                        orders.get(i).setGot_cancelled(true);
-                        orders.get(i).addRefund(refund);
+                        orders.get(i).cancel_order();
+                        orders.get(i).setRefund(refund);
                         customeRefund(orders.get(i).getCustomer().getId(),refund);
                         session.update(orders.get(i));
                     }
