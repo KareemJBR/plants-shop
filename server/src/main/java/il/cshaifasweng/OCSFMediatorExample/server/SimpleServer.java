@@ -113,11 +113,23 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
+    private static void generateShopAdmins() {
+        ShopAdmin admin1 = new ShopAdmin("mostafa1234", "mostafa1234",
+                "212955587", "mostafa", "jabareen");
+        session.save(admin1);
+
+        ShopAdmin admin2 = new ShopAdmin("mortada", "mortada",
+                "888333755", "mortada", "mahameed");
+        session.save(admin2);
+
+        session.flush();
+    }
+
     private static void generateShops() {
         /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","211406343");
+        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","212955587");
         session.save(shop1);
-        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
+        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","888333755");
         session.save(shop2);
         session.flush();
     }
@@ -203,6 +215,7 @@ public class SimpleServer extends AbstractServer {
 
     public static void addDataToDB() {
         try {
+            generateShopAdmins();
             generateShops();
             generateNetWorkers();
             generateSupportWorkers();
