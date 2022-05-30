@@ -13,7 +13,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "order_id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -73,6 +73,11 @@ public class Order implements Serializable {
     @Column(name="shipping_address")
     private String shipping_address;
 
+    @Column(name="got_cancelled")
+    private boolean got_cancelled;
+
+    @Column(name="refund")
+    private Double refund;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderitems =new ArrayList<>();
@@ -107,12 +112,26 @@ public class Order implements Serializable {
         this.receipt_minute=receipt_minute;
         this.receipt_hour=receipt_hour;
         this.shop=shop;
+        got_cancelled=false;
+        this.refund= Double.valueOf(0);
     }
+
 
     public Order() {
 
     }
 
+    public void setGot_cancelled(boolean got_cancelled) {
+        this.got_cancelled = got_cancelled;
+    }
+
+    public boolean isGot_cancelled() {
+        return got_cancelled;
+    }
+
+    public void addRefund(Double refund) {
+        this.refund += refund;
+    }
 
     public void setId(int id) {
         this.id = id;

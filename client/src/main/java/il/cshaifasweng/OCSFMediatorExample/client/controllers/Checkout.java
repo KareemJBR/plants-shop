@@ -109,11 +109,11 @@ public class Checkout {
                 {
                     if(i<10)
                     {
-                        Hour.getItems().add("0"+hour);
+                        Hour.getItems().add("0"+i);
                     }
                     else
                     {
-                        Hour.getItems().add(String.valueOf(hour));
+                        Hour.getItems().add(String.valueOf(i));
                     }
                 }
                 Hour.getSelectionModel().select(0);
@@ -135,6 +135,7 @@ public class Checkout {
         {
             datew.setValue(LocalDate.now());
         }
+        loadTime();
     }
 
     @FXML
@@ -175,23 +176,7 @@ public class Checkout {
                 }
             }
         }
-        ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
-        ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
-        String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
-        String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
-        int hour= Integer.parseInt(Hour.getValue());
-        int minute= Integer.parseInt(Minute.getValue());
-        MsgClass msg = new MsgClass("#add order");
-        Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),false,"");
-        for(int i=0;i<cartItems.size();i++)
-        {
-            OrderItem orderItem=new OrderItem(cartItems.get(i));
-            AddOrderIem(orderItem);
-            orderItems.add(orderItem);
-        }
-//            order.setOrderitems(searchCartItems(LoginClient_userId));
-        order.setOrderitems(orderItems);
-        msg.setObj(order);
+
         if(DeliveryRadioBtn.isSelected())
         {
             if(NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals(""))
@@ -212,6 +197,23 @@ public class Checkout {
             }
             else
             {
+                ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
+                ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
+                String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
+                String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
+                int hour= Integer.parseInt(Hour.getValue());
+                int minute= Integer.parseInt(Minute.getValue());
+                MsgClass msg = new MsgClass("#add order");
+                Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),false,"");
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    OrderItem orderItem=new OrderItem(cartItems.get(i));
+                    AddOrderIem(orderItem);
+                    orderItems.add(orderItem);
+                }
+//            order.setOrderitems(searchCartItems(LoginClient_userId));
+                order.setOrderitems(orderItems);
+                msg.setObj(order);
                 boolean deliveryforclient=false;
                 if(recieverRadioBtn.isSelected())
                 {
@@ -229,6 +231,23 @@ public class Checkout {
         }
         else
         {
+            ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
+            ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
+            String paymethod=CashRadioBtn.isSelected()==true?"Cash":"CreditCard";
+            String shipingmethod=DeliveryRadioBtn.isSelected()==true?"Delivery":"Pickup";
+            int hour= Integer.parseInt(Hour.getValue());
+            int minute= Integer.parseInt(Minute.getValue());
+            MsgClass msg = new MsgClass("#add order");
+            Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),false,"");
+            for(int i=0;i<cartItems.size();i++)
+            {
+                OrderItem orderItem=new OrderItem(cartItems.get(i));
+                AddOrderIem(orderItem);
+                orderItems.add(orderItem);
+            }
+//            order.setOrderitems(searchCartItems(LoginClient_userId));
+            order.setOrderitems(orderItems);
+            msg.setObj(order);
             SimpleClient.getClient().sendToServer(msg);
             deleteCart(LoginClient_userId);
             showAlert("Order successful","Order Successfully placed");

@@ -125,6 +125,11 @@ public class ClientOrders {
         LocalTime currentime=LocalTime.now();
         LocalDate receiptdate=LocalDate.of(order.getReceipt_year(),order.getReceipt_month(),order.getReceipt_day());
         LocalDate currentdate=LocalDate.now();
+
+        if(order.isGot_cancelled())
+        {
+            return "cancelled";
+        }
         if(receiptdate.isBefore(currentdate))
         {
             return "closed";
@@ -141,7 +146,11 @@ public class ClientOrders {
             }
             if(currentime.until(receiptime,ChronoUnit.HOURS)<1)
             {
-                return "complete, %50 refund";
+                return "complete, 0 refund";
+            }
+            if(currentime.until(receiptime,ChronoUnit.HOURS)>=1 && currentime.until(receiptime,ChronoUnit.HOURS)<=3)
+            {
+                return "complete, 50% refund";
             }
         }
         return "complete";
@@ -156,7 +165,7 @@ public class ClientOrders {
         {
             if(orders.size()!=0)
             {
-                ordersList.setMinHeight(orders.size()*30);
+                ordersList.setMinHeight(orders.size()*75);
                 for(int i=0;i<orders.size();i++)
                 {
                     /////////////
@@ -201,11 +210,26 @@ public class ClientOrders {
                     pane.getChildren().add(price);
 
                     ////////// status  ////////////
+                    double refund=0;
                     String orderstatus=orderStatus(orders.get(i));
                     TextField status=new TextField(orderstatus);
+                    if(orderstatus.equals("complete, 50% refund"))
+                    {
+                        status.setText("Processing");
+                        refund=0.5*orders.get(i).getPrice();
+                    }
+                    else if(orderstatus.equals("complete"))
+                    {
+                        status.setText("Processing");
+                        refund=orders.get(i).getPrice();
+                    }
+                    else if(orderstatus.equals("complete, 0 refund"))
+                    {
+                        status.setText("Processing");
+                    }
                     status.setEditable(false);
                     status.setStyle("-fx-background-color:none");
-                    status.setLayoutX(427);
+                    status.setLayoutX(426);
                     status.setLayoutY(12.5);
                     pane.getChildren().add(status);
 
@@ -217,38 +241,38 @@ public class ClientOrders {
                     btn.setLayoutY(8);
                     btn.setId(String.valueOf(orders.get(i).getId()));
 
-                    if(orderstatus.equals("complete, %50 refund"))
+                    if(orderstatus.equals("complete, 0 refund"))
                     {
                         btn.setStyle("-fx-font-size:12.5;-fx-background-radius:2;-fx-background-color:#f17272");
-                        btn.setOnAction(e->{
-                            int num= Integer.parseInt(((Button) e.getTarget()).getId());
-                            try {
-                                cancelOrder(num);
-                                loadPage();
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        });
+
                     }
-                    if(orderstatus.equals("complete"))
+                    else if(orderstatus.equals("complete, 50% refund"))
                     {
-                        btn.setStyle("-fx-font-size:12.5;-fx-background-radius:2;-fx-background-color:#89ee89");
-                        btn.setOnAction(e->{
-                            int num= Integer.parseInt(((Button) e.getTarget()).getId());
-                            try {
-                                cancelOrder(num);
-                                loadPage();
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
-                        });
+                        btn.setStyle("-fx-font-size:12.5;-fx-background-radius:2;-fx-background-color:#44ead1");
+
+                    }else if(orderstatus.equals("complete"))
+                    {
+                        btn.setStyle("-fx-font-size:12.5;-fx-background-radius:2;-fx-background-color:#94f589");
                     }
-                    if(orderstatus.equals("closed"))
+
+
+                    double finalRefund = refund;
+                    btn.setOnAction(e->{
+                        int num= Integer.parseInt(((Button) e.getTarget()).getId());
+                        try {
+                            cancelOrder(num, finalRefund);
+                            loadPage();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    if(orderstatus.equals("closed") || orderstatus.equals("cancelled"))
                     {
                         btn.setDisable(true);
                         btn.setVisible(false);
-//                        status.setStyle("-fx-font-size:12.5;-fx-background-color:none");
                     }
+
                     pane.getChildren().add(btn);
 
                     Line line = new Line(608,0,0,0);
@@ -265,7 +289,7 @@ public class ClientOrders {
             }
             else
             {
-                showAlert("no","no");
+                TextField text=new TextField("No order existed");
             }
         }
     }

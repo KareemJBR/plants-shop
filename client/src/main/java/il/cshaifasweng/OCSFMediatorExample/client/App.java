@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.transaction.Transactional;
+
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
@@ -181,26 +183,6 @@ public class App extends Application {
         return items;
     }
 
-    public static   ArrayList<Order> getClientOrders(String clientId) throws IOException {
-        ArrayList<Order> orders=getAllOrders();
-        ArrayList<Order> returnedorders=new ArrayList<Order>();
-        if(orders!=null)
-        {
-            if(orders.size()!=0)
-            {
-                for(int i=0;i<orders.size();i++)
-                {
-                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
-                    {
-                        returnedorders.add(orders.get(i));
-                    }
-                }
-            }
-        }
-
-        return orders;
-    }
-
     public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
         List<OrderItem> orderitems=new ArrayList<OrderItem>();
         MsgClass msg = new MsgClass("#get orderItems", null);
@@ -257,9 +239,12 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
-    public static void cancelOrder(int id) throws IOException {
+    public static void cancelOrder(int id,double refund) throws IOException {
         MsgClass msg = new MsgClass("#cancel order", null);
-        msg.setObj(id);
+        ArrayList<Double> ob=new ArrayList<Double>();
+        ob.add((double) id);
+        ob.add(refund);
+        msg.setObj(ob);
         SimpleClient.getClient().sendToServer(msg);
     }
 
