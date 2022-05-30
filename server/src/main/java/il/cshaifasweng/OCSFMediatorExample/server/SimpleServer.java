@@ -113,29 +113,367 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static void generateShops() {
-        /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","211406343");
-        session.save(shop1);
-        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
-        session.save(shop2);
-        session.flush();
-    }
+    private static void generateShopsData() {
 
-    private static void generateItems() throws Exception {
         /* ---------- Saving Items To Data Base ---------- */
-        Item item1 = new Item("red",true,0.3,30,"flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
+        Item item1 = new Item("red",true,0.3,30,"flower", "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
         session.flush();
         Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
         session.flush();
-       Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
+        Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
         session.save(item3);
         session.flush();
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
         session.save(item4);
         session.flush();
+
+        /* ---------- Saving Shops To Data Base ---------- */
+        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","212955587");
+        session.save(shop1);
+        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","888333755");
+        session.save(shop2);
+        session.flush();
+
+        // adding admins to the shops
+        ShopAdmin admin1 = new ShopAdmin("mostafa1234", "mostafa1234",
+                "212955587", "mostafa", "jabareen");
+        session.save(admin1);
+
+        ShopAdmin admin2 = new ShopAdmin("mortada", "mortada",
+                "888333755", "mortada", "mahameed");
+        session.save(admin2);
+        session.flush();
+
+        // adding customers
+        Customer customer1 = new Customer("123456789", "saeed", "mahameed",
+                "saeed_mahamed20", "saeed123", "1234123412341234",
+                "Network account","saeed@gmail.com");
+
+        session.save(customer1);
+
+        Customer customer2 = new Customer("208101458", "ons", "jijini",
+                "ons_jijini", "ons123123", "0000111100001111",
+                "Network account","ons@gmail.com");
+
+        session.save(customer2);
+
+        Customer customer3 = new Customer("206522435", "bayan", "swetat",
+                "bayan123", "bayanswetat123", "0000000011111111",
+                "Network account","bayan@gmail.com");
+
+        session.save(customer3);
+        session.flush();
+
+        Customer customer4 = new Customer("12312333", "bayann", "swetatn",
+                "1", "1", "0000000011111111", "Network account with 10% discount",
+                "bayann@gmail.com");
+
+        session.save(customer4);
+
+        Customer customer5 = new Customer("12332312", "sewy", "sew", "2",
+                "2", "0000000011141111", "Network account","email@gmail.com");
+
+        session.save(customer5);
+        session.flush();
+
+        // adding orders
+        double total_price = 0.0;
+
+        List<OrderItem> order_items = new ArrayList<>();
+
+        OrderItem temp1 = new OrderItem(item1, customer1, 2);
+        total_price += 2 * item1.getPrice();
+
+        OrderItem temp2 = new OrderItem(item2, customer1, 1);
+        total_price += item2.getPrice();
+
+        OrderItem temp3 = new OrderItem(item3, customer1, 1);
+        total_price += item3.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+
+        Order order1 = new Order(shop1, customer1, 2022, 4, 4, 2022,
+                4, 20, 15, 0, 20, 0, total_price,
+                "Cash", "Delivery", "May you have a happy birthday!\n\nFrom Saeed",
+                true, "Abba Houshi 30, Haifa");
+
+        order1.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order1);
+
+        order_items = new ArrayList<>();
+
+        temp1 = new OrderItem(item4, customer1, 3);
+        total_price += 3 * item1.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 3);
+        total_price += 3 * item3.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+
+        Order order2 = new Order(shop1, customer2, 2022, 4, 7, 2022,
+                4, 25, 12, 0, 8, 0, total_price,
+                "CreditCard", "Delivery", "Have a great day!\n\nFrom Ons",
+                true, "Gernada 54, Umm Al-Fahem");
+
+        order2.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order2);
+
+        order_items = new ArrayList<>();
+
+        temp1 = new OrderItem(item1, customer1, 2);
+        total_price += 2 * item1.getPrice();
+
+        temp2 = new OrderItem(item2, customer1, 1);
+        total_price += item2.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 1);
+        total_price += item3.getPrice();
+
+        OrderItem temp4 = new OrderItem(item4, customer1, 1);
+        total_price += item4.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order3 = new Order(shop1, customer3, 2022, 4, 1, 2022,
+                4, 10, 20, 14, 7, 30, total_price,
+                "CreditCard", "Pickup", "", false, "");
+
+        order3.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order3);
+
+        order_items = new ArrayList<>();
+
+        temp2 = new OrderItem(item2, customer1, 2);
+        total_price += 2 * item2.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 3);
+        total_price += 3 * item3.getPrice();
+
+        order_items.add(temp2);
+        order_items.add(temp3);
+
+        Order order4 = new Order(shop1, customer4, 2022, 4, 23, 2022,
+                5, 1, 8, 14, 9, 30, total_price,
+                "CreditCard", "Delivery", "", true,
+                "Al-Quds 1, Umm Al-Fahem");
+
+        order4.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order4);
+
+        order_items = new ArrayList<>();
+
+        temp2 = new OrderItem(item2, customer1, 4);
+        total_price += 4 * item2.getPrice();
+
+        order_items.add(temp2);
+
+        Order order5 = new Order(shop1, customer5, 2022, 4, 25, 2022,
+                4, 30, 16, 13, 12, 30, total_price,
+                "CreditCard", "Delivery", "May you have a happy birthday!\n\nFrom Sewy",
+                true, "Hanamal 1, Haifa");
+
+        order5.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order5);
+
+        order_items = new ArrayList<>();
+
+        temp1 = new OrderItem(item1, customer1, 2);
+        total_price += 2 * item1.getPrice();
+
+        temp2 = new OrderItem(item2, customer1, 2);
+        total_price += 2 * item2.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 2);
+        total_price += 2 * item3.getPrice();
+
+        temp4 = new OrderItem(item4, customer1, 2);
+        total_price += 2 * item4.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order6 = new Order(shop2, customer1, 2022, 4, 26, 2022,
+                5, 15, 12, 11, 13, 0, total_price,
+                "CreditCard", "Delivery", "",
+                true, "Moriyya 102, Haifa");
+
+        order6.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order6);
+
+        order_items = new ArrayList<>();
+
+        temp2 = new OrderItem(item2, customer1, 3);
+        total_price += 3 * item2.getPrice();
+
+        temp4 = new OrderItem(item4, customer1, 1);
+        total_price += item4.getPrice();
+
+        order_items.add(temp2);
+        order_items.add(temp4);
+
+        Order order7 = new Order(shop2, customer2, 2022, 5, 14, 2022,
+                5, 30, 23, 54, 17, 0, total_price,
+                "CreditCard", "Delivery", "",
+                true, "Moriyya 121, Haifa");
+
+        order7.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order7);
+
+        order_items = new ArrayList<>();
+
+        temp3 = new OrderItem(item3, customer1, 2);
+        total_price += 2 * item3.getPrice();
+
+        temp4 = new OrderItem(item4, customer1, 6);
+        total_price += 6 * item4.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order8 = new Order(shop2, customer3, 2022, 5, 17, 2022,
+                5, 24, 16, 11, 20, 30, total_price,
+                "CreditCard", "Delivery", "Congrats!",
+                true, "Hanamal 16, Haifa");
+
+        order8.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order8);
+
+        order_items = new ArrayList<>();
+
+        temp1 = new OrderItem(item1, customer1, 4);
+        total_price += 4 * item1.getPrice();
+
+        temp2 = new OrderItem(item2, customer1, 4);
+        total_price += 4 * item2.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 4);
+        total_price += 4 * item3.getPrice();
+
+        temp4 = new OrderItem(item4, customer1, 4);
+        total_price += 4 * item4.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order9 = new Order(shop2, customer4, 2022, 5, 30, 2022,
+                6, 12, 16, 13, 7, 30, total_price,
+                "CreditCard", "Delivery", "",
+                true, "Hanamal 51, Haifa");
+
+        order9.setOrderitems(order_items);
+        total_price = 0.0;
+        session.save(order9);
+
+        order_items = new ArrayList<>();
+
+        temp1 = new OrderItem(item1, customer1, 6);
+        total_price += 6 * item1.getPrice();
+
+        temp3 = new OrderItem(item3, customer1, 3);
+        total_price += 3 * item3.getPrice();
+
+        temp4 = new OrderItem(item4, customer1, 1);
+        total_price += item4.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order10 = new Order(shop2, customer5, 2022, 6, 4, 2022,
+                6, 20, 11, 57, 12, 0, total_price,
+                "CreditCard", "Delivery", "",
+                true, "Hanamal 33, Haifa");
+
+        order10.setOrderitems(order_items);
+        session.save(order10);
+
+        order_items = new ArrayList<>();
+
+        temp3 = new OrderItem(item3, customer1, 2);
+        total_price = 2 * item3.getPrice();
+
+        order_items.add(temp1);
+        order_items.add(temp2);
+        order_items.add(temp3);
+        order_items.add(temp4);
+
+        Order order11 = new Order(shop1, customer1, 2022, 6, 1, 2022,
+                6, 10, 9, 13, 9, 0, total_price,
+                "CreditCard", "Delivery", "",
+                true, "Hanamal 51, Haifa");
+
+        order11.setOrderitems(order_items);
+        session.save(order11);
+        session.flush();
+
+        // add reports
+
+        Report report1 = new Report("The shop is closed before time.", true,
+                false, "Problem solved. Thanks for contacting us!", "30/5/2022",
+                0.0, "2836582283", customer1, shop1);
+
+        session.save(report1);
+
+        Report report2 = new Report("The shop is messy.", true,
+                false, "Problem solved. Thanks for contacting us!", "31/5/2022",
+                0.0, "2836582283", customer2, shop1);
+
+        session.save(report2);
+
+        Report report3 = new Report("The delivery was 20 minutes late.", true,
+                false, "We are sorry to hear that, there was a traffic jam.", "16/5/2022",
+                0.0, "284449200", customer4, shop2);
+
+        session.save(report3);
+
+        Report report4 = new Report("The shop is closed before time.", true,
+                false, "Problem solved. Thanks for contacting us!", "20/5/2022",
+                0.0, "284449200", customer5, shop2);
+
+        session.save(report4);
+
+        Report report5 = new Report("The shop is closed before time.", true,
+                false, "Problem solved. Thanks for contacting us!", "1/6/2022",
+                0.0, "284449200", customer1, shop1);
+
+        session.save(report5);
+
+        Report report6 = new Report("The shop is closed before time.", true,
+                false, "Problem solved. Thanks for contacting us!", "3/6/2022",
+                0.0, "2836582283", customer2, shop1);
+
+        session.save(report6);
+
+        Report report7 = new Report("The shop is closed before time.", true,
+                false, "Problem solved. Thanks for contacting us!", "3/6/2022",
+                0.0, "284449200", customer3, shop2);
+
+        session.save(report7);
+        session.flush();
+
     }
 
     private static void generateNetWorkers() {
@@ -154,22 +492,6 @@ public class SimpleServer extends AbstractServer {
         SupportWorker worker2 = new SupportWorker("284449200", "mohammad", "mahameed",
                 "mohammad_mahameed", "mohammad123456789");
         session.save(worker2);
-        session.flush();
-    }
-
-    private static void generateCustomers() {
-        /* ---------- Saving Customers To Data Base ---------- */
-        Customer customer1 = new Customer("123456789", "saeed", "mahameed", "saeed_mahamed20", "saeed123", "1234123412341234", "Network account","saeed@gmail.com");
-        session.save(customer1);
-        Customer customer2 = new Customer("208101458", "ons", "jijini", "ons_jijini", "ons123123", "0000111100001111", "Network account","ons@gmail.com");
-        session.save(customer2);
-        Customer customer3 = new Customer("206522435", "bayan", "swetat", "bayan123", "bayanswetat123", "0000000011111111", "Network account","bayan@gmail.com");
-        session.save(customer3);
-        session.flush();
-        Customer customer4 = new Customer("12312333", "bayann", "swetatn", "1", "1", "0000000011111111", "Network account with 10% discount","bayann@gmail.com");
-        session.save(customer4);
-        Customer customer5 = new Customer("12332312", "sewy", "sew", "2", "2", "0000000011141111", "Network account","email@gmail.com");
-        session.save(customer5);
         session.flush();
     }
 
@@ -203,11 +525,9 @@ public class SimpleServer extends AbstractServer {
 
     public static void addDataToDB() {
         try {
-            generateShops();
+            generateShopsData();
             generateNetWorkers();
             generateSupportWorkers();
-            generateCustomers();
-            generateItems();
             session.getTransaction().commit();
         } catch (Exception exception) {
             if (session != null) {

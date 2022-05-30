@@ -202,7 +202,7 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get allItems", null);
         allItemsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting  for server8");}
+        while (allItemsData == null) {System.out.println("waiting for server8");}
         items = (ArrayList<Item>) allItemsData;
         return items;
     }
