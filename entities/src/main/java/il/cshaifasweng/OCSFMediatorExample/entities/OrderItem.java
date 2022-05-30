@@ -37,6 +37,13 @@ public class OrderItem  implements Serializable {
         this.amount=cartItem.getAmount();
     }
 
+    public OrderItem(Item item, Customer customer, int amount) {
+        this.item = item;
+        this.customer = customer;
+        this.amount = amount;
+    }
+
+    @Deprecated
     public OrderItem() {
 
     }
