@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -47,5 +48,8 @@ public class OrdersReportOneTimeInterval implements Initializable {
         }
 
         // TODO: get all flowers and display the chart!
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) {
     }
 }

@@ -126,10 +126,10 @@ public class ShowReportsForAdmin implements Initializable {
         if(shops == null)
             return;
 
-        ObservableList<String> shops_ids = FXCollections.observableArrayList();
+        ObservableList<Integer> shops_ids = FXCollections.observableArrayList();
 
-        for(int i=0;i<shops.size();i++){
-            shops_ids.add(shops_ids.get(i));
+        for (Shop shop : shops) {
+            shops_ids.add(shop.getId());
         }
 
         ObservableList<String> reports_types = FXCollections.observableArrayList();

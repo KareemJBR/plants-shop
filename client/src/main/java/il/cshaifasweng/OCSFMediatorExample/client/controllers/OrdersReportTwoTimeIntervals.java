@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -56,5 +57,9 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
         Calendar start_date2 = App.getReport_start_date2();
         Calendar end_date2 = App.getReport_end_date2();
 
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        App.setRoot("controllers/ShowReportsForAdmin");
     }
 }
