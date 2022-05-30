@@ -53,7 +53,6 @@ public class SimpleClient extends AbstractClient {
 				System.out.println(myMsg.getObj());
 				}
             if (myMsg.getMsg().equals("all orderItems")) {
-                System.out.println("asdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                 OrderItemData = myMsg.getObj();
                 System.out.println("in get orderItems");
             }

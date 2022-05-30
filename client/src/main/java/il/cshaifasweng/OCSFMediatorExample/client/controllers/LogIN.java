@@ -5,6 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
+import il.cshaifasweng.OCSFMediatorExample.entities.ShopAdmin;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,12 @@ public class LogIN {
     public static  String LoginWorker_username;
     public static  String LoginClient_userId;
     public static  String LoginClient_acount_type;
+
+    public static Customer Login_customer;
+
+    public static NetWorker Login_netWorker;
+
+    public static ShopAdmin Login_shopAdmin;
     String  current;
     String password_status="invisible";
     @FXML // fx:id="Password"
@@ -58,6 +65,8 @@ public class LogIN {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
         ArrayList<NetWorker> workers = getAllWorkers();
+        ArrayList<ShopAdmin> shopAdmins = getAllShopAdmins();
+
         if(customers!=null)
         {
             if(password_status=="visible")
@@ -77,15 +86,18 @@ public class LogIN {
                    LoginClient_username=customers.get(i).getUser_name();
                    LoginClient_userId=customers.get(i).getUser_id();
                    LoginClient_acount_type=customers.get(i).getAcount_type();
+                   Login_customer=customers.get(i);
                    App.setRoot("controllers/ClientMainPage");
                }
             }
-            if(userName.getText().equals("admin")&&current.equals("admin"))
-            {
-                login_success=true;
-                App.setRoot("controllers/AdministratorHomePage");
-            }
         }
+
+        if(userName.getText().equals("admin")&&current.equals("admin"))
+        {
+            login_success=true;
+            App.setRoot("controllers/AdministratorHomePage");
+        }
+
         if(workers!=null)
         {
             if(password_status=="visible")
@@ -100,15 +112,32 @@ public class LogIN {
             {
                 if(workers.get(i).getUser_name().equals(userName.getText()) && workers.get(i).getPassword().equals(current))
                 {
-                    //showAlert("success","login success");
                     login_success=true;
                     LoginWorker_username=workers.get(i).getUser_name();
+                    Login_netWorker=workers.get(i);
                     App.setRoot("controllers/WorkerHomePage");
                 }
             }
-            if(userName.getText().equals("admin"))
+        }
+
+        if(shopAdmins!=null)
+        {
+            if(password_status=="visible")
             {
-                App.setRoot("controllers/AdministratorHomePage");
+                current=visiblePassword.getText();
+            }
+            else
+            {
+                current=Password.getText();
+            }
+            for(int i=0;i<shopAdmins.size();i++)
+            {
+                if(shopAdmins.get(i).getUser_name().equals(userName.getText()) && shopAdmins.get(i).getPassword().equals(current))
+                {
+                    login_success=true;
+                    Login_shopAdmin=shopAdmins.get(i);
+                    App.setRoot("controllers/WorkerHomePage");
+                }
             }
         }
         if(!login_success)

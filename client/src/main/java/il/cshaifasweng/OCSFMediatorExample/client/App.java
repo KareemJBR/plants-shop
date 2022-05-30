@@ -257,6 +257,12 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
+    public static void cancelOrder(int id) throws IOException {
+        MsgClass msg = new MsgClass("#cancel order", null);
+        msg.setObj(id);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
         
 //    public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
 //        // interval must be valid

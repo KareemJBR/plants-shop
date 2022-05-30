@@ -19,11 +19,19 @@ public class ShopAdmin  implements Serializable {
     @Column(name = "shop_id")
     private final int shop_id;
 
-    public ShopAdmin(String admin_id, String admin_first_name, String admin_last_name, int shop_id) {
+    @Column(name = "admin_user_name")
+    private String user_name;
+
+    @Column(name = "customer_password")
+    private String password;
+
+    public ShopAdmin(String user_name, String password, String admin_id, String admin_first_name, String admin_last_name, int shop_id) {
         this.admin_id = admin_id;
         this.admin_first_name = admin_first_name;
         this.admin_last_name = admin_last_name;
         this.shop_id = shop_id;
+        this.user_name=user_name;
+        this.password=password;
     }
 
     @Deprecated
@@ -31,6 +39,15 @@ public class ShopAdmin  implements Serializable {
         shop_id = -1;
         admin_id = null;
     }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 
     public void setAdmin_first_name(String admin_first_name){
         this.admin_first_name = admin_first_name;

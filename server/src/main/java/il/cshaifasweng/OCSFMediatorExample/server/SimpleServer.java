@@ -150,6 +150,7 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
+        configuration.addAnnotatedClass(ShopAdmin.class);
        configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
@@ -238,6 +239,15 @@ public class SimpleServer extends AbstractServer {
                         update_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#cancel order")) {
+                    try {
+                        System.out.println("in add cartItem");
+                        cancelOrder((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in cancel order");
                         System.out.println(e.getMessage());
                     }
                 }
@@ -642,6 +652,29 @@ public class SimpleServer extends AbstractServer {
             }
         }
         return null;
+    }
+
+    public static void cancelOrder(int id) throws Exception {
+       ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
+        session.beginTransaction();
+       if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i<orders.size();i++)
+                {
+                    if(orders.get(i).getId()==id)
+                    {
+                        for(int j=0;j<orders.get(i).getOrderitems().size();j++)
+                        {
+                            session.delete(orders.get(i).getOrderitems().get(j));
+                        }
+                        session.delete(orders.get(i));
+                    }
+                }
+            }
+        }
+        session.getTransaction().commit();
     }
 
 

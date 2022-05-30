@@ -167,11 +167,13 @@ public class Cart<T> {
                     ///////// name textfield ///////////
                     TextField name=new TextField("Name: "+ cartItems.get(i).getItem().getName());
                     name.setStyle("-fx-background-color:none");
+                    name.setEditable(false);
                     name.setLayoutX(100);
                     name.setLayoutY(8);
                     ///////// price textfield ///////////
                     TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
                     price.setStyle("-fx-background-color:none");
+                    price.setEditable(false);
                     price.setLayoutX(100);
                     price.setLayoutY(28);
 
@@ -184,6 +186,7 @@ public class Cart<T> {
                     ///////// amount textfield ///////////
                     TextField amount=new TextField("Amount: "+ itemamount);
                     amount.setStyle("-fx-background-color:none");
+                    amount.setEditable(false);
                     amount.setLayoutX(100);
                     amount.setLayoutY(68);
 
