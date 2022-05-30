@@ -150,8 +150,11 @@ public class SimpleServer extends AbstractServer {
     private static void generateSupportWorkers() {
         SupportWorker worker1 = new SupportWorker("2836582283", "ahmad",
                 "jabareen", "ahmad_jabareen", "ahmad123456789");
+        session.save(worker1);
         SupportWorker worker2 = new SupportWorker("284449200", "mohammad", "mahameed",
                 "mohammad_mahameed", "mohammad123456789");
+        session.save(worker2);
+        session.flush();
     }
 
     private static void generateCustomers() {
@@ -182,7 +185,8 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-       configuration.addAnnotatedClass(NetWorker.class);
+        configuration.addAnnotatedClass(NetWorker.class);
+        configuration.addAnnotatedClass(SupportWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
         configuration.addAnnotatedClass(Item.class);

@@ -80,10 +80,15 @@ public class SimpleClient extends AbstractClient {
                 System.out.println("in get Shops client side");
                 shopsdata = myMsg.getObj();
             }
-            if(myMsg.getMsg().equals("all Workers"))
+            if(myMsg.getMsg().equals("all NetWorkers"))
             {
-                System.out.println("in get Workers client side");
+                System.out.println("in get NetWorkers client side");
                 NetWorkersData = myMsg.getObj();
+            }
+            if(myMsg.getMsg().equals("all SupportWorkers"))
+            {
+                System.out.println("in get SupportWorkers client side");
+                SupportWorkersData = myMsg.getObj();
             }
             else{
                 System.out.println("not done yet");
