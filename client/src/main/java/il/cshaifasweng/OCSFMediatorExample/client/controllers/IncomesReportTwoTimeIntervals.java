@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -108,5 +109,9 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                     incomesChart2.getData().add(series);
             }
         }
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        App.setRoot("controllers/ShowReportsForAdmin");
     }
 }
