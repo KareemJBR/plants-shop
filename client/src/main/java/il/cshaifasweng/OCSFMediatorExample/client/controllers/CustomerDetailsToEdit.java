@@ -5,6 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -58,13 +59,14 @@ public class CustomerDetailsToEdit implements Initializable {
 
     @FXML
     void saveChanges(ActionEvent event) throws IOException {
-        Customer new_cutomer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
+
+        Customer new_customer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
                 customerLastNameTextField.getText(), customerUsernameTextField.getText(),
                 customerPasswordTextField.getText(), base_customer.getCredit_card(),
                 customerAccountTypeTextField.getTypeSelector(), customerEmailTextField.getText());
 
-        updateCustomer(new_cutomer);
-        base_customer = new Customer(new_cutomer);
+        updateCustomer(new_customer);
+        base_customer = new Customer(new_customer);
     }
 
     private void fill_with_base_customer() {
@@ -90,6 +92,7 @@ public class CustomerDetailsToEdit implements Initializable {
             e.printStackTrace();
         }
 
+        assert customers != null;
         for (Customer customer : customers) {
             if (customer.getUser_id().equals(customer_id)) {
                 base_customer = new Customer(customer.getUser_id(), customer.getFirst_name(), customer.getLast_name(),

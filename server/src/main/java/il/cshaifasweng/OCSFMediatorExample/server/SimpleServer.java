@@ -171,6 +171,7 @@ public class SimpleServer extends AbstractServer {
                 "bayann@gmail.com");
 
         session.save(customer4);
+        session.flush();
 
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2",
                 "2", "0000000011141111", "Network account","email@gmail.com");
@@ -199,11 +200,12 @@ public class SimpleServer extends AbstractServer {
         Order order1 = new Order(shop1, customer1, 2022, 4, 4, 2022,
                 4, 20, 15, 0, 20, 0, total_price,
                 "Cash", "Delivery", "May you have a happy birthday!\n\nFrom Saeed",
-                true, "Abba Houshi 30, Haifa");
+                true, "Abba Houshi 30, Haifa", false, 0.0);
 
         order1.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order1);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -220,11 +222,12 @@ public class SimpleServer extends AbstractServer {
         Order order2 = new Order(shop1, customer2, 2022, 4, 7, 2022,
                 4, 25, 12, 0, 8, 0, total_price,
                 "CreditCard", "Delivery", "Have a great day!\n\nFrom Ons",
-                true, "Gernada 54, Umm Al-Fahem");
+                true, "Gernada 54, Umm Al-Fahem", false, 0.0);
 
         order2.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order2);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -247,11 +250,13 @@ public class SimpleServer extends AbstractServer {
 
         Order order3 = new Order(shop1, customer3, 2022, 4, 1, 2022,
                 4, 10, 20, 14, 7, 30, total_price,
-                "CreditCard", "Pickup", "", false, "");
+                "CreditCard", "Pickup", "", false, "",
+                false, 0.0);
 
         order3.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order3);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -267,11 +272,12 @@ public class SimpleServer extends AbstractServer {
         Order order4 = new Order(shop1, customer4, 2022, 4, 23, 2022,
                 5, 1, 8, 14, 9, 30, total_price,
                 "CreditCard", "Delivery", "", true,
-                "Al-Quds 1, Umm Al-Fahem");
+                "Al-Quds 1, Umm Al-Fahem", false, 0.0);
 
         order4.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order4);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -283,11 +289,12 @@ public class SimpleServer extends AbstractServer {
         Order order5 = new Order(shop1, customer5, 2022, 4, 25, 2022,
                 4, 30, 16, 13, 12, 30, total_price,
                 "CreditCard", "Delivery", "May you have a happy birthday!\n\nFrom Sewy",
-                true, "Hanamal 1, Haifa");
+                true, "Hanamal 1, Haifa", false, 0.0);
 
         order5.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order5);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -311,11 +318,12 @@ public class SimpleServer extends AbstractServer {
         Order order6 = new Order(shop2, customer1, 2022, 4, 26, 2022,
                 5, 15, 12, 11, 13, 0, total_price,
                 "CreditCard", "Delivery", "",
-                true, "Moriyya 102, Haifa");
+                true, "Moriyya 102, Haifa", false, 0.0);
 
         order6.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order6);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -331,11 +339,12 @@ public class SimpleServer extends AbstractServer {
         Order order7 = new Order(shop2, customer2, 2022, 5, 14, 2022,
                 5, 30, 23, 54, 17, 0, total_price,
                 "CreditCard", "Delivery", "",
-                true, "Moriyya 121, Haifa");
+                true, "Moriyya 121, Haifa", false, 0.0);
 
         order7.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order7);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -353,11 +362,12 @@ public class SimpleServer extends AbstractServer {
         Order order8 = new Order(shop2, customer3, 2022, 5, 17, 2022,
                 5, 24, 16, 11, 20, 30, total_price,
                 "CreditCard", "Delivery", "Congrats!",
-                true, "Hanamal 16, Haifa");
+                true, "Hanamal 16, Haifa", false, 0.0);
 
         order8.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order8);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -381,11 +391,12 @@ public class SimpleServer extends AbstractServer {
         Order order9 = new Order(shop2, customer4, 2022, 5, 30, 2022,
                 6, 12, 16, 13, 7, 30, total_price,
                 "CreditCard", "Delivery", "",
-                true, "Hanamal 51, Haifa");
+                true, "Hanamal 51, Haifa", false, 0.0);
 
         order9.setOrderitems(order_items);
         total_price = 0.0;
         session.save(order9);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -405,10 +416,11 @@ public class SimpleServer extends AbstractServer {
         Order order10 = new Order(shop2, customer5, 2022, 6, 4, 2022,
                 6, 20, 11, 57, 12, 0, total_price,
                 "CreditCard", "Delivery", "",
-                true, "Hanamal 33, Haifa");
+                true, "Hanamal 33, Haifa", false, 0.0);
 
         order10.setOrderitems(order_items);
         session.save(order10);
+        session.flush();
 
         order_items = new ArrayList<>();
 
@@ -423,7 +435,7 @@ public class SimpleServer extends AbstractServer {
         Order order11 = new Order(shop1, customer1, 2022, 6, 1, 2022,
                 6, 10, 9, 13, 9, 0, total_price,
                 "CreditCard", "Delivery", "",
-                true, "Hanamal 51, Haifa");
+                true, "Hanamal 51, Haifa", false, 0.0);
 
         order11.setOrderitems(order_items);
         session.save(order11);
@@ -436,36 +448,42 @@ public class SimpleServer extends AbstractServer {
                 0.0, "2836582283", customer1, shop1);
 
         session.save(report1);
+        session.flush();
 
         Report report2 = new Report("The shop is messy.", true,
                 false, "Problem solved. Thanks for contacting us!", "31/5/2022",
                 0.0, "2836582283", customer2, shop1);
 
         session.save(report2);
+        session.flush();
 
         Report report3 = new Report("The delivery was 20 minutes late.", true,
                 false, "We are sorry to hear that, there was a traffic jam.", "16/5/2022",
                 0.0, "284449200", customer4, shop2);
 
         session.save(report3);
+        session.flush();
 
         Report report4 = new Report("The shop is closed before time.", true,
                 false, "Problem solved. Thanks for contacting us!", "20/5/2022",
                 0.0, "284449200", customer5, shop2);
 
         session.save(report4);
+        session.flush();
 
         Report report5 = new Report("The shop is closed before time.", true,
                 false, "Problem solved. Thanks for contacting us!", "1/6/2022",
                 0.0, "284449200", customer1, shop1);
 
         session.save(report5);
+        session.flush();
 
         Report report6 = new Report("The shop is closed before time.", true,
                 false, "Problem solved. Thanks for contacting us!", "3/6/2022",
                 0.0, "2836582283", customer2, shop1);
 
         session.save(report6);
+        session.flush();
 
         Report report7 = new Report("The shop is closed before time.", true,
                 false, "Problem solved. Thanks for contacting us!", "3/6/2022",

@@ -110,6 +110,34 @@ public class Order implements Serializable {
         this.got_cancelled = false;
         this.refund = 0.0;
     }
+
+    public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,
+                 int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,
+                 double price,String pay_method,String shipping_method,String greeting,boolean delivery_for_Client,
+                 String shipping_address, boolean got_cancelled, double refund)
+
+    {
+        this.shipping_address=shipping_address;
+        this.delivery_for_Client=delivery_for_Client;
+        this.greeting=greeting;
+        this.shipping_method=shipping_method;
+        this.pay_method=pay_method;
+        this.price=price;
+        this.customer=customer;
+        this.order_year=order_year;
+        this.order_month=order_month;
+        this.order_day=order_day;
+        this.order_minute=order_minute;
+        this.order_hour=order_hour;
+        this.receipt_year=receipt_year;
+        this.receipt_month=receipt_month;
+        this.receipt_day=receipt_day;
+        this.receipt_minute=receipt_minute;
+        this.receipt_hour=receipt_hour;
+        this.shop=shop;
+        this.got_cancelled = got_cancelled;
+        this.refund = refund;
+    }
   
     @Deprecated
     public Order() {
