@@ -67,6 +67,10 @@ public class IncomesReportOneTimeInterval implements Initializable {
             int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
 
             arr[col_num] += order.getPrice();
+
+            // if the customer got refunded, we should subtract the refund from the total incomes
+            if (order.isGot_cancelled())
+                arr[col_num] -= order.getRefund();
         }
 
         start_date.add(Calendar.DAY_OF_MONTH, -1);
@@ -81,6 +85,10 @@ public class IncomesReportOneTimeInterval implements Initializable {
         }
     }
 
-    public void backButtonClicked(ActionEvent actionEvent) {
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        if (App.getIsAdmin())
+            App.setRoot("controllers/ShowReportsForAdmin");
+        else
+            App.setRoot("controllers/ShowReportsForShopAdmin");
     }
 }
