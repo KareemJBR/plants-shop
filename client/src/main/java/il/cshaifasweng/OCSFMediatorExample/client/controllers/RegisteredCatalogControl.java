@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
+import com.mysql.cj.xdevapi.Client;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
@@ -44,6 +45,15 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 public class RegisteredCatalogControl {
 
     @FXML
+    private Button filterBTN;
+
+    @FXML
+    private ChoiceBox<String> filterSelect;
+
+    @FXML
+    private Label textFilter;
+
+    @FXML
     private Button goBack;
 
     @FXML
@@ -74,6 +84,29 @@ public class RegisteredCatalogControl {
     @FXML
     void addToCart(ActionEvent event) throws IOException {
 
+    }
+
+    @FXML
+    void filter(ActionEvent event) throws IOException {
+        if (filterSelect.getSelectionModel().equals("All Items")) {
+            // msg.setMsg("#get shop items");
+            // msg.setObj(null);
+            // allItemsData=null;
+            //SimpleClient.getClient().sendToServer(msg);
+            // while(allItemsData==null){}
+            getAllitems();
+            System.out.println("all items filter1");
+        } else {
+            // msg.setMsg("#get shop items that under sale");
+            //  msg.setObj(null);
+            // allItemsData=null;
+            //  SimpleClient.getClient().sendToServer(msg);
+            // while(allItemsData==null){}
+            System.out.println("under saler items");
+            getAllitemsUnderSale();
+           // System.out.println("all items filter");
+        }
+        App.setRoot("controllers/RegisteredCatalog");
     }
 
     @FXML
@@ -120,17 +153,21 @@ public class RegisteredCatalogControl {
 
     public void initialize() throws IOException {
 
-        ArrayList<Item> allItems = getAllitems();
+        ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
         itemscontainer.setStyle("-fx-background-color: #222831");
         goBack.setStyle("-fx-background-color:#EEEEEE");
         goToCartBut.setStyle("-fx-background-color:#EEEEEE");
-        title.setStyle("-fx-background-color:#00ADB5");
+        title.setStyle("-fx-background-color:#EC610A");
         itemsContainer.setStyle("-fx-background-color:#222831");
+        textFilter.setStyle("-fx-background-color:#EC610A");
+        filterBTN.setStyle("-fx-background-color:#EEEEEE");
+        filterSelect.setStyle("-fx-background-color:#EEEEEE");
+        filterSelect.getItems().addAll("All Items", "Under Sale");
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
-                itemscontainer.setMinHeight(allItems.size() * 80);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(allItems.size() * 90);      ///the height of the container is related to the amount of the items
 //                ArrayList<Button> addtocartBTNS = new ArrayList<>();
 //                for (int i = 0; i < allItems.size(); i++) {
 //                    addtocartBTNS.add(new Button());
@@ -138,7 +175,7 @@ public class RegisteredCatalogControl {
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #393E46");
-                    p.setMinSize(295, 140);
+                    p.setMinSize(300, 155);
                     if (i % 2 == 1) {
                         moveRight = true;
                     } else {
@@ -146,12 +183,20 @@ public class RegisteredCatalogControl {
                     }
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
-                    imageview.setFitWidth(130);   //width of img
-                    imageview.setFitHeight(130); //height of img
+                    imageview.setFitWidth(125);   //width of img
+                    imageview.setFitHeight(125); //height of img
                     System.out.println(i);
                     imageview.setImage(new Image(allItems.get(i).getUrl()));
-                    imageview.setLayoutX(5);           //x & y coordinate related in the pane
-                    imageview.setLayoutY(5);
+                    imageview.setLayoutX(3);           //x & y coordinate related in the pane
+                    imageview.setLayoutY(10);
+                    ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
+
+                    if (allItems.get(i).isUnderSale()) {
+                        saleImg.setFitWidth(20);   //width of img
+                        saleImg.setFitHeight(20); //height of img
+                        saleImg.setLayoutX(280);           //x & y coordinate related in the pane
+                        saleImg.setLayoutY(10);
+                    }
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
@@ -160,31 +205,43 @@ public class RegisteredCatalogControl {
                             //  + "Type: " + cartItems.get(i).getType() + "\n"
                             //  + "Price: " + cartItems.get(i).getPrice() + "\n"
                     );
-                    name.setStyle("-fx-background-color:#00ADB5");
-                    name.setLayoutX(140);
-                    name.setLayoutY(5);
+                    name.setStyle("-fx-background-color:#EC610A");
+                    name.setLayoutX(130);
+                    name.setLayoutY(10);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
-                    catologNum.setStyle("-fx-background-color:#00ADB5");
-                    catologNum.setLayoutX(140);
-                    catologNum.setLayoutY(25);
+                    catologNum.setStyle("-fx-background-color:#EC610A");
+                    catologNum.setLayoutX(130);
+                    catologNum.setLayoutY(30);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("Type: " + allItems.get(i).getType());
-                    type.setStyle("-fx-background-color:#00ADB5");
-                    type.setLayoutX(140);           //x & y coordinate related in the pane
-                    type.setLayoutY(45);
+                    type.setStyle("-fx-background-color:#EC610A");
+                    type.setLayoutX(130);           //x & y coordinate related in the pane
+                    type.setLayoutY(50);
                     type.setEditable(false);
 
                     ///////// type textfield ///////////
-                    TextField price = new TextField("Price: " + allItems.get(i).getPrice());
-                    price.setStyle("-fx-background-color:#00ADB5");
-                    price.setLayoutX(140);           //x & y coordinate related in the pane
-                    price.setLayoutY(65);
+                    TextField price = new TextField();
+                    TextField priceAfterSale = new TextField();
+                    if (allItems.get(i).isUnderSale()) {
+                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
+                        priceAfterSale.setText("Price After " + allItems.get(i).getOriginal_price() + "% sale is:" + allItems.get(i).getPriceAfterSale());
+                    } else {
+                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
+                        priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price());
+                    }
+                    price.setStyle("-fx-background-color:#EC610A");
+                    price.setLayoutX(130);           //x & y coordinate related in the pane
+                    price.setLayoutY(70);
+                    priceAfterSale.setStyle("-fx-background-color:#EC610A");
+                    priceAfterSale.setLayoutX(130);
+                    priceAfterSale.setLayoutY(90);
                     price.setEditable(false);
+                    priceAfterSale.setEditable(false);
 
 
                     ////////////////////// buttons ///////////////////
@@ -215,10 +272,11 @@ public class RegisteredCatalogControl {
                             ioException.printStackTrace();
                         }
                     });
-                    addToCartbtn.setFont(new Font(14));
+                    addToCartbtn.setFont(new Font(12));
                     addToCartbtn.setStyle("-fx-background-color:#EEEEEE");
                     addToCartbtn.setLayoutX(170);
-                    addToCartbtn.setLayoutY(100);
+                    addToCartbtn.setLayoutY(120);
+
                     addToCartbtn.setId(String.valueOf(i));
 
                     ///////////////////////////////////////////////////////
@@ -237,14 +295,18 @@ public class RegisteredCatalogControl {
                     p.getChildren().add(type);
                     p.getChildren().add(name);
                     p.getChildren().add(catologNum);
-                   // p.getChildren().add(buyNow);
+                    p.getChildren().add(priceAfterSale);
+                    if (allItems.get(i).isUnderSale()) {
+                        p.getChildren().add(saleImg);
+                    }
+                    // p.getChildren().add(buyNow);
                     p.getChildren().add(addToCartbtn);
                     if (moveRight) {
-                        p.setLayoutY(170 * j);
-                        p.setLayoutX(320);
+                        p.setLayoutY(175 * j);
+                        p.setLayoutX(315);
                         j++;
                     } else {
-                        p.setLayoutY(170 * j);
+                        p.setLayoutY(175 * j);
                     }
                     itemscontainer.getChildren().add(p);
                 }

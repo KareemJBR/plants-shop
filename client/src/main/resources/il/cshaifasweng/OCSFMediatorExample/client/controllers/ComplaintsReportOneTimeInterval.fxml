@@ -3,7 +3,9 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportOneTimeInterval">
     <children>
@@ -15,5 +17,10 @@
                 <NumberAxis fx:id="complaintsNumAxes" label="Complaints" side="LEFT" />
             </yAxis>
         </BarChart>
+      <Hyperlink layoutX="772.0" layoutY="14.0" onAction="#backButtonClicked" text="Back" underline="true">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Hyperlink>
     </children>
 </AnchorPane>

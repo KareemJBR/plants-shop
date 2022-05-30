@@ -3,9 +3,11 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="559.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportTwoTimeIntervals">
@@ -31,9 +33,14 @@
         <Text layoutX="36.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
         <Text layoutX="472.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
         <Text layoutX="476.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
-        <TextArea fx:id="startDate2" layoutX="617.0" layoutY="35.0" prefHeight="34.0" prefWidth="200.0" />
-        <TextArea fx:id="endDate2" layoutX="617.0" layoutY="96.0" prefHeight="34.0" prefWidth="200.0" />
-        <TextArea fx:id="endDate1" layoutX="170.0" layoutY="95.0" prefHeight="16.0" prefWidth="200.0" />
-        <TextArea fx:id="startDate1" layoutX="170.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" />
+        <TextArea fx:id="startDate2" editable="false" layoutX="617.0" layoutY="35.0" prefHeight="34.0" prefWidth="200.0" />
+        <TextArea fx:id="endDate2" editable="false" layoutX="617.0" layoutY="96.0" prefHeight="34.0" prefWidth="200.0" />
+        <TextArea fx:id="endDate1" editable="false" layoutX="170.0" layoutY="95.0" prefHeight="16.0" prefWidth="200.0" />
+        <TextArea fx:id="startDate1" editable="false" layoutX="170.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" />
+      <Hyperlink layoutX="859.0" layoutY="14.0" onAction="#backButtonClicked" text="Back" underline="true">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Hyperlink>
     </children>
 </AnchorPane>

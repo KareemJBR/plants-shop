@@ -15,10 +15,13 @@ public class Report implements Serializable {
     private int id;
     private String content;
     private boolean handled=false;
-    private  boolean workingOnIT=false;
+    private boolean workingOnIT=false;
     private String answer;
     private String reportDate;
-    private int MoneyBack;
+    private Double MoneyBack;
+
+    @Column(name="handled_by_id")
+    private String handled_by_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -26,10 +29,24 @@ public class Report implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Shop_id")
-    private  Shop shop;
+    private Shop shop;
 
-
+    @Deprecated
     public Report() {
+    }
+
+    @Deprecated
+    public Report(Report other) {
+        this.id = other.id;
+        this.content = other.content;
+        this.handled = other.handled;
+        this.workingOnIT = other.workingOnIT;
+        this.answer = other.answer;
+        this.reportDate = other.reportDate;
+        this.MoneyBack = other.MoneyBack;
+        this.handled_by_id = other.handled_by_id;
+        this.customer = other.customer;
+        this.shop = other.shop;
     }
 
     public Report(String content, boolean handled, boolean workingOnIT, String answer) {
@@ -37,6 +54,7 @@ public class Report implements Serializable {
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
+        this.handled_by_id = null;
         setdate();
     }
 
@@ -46,12 +64,22 @@ public class Report implements Serializable {
         this.workingOnIT = workingOnIT;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
     }
 
     public Report(String content, String answer, Customer customer) {
         this.content = content;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
+    }
+
+    public String getHandled_by_id() {
+        return handled_by_id;
+    }
+
+    public void setHandled_by_id(String handled_by_id) {
+        this.handled_by_id = handled_by_id;
     }
 
 
@@ -103,11 +131,11 @@ public class Report implements Serializable {
         this.customer = customer;
     }
 
-    public int getMoneyBack() {
+    public Double getMoneyBack() {
         return MoneyBack;
     }
 
-    public void setMoneyBack(int moneyBack) {
+    public void setMoneyBack(Double moneyBack) {
         MoneyBack = moneyBack;
     }
 
