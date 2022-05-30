@@ -68,7 +68,7 @@ public class LogIN {
     void logIN(ActionEvent event) throws IOException {
         boolean login_success=false;
         ArrayList<Customer> customers=getAllCustomers();
-        ArrayList<NetWorker> workers = getAllWorkers();
+        ArrayList<NetWorker> workers = getAllNetWorkers();
         ArrayList<ShopAdmin> shopAdmins = getAllShopAdmins();
 
         if(customers!=null)

@@ -86,7 +86,7 @@ public class Order implements Serializable {
 
     public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,
                  int receipt_month,int receipt_day,int order_hour,int order_minute,int receipt_hour,int receipt_minute,
-                 double price,String pay_method,String shipping_method,String greeting)
+                 double price,String pay_method,String shipping_method,String greeting,boolean delivery_for_Client,String shipping_address)
 
     {
         this.shipping_address=shipping_address;
@@ -123,166 +123,159 @@ public class Order implements Serializable {
         return shipping_address;
     }
 
-    public void setGot_cancelled(boolean got_cancelled) {
-        this.got_cancelled = got_cancelled;
+        public void cancel_order () {
+            got_cancelled = true;
+        }
 
-    public void cancel_order() {
-        got_cancelled = true;
-    }
+        public boolean isGot_cancelled () {
+            return got_cancelled;
+        }
 
-    public void setRefund(double refund) {
-        this.refund = refund;
+        public void setRefund ( double refund){
+            this.refund = refund;
 
-    }
+        }
 
-    public boolean isGot_cancelled() {
-        return got_cancelled;
-    }
+        public double getRefund () {
+            return refund;
+        }
 
-    public void addRefund(Double refund) {
-        this.refund += refund;
-    }
+        public void setId ( int id){
+            this.id = id;
+        }
 
-    public double getRefund() {
-        return refund;
-    }
+        public void setCustomer (Customer customer){
+            this.customer = customer;
+        }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+        public void setOrderitems (List < OrderItem > orderitems) {
+            this.orderitems = orderitems;
+        }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+        public List<OrderItem> getOrderitems () {
+            return orderitems;
+        }
 
-    public void setOrderitems(List<OrderItem> orderitems) {
-        this.orderitems = orderitems;
-    }
+        public void setReceipt_year ( int receipt_year){
+            this.receipt_year = receipt_year;
+        }
 
-    public List<OrderItem> getOrderitems() {
-        return orderitems;
-    }
+        public void setReceipt_month ( int receipt_month){
+            this.receipt_month = receipt_month;
+        }
 
-    public void setReceipt_year(int receipt_year) {
-        this.receipt_year = receipt_year;
-    }
+        public void setReceipt_day ( int receipt_day){
+            this.receipt_day = receipt_day;
+        }
 
-    public void setReceipt_month(int receipt_month) {
-        this.receipt_month = receipt_month;
-    }
+        public void setReceipt_hour ( int receipt_hour){
+            this.receipt_hour = receipt_hour;
+        }
 
-    public void setReceipt_day(int receipt_day) {
-        this.receipt_day = receipt_day;
-    }
+        public void setReceipt_minute ( int receipt_minute){
+            this.receipt_minute = receipt_minute;
+        }
 
-    public void setReceipt_hour(int receipt_hour) {
-        this.receipt_hour = receipt_hour;
-    }
+        public void setOrder_year ( int order_year){
+            this.order_year = order_year;
+        }
 
-    public void setReceipt_minute(int receipt_minute) {
-        this.receipt_minute = receipt_minute;
-    }
+        public void setOrder_month ( int order_month){
+            this.order_month = order_month;
+        }
 
-    public void setOrder_year(int order_year) {
-        this.order_year = order_year;
-    }
+        public void setOrder_day ( int order_day){
+            this.order_day = order_day;
+        }
 
-    public void setOrder_month(int order_month) {
-        this.order_month = order_month;
-    }
+        public void setOrder_hour(int order_hour){
+            this.order_hour = order_hour;
+        }
 
-    public void setOrder_day(int order_day) {
-        this.order_day = order_day;
-    }
+        public void setOrder_minute(int order_minute){
+            this.order_minute = order_minute;
+        }
 
-    public void setOrder_hour(int order_hour) {
-        this.order_hour = order_hour;
-    }
+        public void setPrice ( double price){
+            this.price = price;
+        }
 
-    public void setOrder_minute(int order_minute) {
-        this.order_minute = order_minute;
-    }
+        public void setPay_method (String pay_method){
+            this.pay_method = pay_method;
+        }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+        public void setShipping_method (String shipping_method){
+            this.shipping_method = shipping_method;
+        }
 
-    public void setPay_method(String pay_method) {
-        this.pay_method = pay_method;
-    }
-
-    public void setShipping_method(String shipping_method) {
-        this.shipping_method = shipping_method;
-    }
-
-    public void setGreeting(String greeting) {
-        this.greeting = greeting;
-    }
+        public void setGreeting (String greeting){
+            this.greeting = greeting;
+        }
 
 
-    public int getId() {
-        return id;
-    }
+        public int getId () {
+            return id;
+        }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+        public Customer getCustomer () {
+            return customer;
+        }
 
-    public int getReceipt_year() {
-        return receipt_year;
-    }
+        public int getReceipt_year () {
+            return receipt_year;
+        }
 
-    public int getReceipt_month() {
-        return receipt_month;
-    }
+        public int getReceipt_month () {
+            return receipt_month;
+        }
 
-    public int getReceipt_day() {
-        return receipt_day;
-    }
+        public int getReceipt_day () {
+            return receipt_day;
+        }
 
-    public int getReceipt_hour() {
-        return receipt_hour;
-    }
+        public int getReceipt_hour () {
+            return receipt_hour;
+        }
 
-    public int getReceipt_minute() {
-        return receipt_minute;
-    }
+        public int getReceipt_minute () {
+            return receipt_minute;
+        }
 
-    public int getOrder_year() {
-        return order_year;
-    }
+        public int getOrder_year () {
+            return order_year;
+        }
 
-    public int getOrder_month() {
-        return order_month;
-    }
+        public int getOrder_month () {
+            return order_month;
+        }
 
-    public int getOrder_day() {
-        return order_day;
-    }
+        public int getOrder_day () {
+            return order_day;
+        }
 
-    public int getOrder_hour() {
-        return order_hour;
-    }
+        public int getOrder_hour () {
+            return order_hour;
+        }
 
-    public int getOrder_minute() {
-        return order_minute;
-    }
+        public int getOrder_minute () {
+            return order_minute;
+        }
 
-    public double getPrice() {
-        return price;
-    }
+        public double getPrice () {
+            return price;
+        }
 
-    public String getPay_method() {
-        return pay_method;
-    }
+        public String getPay_method () {
+            return pay_method;
+        }
 
-    public String getShipping_method() {
-        return shipping_method;
-    }
+        public String getShipping_method () {
+            return shipping_method;
+        }
 
-    public String getGreeting() {
-        return greeting;
-    }
+        public String getGreeting () {
+            return greeting;
+        }
 
 
 }

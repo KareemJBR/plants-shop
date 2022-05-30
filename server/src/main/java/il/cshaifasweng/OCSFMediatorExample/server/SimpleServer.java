@@ -4,6 +4,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<SupportWorker> getAllSupportWorkers() throws IOException {
+    private static List<SupportWorker> getAllSupportWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<SupportWorker> query = builder.createQuery(SupportWorker.class);
         query.from(SupportWorker.class);
@@ -185,6 +186,7 @@ public class SimpleServer extends AbstractServer {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
         configuration.addAnnotatedClass(ShopAdmin.class);
+        configuration.addAnnotatedClass(NetWorker.class);
         configuration.addAnnotatedClass(SupportWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
@@ -754,9 +756,9 @@ public class SimpleServer extends AbstractServer {
                 {
                     if(orders.get(i).getId()==id)
                     {
-                        orders.get(i).setGot_cancelled(true);
-                        orders.get(i).addRefund(refund);
-                        customeRefund(orders.get(i).getCustomer().getId(),refund);
+                        orders.get(i).cancel_order();
+                        orders.get(i).setRefund(refund);
+                        customerRefund(orders.get(i).getCustomer().getId(),refund);
                         session.update(orders.get(i));
                     }
                 }
@@ -765,7 +767,7 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
     }
 
-    public static void customeRefund(String id, double refund) throws Exception {
+    public static void customerRefund(String id, double refund) throws Exception {
         ArrayList<Customer> customers= (ArrayList<Customer>) getAllCustomers();
         if(customers!=null)
         {
