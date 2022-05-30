@@ -77,6 +77,10 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
 
     }
 
-    public void backButtonClicked(ActionEvent actionEvent) {
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        if (App.getIsAdmin())
+            App.setRoot("controllers/ShowReportsForAdmin");
+        else
+            App.setRoot("controllers/ShowReportsForShopAdmin");
     }
 }
