@@ -84,6 +84,11 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
+    public static void updateReport(Report report) throws IOException {
+        MsgClass msg = new MsgClass("#update report", report);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
     public static void deleteCustomer(Customer customer) throws IOException {
         MsgClass msg = new MsgClass("#customerDelete", customer);
         SimpleClient.getClient().sendToServer(msg);
@@ -138,8 +143,7 @@ public class App extends Application {
         return shops;
     }
 
-
-    public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
+    public static  ArrayList<NetWorker> getAllNetWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get NetWorkers", null);
         NetWorkersData = null;
@@ -230,6 +234,16 @@ public class App extends Application {
         while (OrderItemData == null) {System.out.println("waiting for server9");}
         orderitems = (List<OrderItem>) OrderItemData;
         return orderitems;
+    }
+
+    public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
+        ArrayList<SupportWorker> support_workers = new ArrayList<SupportWorker>();
+        MsgClass msg = new MsgClass("#get SupportWorkers", null);
+        SupportWorkersData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (SupportWorkersData == null) {System.out.println("waiting for server10");}
+        support_workers = (ArrayList<SupportWorker>) SupportWorkersData;
+        return support_workers;
     }
 
     public static ArrayList<Order> getAllClientOrders(String clientId) throws IOException {

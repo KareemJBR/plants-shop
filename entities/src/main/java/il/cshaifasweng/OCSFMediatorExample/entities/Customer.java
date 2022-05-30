@@ -65,6 +65,8 @@ public class Customer  implements Serializable {
         this.credit_card = customer.credit_card;
         this.acount_type = customer.acount_type;
         this.customer_email = customer.customer_email;
+        this.customerOrders = customer.customerOrders;
+        this.customerReports = customer.customerReports;
     }
 
     @Deprecated

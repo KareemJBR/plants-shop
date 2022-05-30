@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
+import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,7 +57,7 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
     }
 
     @FXML
-    void sendResponse(ActionEvent event) {
+    void sendResponse(ActionEvent event) throws IOException {
 
         if (responseText.getText() == null){
             App.showAlert("Error", "Please add a response to the client.");
@@ -71,12 +72,41 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
                 return;
             }
 
-            // TODO: check if the text in refundValueText is numeric
-            refund_val += Double.parseDouble(refundValueText.getText());
+            try {
+                refund_val += Double.parseDouble(refundValueText.getText());
+            } catch (NumberFormatException e){
+                App.showAlert("Error", "Please enter a valid refund value.");
+                System.out.println(e.getMessage());
+            }
         }
 
-        // TODO: update the report
+        Report new_report = null;
 
+        ArrayList<Report> all_reports = App.getAllReports();
+        for (Report all_report : all_reports)
+            if (all_report.getId() == report_id)
+                new_report = new Report(all_report);
+
+        assert new_report != null;
+        new_report.setHandled(true);
+        new_report.setAnswer(responseText.getText());
+        new_report.setMoneyBack(refund_val);
+
+        // now we shall update the client's budget
+        Customer new_customer = null;
+
+        ArrayList<Customer> all_customers = App.getAllCustomers();
+        for (Customer all_customer : all_customers)
+            if (all_customer.getId().equals(clientIDText.getText()))
+                new_customer = new Customer(all_customer);
+
+        assert new_customer != null;
+        new_customer.setBudget(new_customer.getBudget() + refund_val);
+
+        App.updateReport(new_report);
+        App.updateCustomer(new_customer);
+
+        App.setRoot("controllers/ShowReportsForClientService");
     }
 
     @Override
