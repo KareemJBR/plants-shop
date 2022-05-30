@@ -101,7 +101,7 @@ public class Order implements Serializable {
         this.order_day=order_day;
         this.order_minute=order_minute;
         this.order_hour=order_hour;
-        this.receipt_year=order_year;
+        this.receipt_year=receipt_year;
         this.receipt_month=receipt_month;
         this.receipt_day=receipt_day;
         this.receipt_minute=receipt_minute;

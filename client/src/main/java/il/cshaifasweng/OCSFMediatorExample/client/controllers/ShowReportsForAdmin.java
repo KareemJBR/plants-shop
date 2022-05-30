@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,11 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 
 public class ShowReportsForAdmin implements Initializable {
 
@@ -115,22 +112,6 @@ public class ShowReportsForAdmin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ArrayList<Shop> shops = null;
-        try {
-            shops = getAllShops();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(shops == null)
-            return;
-
-        ObservableList<Integer> shops_ids = FXCollections.observableArrayList();
-
-        for (Shop shop : shops) {
-            shops_ids.add(shop.getId());
-        }
 
         ObservableList<String> reports_types = FXCollections.observableArrayList();
 
