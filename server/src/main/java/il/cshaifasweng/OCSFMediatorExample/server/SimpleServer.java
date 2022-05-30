@@ -48,7 +48,7 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static List<SupportWorker> getAllSupportWorkers() throws IOException {
+    private static List<SupportWorker> getAllSupportWorkers() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<SupportWorker> query = builder.createQuery(SupportWorker.class);
         query.from(SupportWorker.class);

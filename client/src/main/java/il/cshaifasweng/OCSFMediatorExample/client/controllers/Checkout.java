@@ -204,7 +204,12 @@ public class Checkout {
                 int hour= Integer.parseInt(Hour.getValue());
                 int minute= Integer.parseInt(Minute.getValue());
                 MsgClass msg = new MsgClass("#add order");
-                Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),false,"");
+                Order order=new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(),
+                        LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(),
+                        datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(),
+                        LocalTime.now().getMinute(), hour, minute, OrderSubtotal, paymethod, shipingmethod,
+                        Greeting.getText(), false, "");
+
                 for(int i=0;i<cartItems.size();i++)
                 {
                     OrderItem orderItem=new OrderItem(cartItems.get(i));
