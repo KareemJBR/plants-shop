@@ -4,7 +4,6 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,7 +184,7 @@ public class SimpleServer extends AbstractServer {
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
-        configuration.addAnnotatedClass(NetWorker.class);
+        configuration.addAnnotatedClass(ShopAdmin.class);
         configuration.addAnnotatedClass(SupportWorker.class);
         configuration.addAnnotatedClass(Customer.class);
         configuration.addAnnotatedClass(Report.class);
@@ -288,6 +287,17 @@ public class SimpleServer extends AbstractServer {
                         update_customer(temp);
                     } catch (Exception e) {
                         System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if (msgtext.equals("#cancel order")) {
+                    try {
+                        System.out.println("in add cartItem");
+                        Object ob=((MsgClass) msg).getObj();
+                        ArrayList<Double> ob1= (ArrayList<Double>) ob;
+                        cancelOrder(ob1.get(0),ob1.get(1));
+                    } catch (Exception e) {
+                        System.out.println("error happened in cancel order");
                         System.out.println(e.getMessage());
                     }
                 }
@@ -731,6 +741,48 @@ public class SimpleServer extends AbstractServer {
         }
         return null;
     }
+
+    public static void cancelOrder(Double id, double refund) throws Exception {
+       ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
+        session.beginTransaction();
+        session.clear();
+       if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i<orders.size();i++)
+                {
+                    if(orders.get(i).getId()==id)
+                    {
+                        orders.get(i).setGot_cancelled(true);
+                        orders.get(i).addRefund(refund);
+                        customeRefund(orders.get(i).getCustomer().getId(),refund);
+                        session.update(orders.get(i));
+                    }
+                }
+            }
+        }
+        session.getTransaction().commit();
+    }
+
+    public static void customeRefund(String id, double refund) throws Exception {
+        ArrayList<Customer> customers= (ArrayList<Customer>) getAllCustomers();
+        if(customers!=null)
+        {
+            if(customers.size()!=0)
+            {
+                for(int i=0;i<customers.size();i++)
+                {
+                    if(customers.get(i).getId().equals(id))
+                    {
+                        customers.get(i).deposit(refund);
+                        session.update(customers.get(i));
+                    }
+                }
+            }
+        }
+    }
+
 
 
 }
