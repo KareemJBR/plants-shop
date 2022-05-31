@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -12,9 +13,7 @@ import javafx.scene.chart.XYChart;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class OrdersReportOneTimeInterval implements Initializable {
@@ -39,13 +38,49 @@ public class OrdersReportOneTimeInterval implements Initializable {
         XYChart.Series<Integer, String> series = new XYChart.Series<>();
         series.setName("Orders Report");
 
+        List<Order> orders_to_show = null;
+        ArrayList<Item> all_items = null;
 
         try {
-            List<Order> orders_to_show = App.getRelevantOrders(is_admin, shop_id, start_date, end_date);
+            orders_to_show = App.getRelevantOrders(is_admin, shop_id, start_date, end_date);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // TODO: get all flowers and display the chart!
+        // we shall drop the cancelled orders
+
+        assert orders_to_show != null;
+        for (int i = orders_to_show.size() - 1; i >= 0; i--)
+            if (orders_to_show.get(i).isGot_cancelled())
+                orders_to_show.remove(i);
+
+        try {
+            all_items = App.getAllItems();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assert all_items != null;
+        int[] arr = new int[all_items.size()];
+        Arrays.fill(arr, 0);
+
+        for (int i=0;i<all_items.size();i++)
+            for (Order order : orders_to_show)
+                for (int k = 0; k < order.getOrderitems().size(); k++)
+                    if (order.getOrderitems().get(k).getId() == all_items.get(i).getId())
+                        arr[i] += order.getOrderitems().get(k).getAmount();
+
+
+        for (int i=0;i<arr.length;i++) {
+            series.getData().add(new XYChart.Data<>(arr[i], all_items.get(i).getName()));
+            ordersChart.getData().add(series);
+        }
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        if (App.getIsAdmin())
+            App.setRoot("controllers/ShowReportsForAdmin");
+        else
+            App.setRoot("controllers/ShowReportsForShopAdmin");
     }
 }

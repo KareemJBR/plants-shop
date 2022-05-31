@@ -94,21 +94,7 @@ public class ClientMainPage {
 
     @FXML
     void myOrders(ActionEvent event) throws IOException {
-        //showAlert("username","username: "+ Client_username);
-
-        ArrayList<Order> orders=getClientOrders(LoginClient_userId);
-//        List<OrderItem> orderItems=getOrderitems(orders.get(0).getId());
-//       System.out.println(orderItems.size());
-        if(orders!=null)
-        {
-            if(orders.size()!=0)
-            {
-                for(int i=0;i<orders.size();i++)
-                {
-                 //   System.out.println(getOrderitems(orders.get(i).getId()).size());
-                }
-            }
-        }
+        App.setRoot("controllers/ClientOrders");
     }
 
     @FXML

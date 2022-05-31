@@ -79,11 +79,21 @@ public class ShowAllCustomers implements Initializable {
         if(event.getClickCount() != 2)
             return;
 
+        int index;
+        String customer_id;
+
+        try {
+
+            index = customersTable.getSelectionModel().selectedIndexProperty().get();
+            customer_id = customers.get(index).getUser_id();
+        } catch (Exception e) {
+            return;
+            // double-clicked the table but not a row
+        }
+
         // else: a row has been clicked twice, and we need to open a new controller for editing the selected
         // customer's data
 
-        int index = customersTable.getSelectionModel().selectedIndexProperty().get();
-        String customer_id = customers.get(index).getUser_id();
         App.setCustomerIDForAdminView(customer_id);
         App.setRoot("controllers/CustomerDetailsToEdit");
 

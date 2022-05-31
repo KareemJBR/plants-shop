@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -74,5 +75,12 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
             reportsChart.getData().add(series);
         }
 
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        if (App.getIsAdmin())
+            App.setRoot("controllers/ShowReportsForAdmin");
+        else
+            App.setRoot("controllers/ShowReportsForShopAdmin");
     }
 }

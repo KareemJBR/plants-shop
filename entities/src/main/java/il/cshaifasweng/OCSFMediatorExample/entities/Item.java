@@ -29,7 +29,6 @@ public class Item implements Serializable {
 
 
 
-
     public Item(String color, boolean underSale, double salePercent, int original_price, String type, String imgURL, String name) {
         this.color = color;
         Random rand =new Random();
@@ -149,11 +148,4 @@ public class Item implements Serializable {
         Original_price = original_price;
     }
 
-
-    @Override
-    public String toString() {
-        String output="type: "+this.type+"\n"+" price: "+"\n"
-                +"color: "+ this.color+"\n";
-        return  output;
-    }
 }

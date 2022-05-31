@@ -20,6 +20,9 @@ public class Report implements Serializable {
     private String reportDate;
     private Double MoneyBack;
 
+    @Column(name="handled_by_id")
+    private String handled_by_id;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -32,11 +35,39 @@ public class Report implements Serializable {
     public Report() {
     }
 
+    @Deprecated
+    public Report(Report other) {
+        this.id = other.id;
+        this.content = other.content;
+        this.handled = other.handled;
+        this.workingOnIT = other.workingOnIT;
+        this.answer = other.answer;
+        this.reportDate = other.reportDate;
+        this.MoneyBack = other.MoneyBack;
+        this.handled_by_id = other.handled_by_id;
+        this.customer = other.customer;
+        this.shop = other.shop;
+    }
+
+    public Report(String content, boolean handled, boolean workingOnIT, String answer, String reportDate,
+                  double MoneyBack, String handled_by_id, Customer customer, Shop shop) {
+        this.content = content;
+        this.handled = handled;
+        this.workingOnIT = workingOnIT;
+        this.answer = answer;
+        this.reportDate = reportDate;
+        this.MoneyBack = MoneyBack;
+        this.handled_by_id = handled_by_id;
+        this.customer = customer;
+        this.shop = shop;
+    }
+
     public Report(String content, boolean handled, boolean workingOnIT, String answer) {
         this.content = content;
         this.handled = handled;
         this.workingOnIT = workingOnIT;
         this.answer = answer;
+        this.handled_by_id = null;
         setdate();
     }
 
@@ -46,12 +77,22 @@ public class Report implements Serializable {
         this.workingOnIT = workingOnIT;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
     }
 
     public Report(String content, String answer, Customer customer) {
         this.content = content;
         this.answer = answer;
         this.customer = customer;
+        this.handled_by_id = null;
+    }
+
+    public String getHandled_by_id() {
+        return handled_by_id;
+    }
+
+    public void setHandled_by_id(String handled_by_id) {
+        this.handled_by_id = handled_by_id;
     }
 
 

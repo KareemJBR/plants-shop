@@ -47,6 +47,9 @@ public class ShowReportsForClientService implements Initializable {
         try {
             ArrayList<Report> all_reports = App.getAllReports();
 
+            if (all_reports == null)
+                return;     // no reports to show
+
             // removing handled reports
             for (int i=all_reports.size() - 1;i>-1;i--)
                 if (all_reports.get(i).isHandled())
@@ -54,13 +57,13 @@ public class ShowReportsForClientService implements Initializable {
 
             // now we shall sort the reports' list from the oldest to the newest to ensure the fastest answers
 
-            for(int i=0;i<reportsToShow.size();i++){
-                for(int j=i+1;j<reportsToShow.size();j++){
-                    if(reportsToShow.get(i).getdate().after(reportsToShow.get(j).getdate())){
+            for(int i=0;i<all_reports.size();i++){
+                for(int j=i+1;j<all_reports.size();j++){
+                    if(all_reports.get(i).getdate().after(all_reports.get(j).getdate())){
                         Report temp;
-                        temp = reportsToShow.get(i);
-                        reportsToShow.set(i, reportsToShow.get(j));
-                        reportsToShow.set(j, temp);
+                        temp = all_reports.get(i);
+                        all_reports.set(i, all_reports.get(j));
+                        all_reports.set(j, temp);
                     }
                 }
             }
@@ -80,5 +83,40 @@ public class ShowReportsForClientService implements Initializable {
 
         reports.setItems(reportsToShow);
 
+    }
+
+    public void openReport(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getClickCount() != 2)
+            return;
+
+        int index = 0;
+        int report_id = -1;
+
+        try {
+
+            index = reports.getSelectionModel().selectedIndexProperty().get();
+            report_id = reports.getItems().get(index).getId();
+        } catch (Exception e) {
+            return;
+            // double-clicked the table but not a row
+        }
+
+        ArrayList<Report> all_reports = App.getAllReports();
+
+        for (Report all_report : all_reports)
+            if (all_report.getId() == report_id) {
+                if (all_report.isWorkingOnIT()) {
+                    App.showAlert("Error", "Complaint is already being handled by another worker.");
+                    return;
+                }
+                all_report.setWorkingOnIT(true);
+            }
+
+        App.setReport_id_for_client_service(report_id);
+
+        // we need to set workingOnIt to true making the process of responding to a report atomic, this way we avoid
+        // refunding the same report more than one time
+
+        App.setRoot("controllers/ShowSelectedReportForSupportWorker");
     }
 }
