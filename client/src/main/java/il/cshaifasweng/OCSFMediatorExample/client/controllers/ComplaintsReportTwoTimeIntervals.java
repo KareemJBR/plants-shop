@@ -5,10 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
@@ -20,10 +17,10 @@ import java.util.ResourceBundle;
 public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
     @FXML
-    private BarChart<String, Number> complaintsChart1;
+    private LineChart<String, Number> complaintsChart1;
 
     @FXML
-    private BarChart<String, Number> complaintsChart2;
+    private LineChart<String, Number> complaintsChart2;
 
     @FXML
     private NumberAxis complaintsNumAxes1;
@@ -58,6 +55,18 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         Calendar end_date1 = App.getReport_end_date1();
         Calendar start_date2 = App.getReport_start_date2();
         Calendar end_date2 = App.getReport_end_date2();
+
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
+                Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
+                Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
+
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
+                Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
+
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
+                Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
 
         for (int i=0; i<2; i++) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -95,12 +104,12 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
                 arr[col_num]++;
             }
 
-            start_date.add(Calendar.DAY_OF_MONTH, -1);
-
             for (int k : arr) {
 
                 String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
                         start_date.get(Calendar.YEAR);
+
+                start_date.add(Calendar.DAY_OF_MONTH, 1);
 
                 series.getData().add(new XYChart.Data<>(col_name, k));
             }

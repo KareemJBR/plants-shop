@@ -5,10 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
@@ -34,10 +31,10 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
     private TextArea endDate2;
 
     @FXML
-    private BarChart<String, Double> incomesChart1;
+    private LineChart<String, Double> incomesChart1;
 
     @FXML
-    private BarChart<String, Double> incomesChart2;
+    private LineChart<String, Double> incomesChart2;
 
     @FXML
     private NumberAxis incomesNumAxes1;
@@ -61,6 +58,18 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             Calendar end_date1 = App.getReport_end_date1();
             Calendar start_date2 = App.getReport_start_date2();
             Calendar end_date2 = App.getReport_end_date2();
+
+            startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
+                    Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
+
+            startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
+                    Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
+
+            endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
+                    Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
+
+            endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
+                    Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
 
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             series.setName("Incomes Report");
@@ -103,12 +112,11 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                     arr[col_num] -= order.getRefund();
             }
 
-            start_date.add(Calendar.DAY_OF_MONTH, -1);
-
             for (Double aDouble : arr) {
                 series.getData().add(new XYChart.Data<>(start_date.get(Calendar.DAY_OF_MONTH) + "/" +
                         start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR), aDouble));
 
+                start_date.add(Calendar.DAY_OF_MONTH, 1);
             }
 
             if (i == 0)

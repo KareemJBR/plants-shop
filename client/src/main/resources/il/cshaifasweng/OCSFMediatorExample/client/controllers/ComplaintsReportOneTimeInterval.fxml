@@ -7,16 +7,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.chart.LineChart?>
 <AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportOneTimeInterval">
     <children>
-        <BarChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Complaints Report">
+        <LineChart fx:id="reportsChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Complaints Report">
             <xAxis>
                 <CategoryAxis fx:id="dayAxes" label="Day" side="BOTTOM" />
             </xAxis>
             <yAxis>
                 <NumberAxis fx:id="complaintsNumAxes" label="Complaints" side="LEFT" />
             </yAxis>
-        </BarChart>
+        </LineChart>
       <Hyperlink layoutX="772.0" layoutY="14.0" onAction="#backButtonClicked" text="Back" underline="true">
          <font>
             <Font name="System Italic" size="12.0" />
