@@ -10,9 +10,11 @@ import java.util.List;
 @Table(name = "orderitems")
 public class OrderItem  implements Serializable {
     @Id
+    @Column(name = "order_item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="amount")
     private int amount;
 
     @ManyToOne()
@@ -57,7 +59,7 @@ public class OrderItem  implements Serializable {
     public int getId(){return this.id;}
 
     public void addAmount(){
-        this.amount=this.amount++;
+        this.amount++;
     }
 
     public void setAmount(int amount) {
