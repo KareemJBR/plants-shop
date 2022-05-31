@@ -10,24 +10,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.chart.LineChart?>
 <AnchorPane prefHeight="559.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportTwoTimeIntervals">
     <children>
-        <BarChart fx:id="incomesChart2" layoutX="454.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
+        <LineChart fx:id="incomesChart2" layoutX="454.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
             <xAxis>
                 <CategoryAxis fx:id="dayAxes2" label="Day" side="BOTTOM" />
             </xAxis>
             <yAxis>
                 <NumberAxis fx:id="incomesNumAxes2" label="Incomes" side="LEFT" />
             </yAxis>
-        </BarChart>
-        <BarChart fx:id="incomesChart1" layoutX="14.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
+        </LineChart>
+        <LineChart fx:id="incomesChart1" layoutX="14.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
             <xAxis>
                 <CategoryAxis fx:id="dayAxes1" label="Day" side="BOTTOM" />
             </xAxis>
             <yAxis>
                 <NumberAxis fx:id="incomesNumAxes1" label="Incomes" side="LEFT" />
             </yAxis>
-        </BarChart>
+        </LineChart>
         <Line endY="212.80001831054688" layoutX="453.0" layoutY="336.0" startY="-322.0" />
         <Text layoutX="32.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
         <Text layoutX="36.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />

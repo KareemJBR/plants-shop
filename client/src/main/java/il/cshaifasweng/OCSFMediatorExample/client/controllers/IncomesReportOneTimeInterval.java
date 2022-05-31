@@ -70,12 +70,12 @@ public class IncomesReportOneTimeInterval implements Initializable {
                 arr[col_num] -= order.getRefund();
         }
 
-        start_date.add(Calendar.DAY_OF_MONTH, -1);
-
         for (int i=0;i<num_of_days;i++) {
 
             String c_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
                     start_date.get(Calendar.YEAR);
+
+            start_date.add(Calendar.DAY_OF_MONTH, 1);
 
             series.getData().add(new XYChart.Data<>(c_name, arr[i]));
         }

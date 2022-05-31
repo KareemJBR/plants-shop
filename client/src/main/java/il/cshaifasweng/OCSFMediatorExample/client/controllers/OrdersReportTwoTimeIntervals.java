@@ -6,10 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
@@ -31,10 +28,10 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
     private CategoryAxis itemAxes2;
 
     @FXML
-    private BarChart<String, Integer> ordersChart1;
+    private LineChart<String, Integer> ordersChart1;
 
     @FXML
-    private BarChart<String, Integer> ordersChart2;
+    private LineChart<String, Integer> ordersChart2;
 
     @FXML
     private NumberAxis ordersNumAxes1;
@@ -61,6 +58,18 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
 
         Calendar start_date;
         Calendar end_date;
+
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
+                Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
+
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
+                Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
+
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
+                Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
+                Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
 
         ArrayList<Item> all_items = null;
 
