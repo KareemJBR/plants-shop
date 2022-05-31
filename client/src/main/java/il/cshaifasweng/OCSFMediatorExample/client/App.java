@@ -47,7 +47,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       // EventBus.getDefault().register(this);
+        // EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
 //        MsgClass msg =new MsgClass("#get customers",null);
