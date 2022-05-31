@@ -5,10 +5,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +23,7 @@ public class IncomesReportOneTimeInterval implements Initializable {
     private NumberAxis incomesNumAxes;
 
     @FXML
-    private BarChart<String, Number> reportsChart;
+    private LineChart<String, Number> reportsChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
