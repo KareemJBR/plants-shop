@@ -296,7 +296,7 @@ public class App extends Application {
                         all_order.getOrder_minute(), 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
-                        !all_order.gotCancelled())
+                       !all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
@@ -304,7 +304,7 @@ public class App extends Application {
         else {
             for (Order all_order : all_orders) {
 
-                if (all_order.getShop().getId() != shop_id || all_order.gotCancelled())
+                if (all_order.getShop().getId() != shop_id || all_order.isGot_cancelled())
                     continue;
 
                 Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),

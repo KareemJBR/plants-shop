@@ -27,8 +27,7 @@ public class Item implements Serializable {
     @Column(name="Item_name")
     private String name;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Order> orders = new ArrayList<>();
+
 
 
     public Item(String color, boolean underSale, double salePercent, int original_price, String type, String imgURL, String name) {
@@ -153,7 +152,7 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        String output="type: "+this.type+"\n"+" price: "+this.orders +"\n"
+        String output="type: "+this.type+"\n"+" price: "+"\n"
                 +"color: "+ this.color+"\n";
         return  output;
     }

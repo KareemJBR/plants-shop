@@ -103,7 +103,7 @@ public class LogIN {
                     //showAlert("success","login success");
                     login_success=true;
                     LoginWorker_username=workers.get(i).getUser_name();
-                    App.setRoot("controllers/WorkerHomePage");
+                    App.setRoot("controllers/NetWorkerHomePage");
                 }
             }
             if(userName.getText().equals("admin"))
