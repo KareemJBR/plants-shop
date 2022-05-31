@@ -49,6 +49,19 @@ public class Report implements Serializable {
         this.shop = other.shop;
     }
 
+    public Report(String content, boolean handled, boolean workingOnIT, String answer, String reportDate,
+                  double MoneyBack, String handled_by_id, Customer customer, Shop shop) {
+        this.content = content;
+        this.handled = handled;
+        this.workingOnIT = workingOnIT;
+        this.answer = answer;
+        this.reportDate = reportDate;
+        this.MoneyBack = MoneyBack;
+        this.handled_by_id = handled_by_id;
+        this.customer = customer;
+        this.shop = shop;
+    }
+
     public Report(String content, boolean handled, boolean workingOnIT, String answer) {
         this.content = content;
         this.handled = handled;

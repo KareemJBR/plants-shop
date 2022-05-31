@@ -6,21 +6,24 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllItems;
+
 public class NetWorkerHomePage {
 
     @FXML
     void addSale(ActionEvent event) throws IOException {
+        getAllItems();
         App.setRoot("controllers/AddSale");
     }
 
     @FXML
-    void openCatalogue(ActionEvent event) {
-
+    void openCatalogue(ActionEvent event) throws IOException {
+        getAllItems();
+        App.setRoot("controllers/NetWorkerCatalog");
     }
 
     @FXML
     void signOut(ActionEvent event) throws IOException {
         App.setRoot("controllers/LogIN");
     }
-
 }

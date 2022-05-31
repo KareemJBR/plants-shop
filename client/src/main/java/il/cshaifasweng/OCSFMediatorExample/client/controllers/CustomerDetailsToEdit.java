@@ -58,18 +58,18 @@ public class CustomerDetailsToEdit implements Initializable {
 
     @FXML
     void saveChanges(ActionEvent event) throws IOException {
-        Customer new_cutomer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
+
+        Customer new_customer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
                 customerLastNameTextField.getText(), customerUsernameTextField.getText(),
                 customerPasswordTextField.getText(), base_customer.getCredit_card(),
                 customerAccountTypeTextField.getTypeSelector(), customerEmailTextField.getText());
 
-        updateCustomer(new_cutomer);
-        base_customer = new Customer(new_cutomer);
+        updateCustomer(new_customer);
+        base_customer = new Customer(new_customer);
     }
 
     private void fill_with_base_customer() {
         customerIDTextField.textProperty().set(base_customer.getUser_id());
-        customerIDTextField.disableProperty().set(true);
 
         customerFirstNameTextField.textProperty().set(base_customer.getFirst_name());
         customerLastNameTextField.textProperty().set(base_customer.getLast_name());
@@ -81,6 +81,8 @@ public class CustomerDetailsToEdit implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIDTextField.editableProperty().set(false);
+
         ArrayList<Customer> customers = null;
         String customer_id = App.getCustomer_id_for_admin_view();
 
@@ -90,11 +92,12 @@ public class CustomerDetailsToEdit implements Initializable {
             e.printStackTrace();
         }
 
+        assert customers != null;
         for (Customer customer : customers) {
             if (customer.getUser_id().equals(customer_id)) {
                 base_customer = new Customer(customer.getUser_id(), customer.getFirst_name(), customer.getLast_name(),
-                        customer.getUser_name(), customer.getPassword(), null, customer.getAcount_type(),
-                        customer.getEmail());
+                        customer.getUser_name(), customer.getPassword(), customer.getCredit_card(),
+                        customer.getAcount_type(), customer.getEmail());
 
                 fill_with_base_customer();
                 return;

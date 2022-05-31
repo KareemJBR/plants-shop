@@ -28,6 +28,7 @@ public class Item implements Serializable {
     private String name;
 
 
+
     public Item(String color, boolean underSale, double salePercent, int original_price, String type, String imgURL, String name) {
         this.color = color;
         Random rand =new Random();

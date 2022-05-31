@@ -134,7 +134,7 @@ public class publicCatalogControl {
                     TextField priceAfterSale = new TextField();
                     if(allItems.get(i).isUnderSale()) {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After "+allItems.get(i).getOriginal_price()+"% sale is:"+allItems.get(i).getPriceAfterSale());
+                        priceAfterSale.setText("Price After "+allItems.get(i).getSalePercent()*100 +"% sale is:"+allItems.get(i).getPriceAfterSale());
                     }
                     else{
                         price.setText("Price :"+allItems.get(i).getOriginal_price());

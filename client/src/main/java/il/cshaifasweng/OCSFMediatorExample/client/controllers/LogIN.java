@@ -82,7 +82,6 @@ public class LogIN {
             App.setRoot("controllers/AdministratorHomePage");
             return;
         }
-
         if(customers!=null)
             for (Customer customer : customers)
                 if (customer.getUser_name().equals(userName.getText()) && customer.getPassword().equals(current)) {
