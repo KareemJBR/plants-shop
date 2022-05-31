@@ -314,8 +314,7 @@ public class App extends Application {
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
-                        !all_order.isGot_cancelled())
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&!all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
