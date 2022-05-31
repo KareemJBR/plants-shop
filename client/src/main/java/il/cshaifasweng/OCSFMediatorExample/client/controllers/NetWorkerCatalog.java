@@ -43,7 +43,6 @@ public class NetWorkerCatalog {
         App.setRoot("controllers/NetWorkerHomePage");
     }
 
-
     public void initialize() throws IOException {
 
         ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
