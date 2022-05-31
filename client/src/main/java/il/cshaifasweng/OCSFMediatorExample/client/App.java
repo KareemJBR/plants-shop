@@ -294,13 +294,8 @@ public class App extends Application {
         int t_month = end_date.get(Calendar.MONTH);
         int t_year = end_date.get(Calendar.YEAR);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-
-        String str1 = s_day + " " + s_month + " " + s_year;
-        String str2 = t_day + " " + t_month + " " + t_year;
-
-        LocalDateTime date1 = LocalDateTime.from(LocalDate.parse(str1, dtf));
-        LocalDateTime date2 = LocalDateTime.from(LocalDate.parse(str2, dtf));
+        LocalDateTime date1 = LocalDateTime.of(s_year, s_month, s_day, 1, 0);
+        LocalDateTime date2 = LocalDateTime.of(t_year, t_month, t_day, 1, 0);
 
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 

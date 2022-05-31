@@ -57,6 +57,9 @@ public class ShowReportsForAdmin implements Initializable {
         Calendar fromC2 = null;
         Calendar untilC2 = null;
 
+        App.setShop_id(-1);     // no shop specified, the data to be displayed is for all shops together
+        App.setIs_admin(true);
+
         if (comparisonOn.isSelected()) {
             fromC2 = App.localDateToCalendar(fromDate2.getValue());
             untilC2 = App.localDateToCalendar(untilDate2.getValue());
