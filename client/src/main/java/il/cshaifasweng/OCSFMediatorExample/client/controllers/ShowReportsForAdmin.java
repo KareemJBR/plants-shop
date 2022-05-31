@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,11 +11,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 
 public class ShowReportsForAdmin implements Initializable {
 
@@ -59,6 +56,9 @@ public class ShowReportsForAdmin implements Initializable {
 
         Calendar fromC2 = null;
         Calendar untilC2 = null;
+
+        App.setShop_id(-1);     // no shop specified, the data to be displayed is for all shops together
+        App.setIs_admin(true);
 
         if (comparisonOn.isSelected()) {
             fromC2 = App.localDateToCalendar(fromDate2.getValue());
@@ -115,22 +115,6 @@ public class ShowReportsForAdmin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ArrayList<Shop> shops = null;
-        try {
-            shops = getAllShops();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(shops == null)
-            return;
-
-        ObservableList<String> shops_ids = FXCollections.observableArrayList();
-
-        for(int i=0;i<shops.size();i++){
-            shops_ids.add(shops_ids.get(i));
-        }
 
         ObservableList<String> reports_types = FXCollections.observableArrayList();
 

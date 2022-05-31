@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -93,7 +94,13 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                 Calendar calendar = App.getCalendarOfOrder(order.getOrder_year(), order.getOrder_month(),
                         order.getOrder_day(), order.getOrder_hour(), order.getOrder_minute(), 0, 0);
 
-                arr[App.get_num_of_days_in_time_interval(start_date, calendar)] += order.getPrice();
+                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+
+                arr[col_num] += order.getPrice();
+
+                // if the customer got refunded, we should subtract the refund from the total incomes
+                if (order.isGot_cancelled())
+                    arr[col_num] -= order.getRefund();
             }
 
             start_date.add(Calendar.DAY_OF_MONTH, -1);
@@ -108,5 +115,9 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                     incomesChart2.getData().add(series);
             }
         }
+    }
+
+    public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        App.setRoot("controllers/ShowReportsForAdmin");
     }
 }

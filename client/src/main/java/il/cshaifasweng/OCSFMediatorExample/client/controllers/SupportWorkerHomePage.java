@@ -8,8 +8,6 @@ import java.io.IOException;
 
 public class SupportWorkerHomePage {
 
-    private String worker_id;   // TODO: assign this when logged in to add it to the reports handled by this worker
-
     @FXML
     void showReports(ActionEvent event) throws IOException {
         App.setRoot("controllers/ShowReportsForClientService");

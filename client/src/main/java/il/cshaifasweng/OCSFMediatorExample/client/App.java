@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.transaction.Transactional;
+
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 
@@ -34,15 +36,14 @@ public class App extends Application {
     private SimpleClient client;
 
     private static String customer_id_for_admin_view;
-
     private static Calendar report_start_date1;
     private static Calendar report_start_date2;
-
     private static Calendar report_end_date1;
     private static Calendar report_end_date2;
-
     private static boolean is_admin;
     private static int shop_id;
+    private static int report_id_for_client_service;
+    private static String support_worker_id_for_report;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -82,6 +83,11 @@ public class App extends Application {
 
     public static void updateCustomer(Customer customer) throws IOException {
         MsgClass msg = new MsgClass("#customerUpdate", customer);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void updateReport(Report report) throws IOException {
+        MsgClass msg = new MsgClass("#update report", report);
         SimpleClient.getClient().sendToServer(msg);
     }
 
@@ -139,8 +145,7 @@ public class App extends Application {
         return shops;
     }
 
-
-    public static  ArrayList<NetWorker> getAllWorkers() throws IOException {
+    public static  ArrayList<NetWorker> getAllNetWorkers() throws IOException {
         ArrayList<NetWorker> workers = new ArrayList<NetWorker>();
         MsgClass msg = new MsgClass("#get NetWorkers", null);
         NetWorkersData = null;
@@ -197,29 +202,9 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#get allItems", null);
         allItemsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting  for server8");}
+        while (allItemsData == null) {System.out.println("waiting for server8");}
         items = (ArrayList<Item>) allItemsData;
         return items;
-    }
-
-    public static   ArrayList<Order> getClientOrders(String clientId) throws IOException {
-        ArrayList<Order> orders=getAllOrders();
-        ArrayList<Order> returnedorders=new ArrayList<Order>();
-        if(orders!=null)
-        {
-            if(orders.size()!=0)
-            {
-                for(int i=0;i<orders.size();i++)
-                {
-                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
-                    {
-                        returnedorders.add(orders.get(i));
-                    }
-                }
-            }
-        }
-
-        return orders;
     }
 
     public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
@@ -231,6 +216,36 @@ public class App extends Application {
         while (OrderItemData == null) {System.out.println("waiting for server9");}
         orderitems = (List<OrderItem>) OrderItemData;
         return orderitems;
+    }
+
+    public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
+        ArrayList<SupportWorker> support_workers = new ArrayList<SupportWorker>();
+        MsgClass msg = new MsgClass("#get SupportWorkers", null);
+        SupportWorkersData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (SupportWorkersData == null) {System.out.println("waiting for server10");}
+        support_workers = (ArrayList<SupportWorker>) SupportWorkersData;
+        return support_workers;
+    }
+
+    public static ArrayList<Order> getAllClientOrders(String clientId) throws IOException {
+
+        ArrayList<Order> orders =getAllOrders();
+        ArrayList<Order> clientorders =new ArrayList<Order>();
+        if(orders!=null)
+        {
+            if(orders.size()!=0)
+            {
+                for(int i=0;i< orders.size();i++)
+                {
+                    if(orders.get(i).getCustomer().getUser_id().equals(clientId))
+                    {
+                        clientorders.add(orders.get(i));
+                    }
+                }
+            }
+        }
+      return clientorders;
     }
 
     public static void AddOrderIem(OrderItem orderItem) throws IOException {
@@ -258,6 +273,15 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
+    public static void cancelOrder(int id,double refund) throws IOException {
+        MsgClass msg = new MsgClass("#cancel order", null);
+        ArrayList<Double> ob=new ArrayList<Double>();
+        ob.add((double) id);
+        ob.add(refund);
+        msg.setObj(ob);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
         
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
@@ -270,13 +294,8 @@ public class App extends Application {
         int t_month = end_date.get(Calendar.MONTH);
         int t_year = end_date.get(Calendar.YEAR);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MM yyyy");
-
-        String str1 = s_day + " " + s_month + " " + s_year;
-        String str2 = t_day + " " + t_month + " " + t_year;
-
-        LocalDateTime date1 = LocalDateTime.from(LocalDate.parse(str1, dtf));
-        LocalDateTime date2 = LocalDateTime.from(LocalDate.parse(str2, dtf));
+        LocalDateTime date1 = LocalDateTime.of(s_year, s_month, s_day, 1, 0);
+        LocalDateTime date2 = LocalDateTime.of(t_year, t_month, t_day, 1, 0);
 
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 
@@ -295,8 +314,7 @@ public class App extends Application {
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&
-                       !all_order.isGot_cancelled())
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&!all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
@@ -426,6 +444,22 @@ public class App extends Application {
 
     public static int getShopID() {
         return shop_id;
+    }
+
+    public static int getReport_id_for_client_service() {
+        return report_id_for_client_service;
+    }
+
+    public static void setReport_id_for_client_service(int report_id) {
+        report_id_for_client_service = report_id;
+    }
+
+    public static String getSupport_worker_id_for_report() {
+        return support_worker_id_for_report;
+    }
+
+    public static void setSupport_worker_id_for_report(String temp_id) {
+        support_worker_id_for_report = temp_id;
     }
 
     public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,

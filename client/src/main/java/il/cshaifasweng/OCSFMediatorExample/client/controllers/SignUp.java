@@ -2,12 +2,9 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import java.util.List;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
-import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,11 +12,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllWorkers;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
-import static  il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.Customersdata;
-import static  il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.NetWorkersData;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 
 public class SignUp {
     public static boolean shop;
@@ -76,7 +69,8 @@ public class SignUp {
         String email=EmailTextBox.getText();
         ArrayList<String> errors = new ArrayList<String>();
         List<Customer> customers=getAllCustomers();
-        List<NetWorker> workers = getAllWorkers();
+        List<NetWorker> net_workers = getAllNetWorkers();
+        List<SupportWorker> support_workers = getAllSupportWorkers();
         clear();
         MsgClass msg;
 
@@ -147,22 +141,37 @@ public class SignUp {
             }
 
         }
-        if(workers!=null)
+        if(net_workers!=null)
         {
-            for(int i=0;i<workers.size();i++)
-            {
-                if(username.equals(workers.get(i).getUser_name()))
-                {
+            for (NetWorker netWorker : net_workers) {
+                if (username.equals(netWorker.getUser_name())) {
                     errors.add("User Name already exists please try with another one");
                     userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                     break;
                 }
             }
-            for(int i=0;i<workers.size();i++)
-            {
+            for (NetWorker net_worker : net_workers) {
 
-                if(id.equals(workers.get(i).getId()))
-                {
+                if (id.equals(net_worker.getId())) {
+                    errors.add("Id Numer already exists please try with another one");
+                    IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+        }
+
+        if(support_workers!=null)
+        {
+            for (SupportWorker supportWorker : support_workers) {
+                if (username.equals(supportWorker.getUser_name())) {
+                    errors.add("User Name already exists please try with another one");
+                    userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+            for (SupportWorker support_worker : support_workers) {
+
+                if (id.equals(support_worker.getId())) {
                     errors.add("Id Numer already exists please try with another one");
                     IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                     break;
