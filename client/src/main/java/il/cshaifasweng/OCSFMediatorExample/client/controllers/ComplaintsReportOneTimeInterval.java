@@ -26,7 +26,7 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
     private CategoryAxis dayAxes;
 
     @FXML
-    private BarChart<Integer, String> reportsChart;
+    private BarChart<String, Number> reportsChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,7 +36,7 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
         Calendar end_date = App.getReport_end_date1();
         int shop_id = App.getShopID();
 
-        XYChart.Series<Integer, String> series = new XYChart.Series<>();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Complaints Report");
 
         List<Report> reports_to_show = null;
@@ -71,10 +71,10 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
             String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
                     start_date.get(Calendar.YEAR);
 
-            series.getData().add(new XYChart.Data<>(arr[i], col_name));
-            reportsChart.getData().add(series);
+            series.getData().add(new XYChart.Data<>(col_name, arr[i]));
         }
 
+        reportsChart.getData().add(series);
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {

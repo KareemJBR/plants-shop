@@ -34,10 +34,10 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
     private TextArea endDate2;
 
     @FXML
-    private BarChart<Double, String> incomesChart1;
+    private BarChart<String, Double> incomesChart1;
 
     @FXML
-    private BarChart<Double, String> incomesChart2;
+    private BarChart<String, Double> incomesChart2;
 
     @FXML
     private NumberAxis incomesNumAxes1;
@@ -62,7 +62,7 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             Calendar start_date2 = App.getReport_start_date2();
             Calendar end_date2 = App.getReport_end_date2();
 
-            XYChart.Series<Double, String> series = new XYChart.Series<>();
+            XYChart.Series<String, Double> series = new XYChart.Series<>();
             series.setName("Incomes Report");
 
             Calendar start_date, end_date;
@@ -106,14 +106,15 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             start_date.add(Calendar.DAY_OF_MONTH, -1);
 
             for (Double aDouble : arr) {
-                series.getData().add(new XYChart.Data<>(aDouble, start_date.get(Calendar.DAY_OF_MONTH) + "/" +
-                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR)));
+                series.getData().add(new XYChart.Data<>(start_date.get(Calendar.DAY_OF_MONTH) + "/" +
+                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR), aDouble));
 
-                if (i == 0)
-                    incomesChart1.getData().add(series);
-                else
-                    incomesChart2.getData().add(series);
             }
+
+            if (i == 0)
+                incomesChart1.getData().add(series);
+            else
+                incomesChart2.getData().add(series);
         }
     }
 

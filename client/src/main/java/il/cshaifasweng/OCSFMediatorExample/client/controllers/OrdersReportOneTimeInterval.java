@@ -22,7 +22,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
     private CategoryAxis itemAxes;
 
     @FXML
-    private BarChart<Integer, String> ordersChart;
+    private BarChart<String, Integer> ordersChart;
 
     @FXML
     private NumberAxis ordersNumAxes;
@@ -35,7 +35,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
         Calendar start_date = App.getReport_start_date1();
         Calendar end_date = App.getReport_end_date1();
 
-        XYChart.Series<Integer, String> series = new XYChart.Series<>();
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
         series.setName("Orders Report");
 
         List<Order> orders_to_show = null;
@@ -71,10 +71,10 @@ public class OrdersReportOneTimeInterval implements Initializable {
                         arr[i] += order.getOrderitems().get(k).getAmount();
 
 
-        for (int i=0;i<arr.length;i++) {
-            series.getData().add(new XYChart.Data<>(arr[i], all_items.get(i).getName()));
-            ordersChart.getData().add(series);
-        }
+        for (int i=0;i<arr.length;i++)
+            series.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
+
+        ordersChart.getData().add(series);
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
