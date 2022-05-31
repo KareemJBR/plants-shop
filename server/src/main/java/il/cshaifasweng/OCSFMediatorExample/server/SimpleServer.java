@@ -182,7 +182,7 @@ public class SimpleServer extends AbstractServer {
         // adding orders
         double total_price = 0.0;
 
-        List<OrderItem> order_items = new ArrayList<>();
+        List<OrderItem> order_items1 = new ArrayList<>();
 
         OrderItem temp1 = new OrderItem(item1, customer1, 2);
         total_price += 2 * item1.getPrice();
@@ -193,43 +193,21 @@ public class SimpleServer extends AbstractServer {
         OrderItem temp3 = new OrderItem(item3, customer1, 1);
         total_price += item3.getPrice();
 
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
+        order_items1.add(temp1);
+        order_items1.add(temp2);
+        order_items1.add(temp3);
 
         Order order1 = new Order(shop1, customer1, 2022, 4, 4, 2022,
                 4, 20, 15, 0, 20, 0, total_price,
                 "Cash", "Delivery", "May you have a happy birthday!\n\nFrom Saeed",
                 true, "Abba Houshi 30, Haifa", false, 0.0);
 
-        order1.setOrderitems(order_items);
+        order1.setOrderitems(order_items1);
         total_price = 0.0;
         session.save(order1);
         session.flush();
 
-        order_items = new ArrayList<>();
-
-        temp1 = new OrderItem(item4, customer1, 3);
-        total_price += 3 * item1.getPrice();
-
-        temp3 = new OrderItem(item3, customer1, 3);
-        total_price += 3 * item3.getPrice();
-
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-
-        Order order2 = new Order(shop1, customer2, 2022, 4, 7, 2022,
-                4, 25, 12, 0, 8, 0, total_price,
-                "CreditCard", "Delivery", "Have a great day!\n\nFrom Ons",
-                true, "Gernada 54, Umm Al-Fahem", false, 0.0);
-
-        order2.setOrderitems(order_items);
-        total_price = 0.0;
-        session.save(order2);
-        session.flush();
-
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items3 = new ArrayList<>();
 
         temp1 = new OrderItem(item1, customer1, 2);
         total_price += 2 * item1.getPrice();
@@ -243,22 +221,22 @@ public class SimpleServer extends AbstractServer {
         OrderItem temp4 = new OrderItem(item4, customer1, 1);
         total_price += item4.getPrice();
 
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-        order_items.add(temp4);
+        order_items3.add(temp1);
+        order_items3.add(temp2);
+        order_items3.add(temp3);
+        order_items3.add(temp4);
 
         Order order3 = new Order(shop1, customer3, 2022, 4, 1, 2022,
                 4, 10, 20, 14, 7, 30, total_price,
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
-        order3.setOrderitems(order_items);
+        order3.setOrderitems(order_items3);
         total_price = 0.0;
         session.save(order3);
         session.flush();
 
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items4 = new ArrayList<>();
 
         temp2 = new OrderItem(item2, customer1, 2);
         total_price += 2 * item2.getPrice();
@@ -266,37 +244,37 @@ public class SimpleServer extends AbstractServer {
         temp3 = new OrderItem(item3, customer1, 3);
         total_price += 3 * item3.getPrice();
 
-        order_items.add(temp2);
-        order_items.add(temp3);
+        order_items4.add(temp2);
+        order_items4.add(temp3);
 
         Order order4 = new Order(shop1, customer4, 2022, 4, 23, 2022,
                 5, 1, 8, 14, 9, 30, total_price,
                 "CreditCard", "Delivery", "", true,
                 "Al-Quds 1, Umm Al-Fahem", false, 0.0);
 
-        order4.setOrderitems(order_items);
+        order4.setOrderitems(order_items4);
         total_price = 0.0;
         session.save(order4);
         session.flush();
 
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items5 = new ArrayList<>();
 
         temp2 = new OrderItem(item2, customer1, 4);
         total_price += 4 * item2.getPrice();
 
-        order_items.add(temp2);
+        order_items5.add(temp2);
 
         Order order5 = new Order(shop1, customer5, 2022, 4, 25, 2022,
                 4, 30, 16, 13, 12, 30, total_price,
                 "CreditCard", "Delivery", "May you have a happy birthday!\n\nFrom Sewy",
                 true, "Hanamal 1, Haifa", false, 0.0);
 
-        order5.setOrderitems(order_items);
+        order5.setOrderitems(order_items5);
         total_price = 0.0;
         session.save(order5);
         session.flush();
 
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items6 = new ArrayList<>();
 
         temp1 = new OrderItem(item1, customer1, 2);
         total_price += 2 * item1.getPrice();
@@ -310,22 +288,22 @@ public class SimpleServer extends AbstractServer {
         temp4 = new OrderItem(item4, customer1, 2);
         total_price += 2 * item4.getPrice();
 
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-        order_items.add(temp4);
+        order_items6.add(temp1);
+        order_items6.add(temp2);
+        order_items6.add(temp3);
+        order_items6.add(temp4);
 
         Order order6 = new Order(shop2, customer1, 2022, 4, 26, 2022,
                 5, 15, 12, 11, 13, 0, total_price,
                 "CreditCard", "Delivery", "",
                 true, "Moriyya 102, Haifa", false, 0.0);
 
-        order6.setOrderitems(order_items);
+        order6.setOrderitems(order_items6);
         total_price = 0.0;
         session.save(order6);
         session.flush();
 
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items7 = new ArrayList<>();
 
         temp2 = new OrderItem(item2, customer1, 3);
         total_price += 3 * item2.getPrice();
@@ -333,43 +311,20 @@ public class SimpleServer extends AbstractServer {
         temp4 = new OrderItem(item4, customer1, 1);
         total_price += item4.getPrice();
 
-        order_items.add(temp2);
-        order_items.add(temp4);
+        order_items7.add(temp2);
+        order_items7.add(temp4);
 
         Order order7 = new Order(shop2, customer2, 2022, 5, 14, 2022,
                 5, 30, 23, 54, 17, 0, total_price,
                 "CreditCard", "Delivery", "",
                 true, "Moriyya 121, Haifa", false, 0.0);
 
-        order7.setOrderitems(order_items);
+        order7.setOrderitems(order_items7);
         total_price = 0.0;
         session.save(order7);
         session.flush();
 
-        order_items = new ArrayList<>();
-
-        temp3 = new OrderItem(item3, customer1, 2);
-        total_price += 2 * item3.getPrice();
-
-        temp4 = new OrderItem(item4, customer1, 6);
-        total_price += 6 * item4.getPrice();
-
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-        order_items.add(temp4);
-
-        Order order8 = new Order(shop2, customer3, 2022, 5, 17, 2022,
-                5, 24, 16, 11, 20, 30, total_price,
-                "CreditCard", "Delivery", "Congrats!",
-                true, "Hanamal 16, Haifa", false, 0.0);
-
-        order8.setOrderitems(order_items);
-        total_price = 0.0;
-        session.save(order8);
-        session.flush();
-
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items9 = new ArrayList<>();
 
         temp1 = new OrderItem(item1, customer1, 4);
         total_price += 4 * item1.getPrice();
@@ -383,22 +338,22 @@ public class SimpleServer extends AbstractServer {
         temp4 = new OrderItem(item4, customer1, 4);
         total_price += 4 * item4.getPrice();
 
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-        order_items.add(temp4);
+        order_items9.add(temp1);
+        order_items9.add(temp2);
+        order_items9.add(temp3);
+        order_items9.add(temp4);
 
         Order order9 = new Order(shop2, customer4, 2022, 5, 30, 2022,
                 6, 12, 16, 13, 7, 30, total_price,
                 "CreditCard", "Delivery", "",
                 true, "Hanamal 51, Haifa", false, 0.0);
 
-        order9.setOrderitems(order_items);
+        order9.setOrderitems(order_items9);
         total_price = 0.0;
         session.save(order9);
         session.flush();
 
-        order_items = new ArrayList<>();
+        List<OrderItem> order_items10 = new ArrayList<>();
 
         temp1 = new OrderItem(item1, customer1, 6);
         total_price += 6 * item1.getPrice();
@@ -409,36 +364,17 @@ public class SimpleServer extends AbstractServer {
         temp4 = new OrderItem(item4, customer1, 1);
         total_price += item4.getPrice();
 
-        order_items.add(temp1);
-        order_items.add(temp3);
-        order_items.add(temp4);
+        order_items10.add(temp1);
+        order_items10.add(temp3);
+        order_items10.add(temp4);
 
         Order order10 = new Order(shop2, customer5, 2022, 6, 4, 2022,
                 6, 20, 11, 57, 12, 0, total_price,
                 "CreditCard", "Delivery", "",
                 true, "Hanamal 33, Haifa", false, 0.0);
 
-        order10.setOrderitems(order_items);
+        order10.setOrderitems(order_items10);
         session.save(order10);
-        session.flush();
-
-        order_items = new ArrayList<>();
-
-        temp3 = new OrderItem(item3, customer1, 2);
-        total_price = 2 * item3.getPrice();
-
-        order_items.add(temp1);
-        order_items.add(temp2);
-        order_items.add(temp3);
-        order_items.add(temp4);
-
-        Order order11 = new Order(shop1, customer1, 2022, 6, 1, 2022,
-                6, 10, 9, 13, 9, 0, total_price,
-                "CreditCard", "Delivery", "",
-                true, "Hanamal 51, Haifa", false, 0.0);
-
-        order11.setOrderitems(order_items);
-        session.save(order11);
         session.flush();
 
         // add reports
