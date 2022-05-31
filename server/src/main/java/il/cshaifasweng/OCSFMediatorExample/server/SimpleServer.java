@@ -209,16 +209,16 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items3 = new ArrayList<>();
 
-        temp1 = new OrderItem(item1, customer1, 2);
+        temp1 = new OrderItem(item1, customer3, 2);
         total_price += 2 * item1.getPrice();
 
-        temp2 = new OrderItem(item2, customer1, 1);
+        temp2 = new OrderItem(item2, customer3, 1);
         total_price += item2.getPrice();
 
-        temp3 = new OrderItem(item3, customer1, 1);
+        temp3 = new OrderItem(item3, customer3, 1);
         total_price += item3.getPrice();
 
-        OrderItem temp4 = new OrderItem(item4, customer1, 1);
+        OrderItem temp4 = new OrderItem(item4, customer3, 1);
         total_price += item4.getPrice();
 
         order_items3.add(temp1);
@@ -238,10 +238,10 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items4 = new ArrayList<>();
 
-        temp2 = new OrderItem(item2, customer1, 2);
+        temp2 = new OrderItem(item2, customer4, 2);
         total_price += 2 * item2.getPrice();
 
-        temp3 = new OrderItem(item3, customer1, 3);
+        temp3 = new OrderItem(item3, customer4, 3);
         total_price += 3 * item3.getPrice();
 
         order_items4.add(temp2);
@@ -259,7 +259,7 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items5 = new ArrayList<>();
 
-        temp2 = new OrderItem(item2, customer1, 4);
+        temp2 = new OrderItem(item2, customer5, 4);
         total_price += 4 * item2.getPrice();
 
         order_items5.add(temp2);
@@ -305,10 +305,10 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items7 = new ArrayList<>();
 
-        temp2 = new OrderItem(item2, customer1, 3);
+        temp2 = new OrderItem(item2, customer2, 3);
         total_price += 3 * item2.getPrice();
 
-        temp4 = new OrderItem(item4, customer1, 1);
+        temp4 = new OrderItem(item4, customer2, 1);
         total_price += item4.getPrice();
 
         order_items7.add(temp2);
@@ -326,16 +326,16 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items9 = new ArrayList<>();
 
-        temp1 = new OrderItem(item1, customer1, 4);
+        temp1 = new OrderItem(item1, customer4, 4);
         total_price += 4 * item1.getPrice();
 
-        temp2 = new OrderItem(item2, customer1, 4);
+        temp2 = new OrderItem(item2, customer4, 4);
         total_price += 4 * item2.getPrice();
 
-        temp3 = new OrderItem(item3, customer1, 4);
+        temp3 = new OrderItem(item3, customer4, 4);
         total_price += 4 * item3.getPrice();
 
-        temp4 = new OrderItem(item4, customer1, 4);
+        temp4 = new OrderItem(item4, customer4, 4);
         total_price += 4 * item4.getPrice();
 
         order_items9.add(temp1);
@@ -355,13 +355,13 @@ public class SimpleServer extends AbstractServer {
 
         List<OrderItem> order_items10 = new ArrayList<>();
 
-        temp1 = new OrderItem(item1, customer1, 6);
+        temp1 = new OrderItem(item1, customer5, 6);
         total_price += 6 * item1.getPrice();
 
-        temp3 = new OrderItem(item3, customer1, 3);
+        temp3 = new OrderItem(item3, customer5, 3);
         total_price += 3 * item3.getPrice();
 
-        temp4 = new OrderItem(item4, customer1, 1);
+        temp4 = new OrderItem(item4, customer5, 1);
         total_price += item4.getPrice();
 
         order_items10.add(temp1);
@@ -969,6 +969,7 @@ public class SimpleServer extends AbstractServer {
 
     private static void update_customer(Customer customer) {
         session.beginTransaction();
+        session.clear();
         session.update(customer);
         session.getTransaction().commit();
     }
@@ -989,6 +990,7 @@ public class SimpleServer extends AbstractServer {
 
     private static void delete_customer(Customer customer) {
         session.beginTransaction();
+        session.clear();
         session.delete(customer);
         session.getTransaction().commit();
     }

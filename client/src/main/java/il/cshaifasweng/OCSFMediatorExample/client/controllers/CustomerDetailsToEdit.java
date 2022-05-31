@@ -5,7 +5,6 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -71,7 +70,6 @@ public class CustomerDetailsToEdit implements Initializable {
 
     private void fill_with_base_customer() {
         customerIDTextField.textProperty().set(base_customer.getUser_id());
-        customerIDTextField.disableProperty().set(true);
 
         customerFirstNameTextField.textProperty().set(base_customer.getFirst_name());
         customerLastNameTextField.textProperty().set(base_customer.getLast_name());
@@ -83,6 +81,8 @@ public class CustomerDetailsToEdit implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIDTextField.editableProperty().set(false);
+
         ArrayList<Customer> customers = null;
         String customer_id = App.getCustomer_id_for_admin_view();
 
@@ -96,8 +96,8 @@ public class CustomerDetailsToEdit implements Initializable {
         for (Customer customer : customers) {
             if (customer.getUser_id().equals(customer_id)) {
                 base_customer = new Customer(customer.getUser_id(), customer.getFirst_name(), customer.getLast_name(),
-                        customer.getUser_name(), customer.getPassword(), null, customer.getAcount_type(),
-                        customer.getEmail());
+                        customer.getUser_name(), customer.getPassword(), customer.getCredit_card(),
+                        customer.getAcount_type(), customer.getEmail());
 
                 fill_with_base_customer();
                 return;
