@@ -6,8 +6,10 @@ import il.cshaifasweng.OCSFMediatorExample.entities.CartItem;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -55,6 +57,7 @@ public class NetWorkerCatalog {
         if (allItems != null) {
             if (allItems.size() != 0) {
                 Container.setMinHeight(allItems.size() * 90);      ///the height of the container is related to the amount of the items
+                ArrayList<TextField> newPrices =new ArrayList<>();
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #393E46");
@@ -64,7 +67,7 @@ public class NetWorkerCatalog {
                     } else {
                         moveRight = false;
                     }
-                    ArrayList<TextField> newPrices =new ArrayList<>();
+
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
                     imageview.setFitWidth(125);   //width of img
@@ -138,17 +141,26 @@ public class NetWorkerCatalog {
                     newPrice.setPromptText("New Price"); //to set the hint text
                     newPrice.getParent().requestFocus(); //to not setting the focus on that node so that the hint will display immediately
                     newPrices.add(newPrice);
+                    newPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue.matches("\\d*")) return;
+                        newPrice.setText(newValue.replaceAll("[^\\d]", ""));
+                    });
                     ////////////////////// buttons ///////////////////
                     Button updatePrice = new Button();
                     updatePrice.setText("Update Price");
                     updatePrice.setOnAction(e -> {
                         try {
                             int num = Integer.parseInt(((Button) e.getTarget()).getId());
+                            if(newPrices.get(num).getText().equals("")){
+                                showAlert("Eror","Please enter new price");
+                                return;
+                            }
                             updatePrice(allItems.get(num),Integer.parseInt(newPrices.get(num).getText()));
                             MsgClass newMsg = new MsgClass("#update Item",allItems.get(num));
                             SimpleClient.getClient().sendToServer(newMsg);
                             getAllitems();
                             App.setRoot("controllers/NetWorkerCatalog");
+                            showAlert("Success","Item price updated");
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -202,5 +214,15 @@ public class NetWorkerCatalog {
         }
         System.out.println(flower);
     }
-
+    public void showAlert(String title, String head) {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(title);
+                alert.setHeaderText(null);
+                alert.setContentText(head);
+                alert.showAndWait();
+            }
+        });
+    }
 }
