@@ -31,10 +31,10 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
     private CategoryAxis itemAxes2;
 
     @FXML
-    private BarChart<Integer, String> ordersChart1;
+    private BarChart<String, Integer> ordersChart1;
 
     @FXML
-    private BarChart<Integer, String> ordersChart2;
+    private BarChart<String, Integer> ordersChart2;
 
     @FXML
     private NumberAxis ordersNumAxes1;
@@ -81,7 +81,7 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
                 end_date = end_date2;
             }
 
-            XYChart.Series<Integer, String> series = new XYChart.Series<>();
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName("Orders Report");
 
             List<Order> orders_to_show = null;
@@ -110,14 +110,13 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
                             arr[i] += order.getOrderitems().get(k).getAmount();
 
 
-            for (int i=0;i<arr.length;i++) {
-                series.getData().add(new XYChart.Data<>(arr[i], all_items.get(i).getName()));
+            for (int i=0;i<arr.length;i++)
+                series.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
 
-                if (a==0)
-                    ordersChart1.getData().add(series);
-                else
-                    ordersChart2.getData().add(series);
-            }
+            if (a==0)
+                ordersChart1.getData().add(series);
+            else
+                ordersChart2.getData().add(series);
         }
 
     }

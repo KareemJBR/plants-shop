@@ -341,6 +341,7 @@ public class App extends Application {
             throws IOException{
 
         List<Report> all_reports = getAllReports();
+
         List<Report> reports_to_show = new ArrayList<>();
 
         if (is_admin) {

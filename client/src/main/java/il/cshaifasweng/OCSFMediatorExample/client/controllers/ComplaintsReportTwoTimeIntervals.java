@@ -20,10 +20,10 @@ import java.util.ResourceBundle;
 public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
     @FXML
-    private BarChart<Integer, String> complaintsChart1;
+    private BarChart<String, Number> complaintsChart1;
 
     @FXML
-    private BarChart<Integer, String> complaintsChart2;
+    private BarChart<String, Number> complaintsChart2;
 
     @FXML
     private NumberAxis complaintsNumAxes1;
@@ -60,7 +60,7 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         Calendar end_date2 = App.getReport_end_date2();
 
         for (int i=0; i<2; i++) {
-            XYChart.Series<Integer, String> series = new XYChart.Series<>();
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName("Complaints Report");
             Calendar start_date, end_date;
 
@@ -102,13 +102,13 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
                 String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
                         start_date.get(Calendar.YEAR);
 
-                series.getData().add(new XYChart.Data<>(k, col_name));
-
-                if (i == 0)
-                    complaintsChart1.getData().add(series);
-                else
-                    complaintsChart2.getData().add(series);
+                series.getData().add(new XYChart.Data<>(col_name, k));
             }
+
+            if (i == 0)
+                complaintsChart1.getData().add(series);
+            else
+                complaintsChart2.getData().add(series);
         }
 
     }
