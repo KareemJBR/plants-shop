@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import com.mysql.cj.log.Log;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -25,6 +26,7 @@ import javax.transaction.Transactional;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login_customer;
 
 
 /**
@@ -72,6 +74,8 @@ public class App extends Application {
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
     	EventBus.getDefault().unregister(this);
+        Login_customer.setOnline(false);
+        updateCustomer(Login_customer);
         client.closeConnection();
 		super.stop();
 	}
