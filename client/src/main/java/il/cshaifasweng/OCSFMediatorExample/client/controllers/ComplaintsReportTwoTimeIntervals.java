@@ -56,17 +56,17 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         Calendar start_date2 = App.getReport_start_date2();
         Calendar end_date2 = App.getReport_end_date2();
 
-        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
-                Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
 
-        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
-                Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
 
-        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
-                Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
+                Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
 
-        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
-                Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
 
         for (int i=0; i<2; i++) {
             XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -92,22 +92,22 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
             }
 
             int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
-
             assert reports_to_show != null;
             for (Report report : reports_to_show) {
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                calendar.set(report.getYear(), report.getMonth() - 1, report.getDay(),
+                        5, 0, 0);
 
-                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
                 arr[col_num]++;
             }
 
             for (int k : arr) {
 
-                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
-                        start_date.get(Calendar.YEAR);
+                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + (start_date.get(Calendar.MONTH) + 1) +
+                        "/" + start_date.get(Calendar.YEAR);
 
                 start_date.add(Calendar.DAY_OF_MONTH, 1);
 

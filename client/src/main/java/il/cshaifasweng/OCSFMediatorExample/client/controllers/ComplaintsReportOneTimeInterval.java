@@ -53,15 +53,18 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
         for (Report report : reports_to_show) {
 
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(report.getdate());
-            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+
+            calendar.set(report.getYear(), report.getMonth() - 1, report.getDay(),
+                    5, 0, 0);
+
+            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
             arr[col_num]++;
         }
 
         for (int j : arr) {
 
-            String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
+            String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + (start_date.get(Calendar.MONTH) + 1) + "/" +
                     start_date.get(Calendar.YEAR);
 
             start_date.add(Calendar.DAY_OF_MONTH, 1);

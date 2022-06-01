@@ -1,6 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import com.mysql.cj.log.Log;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,8 +19,6 @@ import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
-
-import javax.transaction.Transactional;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
@@ -298,8 +294,9 @@ public class App extends Application {
         int t_month = end_date.get(Calendar.MONTH);
         int t_year = end_date.get(Calendar.YEAR);
 
-        LocalDateTime date1 = LocalDateTime.of(s_year, s_month, s_day, 1, 0);
-        LocalDateTime date2 = LocalDateTime.of(t_year, t_month, t_day, 1, 0);
+        // month is saved in [0, 11] in Calendar unlike in LocalDate, so we have to add 1 to the month value
+        LocalDateTime date1 = LocalDateTime.of(s_year, s_month + 1, s_day, 1, 0);
+        LocalDateTime date2 = LocalDateTime.of(t_year, t_month + 1, t_day, 1, 0);
 
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 
@@ -314,11 +311,12 @@ public class App extends Application {
 
         if (is_admin) {
             for (Order all_order : all_orders) {
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&!all_order.isGot_cancelled())
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime())
+                        &&!all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
@@ -329,7 +327,7 @@ public class App extends Application {
                 if (all_order.getShop().getId() != shop_id || all_order.isGot_cancelled())
                     continue;
 
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
@@ -350,8 +348,8 @@ public class App extends Application {
 
         if (is_admin) {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
                     reports_to_show.add(report);
@@ -360,8 +358,8 @@ public class App extends Application {
 
         else {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (report.getShop().getId() != shop_id)
                     continue;
@@ -392,7 +390,6 @@ public class App extends Application {
         Date date = Date.from(instant);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.MONTH, 1);
         return calendar;
     }
 
@@ -468,11 +465,11 @@ public class App extends Application {
         support_worker_id_for_report = temp_id;
     }
 
-    public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,
-                                               int millisecond) {
+    public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,
+                                          int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
