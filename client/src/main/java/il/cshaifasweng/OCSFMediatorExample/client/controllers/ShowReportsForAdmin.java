@@ -63,7 +63,17 @@ public class ShowReportsForAdmin implements Initializable {
         if (comparisonOn.isSelected()) {
             fromC2 = App.localDateToCalendar(fromDate2.getValue());
             untilC2 = App.localDateToCalendar(untilDate2.getValue());
+
+            fromC2.set(Calendar.HOUR, 0);
+            fromC2.set(Calendar.MINUTE, 0);
+            untilC2.set(Calendar.HOUR, 23);
+            untilC2.set(Calendar.MINUTE, 59);
         }
+
+        fromC1.set(Calendar.HOUR, 0);
+        fromC1.set(Calendar.MINUTE, 0);
+        untilC1.set(Calendar.HOUR, 23);
+        untilC1.set(Calendar.MINUTE, 59);
 
         App.setReport_start_date1(fromC1);
         App.setReport_end_date1(untilC1);

@@ -92,7 +92,6 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
             }
 
             int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
-
             assert reports_to_show != null;
             for (Report report : reports_to_show) {
 

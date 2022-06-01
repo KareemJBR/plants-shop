@@ -1,6 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import com.mysql.cj.log.Log;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,8 +19,6 @@ import java.util.List;
 
 
 import org.greenrobot.eventbus.EventBus;
-
-import javax.transaction.Transactional;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
@@ -315,11 +311,12 @@ public class App extends Application {
 
         if (is_admin) {
             for (Order all_order : all_orders) {
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&!all_order.isGot_cancelled())
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime())
+                        &&!all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
@@ -330,7 +327,7 @@ public class App extends Application {
                 if (all_order.getShop().getId() != shop_id || all_order.isGot_cancelled())
                     continue;
 
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
@@ -351,9 +348,8 @@ public class App extends Application {
 
         if (is_admin) {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-
-                calendar.set(report.getYear(), report.getMonth(), report.getDay(), 0, 30, 0);
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
                     reports_to_show.add(report);
@@ -362,8 +358,8 @@ public class App extends Application {
 
         else {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(report.getYear(), report.getMonth(), report.getDay(), 0, 30, 0);
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (report.getShop().getId() != shop_id)
                     continue;
@@ -469,8 +465,8 @@ public class App extends Application {
         support_worker_id_for_report = temp_id;
     }
 
-    public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,
-                                               int millisecond) {
+    public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,
+                                          int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);

@@ -100,7 +100,7 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             assert orders_to_show != null;
             for (Order order : orders_to_show) {
 
-                Calendar calendar = App.getCalendarOfOrder(order.getOrder_year(), order.getOrder_month(),
+                Calendar calendar = App.createCalendar(order.getOrder_year(), order.getOrder_month(),
                         order.getOrder_day(), order.getOrder_hour(), order.getOrder_minute(), 0, 0);
 
                 int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;

@@ -58,7 +58,7 @@ public class IncomesReportOneTimeInterval implements Initializable {
             int order_hour = order.getOrder_hour();
             int order_minute = order.getOrder_minute();
 
-            Calendar calendar = App.getCalendarOfOrder(order_year, order_month, order_day, order_hour,
+            Calendar calendar = App.createCalendar(order_year, order_month, order_day, order_hour,
                     order_minute, 0, 0);
 
             int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
