@@ -57,6 +57,11 @@ public class LogIN {
 
 
     @FXML
+    void Cleanup ()
+    {
+        System.out.println("asssssssssssssssssssssssssss");
+    }
+    @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=false;
        App.setRoot("controllers/SignUp");
