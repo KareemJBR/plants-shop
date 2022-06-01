@@ -24,8 +24,8 @@ import java.util.List;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
+
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
 import javafx.stage.Stage;
 
@@ -117,6 +117,8 @@ public class ClientMainPage {
 
     @FXML
     void logOutBtn(ActionEvent event) throws IOException {
+        Login_customer.setOnline(false);
+        updateCustomer(Login_customer);
         App.setRoot("controllers/Login");
     }
 
