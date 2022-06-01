@@ -59,17 +59,17 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
         Calendar start_date;
         Calendar end_date;
 
-        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
-                Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
+                Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
 
-        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
-                Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
 
-        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
-                Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
 
-        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
-                Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
 
         ArrayList<Item> all_items = null;
 

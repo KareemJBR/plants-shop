@@ -61,7 +61,7 @@ public class IncomesReportOneTimeInterval implements Initializable {
             Calendar calendar = App.getCalendarOfOrder(order_year, order_month, order_day, order_hour,
                     order_minute, 0, 0);
 
-            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
             arr[col_num] += order.getPrice();
 
@@ -72,7 +72,7 @@ public class IncomesReportOneTimeInterval implements Initializable {
 
         for (int i=0;i<num_of_days;i++) {
 
-            String c_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
+            String c_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + (start_date.get(Calendar.MONTH) + 1) + "/" +
                     start_date.get(Calendar.YEAR);
 
             start_date.add(Calendar.DAY_OF_MONTH, 1);

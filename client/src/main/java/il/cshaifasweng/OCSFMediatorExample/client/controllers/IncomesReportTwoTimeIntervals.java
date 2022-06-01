@@ -50,26 +50,26 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        boolean is_admin = App.getIsAdmin();
+
+        Calendar start_date1 = App.getReport_start_date1();
+        Calendar end_date1 = App.getReport_end_date1();
+        Calendar start_date2 = App.getReport_start_date2();
+        Calendar end_date2 = App.getReport_end_date2();
+
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
+
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
+                Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
+
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
+
         for (int i=0;i<2;i++) {
-
-            boolean is_admin = App.getIsAdmin();
-
-            Calendar start_date1 = App.getReport_start_date1();
-            Calendar end_date1 = App.getReport_end_date1();
-            Calendar start_date2 = App.getReport_start_date2();
-            Calendar end_date2 = App.getReport_end_date2();
-
-            startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + start_date1.get(
-                    Calendar.MONTH) + "/" + start_date1.get(Calendar.YEAR));
-
-            startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + start_date2.get(
-                    Calendar.MONTH) + "/" + start_date2.get(Calendar.YEAR));
-
-            endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + end_date1.get(
-                    Calendar.MONTH) + "/" + end_date1.get(Calendar.YEAR));
-
-            endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + end_date2.get(
-                    Calendar.MONTH) + "/" + end_date2.get(Calendar.YEAR));
 
             XYChart.Series<String, Double> series = new XYChart.Series<>();
             series.setName("Incomes Report");
@@ -103,7 +103,7 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                 Calendar calendar = App.getCalendarOfOrder(order.getOrder_year(), order.getOrder_month(),
                         order.getOrder_day(), order.getOrder_hour(), order.getOrder_minute(), 0, 0);
 
-                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
                 arr[col_num] += order.getPrice();
 
@@ -114,7 +114,7 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
 
             for (Double aDouble : arr) {
                 series.getData().add(new XYChart.Data<>(start_date.get(Calendar.DAY_OF_MONTH) + "/" +
-                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR), aDouble));
+                        (start_date.get(Calendar.MONTH) + 1) + "/" + start_date.get(Calendar.YEAR), aDouble));
 
                 start_date.add(Calendar.DAY_OF_MONTH, 1);
             }

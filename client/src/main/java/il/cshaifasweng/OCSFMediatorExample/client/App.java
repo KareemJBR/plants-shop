@@ -298,8 +298,9 @@ public class App extends Application {
         int t_month = end_date.get(Calendar.MONTH);
         int t_year = end_date.get(Calendar.YEAR);
 
-        LocalDateTime date1 = LocalDateTime.of(s_year, s_month, s_day, 1, 0);
-        LocalDateTime date2 = LocalDateTime.of(t_year, t_month, t_day, 1, 0);
+        // month is saved in [0, 11] in Calendar unlike in LocalDate, so we have to add 1 to the month value
+        LocalDateTime date1 = LocalDateTime.of(s_year, s_month + 1, s_day, 1, 0);
+        LocalDateTime date2 = LocalDateTime.of(t_year, t_month + 1, t_day, 1, 0);
 
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 
@@ -351,7 +352,8 @@ public class App extends Application {
         if (is_admin) {
             for (Report report : all_reports) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+
+                calendar.set(report.getYear(), report.getMonth(), report.getDay(), 0, 30, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
                     reports_to_show.add(report);
@@ -361,7 +363,7 @@ public class App extends Application {
         else {
             for (Report report : all_reports) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                calendar.set(report.getYear(), report.getMonth(), report.getDay(), 0, 30, 0);
 
                 if (report.getShop().getId() != shop_id)
                     continue;
@@ -392,7 +394,6 @@ public class App extends Application {
         Date date = Date.from(instant);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.MONTH, 1);
         return calendar;
     }
 
@@ -472,7 +473,7 @@ public class App extends Application {
                                                int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
