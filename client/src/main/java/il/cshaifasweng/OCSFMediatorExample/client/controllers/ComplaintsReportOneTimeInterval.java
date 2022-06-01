@@ -54,7 +54,6 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(report.getdate());
-
             int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
 
             arr[col_num]++;
