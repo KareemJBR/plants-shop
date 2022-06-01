@@ -2,14 +2,10 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.ShopAdmin;
 import javafx.application.Platform;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.SupportWorker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -58,6 +54,7 @@ public class LogIN {
 
     @FXML // fx:id="visiblePassword"
     private TextField visiblePassword; // Value injected by FXMLLoader
+
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
