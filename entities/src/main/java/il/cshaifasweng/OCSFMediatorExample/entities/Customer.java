@@ -32,6 +32,9 @@ public class Customer  implements Serializable {
     @Column(name = "customer_email")
     private String customer_email;
 
+    @Column(name = "online")
+    private boolean online=false;
+
 
     @OneToMany(mappedBy = "customer")
     private List<Order> customerOrders =new ArrayList<>();
@@ -52,6 +55,7 @@ public class Customer  implements Serializable {
         this.credit_card=credit_card;
         this.acount_type=account_type;
         this.customer_email=customer_email;
+        online=false;
     }
 
     @Deprecated
@@ -88,6 +92,14 @@ public class Customer  implements Serializable {
     }
     public String getAcount_type(){
         return this.acount_type;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 
     public void setFirst_name(String first_name){

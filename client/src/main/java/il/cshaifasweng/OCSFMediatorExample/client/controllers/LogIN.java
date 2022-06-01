@@ -85,11 +85,20 @@ public class LogIN {
         if(customers!=null)
             for (Customer customer : customers)
                 if (customer.getUser_name().equals(userName.getText()) && customer.getPassword().equals(current)) {
-                    LoginClient_username = customer.getUser_name();
-                    LoginClient_userId = customer.getUser_id();
-                    LoginClient_acount_type = customer.getAcount_type();
-                    Login_customer = customer;
-                    App.setRoot("controllers/ClientMainPage");
+                    if(!customer.isOnline())
+                    {
+                        LoginClient_username = customer.getUser_name();
+                        LoginClient_userId = customer.getUser_id();
+                        LoginClient_acount_type = customer.getAcount_type();
+                        Login_customer = customer;
+                        customer.setOnline(true);
+                        updateCustomer(customer);
+                        App.setRoot("controllers/ClientMainPage");
+                    }
+                    else
+                    {
+                        App.showAlert("ERROR","Your account is currently logged onto another device. Please log out of the other device or contact your administrator");
+                    }
                     return;
                 }
 
