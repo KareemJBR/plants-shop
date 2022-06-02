@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextArea?>
@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.chart.LineChart?>
 <AnchorPane prefHeight="559.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportTwoTimeIntervals">
     <children>
         <LineChart fx:id="ordersChart2" layoutX="454.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Orders Report">
@@ -18,7 +17,7 @@
                 <CategoryAxis fx:id="itemAxes2" label="Item" side="BOTTOM" />
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="ordersNumAxes2" label="Orders" side="LEFT" />
+                <NumberAxis fx:id="ordersNumAxes2" label="Sold Amount" side="LEFT" />
             </yAxis>
         </LineChart>
         <LineChart fx:id="ordersChart1" layoutX="14.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Orders Report">
@@ -26,7 +25,7 @@
                 <CategoryAxis fx:id="itemAxes1" label="Item" side="BOTTOM" />
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="ordersNumAxes1" label="Orders" side="LEFT" />
+                <NumberAxis fx:id="ordersNumAxes1" label="Sold Amount" side="LEFT" />
             </yAxis>
         </LineChart>
         <Line endY="212.80001831054688" layoutX="453.0" layoutY="336.0" startY="-322.0" />

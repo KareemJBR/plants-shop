@@ -115,7 +115,7 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
             for (int i=0;i<=all_items.size()-1;i++)
                 for (Order order : orders_to_show)
                     for (int k = 0; k < order.getOrderitems().size(); k++)
-                        if (order.getOrderitems().get(k).getId() == all_items.get(i).getId())
+                        if (order.getOrderitems().get(k).getItem().getId() == all_items.get(i).getId())
                             arr[i] += order.getOrderitems().get(k).getAmount();
 
 
