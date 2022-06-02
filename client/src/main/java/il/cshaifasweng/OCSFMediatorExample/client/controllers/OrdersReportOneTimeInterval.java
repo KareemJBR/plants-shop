@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import il.cshaifasweng.OCSFMediatorExample.entities.OrderItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getOrderItems;
 
 
 public class OrdersReportOneTimeInterval implements Initializable {
@@ -60,12 +63,23 @@ public class OrdersReportOneTimeInterval implements Initializable {
         assert all_items != null;
         int[] arr = new int[all_items.size()];
         Arrays.fill(arr, 0);
-
+        List<OrderItem> orderItems=null;
         for (int i=0;i<all_items.size();i++)
+        {
             for (Order order : orders_to_show)
-                for (int k = 0; k < order.getOrderitems().size(); k++)
-                    if (order.getOrderitems().get(k).getItem().getId() == all_items.get(i).getId())
-                        arr[i] += order.getOrderitems().get(k).getAmount();
+            {
+                try {
+                    orderItems= getOrderItems(order.getId());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                for (int k = 0; k < orderItems.size(); k++)
+                    if (orderItems.get(k).getItem().getId() == all_items.get(i).getId())
+                        arr[i] += orderItems.get(k).getAmount();
+            }
+
+        }
+
 
 
         for (int i=0;i<arr.length;i++)
