@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class LogIN {
     public static ShopAdmin Login_shopAdmin;
     String  current;
     String password_status="invisible";
+
     @FXML // fx:id="Password"
     private PasswordField Password; // Value injected by FXMLLoader
 
@@ -55,12 +58,11 @@ public class LogIN {
     @FXML // fx:id="visiblePassword"
     private TextField visiblePassword; // Value injected by FXMLLoader
 
-
-    @FXML
-    void Cleanup ()
-    {
-        System.out.println("asssssssssssssssssssssssssss");
-    }
+  @FXML
+  void initialize()
+  {
+      logInBtn.setStyle("-fx-background-color:#4ea7f6;-fx-background-radius:25");
+  }
     @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=false;
