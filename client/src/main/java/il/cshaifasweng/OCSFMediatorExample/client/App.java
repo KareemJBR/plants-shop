@@ -45,6 +45,10 @@ public class App extends Application {
     private static boolean is_admin;
     private static int shop_id;
     private static int report_id_for_client_service;
+    private static String support_worker_id_for_report;
+    private static Item edit_item;
+    private static Item edit_item_for_NW;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -111,7 +115,15 @@ public class App extends Application {
         return (Customer)currentCustomerData;
     }
 
-
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get shop items", null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (allItemsData == null) {System.out.println("waiting for server8");}
+        items = (ArrayList<Item>) allItemsData;
+        return items;
+    }
 
     public static  ArrayList<Item> getAllitems() throws IOException {
         ArrayList<Item> items=new ArrayList<Item>();
@@ -205,6 +217,7 @@ public class App extends Application {
         return orders;
     }
 
+
     public  static List<OrderItem> getOrderItems(int orderId) throws IOException {
         List<OrderItem> orderItems=new ArrayList<OrderItem>();
         MsgClass msg=new MsgClass("#get orderItems",null);
@@ -225,6 +238,7 @@ public class App extends Application {
         items = (ArrayList<Item>) allItemsData;
         return items;
     }
+
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
         ArrayList<SupportWorker> support_workers = new ArrayList<SupportWorker>();
@@ -463,6 +477,23 @@ public class App extends Application {
 
     public static void setReport_id_for_client_service(int report_id) {
         report_id_for_client_service = report_id;
+    }
+
+
+    public static String getSupport_worker_id_for_report() {
+        return support_worker_id_for_report;
+    }
+
+    public static void setSupport_worker_id_for_report(String temp_id) {
+        support_worker_id_for_report = temp_id;
+    }
+
+    public static Item getEdit_item() {
+        return edit_item;
+    }
+
+    public static void setEdit_item(Item edit_item) {
+        App.edit_item = edit_item;
     }
 
     public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,

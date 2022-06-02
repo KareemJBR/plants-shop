@@ -40,6 +40,7 @@ public class Item implements Serializable {
             this.price=(int)(original_price*(1-salePercent));
         }
         else {
+            salePercent=0;
             this.price = original_price;
         }
 
@@ -119,9 +120,9 @@ public class Item implements Serializable {
         return salePercent;
     }
 
-    public void setSalePercent(int salePercent) {
+    public void setSalePercent(double salePercent) {
         this.salePercent = salePercent;
-        this.price=this.Original_price*(1-salePercent);
+        this.price=(int)(this.Original_price*(1-salePercent));
     }
 
     public int getPriceAfterSale() {
