@@ -8,16 +8,23 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 
 
 import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.CartItemsdata;
@@ -177,8 +184,13 @@ public class Cart<T> {
                     price.setLayoutX(100);
                     price.setLayoutY(28);
 
+
                     ///////// type textfield ///////////
-                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getOriginal_price());
+                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice());
+                    if(cartItems.get(i).getItem().isUnderSale())
+                    {
+                        type.setText("Price after discount: " +cartItems.get(i).getItem().getPrice());
+                    }
                     type.setStyle("-fx-background-color:none");
                     type.setLayoutX(100);
                     type.setLayoutY(48);

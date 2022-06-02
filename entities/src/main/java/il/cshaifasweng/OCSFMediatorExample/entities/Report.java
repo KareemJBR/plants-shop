@@ -4,6 +4,9 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 @Entity
@@ -171,6 +174,29 @@ public class Report implements Serializable {
         Date date = new Date(this.reportDate)  ;
         return date;
     }
+
+    public int getDay()
+    {
+        String[] date=this.reportDate.split("/");
+        int day= Integer.parseInt(date[0]);
+        return day;
+    }
+
+    public int getMonth()
+    {
+        String[] date=this.reportDate.split("/");
+        int month= Integer.parseInt(date[1]);
+        return month;
+    }
+
+    public int getYear()
+    {
+        String[] date=this.reportDate.split("/");
+        int year= Integer.parseInt(date[2]);
+        return year;
+    }
+
+
 
 
 }

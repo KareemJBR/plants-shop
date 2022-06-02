@@ -5,11 +5,9 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -19,24 +17,23 @@ import java.util.ResourceBundle;
 
 public class IncomesReportOneTimeInterval implements Initializable {
 
-    @FXML
-    private CategoryAxis dayAxes;
+    private Calendar start_date;
+    private Calendar end_date;
+
+    private XYChart.Series<String, Number> series;
 
     @FXML
-    private NumberAxis incomesNumAxes;
-
-    @FXML
-    private BarChart<Double, String> reportsChart;
+    private LineChart<String, Number> reportsChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         boolean is_admin = App.getIsAdmin();
         int shop_id = App.getShopID();
-        Calendar start_date = App.getReport_start_date1();
-        Calendar end_date = App.getReport_end_date1();
+        start_date = App.getReport_start_date1();
+        end_date = App.getReport_end_date1();
 
-        XYChart.Series<Double, String> series = new XYChart.Series<>();
+        series = new XYChart.Series<>();
         series.setName("Incomes Report");
 
         List<Order> orders_to_show = null;
@@ -61,10 +58,10 @@ public class IncomesReportOneTimeInterval implements Initializable {
             int order_hour = order.getOrder_hour();
             int order_minute = order.getOrder_minute();
 
-            Calendar calendar = App.getCalendarOfOrder(order_year, order_month, order_day, order_hour,
+            Calendar calendar = App.createCalendar(order_year, order_month, order_day, order_hour,
                     order_minute, 0, 0);
 
-            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+            int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
             arr[col_num] += order.getPrice();
 
@@ -73,16 +70,17 @@ public class IncomesReportOneTimeInterval implements Initializable {
                 arr[col_num] -= order.getRefund();
         }
 
-        start_date.add(Calendar.DAY_OF_MONTH, -1);
-
         for (int i=0;i<num_of_days;i++) {
 
-            String c_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
+            String c_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + (start_date.get(Calendar.MONTH) + 1) + "/" +
                     start_date.get(Calendar.YEAR);
 
-            series.getData().add(new XYChart.Data<>(arr[i], c_name));
-            reportsChart.getData().add(series);
+            start_date.add(Calendar.DAY_OF_MONTH, 1);
+
+            series.getData().add(new XYChart.Data<>(c_name, arr[i]));
         }
+
+        reportsChart.getData().add(series);
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
@@ -90,5 +88,9 @@ public class IncomesReportOneTimeInterval implements Initializable {
             App.setRoot("controllers/ShowReportsForAdmin");
         else
             App.setRoot("controllers/ShowReportsForShopAdmin");
+    }
+
+    public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Incomes", start_date, end_date, "Datem, Incomes", series);
     }
 }

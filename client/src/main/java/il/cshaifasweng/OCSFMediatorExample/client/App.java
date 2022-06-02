@@ -6,12 +6,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,10 +24,9 @@ import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
 
-import javax.transaction.Transactional;
-
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login_customer;
 
 
 /**
@@ -47,9 +49,10 @@ public class App extends Application {
     private static Item edit_item;
     private static Item edit_item_for_NW;
 
+
     @Override
     public void start(Stage stage) throws IOException {
-       // EventBus.getDefault().register(this);
+        // EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
 //        MsgClass msg =new MsgClass("#get customers",null);
@@ -74,6 +77,11 @@ public class App extends Application {
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
     	EventBus.getDefault().unregister(this);
+        if(Login_customer!=null)
+        {
+            Login_customer.setOnline(false);
+            updateCustomer(Login_customer);
+        }
         client.closeConnection();
 		super.stop();
 	}
@@ -97,6 +105,8 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#customerDelete", customer);
         SimpleClient.getClient().sendToServer(msg);
     }
+
+
     public static  Customer getCurrentCustomer() throws IOException {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
         currentCustomerData = null;
@@ -208,17 +218,27 @@ public class App extends Application {
     }
 
 
-
-    public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
-        List<OrderItem> orderitems=new ArrayList<OrderItem>();
-        MsgClass msg = new MsgClass("#get orderItems", null);
+    public  static List<OrderItem> getOrderItems(int orderId) throws IOException {
+        List<OrderItem> orderItems=new ArrayList<OrderItem>();
+        MsgClass msg=new MsgClass("#get orderItems",null);
         OrderItemData=null;
         msg.setObj(orderId);
         SimpleClient.getClient().sendToServer(msg);
-        while (OrderItemData == null) {System.out.println("waiting for server9");}
-        orderitems = (List<OrderItem>) OrderItemData;
-        return orderitems;
+        while (OrderItemData==null){System.out.println("waiting for server11");}
+        orderItems=(List<OrderItem>) OrderItemData;
+        return orderItems;
     }
+
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get allItems", null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (allItemsData == null) {System.out.println("waiting for server8");}
+        items = (ArrayList<Item>) allItemsData;
+        return items;
+    }
+
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
         ArrayList<SupportWorker> support_workers = new ArrayList<SupportWorker>();
@@ -296,8 +316,9 @@ public class App extends Application {
         int t_month = end_date.get(Calendar.MONTH);
         int t_year = end_date.get(Calendar.YEAR);
 
-        LocalDateTime date1 = LocalDateTime.of(s_year, s_month, s_day, 1, 0);
-        LocalDateTime date2 = LocalDateTime.of(t_year, t_month, t_day, 1, 0);
+        // month is saved in [0, 11] in Calendar unlike in LocalDate, so we have to add 1 to the month value
+        LocalDateTime date1 = LocalDateTime.of(s_year, s_month + 1, s_day, 1, 0);
+        LocalDateTime date2 = LocalDateTime.of(t_year, t_month + 1, t_day, 1, 0);
 
         long daysBetween = ChronoUnit.DAYS.between(date1, date2);
 
@@ -312,11 +333,12 @@ public class App extends Application {
 
         if (is_admin) {
             for (Order all_order : all_orders) {
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
-                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()) &&!all_order.isGot_cancelled())
+                if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime())
+                        &&!all_order.isGot_cancelled())
                     orders_to_show.add(all_order);
             }
         }
@@ -327,7 +349,7 @@ public class App extends Application {
                 if (all_order.getShop().getId() != shop_id || all_order.isGot_cancelled())
                     continue;
 
-                Calendar calendar = App.getCalendarOfOrder(all_order.getOrder_year(), all_order.getOrder_month(),
+                Calendar calendar = App.createCalendar(all_order.getOrder_year(), all_order.getOrder_month(),
                         all_order.getOrder_day(), all_order.getOrder_hour(),
                         all_order.getOrder_minute(), 0, 0);
 
@@ -343,12 +365,13 @@ public class App extends Application {
             throws IOException{
 
         List<Report> all_reports = getAllReports();
+
         List<Report> reports_to_show = new ArrayList<>();
 
         if (is_admin) {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (calendar.getTime().after(start_date.getTime()) && calendar.getTime().before(end_date.getTime()))
                     reports_to_show.add(report);
@@ -357,8 +380,8 @@ public class App extends Application {
 
         else {
             for (Report report : all_reports) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                Calendar calendar = App.createCalendar(report.getYear(), report.getMonth(),
+                        report.getDay(), 2, 0, 0, 0);
 
                 if (report.getShop().getId() != shop_id)
                     continue;
@@ -456,6 +479,7 @@ public class App extends Application {
         report_id_for_client_service = report_id;
     }
 
+
     public static String getSupport_worker_id_for_report() {
         return support_worker_id_for_report;
     }
@@ -472,11 +496,11 @@ public class App extends Application {
         App.edit_item = edit_item;
     }
 
-    public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,
-                                              int millisecond) {
+    public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,
+                                          int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
@@ -484,6 +508,42 @@ public class App extends Application {
         calendar.set(Calendar.MILLISECOND, millisecond);
 
         return calendar;
+    }
+
+    public static void createCSVFile(String name_prefix, Calendar start_date, Calendar end_date, String first_line,
+                                     XYChart.Series<String, Number> data) throws FileNotFoundException {
+        String file_name = App.getCSVFileName(name_prefix, start_date, end_date);
+        File csv_file = new File(file_name);
+        PrintWriter out = new PrintWriter(csv_file);
+
+        out.println(first_line);
+
+        for (int i=0;i<data.getData().size();i++)
+            out.println(data.getData().get(i).XValueProperty().get() + ", " +
+                    data.getData().get(i).YValueProperty().get());
+
+        out.close();
+        showAlert("Success", file_name + " successfully created.");
+    }
+
+    public static String getCSVFileName(String prefix, Calendar start_date, Calendar end_date) {
+        String res = prefix;
+        if (start_date.get(Calendar.DAY_OF_MONTH) < 10)
+            res += "0";
+        res += start_date.get(Calendar.DAY_OF_MONTH);
+        if (start_date.get(Calendar.MONTH) < 10)
+            res += "0";
+        res += start_date.get(Calendar.MONTH);
+        res += start_date.get(Calendar.YEAR);
+        res += "To";
+
+        if (end_date.get(Calendar.DAY_OF_MONTH) < 10)
+            res += "0";
+        res += end_date.get(Calendar.DAY_OF_MONTH);
+        if (end_date.get(Calendar.MONTH) < 10)
+            res += "0";
+        res += end_date.get(Calendar.MONTH) + ".csv";
+        return res + end_date.get(Calendar.YEAR);
     }
 
 }

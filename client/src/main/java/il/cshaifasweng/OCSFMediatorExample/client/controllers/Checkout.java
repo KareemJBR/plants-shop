@@ -121,8 +121,7 @@ public class Checkout {
             }
             else if(hour>20)
             {
-                LocalDate date=LocalDate.of(datew.getValue().getYear(), datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth()+1);
-                datew.setValue(date);
+                datew.setValue(datew.getValue().plusDays(1));
             }
         }
         Hour.getItems().addAll("08","09","10","11","12","13","14","15","16","17","18","19","20");

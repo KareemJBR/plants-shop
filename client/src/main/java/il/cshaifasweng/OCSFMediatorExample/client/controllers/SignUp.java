@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 
@@ -305,11 +306,6 @@ public class SignUp {
             ShopsCombo.setVisible(false);
             ShopsCombo.setDisable(true);
         }
-    }
-
-    @Subscribe
-    public void onMessageEvent(MsgClass msg) {
-
     }
 
 

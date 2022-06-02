@@ -5,12 +5,10 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -19,23 +17,20 @@ import java.util.ResourceBundle;
 
 public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
-    @FXML
-    private BarChart<Integer, String> complaintsChart1;
+    private Calendar start_date1;
+    private Calendar end_date1;
+
+    private Calendar start_date2;
+    private Calendar end_date2;
+
+    private XYChart.Series<String, Number> series1;
+    private XYChart.Series<String, Number> series2;
 
     @FXML
-    private BarChart<Integer, String> complaintsChart2;
+    private LineChart<String, Number> complaintsChart1;
 
     @FXML
-    private NumberAxis complaintsNumAxes1;
-
-    @FXML
-    private NumberAxis complaintsNumAxes2;
-
-    @FXML
-    private CategoryAxis dayAxes1;
-
-    @FXML
-    private CategoryAxis dayAxes2;
+    private LineChart<String, Number> complaintsChart2;
 
     @FXML
     private TextArea endDate1;
@@ -59,9 +54,25 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         Calendar start_date2 = App.getReport_start_date2();
         Calendar end_date2 = App.getReport_end_date2();
 
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
+
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
+                Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
+
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
+
+        series1 = new XYChart.Series<>();
+        series2 = new XYChart.Series<>();
+
+        series1.setName("Complaints Report");
+        series2.setName("Complaints Report");
+
         for (int i=0; i<2; i++) {
-            XYChart.Series<Integer, String> series = new XYChart.Series<>();
-            series.setName("Complaints Report");
             Calendar start_date, end_date;
 
             if (i==0){
@@ -83,37 +94,48 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
             }
 
             int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
-
             assert reports_to_show != null;
             for (Report report : reports_to_show) {
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(report.getdate());
+                calendar.set(report.getYear(), report.getMonth() - 1, report.getDay(),
+                        5, 0, 0);
 
-                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
                 arr[col_num]++;
             }
 
-            start_date.add(Calendar.DAY_OF_MONTH, -1);
-
             for (int k : arr) {
 
-                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + start_date.get(Calendar.MONTH) + "/" +
-                        start_date.get(Calendar.YEAR);
+                String col_name = start_date.get(Calendar.DAY_OF_MONTH) + "/" + (start_date.get(Calendar.MONTH) + 1) +
+                        "/" + start_date.get(Calendar.YEAR);
 
-                series.getData().add(new XYChart.Data<>(k, col_name));
+                start_date.add(Calendar.DAY_OF_MONTH, 1);
 
-                if (i == 0)
-                    complaintsChart1.getData().add(series);
+                if (i==0)
+                    series1.getData().add(new XYChart.Data<>(col_name, k));
                 else
-                    complaintsChart2.getData().add(series);
+                    series2.getData().add(new XYChart.Data<>(col_name, k));
             }
+
+            if (i == 0)
+                complaintsChart1.getData().add(series1);
+            else
+                complaintsChart2.getData().add(series2);
         }
 
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         App.setRoot("controllers/ShowReportsForAdmin");
+    }
+
+    public void downloadCSVFile1(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Complaints", start_date1, end_date1, "Date, Num of Complaints", series1);
+    }
+
+    public void downloadCSVFile2(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Complaints", start_date2, end_date2, "Date, Num of Complaints", series2);
     }
 }

@@ -196,8 +196,9 @@ public class ClientOrders {
                     ////////// Ship to ////////////
                     TextField shipto=new TextField(orders.get(i).getShipping_address());
                     shipto.setEditable(false);
+                    shipto.setMaxWidth(85);
                     shipto.setStyle("-fx-background-color:none");
-                    shipto.setLayoutX(240);
+                    shipto.setLayoutX(228);
                     shipto.setLayoutY(12.5);
                     pane.getChildren().add(shipto);
 
@@ -262,6 +263,7 @@ public class ClientOrders {
                         try {
                             cancelOrder(num, finalRefund);
                             loadPage();
+                            App.showAlert("order cancelled","order cancelled successfully, you got "+ finalRefund +" refund.");
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }

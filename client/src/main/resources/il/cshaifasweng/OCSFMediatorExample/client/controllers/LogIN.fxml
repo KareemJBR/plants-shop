@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="PASSWORD_FIELD" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
+<AnchorPane fx:id="controller" accessibleRole="PASSWORD_FIELD" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
    <children>
       <TextField fx:id="userName" layoutX="200.0" layoutY="156.0" prefHeight="36.0" prefWidth="255.0" promptText="username" style="-fx-background-radius: 15;">
          <font>
@@ -20,7 +20,7 @@
             <Font name="Arial" size="15.0" />
          </font>
       </PasswordField>
-      <CheckBox fx:id="showPassword" layoutX="467.0" layoutY="198.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
+      <CheckBox fx:id="showPassword" layoutX="466.0" layoutY="203.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
       <Button fx:id="logInBtn" layoutX="269.0" layoutY="273.0" mnemonicParsing="false" onAction="#logIN" prefHeight="36.0" prefWidth="118.0" style="-fx-background-radius: 25;" text="Login">
          <font>
             <Font size="15.0" />

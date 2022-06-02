@@ -2,17 +2,15 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
-import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import il.cshaifasweng.OCSFMediatorExample.entities.NetWorker;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.ShopAdmin;
 import javafx.application.Platform;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.SupportWorker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +33,7 @@ public class LogIN {
     public static ShopAdmin Login_shopAdmin;
     String  current;
     String password_status="invisible";
+
     @FXML // fx:id="Password"
     private PasswordField Password; // Value injected by FXMLLoader
 
@@ -59,6 +58,11 @@ public class LogIN {
     @FXML // fx:id="visiblePassword"
     private TextField visiblePassword; // Value injected by FXMLLoader
 
+  @FXML
+  void initialize()
+  {
+      logInBtn.setStyle("-fx-background-color:#4ea7f6;-fx-background-radius:25");
+  }
     @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=false;
@@ -85,11 +89,20 @@ public class LogIN {
         if(customers!=null)
             for (Customer customer : customers)
                 if (customer.getUser_name().equals(userName.getText()) && customer.getPassword().equals(current)) {
-                    LoginClient_username = customer.getUser_name();
-                    LoginClient_userId = customer.getUser_id();
-                    LoginClient_acount_type = customer.getAcount_type();
-                    Login_customer = customer;
-                    App.setRoot("controllers/ClientMainPage");
+                    if(!customer.isOnline())
+                    {
+                        LoginClient_username = customer.getUser_name();
+                        LoginClient_userId = customer.getUser_id();
+                        LoginClient_acount_type = customer.getAcount_type();
+                        Login_customer = customer;
+                        customer.setOnline(true);
+                        updateCustomer(customer);
+                        App.setRoot("controllers/ClientMainPage");
+                    }
+                    else
+                    {
+                        App.showAlert("ERROR","Your account is currently logged onto another device. Please log out of the other device or contact your administrator");
+                    }
                     return;
                 }
 

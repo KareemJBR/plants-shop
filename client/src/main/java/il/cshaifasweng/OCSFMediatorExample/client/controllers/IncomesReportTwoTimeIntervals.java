@@ -5,12 +5,10 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -21,11 +19,13 @@ import java.util.ResourceBundle;
 
 public class IncomesReportTwoTimeIntervals implements Initializable {
 
-    @FXML
-    private CategoryAxis dayAxes1;
+    private Calendar start_date1;
+    private Calendar start_date2;
+    private Calendar end_date1;
+    private Calendar end_date2;
 
-    @FXML
-    private CategoryAxis dayAxes2;
+    private XYChart.Series<String, Number> series1;
+    private XYChart.Series<String, Number> series2;
 
     @FXML
     private TextArea endDate1;
@@ -34,16 +34,10 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
     private TextArea endDate2;
 
     @FXML
-    private BarChart<Double, String> incomesChart1;
+    private LineChart<String, Number> incomesChart1;
 
     @FXML
-    private BarChart<Double, String> incomesChart2;
-
-    @FXML
-    private NumberAxis incomesNumAxes1;
-
-    @FXML
-    private NumberAxis incomesNumAxes2;
+    private LineChart<String, Number> incomesChart2;
 
     @FXML
     private TextArea startDate1;
@@ -53,17 +47,32 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        boolean is_admin = App.getIsAdmin();
+
+        start_date1 = App.getReport_start_date1();
+        end_date1 = App.getReport_end_date1();
+        start_date2 = App.getReport_start_date2();
+        end_date2 = App.getReport_end_date2();
+
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
+
+        endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
+                Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
+
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
+
+        series1 = new XYChart.Series<>();
+        series2 = new XYChart.Series<>();
+
+        series1.setName("Incomes Report");
+        series2.setName("Incomes Report");
+
         for (int i=0;i<2;i++) {
-
-            boolean is_admin = App.getIsAdmin();
-
-            Calendar start_date1 = App.getReport_start_date1();
-            Calendar end_date1 = App.getReport_end_date1();
-            Calendar start_date2 = App.getReport_start_date2();
-            Calendar end_date2 = App.getReport_end_date2();
-
-            XYChart.Series<Double, String> series = new XYChart.Series<>();
-            series.setName("Incomes Report");
 
             Calendar start_date, end_date;
 
@@ -91,10 +100,10 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             assert orders_to_show != null;
             for (Order order : orders_to_show) {
 
-                Calendar calendar = App.getCalendarOfOrder(order.getOrder_year(), order.getOrder_month(),
+                Calendar calendar = App.createCalendar(order.getOrder_year(), order.getOrder_month(),
                         order.getOrder_day(), order.getOrder_hour(), order.getOrder_minute(), 0, 0);
 
-                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar);
+                int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
 
                 arr[col_num] += order.getPrice();
 
@@ -103,21 +112,33 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
                     arr[col_num] -= order.getRefund();
             }
 
-            start_date.add(Calendar.DAY_OF_MONTH, -1);
-
             for (Double aDouble : arr) {
-                series.getData().add(new XYChart.Data<>(aDouble, start_date.get(Calendar.DAY_OF_MONTH) + "/" +
-                        start_date.get(Calendar.MONTH) + "/" + start_date.get(Calendar.YEAR)));
-
-                if (i == 0)
-                    incomesChart1.getData().add(series);
+                if (i==0)
+                    series1.getData().add(new XYChart.Data<>(start_date.get(Calendar.DAY_OF_MONTH) + "/" +
+                        (start_date.get(Calendar.MONTH) + 1) + "/" + start_date.get(Calendar.YEAR), aDouble));
                 else
-                    incomesChart2.getData().add(series);
+                    series2.getData().add(new XYChart.Data<>(start_date.get(Calendar.DAY_OF_MONTH) + "/" +
+                            (start_date.get(Calendar.MONTH) + 1) + "/" + start_date.get(Calendar.YEAR), aDouble));
+
+                start_date.add(Calendar.DAY_OF_MONTH, 1);
             }
+
+            if (i == 0)
+                incomesChart1.getData().add(series1);
+            else
+                incomesChart2.getData().add(series2);
         }
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         App.setRoot("controllers/ShowReportsForAdmin");
+    }
+
+    public void downloadCSVFile1(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Incomes", start_date1, end_date1, "Date, Incomes", series1);
+    }
+
+    public void downloadCSVFile2(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Incomes", start_date2, end_date2, "Date, Incomes", series2);
     }
 }
