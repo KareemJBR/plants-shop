@@ -49,10 +49,10 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
         boolean is_admin = App.getIsAdmin();
 
-        Calendar start_date1 = App.getReport_start_date1();
-        Calendar end_date1 = App.getReport_end_date1();
-        Calendar start_date2 = App.getReport_start_date2();
-        Calendar end_date2 = App.getReport_end_date2();
+        start_date1 = App.getReport_start_date1();
+        end_date1 = App.getReport_end_date1();
+        start_date2 = App.getReport_start_date2();
+        end_date2 = App.getReport_end_date2();
 
         startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
                 Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
