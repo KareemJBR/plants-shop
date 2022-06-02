@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.TextArea;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
@@ -16,23 +17,20 @@ import java.util.ResourceBundle;
 
 public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
+    private Calendar start_date1;
+    private Calendar end_date1;
+
+    private Calendar start_date2;
+    private Calendar end_date2;
+
+    private XYChart.Series<String, Number> series1;
+    private XYChart.Series<String, Number> series2;
+
     @FXML
     private LineChart<String, Number> complaintsChart1;
 
     @FXML
     private LineChart<String, Number> complaintsChart2;
-
-    @FXML
-    private NumberAxis complaintsNumAxes1;
-
-    @FXML
-    private NumberAxis complaintsNumAxes2;
-
-    @FXML
-    private CategoryAxis dayAxes1;
-
-    @FXML
-    private CategoryAxis dayAxes2;
 
     @FXML
     private TextArea endDate1;
@@ -68,9 +66,13 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
                 Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
 
+        series1 = new XYChart.Series<>();
+        series2 = new XYChart.Series<>();
+
+        series1.setName("Complaints Report");
+        series2.setName("Complaints Report");
+
         for (int i=0; i<2; i++) {
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Complaints Report");
             Calendar start_date, end_date;
 
             if (i==0){
@@ -111,18 +113,29 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
                 start_date.add(Calendar.DAY_OF_MONTH, 1);
 
-                series.getData().add(new XYChart.Data<>(col_name, k));
+                if (i==0)
+                    series1.getData().add(new XYChart.Data<>(col_name, k));
+                else
+                    series2.getData().add(new XYChart.Data<>(col_name, k));
             }
 
             if (i == 0)
-                complaintsChart1.getData().add(series);
+                complaintsChart1.getData().add(series1);
             else
-                complaintsChart2.getData().add(series);
+                complaintsChart2.getData().add(series2);
         }
 
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
         App.setRoot("controllers/ShowReportsForAdmin");
+    }
+
+    public void downloadCSVFile1(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Complaints", start_date1, end_date1, "Date, Num of Complaints", series1);
+    }
+
+    public void downloadCSVFile2(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Complaints", start_date2, end_date2, "Date, Num of Complaints", series2);
     }
 }

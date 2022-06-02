@@ -6,10 +6,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -480,6 +484,40 @@ public class App extends Application {
         calendar.set(Calendar.MILLISECOND, millisecond);
 
         return calendar;
+    }
+
+    public static void createCSVFile(String name_prefix, Calendar start_date, Calendar end_date, String first_line,
+                                     XYChart.Series<String, Number> data) throws FileNotFoundException {
+        File csv_file = new File(App.getCSVFileName(name_prefix, start_date, end_date));
+        PrintWriter out = new PrintWriter(csv_file);
+
+        out.println(first_line);
+
+        for (int i=0;i<data.getData().size();i++)
+            out.println(data.getData().get(i).XValueProperty().get() + ", " +
+                    data.getData().get(i).YValueProperty().get());
+
+        out.close();
+    }
+
+    public static String getCSVFileName(String prefix, Calendar start_date, Calendar end_date) {
+        String res = prefix;
+        if (start_date.get(Calendar.DAY_OF_MONTH) < 10)
+            res += "0";
+        res += start_date.get(Calendar.DAY_OF_MONTH);
+        if (start_date.get(Calendar.MONTH) < 10)
+            res += "0";
+        res += start_date.get(Calendar.MONTH);
+        res += start_date.get(Calendar.YEAR);
+        res += "To";
+
+        if (end_date.get(Calendar.DAY_OF_MONTH) < 10)
+            res += "0";
+        res += end_date.get(Calendar.DAY_OF_MONTH);
+        if (end_date.get(Calendar.MONTH) < 10)
+            res += "0";
+        res += end_date.get(Calendar.MONTH) + ".csv";
+        return res + end_date.get(Calendar.YEAR);
     }
 
 }
