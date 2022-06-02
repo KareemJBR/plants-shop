@@ -506,23 +506,26 @@ public class App extends Application {
     }
 
     public static String getCSVFileName(String prefix, Calendar start_date, Calendar end_date) {
-        String res = prefix;
+        String reports_dir = "Reports/";
+        String res = reports_dir + prefix;
+
         if (start_date.get(Calendar.DAY_OF_MONTH) < 10)
             res += "0";
         res += start_date.get(Calendar.DAY_OF_MONTH);
-        if (start_date.get(Calendar.MONTH) < 10)
+        if (start_date.get(Calendar.MONTH) < 9)
             res += "0";
-        res += start_date.get(Calendar.MONTH);
+        res += Integer.toString(start_date.get(Calendar.MONTH) + 1);    // months in Calendar start from 0 not 1
         res += start_date.get(Calendar.YEAR);
         res += "To";
 
         if (end_date.get(Calendar.DAY_OF_MONTH) < 10)
             res += "0";
         res += end_date.get(Calendar.DAY_OF_MONTH);
-        if (end_date.get(Calendar.MONTH) < 10)
+        if (end_date.get(Calendar.MONTH) < 9)
             res += "0";
-        res += end_date.get(Calendar.MONTH) + ".csv";
-        return res + end_date.get(Calendar.YEAR);
+        res += Integer.toString(end_date.get(Calendar.MONTH) + 1);
+        res += end_date.get(Calendar.YEAR);
+        return res + ".csv";
     }
 
 }
