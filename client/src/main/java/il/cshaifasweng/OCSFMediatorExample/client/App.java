@@ -74,8 +74,11 @@ public class App extends Application {
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
     	EventBus.getDefault().unregister(this);
-        Login_customer.setOnline(false);
-        updateCustomer(Login_customer);
+        if(Login_customer!=null)
+        {
+            Login_customer.setOnline(false);
+            updateCustomer(Login_customer);
+        }
         client.closeConnection();
 		super.stop();
 	}
