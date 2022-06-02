@@ -4,10 +4,6 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
-import java.io.IOException;
-
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitems;
-
 public class SimpleClient extends AbstractClient {
 
     private static SimpleClient client = null;
@@ -138,7 +134,7 @@ public class SimpleClient extends AbstractClient {
 
         if (myMsg.getMsg().equals("reload")){
             try {
-                getAllitems();
+                App.getAllItems();
                 App.setRoot("controllers/RegisteredCatalog");
             }
             catch (Exception e){

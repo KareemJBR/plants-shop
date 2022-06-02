@@ -123,15 +123,6 @@ public class App extends Application {
         return items;
     }
 
-    public static  ArrayList<Item> getAllitems() throws IOException {
-        ArrayList<Item> items=new ArrayList<Item>();
-        MsgClass msg =new MsgClass("#get shop items",null);
-        allItemsData = null;
-        SimpleClient.getClient().sendToServer(msg);
-        while(allItemsData==null) {System.out.println("waiting for server13");}
-        items=(ArrayList<Item>)allItemsData;
-        return items;
-    }
     public static  ArrayList<Item> getAllitemsUnderSale() throws IOException {
         ArrayList<Item> items=new ArrayList<Item>();
         MsgClass msg =new MsgClass("#get shop items that under sale",null);
@@ -225,16 +216,6 @@ public class App extends Application {
         while (OrderItemData==null){System.out.println("waiting for server11");}
         orderItems=(List<OrderItem>) OrderItemData;
         return orderItems;
-    }
-
-    public static ArrayList<Item> getAllItems() throws IOException {
-        ArrayList<Item> items = new ArrayList<Item>();
-        MsgClass msg = new MsgClass("#get allItems", null);
-        allItemsData = null;
-        SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting for server8");}
-        items = (ArrayList<Item>) allItemsData;
-        return items;
     }
 
 

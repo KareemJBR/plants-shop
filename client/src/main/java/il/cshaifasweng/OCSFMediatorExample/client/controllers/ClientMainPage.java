@@ -81,7 +81,7 @@ public class ClientMainPage {
       //  allItemsData=null;
        // SimpleClient.getClient().sendToServer(msg);
       //  while(allItemsData==null){System.out.println("waiting");}
-        getAllitems();
+        App.getAllItems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/RegisteredCatalog");
     }
