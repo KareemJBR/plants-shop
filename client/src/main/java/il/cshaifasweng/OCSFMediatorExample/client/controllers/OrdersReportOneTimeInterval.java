@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -15,24 +16,23 @@ import java.util.*;
 
 public class OrdersReportOneTimeInterval implements Initializable {
 
-    @FXML
-    private CategoryAxis itemAxes;
+    private Calendar start_date;
+    private Calendar end_date;
+
+    private XYChart.Series<String, Number> series;
 
     @FXML
-    private LineChart<String, Integer> ordersChart;
-
-    @FXML
-    private NumberAxis ordersNumAxes;
+    private LineChart<String, Number> ordersChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         boolean is_admin = App.getIsAdmin();
         int shop_id = App.getShopID();
-        Calendar start_date = App.getReport_start_date1();
-        Calendar end_date = App.getReport_end_date1();
+        start_date = App.getReport_start_date1();
+        end_date = App.getReport_end_date1();
 
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        series = new XYChart.Series<>();
         series.setName("Orders Report");
 
         List<Order> orders_to_show = null;
@@ -79,5 +79,9 @@ public class OrdersReportOneTimeInterval implements Initializable {
             App.setRoot("controllers/ShowReportsForAdmin");
         else
             App.setRoot("controllers/ShowReportsForShopAdmin");
+    }
+
+    public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
+        App.createCSVFile("Orders", start_date, end_date, "Item, Sold Amount", series);
     }
 }
