@@ -44,6 +44,8 @@ public class App extends Application {
     private static int shop_id;
     private static int report_id_for_client_service;
     private static String support_worker_id_for_report;
+    private static Item edit_item;
+    private static Item edit_item_for_NW;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -103,7 +105,15 @@ public class App extends Application {
         return (Customer)currentCustomerData;
     }
 
-
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get shop items", null);
+        allItemsData = null;
+        SimpleClient.getClient().sendToServer(msg);
+        while (allItemsData == null) {System.out.println("waiting for server8");}
+        items = (ArrayList<Item>) allItemsData;
+        return items;
+    }
 
     public static  ArrayList<Item> getAllitems() throws IOException {
         ArrayList<Item> items=new ArrayList<Item>();
@@ -197,15 +207,7 @@ public class App extends Application {
         return orders;
     }
 
-    public static ArrayList<Item> getAllItems() throws IOException {
-        ArrayList<Item> items = new ArrayList<Item>();
-        MsgClass msg = new MsgClass("#get allItems", null);
-        allItemsData = null;
-        SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting for server8");}
-        items = (ArrayList<Item>) allItemsData;
-        return items;
-    }
+
 
     public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
         List<OrderItem> orderitems=new ArrayList<OrderItem>();
@@ -462,8 +464,16 @@ public class App extends Application {
         support_worker_id_for_report = temp_id;
     }
 
+    public static Item getEdit_item() {
+        return edit_item;
+    }
+
+    public static void setEdit_item(Item edit_item) {
+        App.edit_item = edit_item;
+    }
+
     public static Calendar getCalendarOfOrder(int year, int month, int day, int hour, int minute, int second,
-                                               int millisecond) {
+                                              int millisecond) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);

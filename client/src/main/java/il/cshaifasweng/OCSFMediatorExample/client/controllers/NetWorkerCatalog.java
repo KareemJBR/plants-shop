@@ -57,7 +57,7 @@ public class NetWorkerCatalog {
         if (allItems != null) {
             if (allItems.size() != 0) {
                 Container.setMinHeight(allItems.size() * 90);      ///the height of the container is related to the amount of the items
-                ArrayList<TextField> newPrices =new ArrayList<>();
+                ArrayList<TextField> newPrices = new ArrayList<>();
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #393E46");
@@ -116,7 +116,7 @@ public class NetWorkerCatalog {
                     TextField priceAfterSale = new TextField();
                     if (allItems.get(i).isUnderSale()) {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent()*100 + "% sale is:" + allItems.get(i).getPriceAfterSale());
+                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent() * 100 + "% sale is:" + allItems.get(i).getPriceAfterSale());
                     } else {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
                         priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price());
@@ -151,16 +151,19 @@ public class NetWorkerCatalog {
                     updatePrice.setOnAction(e -> {
                         try {
                             int num = Integer.parseInt(((Button) e.getTarget()).getId());
-                            if(newPrices.get(num).getText().equals("")){
-                                showAlert("Eror","Please enter new price");
+                            if (newPrices.get(num).getText().equals("")) {
+                                showAlert("Eror", "Please enter new price");
                                 return;
                             }
-                            updatePrice(allItems.get(num),Integer.parseInt(newPrices.get(num).getText()));
+
+                            updatePrice(allItems.get(num), Integer.parseInt(newPrices.get(num).getText()));
                             MsgClass newMsg = new MsgClass("#update Item",allItems.get(num));
                             SimpleClient.getClient().sendToServer(newMsg);
-                            getAllitems();
+//                            getAllitems();
+//                            MsgClass reload = new MsgClass("#reload for all clients");
+//                            SimpleClient.getClient().sendToServer(reload);
                             App.setRoot("controllers/NetWorkerCatalog");
-                            showAlert("Success","Item price updated");
+                            showAlert("Success", "Item price updated");
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -205,15 +208,17 @@ public class NetWorkerCatalog {
             }
         }
     }
+
     private static void updatePrice(Item flower, int price) {
         System.out.println(price);
         System.out.println(flower);
         flower.setOriginal_price(price);
-        if(flower.isUnderSale()){
-            flower.setPriceAfterSale((int)(flower.getOriginal_price()* (1-flower.getSalePercent())));
+        if (flower.isUnderSale()) {
+            flower.setPriceAfterSale((int) (flower.getOriginal_price() * (1 - flower.getSalePercent())));
         }
         System.out.println(flower);
     }
+
     public void showAlert(String title, String head) {
         Platform.runLater(new Runnable() {
             public void run() {

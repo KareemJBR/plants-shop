@@ -134,10 +134,10 @@ public class SimpleServer extends AbstractServer {
         Item item1 = new Item("red",true,0.3,30,"flower", "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
         session.flush();
-        Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+        Item item2 = new Item("blue",false,0,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
         session.flush();
-        Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
+        Item item3 = new Item("red",false,0,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
         session.save(item3);
         session.flush();
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
@@ -599,6 +599,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 if (msgtext.equals("#update cartIrem")) {
                     try {
                         updateCartIrem((CartItem) ((MsgClass) msg).getObj());
@@ -621,6 +622,17 @@ public class SimpleServer extends AbstractServer {
                     try {
                         Customer temp = (Customer) (((MsgClass) msg).getObj());
                         delete_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#reload for all clients")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("reload");
+                        myMSg.setObj(null);
+                        sendToAllClients(myMSg);
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
@@ -1080,7 +1092,20 @@ public class SimpleServer extends AbstractServer {
             }
         }
     }
+    @Override
+    public void sendToAllClients(Object msg)
+    {
+        Thread[] clientThreadList = getClientConnections();
 
+        for (int i=0; i<clientThreadList.length; i++)
+        {
+            try
+            {
+                ((ConnectionToClient)clientThreadList[i]).sendToClient(msg);
+            }
+            catch (Exception ex) {}
+        }
+    }
 
 
 }
