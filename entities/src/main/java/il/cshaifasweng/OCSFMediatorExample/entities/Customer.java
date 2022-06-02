@@ -36,9 +36,9 @@ public class Customer  implements Serializable {
     private boolean online=false;
 
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",orphanRemoval = true)
     private List<Order> customerOrders =new ArrayList<>();
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Report> customerReports =new ArrayList<>();
 
 
@@ -98,9 +98,11 @@ public class Customer  implements Serializable {
         return online;
     }
 
+
     public void setOnline(boolean online) {
         this.online = online;
     }
+
 
     public void setFirst_name(String first_name){
         this.first_name = first_name;

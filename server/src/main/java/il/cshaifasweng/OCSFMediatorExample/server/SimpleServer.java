@@ -1011,7 +1011,8 @@ public class SimpleServer extends AbstractServer {
     private static void delete_customer(Customer customer) {
         session.beginTransaction();
         session.clear();
-        session.delete(customer);
+      //  session.delete(customer);
+        session.delete(session.get(Customer.class, customer.getId()));
         session.getTransaction().commit();
     }
     private static void deleteReport(Report report) {

@@ -101,6 +101,8 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#customerDelete", customer);
         SimpleClient.getClient().sendToServer(msg);
     }
+
+
     public static  Customer getCurrentCustomer() throws IOException {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
         currentCustomerData = null;

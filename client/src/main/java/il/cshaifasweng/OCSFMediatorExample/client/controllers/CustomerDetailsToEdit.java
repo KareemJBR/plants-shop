@@ -12,8 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.updateCustomer;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 
 public class CustomerDetailsToEdit implements Initializable {
 
@@ -59,13 +58,30 @@ public class CustomerDetailsToEdit implements Initializable {
     @FXML
     void saveChanges(ActionEvent event) throws IOException {
 
-        Customer new_customer = new Customer(customerIDTextField.getId(), customerFirstNameTextField.getText(),
-                customerLastNameTextField.getText(), customerUsernameTextField.getText(),
-                customerPasswordTextField.getText(), base_customer.getCredit_card(),
-                customerAccountTypeTextField.getTypeSelector(), customerEmailTextField.getText());
+        Customer new_customer=null;
+
+        ArrayList<Customer> customers=getAllCustomers();
+        if(customers!=null)
+        {
+            for(Customer customer:customers)
+            {
+                if(customer.getUser_id().equals(customerIDTextField.getText()))
+                {
+                    customer.setFirst_name(customerFirstNameTextField.getText());
+                    customer.setLast_name(customerLastNameTextField.getText());
+                    customer.setEmail(customerEmailTextField.getText());
+                    customer.setPassword(customerPasswordTextField.getText());
+                    customer.setAccount_type(customerAccountTypeTextField.getText());
+                    customer.setUser_name(customerUsernameTextField.getText());
+                    new_customer=customer;
+                    break;
+                }
+            }
+        }
 
         updateCustomer(new_customer);
-        base_customer = new Customer(new_customer);
+        base_customer =new_customer;
+        fill_with_base_customer();
     }
 
     private void fill_with_base_customer() {
@@ -95,10 +111,7 @@ public class CustomerDetailsToEdit implements Initializable {
         assert customers != null;
         for (Customer customer : customers) {
             if (customer.getUser_id().equals(customer_id)) {
-                base_customer = new Customer(customer.getUser_id(), customer.getFirst_name(), customer.getLast_name(),
-                        customer.getUser_name(), customer.getPassword(), customer.getCredit_card(),
-                        customer.getAcount_type(), customer.getEmail());
-
+                base_customer = customer;
                 fill_with_base_customer();
                 return;
             }
