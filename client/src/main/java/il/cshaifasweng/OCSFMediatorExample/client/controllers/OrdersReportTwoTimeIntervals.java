@@ -120,7 +120,7 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
 
 
             for (int i=0;i<arr.length;i++)
-                if (i==0)
+                if (a==0)
                     series1.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
                 else
                     series2.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
