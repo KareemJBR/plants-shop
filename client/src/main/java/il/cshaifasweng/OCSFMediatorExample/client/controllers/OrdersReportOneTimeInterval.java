@@ -78,6 +78,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
             series.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
 
         ordersChart.getData().add(series);
+
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {

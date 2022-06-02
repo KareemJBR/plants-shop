@@ -76,6 +76,8 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
 
         ArrayList<Item> all_items = null;
 
+        int len1 = 0, len2 = 0;
+
         try {
             all_items = App.getAllItems();
         } catch (IOException e) {
@@ -100,6 +102,11 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            if (a==0)
+                len1 = App.get_num_of_days_in_time_interval(start_date, end_date);
+            else
+                len2 = App.get_num_of_days_in_time_interval(start_date, end_date);
 
             // we shall drop the cancelled orders
 

@@ -49,6 +49,9 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boolean is_admin = App.getIsAdmin();
 
+        Calendar start_date;
+        Calendar end_date;
+
         start_date1 = App.getReport_start_date1();
         end_date1 = App.getReport_end_date1();
         start_date2 = App.getReport_start_date2();
@@ -72,9 +75,9 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
         series1.setName("Incomes Report");
         series2.setName("Incomes Report");
 
-        for (int i=0;i<2;i++) {
+        int len1 = 0, len2 = 0;
 
-            Calendar start_date, end_date;
+        for (int i=0;i<2;i++) {
 
             if (i==0) {
                 start_date = start_date1;
@@ -92,6 +95,11 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            if (i==0)
+                len1 = App.get_num_of_days_in_time_interval(start_date, end_date);
+            else
+                len2 = App.get_num_of_days_in_time_interval(start_date, end_date);
 
             Double[] arr = new Double[App.get_num_of_days_in_time_interval(start_date, end_date)];
 
@@ -128,6 +136,10 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             else
                 incomesChart2.getData().add(series2);
         }
+
+        start_date1.add(Calendar.DAY_OF_MONTH, -1 * len1);
+        start_date2.add(Calendar.DAY_OF_MONTH, -1 * len2);
+
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {

@@ -78,6 +78,8 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
         }
 
         reportsChart.getData().add(series);
+
+        start_date.add(Calendar.DAY_OF_MONTH, -1 * arr.length);
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
