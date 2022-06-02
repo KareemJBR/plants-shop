@@ -45,7 +45,6 @@ public class App extends Application {
     private static boolean is_admin;
     private static int shop_id;
     private static int report_id_for_client_service;
-    private static String support_worker_id_for_report;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -212,17 +211,6 @@ public class App extends Application {
         while (allItemsData == null) {System.out.println("waiting for server8");}
         items = (ArrayList<Item>) allItemsData;
         return items;
-    }
-
-    public static  List<OrderItem> getOrderitems(int orderId) throws IOException {
-        List<OrderItem> orderitems=new ArrayList<OrderItem>();
-        MsgClass msg = new MsgClass("#get orderItems", null);
-        OrderItemData=null;
-        msg.setObj(orderId);
-        SimpleClient.getClient().sendToServer(msg);
-        while (OrderItemData == null) {System.out.println("waiting for server9");}
-        orderitems = (List<OrderItem>) OrderItemData;
-        return orderitems;
     }
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
@@ -464,14 +452,6 @@ public class App extends Application {
         report_id_for_client_service = report_id;
     }
 
-    public static String getSupport_worker_id_for_report() {
-        return support_worker_id_for_report;
-    }
-
-    public static void setSupport_worker_id_for_report(String temp_id) {
-        support_worker_id_for_report = temp_id;
-    }
-
     public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,
                                           int millisecond) {
         Calendar calendar = Calendar.getInstance();
@@ -488,7 +468,8 @@ public class App extends Application {
 
     public static void createCSVFile(String name_prefix, Calendar start_date, Calendar end_date, String first_line,
                                      XYChart.Series<String, Number> data) throws FileNotFoundException {
-        File csv_file = new File(App.getCSVFileName(name_prefix, start_date, end_date));
+        String file_name = App.getCSVFileName(name_prefix, start_date, end_date);
+        File csv_file = new File(file_name);
         PrintWriter out = new PrintWriter(csv_file);
 
         out.println(first_line);
@@ -498,6 +479,7 @@ public class App extends Application {
                     data.getData().get(i).YValueProperty().get());
 
         out.close();
+        showAlert("Success", file_name + " successfully created.");
     }
 
     public static String getCSVFileName(String prefix, Calendar start_date, Calendar end_date) {
