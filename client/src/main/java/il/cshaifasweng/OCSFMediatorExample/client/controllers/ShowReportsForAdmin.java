@@ -133,6 +133,7 @@ public class ShowReportsForAdmin implements Initializable {
         reports_types.add("Complaints");
 
         reportTypeComboBox.setItems(reports_types);
+        reportTypeComboBox.getSelectionModel().select(0);
     }
 
 }
