@@ -205,6 +205,17 @@ public class App extends Application {
         return orders;
     }
 
+    public  static List<OrderItem> getOrderItems(int orderId) throws IOException {
+        List<OrderItem> orderItems=new ArrayList<OrderItem>();
+        MsgClass msg=new MsgClass("#get orderItems",null);
+        OrderItemData=null;
+        msg.setObj(orderId);
+        SimpleClient.getClient().sendToServer(msg);
+        while (OrderItemData==null){System.out.println("waiting for server11");}
+        orderItems=(List<OrderItem>) OrderItemData;
+        return orderItems;
+    }
+
     public static ArrayList<Item> getAllItems() throws IOException {
         ArrayList<Item> items = new ArrayList<Item>();
         MsgClass msg = new MsgClass("#get allItems", null);
