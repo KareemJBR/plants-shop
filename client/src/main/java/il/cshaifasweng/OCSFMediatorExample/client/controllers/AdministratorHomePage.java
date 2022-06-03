@@ -14,20 +14,11 @@ public class AdministratorHomePage {
     }
 
     @FXML
-    void showNetWorkers(ActionEvent event) throws IOException {
-        App.setRoot("controllers/ShowNetWorkers");
-    }
-
-    @FXML
     void showReports(ActionEvent event) throws IOException {
+        // specifying the right values of App.is_admin and App.shop_id for creating the right reports
         App.setIs_admin(true);
         App.setShop_id(-1);
         App.setRoot("controllers/ShowReportsForAdmin");
-    }
-
-    @FXML
-    void showSupportWorkers(ActionEvent event) throws IOException {
-        App.setRoot("controllers/ShowSupportWorkers");
     }
 
     @FXML

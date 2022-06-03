@@ -22,16 +22,12 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
     private Calendar end_date;
 
     @FXML
-    private NumberAxis complaintsNumAxes;
-
-    @FXML
-    private CategoryAxis dayAxes;
-
-    @FXML
     private LineChart<String, Number> reportsChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // initialize GUI items and get the right date values
 
         boolean is_admin = App.getIsAdmin();
         start_date = App.getReport_start_date1();
@@ -78,6 +74,8 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
         }
 
         reportsChart.getData().add(series);
+
+        start_date.add(Calendar.DAY_OF_MONTH, -1 * arr.length);
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
@@ -88,6 +86,7 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
     }
 
     public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
+        // create CSV file of the report
         App.createCSVFile("Complaints", start_date, end_date, "Date, Num of Complaints", series);
     }
 }

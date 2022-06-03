@@ -45,6 +45,8 @@ public class App extends Application {
     private static boolean is_admin;
     private static int shop_id;
     private static int report_id_for_client_service;
+    private static Item edit_item;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -65,8 +67,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-
-
     @Override
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
@@ -79,7 +79,6 @@ public class App extends Application {
         client.closeConnection();
 		super.stop();
 	}
-
 
 	public static void main(String[] args) {
         launch();
@@ -100,7 +99,6 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
-
     public static  Customer getCurrentCustomer() throws IOException {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
         currentCustomerData = null;
@@ -109,17 +107,16 @@ public class App extends Application {
         return (Customer)currentCustomerData;
     }
 
-
-
-    public static  ArrayList<Item> getAllitems() throws IOException {
-        ArrayList<Item> items=new ArrayList<Item>();
-        MsgClass msg =new MsgClass("#get shop items",null);
+    public static ArrayList<Item> getAllItems() throws IOException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        MsgClass msg = new MsgClass("#get shop items", null);
         allItemsData = null;
         SimpleClient.getClient().sendToServer(msg);
-        while(allItemsData==null) {System.out.println("waiting for server13");}
-        items=(ArrayList<Item>)allItemsData;
+        while (allItemsData == null) {System.out.println("waiting for server8");}
+        items = (ArrayList<Item>) allItemsData;
         return items;
     }
+
     public static  ArrayList<Item> getAllitemsUnderSale() throws IOException {
         ArrayList<Item> items=new ArrayList<Item>();
         MsgClass msg =new MsgClass("#get shop items that under sale",null);
@@ -129,7 +126,6 @@ public class App extends Application {
         items=(ArrayList<Item>)allItemsData;
         return items;
     }
-
 
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();
@@ -191,7 +187,6 @@ public class App extends Application {
         return shopAdmins;
     }
 
-
     public static ArrayList<Order> getAllOrders() throws IOException {
 
         ArrayList<Order> orders = new ArrayList<Order>();
@@ -212,16 +207,6 @@ public class App extends Application {
         while (OrderItemData==null){System.out.println("waiting for server11");}
         orderItems=(List<OrderItem>) OrderItemData;
         return orderItems;
-    }
-
-    public static ArrayList<Item> getAllItems() throws IOException {
-        ArrayList<Item> items = new ArrayList<Item>();
-        MsgClass msg = new MsgClass("#get allItems", null);
-        allItemsData = null;
-        SimpleClient.getClient().sendToServer(msg);
-        while (allItemsData == null) {System.out.println("waiting for server8");}
-        items = (ArrayList<Item>) allItemsData;
-        return items;
     }
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
@@ -266,7 +251,6 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
-
     public static void deleteCartitem(int cartitemId) throws IOException {
         MsgClass msg = new MsgClass("#delete CartItem", null);
         msg.setObj(cartitemId);
@@ -293,7 +277,6 @@ public class App extends Application {
         msg.setObj(ob);
         SimpleClient.getClient().sendToServer(msg);
     }
-
         
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
@@ -469,6 +452,14 @@ public class App extends Application {
         report_id_for_client_service = report_id;
     }
 
+    public static Item getEdit_item() {
+        return edit_item;
+    }
+
+    public static void setEdit_item(Item edit_item) {
+        App.edit_item = edit_item;
+    }
+
     public static Calendar createCalendar(int year, int month, int day, int hour, int minute, int second,
                                           int millisecond) {
         Calendar calendar = Calendar.getInstance();
@@ -500,23 +491,26 @@ public class App extends Application {
     }
 
     public static String getCSVFileName(String prefix, Calendar start_date, Calendar end_date) {
-        String res = prefix;
+        String reports_dir = "Reports/";
+        String res = reports_dir + prefix;
+
         if (start_date.get(Calendar.DAY_OF_MONTH) < 10)
             res += "0";
         res += start_date.get(Calendar.DAY_OF_MONTH);
-        if (start_date.get(Calendar.MONTH) < 10)
+        if (start_date.get(Calendar.MONTH) < 9)
             res += "0";
-        res += start_date.get(Calendar.MONTH);
+        res += Integer.toString(start_date.get(Calendar.MONTH) + 1);    // months in Calendar start from 0 not 1
         res += start_date.get(Calendar.YEAR);
         res += "To";
 
         if (end_date.get(Calendar.DAY_OF_MONTH) < 10)
             res += "0";
         res += end_date.get(Calendar.DAY_OF_MONTH);
-        if (end_date.get(Calendar.MONTH) < 10)
+        if (end_date.get(Calendar.MONTH) < 9)
             res += "0";
-        res += end_date.get(Calendar.MONTH) + ".csv";
-        return res + end_date.get(Calendar.YEAR);
+        res += Integer.toString(end_date.get(Calendar.MONTH) + 1);
+        res += end_date.get(Calendar.YEAR);
+        return res + ".csv";
     }
 
 }

@@ -47,6 +47,7 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
+        // going back to Support Worker homepage
         ArrayList<Report> all_reports = App.getAllReports();
 
         for (Report all_report : all_reports)
@@ -58,6 +59,8 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
 
     @FXML
     void sendResponse(ActionEvent event) throws IOException {
+
+        // submit worker response to the client
 
         if (responseText.getText() == null){
             App.showAlert("Error", "Please add a response to the client.");
@@ -77,36 +80,43 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
             } catch (NumberFormatException e){
                 App.showAlert("Error", "Please enter a valid refund value.");
                 System.out.println(e.getMessage());
+                return;
+            }
+
+            if (refund_val < 0.0) {
+                App.showAlert("Error", "Refund value should be non-negative.");
+                return;
             }
         }
 
-        Report new_report = null;
+        // if we reach this line then the inputs are legal
+        int report_index = 0;
 
         ArrayList<Report> all_reports = App.getAllReports();
-        for (Report all_report : all_reports)
-            if (all_report.getId() == report_id)
-                new_report = new Report(all_report);
 
-        assert new_report != null;
-        new_report.setHandled(true);
-        new_report.setAnswer(responseText.getText());
-        new_report.setMoneyBack(refund_val);
+        for (int i=0;i<all_reports.size();i++)
+            if (all_reports.get(i).getId() == report_id) {
+                all_reports.get(i).setHandled(true);
+                all_reports.get(i).setAnswer(responseText.getText());
+                all_reports.get(i).setMoneyBack(refund_val);
+                report_index = i;
+            }
 
         // now we shall update the client's budget
-        Customer new_customer = null;
+        int customer_index = 0;
 
         ArrayList<Customer> all_customers = App.getAllCustomers();
-        for (Customer all_customer : all_customers)
-            if (all_customer.getId().equals(clientIDText.getText()))
-                new_customer = new Customer(all_customer);
+        for (int i=0;i<all_customers.size();i++)
+            if (all_customers.get(i).getId().equals(clientIDText.getText())) {
+                all_customers.get(i).setBudget(all_customers.get(i).getBudget() + refund_val);
+                customer_index = i;
+                break;
+            }
 
-        assert new_customer != null;
-        new_customer.setBudget(new_customer.getBudget() + refund_val);
+        App.updateReport(all_reports.get(report_index));
+        App.updateCustomer(all_customers.get(customer_index));
 
-        App.updateReport(new_report);
-        App.updateCustomer(new_customer);
-
-        App.setRoot("controllers/ShowReportsForClientService");
+        App.setRoot("controllers/ShowReportsForClientService");     // going back to the reports table
     }
 
     @Override
@@ -121,9 +131,10 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
             e.printStackTrace();
         }
 
-        assert all_reports != null;
+        assert all_reports != null;     // avoiding NullPtr exception
         for (Report all_report : all_reports)
             if (all_report.getId() == report_id) {
+                // initialize the text fields
                 reportIDText.textProperty().set(Integer.toString(report_id));
                 clientIDText.textProperty().set(all_report.getCustomer().getId());
                 shopIDText.textProperty().set(Integer.toString(all_report.getShop().getId()));

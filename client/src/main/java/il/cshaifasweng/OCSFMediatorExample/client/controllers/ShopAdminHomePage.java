@@ -13,6 +13,7 @@ public class ShopAdminHomePage {
 
     @FXML
     void showReports(ActionEvent event) throws IOException {
+        // passing parameters for the reports controllers
         App.setIs_admin(false);
 
         ArrayList<Shop> all_shops = App.getAllShops();

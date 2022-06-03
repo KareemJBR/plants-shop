@@ -131,6 +131,17 @@ public class SimpleClient extends AbstractClient {
             System.out.println("in get selected shop client side");
             selectedShopData = myMsg.getObj();
         }
+
+        if (myMsg.getMsg().equals("reload")){
+            try {
+                App.getAllItems();
+                App.setRoot("controllers/RegisteredCatalog");
+            }
+            catch (Exception e){
+            }
+        }
+
+
     }
 
     public static SimpleClient getClient() {
