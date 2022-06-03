@@ -148,7 +148,7 @@ public class RegisteredCatalogControl {
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
-                itemscontainer.setMinHeight(allItems.size() * 120);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
 //                ArrayList<Button> addtocartBTNS = new ArrayList<>();
 //                for (int i = 0; i < allItems.size(); i++) {
 //                    addtocartBTNS.add(new Button());

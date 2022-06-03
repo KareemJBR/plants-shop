@@ -853,6 +853,15 @@ public class SimpleServer extends AbstractServer {
                     }
 
                 }
+                if(msgtext.equals("#add new Item")){
+                    try {
+                        System.out.println("in add item");
+                        AddItem((Item) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in add orderitem");
+                        System.out.println(e.getMessage());
+                    }
+                }
                 if (msgString.startsWith("#close")) {
                     session.close();
                 }
@@ -885,6 +894,14 @@ public class SimpleServer extends AbstractServer {
         session.beginTransaction();
         session.clear();
         session.save(R);
+        session.flush();
+        session.getTransaction().commit();
+
+    }
+    private static void AddItem(Item i) {
+        session.beginTransaction();
+        session.clear();
+        session.save(i);
         session.flush();
         session.getTransaction().commit();
 

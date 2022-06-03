@@ -89,7 +89,7 @@ public class EditItem {
             showAlert("Eror","please enter the sale percent");
             return;
         }
-        int sale =Integer.parseInt(saleText.getText());
+        double sale =Integer.parseInt(saleText.getText());
         if(sale<1||sale>99){
             showAlert("Eror","sale percent should be between 1-99%");
             return;
@@ -103,7 +103,7 @@ public class EditItem {
         }
         sale=sale/100;
         item.setSalePercent(sale);
-        item.setPriceAfterSale(item.getOriginal_price()*(1-sale));
+        item.setPriceAfterSale((int)(item.getOriginal_price()*(1-sale)));
         MsgClass msg = new MsgClass("#update Item",item);
         SimpleClient.getClient().sendToServer(msg);
         showAlert("successes","sale percent have been edited");

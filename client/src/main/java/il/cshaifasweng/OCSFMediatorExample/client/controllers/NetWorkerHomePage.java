@@ -17,6 +17,11 @@ public class NetWorkerHomePage {
     }
 
     @FXML
+    void addItem(ActionEvent event) throws IOException {
+        App.setRoot("controllers/AddItem");
+    }
+
+    @FXML
     void openCatalogue(ActionEvent event) throws IOException {
         getAllItems();
         App.setRoot("controllers/NetWorkerCatalog");
@@ -26,4 +31,7 @@ public class NetWorkerHomePage {
     void signOut(ActionEvent event) throws IOException {
         App.setRoot("controllers/LogIN");
     }
+
+
+
 }

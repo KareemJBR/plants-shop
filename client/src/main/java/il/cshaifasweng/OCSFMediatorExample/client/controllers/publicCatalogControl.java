@@ -59,8 +59,10 @@ public class publicCatalogControl {
         } else {
             getAllitemsUnderSale();
         }
-        App.setRoot("controllers/RegisteredCatalog");
+        App.setRoot("controllers/publicCatalog");
     }
+
+
 
     @FXML
     void createAcount(ActionEvent event) throws IOException {
@@ -80,7 +82,7 @@ public class publicCatalogControl {
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
-                itemscontainer.setMinHeight(allItems.size() * 120);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #E43A19");
