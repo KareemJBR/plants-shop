@@ -163,6 +163,7 @@ public class RegisteredCatalogControl {
         filterBTN.setStyle("-fx-background-color:#EEEEEE");
         filterSelect.setStyle("-fx-background-color:#EEEEEE");
         filterSelect.getItems().addAll("All Items", "Under Sale");
+        filterSelect.getSelectionModel().select(0);
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
