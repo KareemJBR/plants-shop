@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.addItem">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.addItem">
    <children>
       <Label alignment="CENTER" layoutX="162.0" layoutY="13.0" prefHeight="69.0" prefWidth="454.0" style="-fx-text-fill: #F2F4F7;" text="Add New Item">
          <font>
@@ -55,16 +54,16 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <TextField fx:id="nameText" layoutX="177.0" layoutY="150.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="nameText" layoutX="177.0" layoutY="143.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="priceText" layoutX="177.0" layoutY="200.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="colorText" layoutX="177.0" layoutY="255.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="picText" layoutX="177.0" layoutY="315.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="SaleText" layoutX="598.0" layoutY="181.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
-      <Label fx:id="typeLabel" layoutX="50.0" layoutY="359.0" prefHeight="50.0" prefWidth="132.0" style="-fx-text-fill: #F2F4F7;" text="Item Type:">
+      <Label fx:id="typeLabel" layoutX="50.0" layoutY="365.0" prefHeight="50.0" prefWidth="132.0" style="-fx-text-fill: #F2F4F7;" text="Item Type:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="typeText" layoutX="177.0" layoutY="365.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="typeText" layoutX="177.0" layoutY="371.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
    </children>
 </AnchorPane>

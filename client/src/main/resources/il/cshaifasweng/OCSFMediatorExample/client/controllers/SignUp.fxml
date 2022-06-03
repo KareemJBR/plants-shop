@@ -57,7 +57,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
-      <ComboBox fx:id="ShopsCombo" disable="true" layoutX="462.0" layoutY="292.0" prefHeight="36.0" prefWidth="150.0" promptText="Stores" visible="false" />
+      <ComboBox fx:id="ShopsCombo" disable="true" layoutX="538.0" layoutY="344.0" prefHeight="41.0" prefWidth="171.0" promptText="Stores" visible="false" />
       <TextField fx:id="lastNameTextBox" layoutX="399.0" layoutY="86.0" prefHeight="41.0" prefWidth="125.0" promptText="Last Name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
