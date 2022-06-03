@@ -34,19 +34,20 @@ public class Cart<T> {
     public static double OrderSubtotal;
     public static String OrderShop;
 
-    @FXML
-    private AnchorPane Controller;
-
     @FXML // fx:id="AccountTypeLabel"
     private Label AccountTypeLabel; // Value injected by FXMLLoader
+
     @FXML // fx:id="CheckoutBtn"
     private Button CheckoutBtn; // Value injected by FXMLLoader
+
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
 
     @FXML // fx:id="EmptyCartLabel"
     private Label EmptyCartLabel; // Value injected by FXMLLoader
 
     @FXML // fx:id="Subtotal"
-    private TextField Subtotal; // Value injected by FXMLLoader
+    private Label Subtotal; // Value injected by FXMLLoader
 
     @FXML // fx:id="backBtn"
     private Button backBtn; // Value injected by FXMLLoader
@@ -90,7 +91,6 @@ public class Cart<T> {
             AccountTypeLabel.setText(LoginClient_acount_type);
             OrderShop=LoginClient_acount_type;
         }
-        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadPage();
     }
 

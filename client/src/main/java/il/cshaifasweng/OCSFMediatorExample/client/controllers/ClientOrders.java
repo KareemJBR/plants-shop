@@ -42,11 +42,6 @@ public class ClientOrders {
         App.setRoot("controllers/ClientMainPage");
     }
 
-    @FXML
-    void initialize() throws IOException {
-        Controller.setStyle("-fx-background-color: #D4F1F4");
-       loadPage();
-    }
 
     public void loadorderlist()
     {
@@ -117,6 +112,12 @@ public class ClientOrders {
         pane.getChildren().add(line);
 
         ordersList.getChildren().add(pane);
+    }
+
+
+    @FXML
+    void initialize() throws IOException {
+        loadPage();
     }
 
     public void showAlert(String title, String head) {

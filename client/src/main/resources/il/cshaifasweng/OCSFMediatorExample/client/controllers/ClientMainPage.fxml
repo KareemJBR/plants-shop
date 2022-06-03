@@ -5,39 +5,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
    <children>
-      <Button fx:id="catalogBtn" layoutX="118.0" layoutY="174.0" mnemonicParsing="false" onAction="#catalog" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: gray;" text="Catalog" textFill="WHITE">
+      <Button fx:id="catalogBtn" layoutX="118.0" layoutY="174.0" mnemonicParsing="false" onAction="#catalog" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text="Catalog" textFill="WHITE">
          <font>
             <Font name="Arial" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="LogOutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-background-color: red;" text="Log out" textFill="WHITE">
+      <Button fx:id="LogOutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1;" text="Log out" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="cartBtn" layoutX="671.0" layoutY="17.0" mnemonicParsing="false" onAction="#Cart" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25;" text="Cart">
+      <Button fx:id="cartBtn" layoutX="671.0" layoutY="17.0" mnemonicParsing="false" onAction="#Cart" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Cart">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="myOrdersBtn" alignment="CENTER" layoutX="458.0" layoutY="174.0" mnemonicParsing="false" onAction="#myOrders" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: gray;" text="My Orders " textFill="#f4f4f4">
+      <Button fx:id="myOrdersBtn" alignment="CENTER" layoutX="458.0" layoutY="174.0" mnemonicParsing="false" onAction="#myOrders" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text="My Orders " textFill="#f4f4f4">
          <font>
             <Font name="Arial" size="22.0" />
          </font>
       </Button>
-      <TextField fx:id="messagetextfield" layoutX="249.0" layoutY="12.0" prefHeight="57.0" prefWidth="331.0" style="-fx-background-color: none;" text="welcome first name">
+      <TextField fx:id="messagetextfield" alignment="CENTER" layoutX="249.0" layoutY="12.0" prefHeight="57.0" prefWidth="331.0" style="-fx-font: none;" text="welcome first name">
          <font>
             <Font name="Arial" size="26.0" />
          </font>
       </TextField>
-      <Button fx:id="viewReportBtn" layoutX="458.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewReport" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: gray;" text=" My Reports" textFill="WHITE">
+      <Button fx:id="viewReportBtn" layoutX="458.0" layoutY="416.0" mnemonicParsing="false" onAction="#viewReport" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" My Reports" textFill="WHITE">
          <font>
             <Font name="Arial" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="SendReportBtn" layoutX="118.0" layoutY="416.0" mnemonicParsing="false" onAction="#CreateReport" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: gray;" text=" Create Report" textFill="WHITE">
+      <Button fx:id="SendReportBtn" layoutX="118.0" layoutY="416.0" mnemonicParsing="false" onAction="#CreateReport" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" Create Report" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>

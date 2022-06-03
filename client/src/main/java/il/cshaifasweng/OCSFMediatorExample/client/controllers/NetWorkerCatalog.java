@@ -45,20 +45,16 @@ public class NetWorkerCatalog {
     public void initialize() throws IOException {
 
         ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
-        MainPane.setStyle("-fx-background-color: #222831");
-        BackBTN.setStyle("-fx-background-color:#EEEEEE");
-        Container.setStyle("-fx-background-color:#222831");
-
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
-                Container.setMinHeight(allItems.size() * 90);      ///the height of the container is related to the amount of the items
+                Container.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
                 ArrayList<TextField> newPrices = new ArrayList<>();
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
-                    p.setStyle("-fx-background-color: #393E46");
-                    p.setMinSize(300, 155);
+                    p.setStyle("-fx-background-color: #1e2850");
+                    p.setMinSize(360, 200);
                     if (i % 2 == 1) {
                         moveRight = true;
                     } else {
@@ -67,19 +63,19 @@ public class NetWorkerCatalog {
 
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
-                    imageview.setFitWidth(125);   //width of img
-                    imageview.setFitHeight(125); //height of img
+                    imageview.setFitWidth(180);   //width of img
+                    imageview.setFitHeight(180); //height of img
                     System.out.println(i);
                     imageview.setImage(new Image(allItems.get(i).getUrl()));
-                    imageview.setLayoutX(3);           //x & y coordinate related in the pane
+                    imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
                     ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
 
                     if (allItems.get(i).isUnderSale()) {
-                        saleImg.setFitWidth(20);   //width of img
-                        saleImg.setFitHeight(20); //height of img
-                        saleImg.setLayoutX(280);           //x & y coordinate related in the pane
-                        saleImg.setLayoutY(10);
+                        saleImg.setFitWidth(25);   //width of img
+                        saleImg.setFitHeight(25); //height of img
+                        saleImg.setLayoutX(325);           //x & y coordinate related in the pane
+                        saleImg.setLayoutY(2);
                     }
 
                     //////////////// details of the item //////////////
@@ -89,23 +85,23 @@ public class NetWorkerCatalog {
                             //  + "Type: " + cartItems.get(i).getType() + "\n"
                             //  + "Price: " + cartItems.get(i).getPrice() + "\n"
                     );
-                    name.setStyle("-fx-background-color:#EC610A");
-                    name.setLayoutX(130);
-                    name.setLayoutY(10);
+                    name.setStyle("-fx-background-color:#F2F4F7");
+                    name.setLayoutX(200);
+                    name.setLayoutY(30);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
-                    catologNum.setStyle("-fx-background-color:#EC610A");
-                    catologNum.setLayoutX(130);
-                    catologNum.setLayoutY(30);
+                    catologNum.setStyle("-fx-background-color:#F2F4F7");
+                    catologNum.setLayoutX(200);
+                    catologNum.setLayoutY(50);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("Type: " + allItems.get(i).getType());
-                    type.setStyle("-fx-background-color:#EC610A");
-                    type.setLayoutX(130);           //x & y coordinate related in the pane
-                    type.setLayoutY(50);
+                    type.setStyle("-fx-background-color:#F2F4F7");
+                    type.setLayoutX(200);           //x & y coordinate related in the pane
+                    type.setLayoutY(70);
                     type.setEditable(false);
 
                     ///////// type textfield ///////////
@@ -118,19 +114,19 @@ public class NetWorkerCatalog {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
                         priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price());
                     }
-                    price.setStyle("-fx-background-color:#EC610A");
-                    price.setLayoutX(130);           //x & y coordinate related in the pane
-                    price.setLayoutY(70);
-                    priceAfterSale.setStyle("-fx-background-color:#EC610A");
-                    priceAfterSale.setLayoutX(130);
-                    priceAfterSale.setLayoutY(90);
+                    price.setStyle("-fx-background-color:#F2F4F7");
+                    price.setLayoutX(200);           //x & y coordinate related in the pane
+                    price.setLayoutY(90);
+                    priceAfterSale.setStyle("-fx-background-color:#F2F4F7");
+                    priceAfterSale.setLayoutX(200);
+                    priceAfterSale.setLayoutY(110);
                     price.setEditable(false);
                     priceAfterSale.setEditable(false);
 
 
                     TextField newPrice = new TextField();
-                    newPrice.setLayoutX(130);           //x & y coordinate related in the pane
-                    newPrice.setLayoutY(125);
+                    newPrice.setLayoutX(200);           //x & y coordinate related in the pane
+                    newPrice.setLayoutY(155);
                     newPrice.setEditable(true);
                     newPrice.setMaxWidth(80);
                     newPrice.setId(String.valueOf(i));
@@ -166,9 +162,9 @@ public class NetWorkerCatalog {
                         }
                     });
                     updatePrice.setFont(new Font(12));
-                    updatePrice.setStyle("-fx-background-color:#EEEEEE");
-                    updatePrice.setLayoutX(215);
-                    updatePrice.setLayoutY(125);
+                    updatePrice.setStyle("-fx-background-color:#E43A19;-fx-background-radius: 20;-fx-text-fill: #F2F4F7");
+                    updatePrice.setLayoutX(280);
+                    updatePrice.setLayoutY(155);
 
                     updatePrice.setId(String.valueOf(i));
 
@@ -194,11 +190,11 @@ public class NetWorkerCatalog {
                     }
                     p.getChildren().add(updatePrice);
                     if (moveRight) {
-                        p.setLayoutY(175 * j);
-                        p.setLayoutX(315);
+                        p.setLayoutY(240 * j);
+                        p.setLayoutX(390);
                         j++;
                     } else {
-                        p.setLayoutY(175 * j);
+                        p.setLayoutY(240 * j);
                     }
                     Container.getChildren().add(p);
                 }

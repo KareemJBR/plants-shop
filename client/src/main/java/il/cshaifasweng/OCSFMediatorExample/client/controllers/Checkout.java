@@ -37,8 +37,9 @@ public class Checkout {
     @FXML
     private RadioButton DeliveryRadioBtn;
 
-    @FXML
-    private TextField Greeting;
+
+    @FXML // fx:id="Greeting"
+    private TextArea Greeting; // Value injected by FXMLLoader
 
     @FXML
     private TextField NameTextFeild;
@@ -88,7 +89,6 @@ public class Checkout {
         datew.setValue(LocalDate.now());
         SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
         recieverRadioBtn.setSelected(false);
-        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadTime();
 
     }
