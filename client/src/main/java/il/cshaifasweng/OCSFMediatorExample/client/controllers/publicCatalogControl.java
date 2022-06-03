@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitemsUnderSale;
+import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class publicCatalogControl {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        ArrayList<Item> allItems = App.getAllItems();
+        ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
         filterSelect.getItems().addAll("All Items","Under Sale");
         filterSelect.getSelectionModel().select(0);
         boolean moveRight = false;
