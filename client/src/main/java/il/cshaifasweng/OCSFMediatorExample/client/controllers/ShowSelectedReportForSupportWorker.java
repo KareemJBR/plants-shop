@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ShowSelectedReportForSupportWorker implements Initializable {
@@ -62,7 +63,7 @@ public class ShowSelectedReportForSupportWorker implements Initializable {
 
         // submit worker response to the client
 
-        if (responseText.getText() == null){
+        if (Objects.equals(responseText.getText(), "")){
             App.showAlert("Error", "Please add a response to the client.");
             return;
         }
