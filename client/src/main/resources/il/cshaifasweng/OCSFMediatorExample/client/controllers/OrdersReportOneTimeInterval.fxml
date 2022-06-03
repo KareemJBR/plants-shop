@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportOneTimeInterval">
+<AnchorPane prefHeight="600.0" prefWidth="819.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportOneTimeInterval">
     <children>
         <LineChart fx:id="ordersChart" layoutX="107.0" layoutY="75.0" prefHeight="449.0" prefWidth="605.0" title="Orders Report">
             <xAxis>
@@ -18,9 +18,9 @@
                 <NumberAxis fx:id="ordersNumAxes" label="Sold Amount" side="LEFT" />
             </yAxis>
         </LineChart>
-      <Hyperlink layoutX="772.0" layoutY="14.0" onAction="#backButtonClicked" text="Back" underline="true">
+      <Hyperlink layoutX="31.0" layoutY="21.0" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="48.0" text="Back" underline="true">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="15.0" />
          </font>
       </Hyperlink>
       <Button layoutX="344.0" layoutY="525.0" mnemonicParsing="false" onAction="#downloadCSVFile" prefHeight="42.0" prefWidth="130.0" text="Download CSV File" />
