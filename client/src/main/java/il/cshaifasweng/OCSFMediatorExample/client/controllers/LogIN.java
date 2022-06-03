@@ -61,12 +61,7 @@ public class LogIN {
     @FXML // fx:id="visiblePassword"
     private TextField visiblePassword; // Value injected by FXMLLoader
 
-  @FXML
-  void initialize()
-  {
-      logInBtn.setStyle("-fx-background-color:#4ea7f6;-fx-background-radius:25");
-      Controller.setStyle("-fx-background-color: #fff8dc");
-  }
+
     @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=false;

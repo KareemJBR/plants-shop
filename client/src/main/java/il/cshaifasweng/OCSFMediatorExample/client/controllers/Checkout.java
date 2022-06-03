@@ -89,7 +89,6 @@ public class Checkout {
         datew.setValue(LocalDate.now());
         SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
         recieverRadioBtn.setSelected(false);
-        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadTime();
 
     }

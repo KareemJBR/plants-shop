@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientOrders">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientOrders">
    <children>
-      <Label layoutX="306.0" layoutY="16.0" prefHeight="73.0" prefWidth="185.0" text="My Orders">
+      <Label layoutX="306.0" layoutY="16.0" prefHeight="73.0" prefWidth="185.0" style="-fx-text-fill: #F2F4F7;" text="My Orders">
          <font>
             <Font name="Arial" size="30.0" />
          </font>
@@ -18,16 +18,25 @@
           <AnchorPane fx:id="ordersList" minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="765.0" />
         </content>
       </ScrollPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="47.0" prefWidth="94.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Back">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
       <Button layoutX="679.0" layoutY="455.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #f17272;" />
-      <Label layoutX="390.0" layoutY="445.0" prefHeight="47.0" prefWidth="217.0" text="0% refund: 0-1 hour before reciept time " />
+      <Label layoutX="416.0" layoutY="445.0" prefHeight="47.0" prefWidth="294.0" style="-fx-text-fill: #F2F4F7;" text="0% refund: 0-1 hour before reciept time ">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Button layoutX="679.0" layoutY="501.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #44ead1;" />
       <Button layoutX="679.0" layoutY="553.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #94f589;" />
-      <Label layoutX="390.0" layoutY="491.0" prefHeight="47.0" prefWidth="245.0" text="50% refund: 1-3 hours before reciept time " />
-      <Label layoutX="390.0" layoutY="543.0" prefHeight="47.0" prefWidth="287.0" text="100% refund: more than 3 hours before reciept time " />
+      <Label layoutX="409.0" layoutY="491.0" prefHeight="47.0" prefWidth="294.0" style="-fx-text-fill: #F2F4F7;" text="50% refund: 1-3 hours before reciept time ">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="345.0" layoutY="543.0" prefHeight="47.0" prefWidth="333.0" style="-fx-text-fill: F2F4F7;" text="100% refund: more than 3 hours before reciept time ">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>
