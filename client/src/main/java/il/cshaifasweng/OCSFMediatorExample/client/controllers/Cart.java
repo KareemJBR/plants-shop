@@ -169,7 +169,11 @@ public class Cart<T> {
                     imageview.setFitWidth(87);   //width of img
                     imageview.setFitHeight(95); //height of img
 //                        System.out.println(cartItems.get(i).getUrl());
-                    imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
+                    try{
+                        imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
+                    } catch (Exception e) {
+                        imageview.setImage(new Image("https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg?ver=6"));
+                    }
                     imageview.setX(8);           //x & y coordinate related to the pane
                     imageview.setY(8);
 
