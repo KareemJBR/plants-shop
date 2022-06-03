@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ClientMainPage">
    <children>
       <Button fx:id="catalogBtn" layoutX="118.0" layoutY="174.0" mnemonicParsing="false" onAction="#catalog" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text="Catalog" textFill="WHITE">
          <font>
@@ -27,7 +27,7 @@
             <Font name="Arial" size="22.0" />
          </font>
       </Button>
-      <TextField fx:id="messagetextfield" layoutX="249.0" layoutY="12.0" prefHeight="57.0" prefWidth="331.0" style="-fx-font: none;" text="welcome first name">
+      <TextField fx:id="messagetextfield" alignment="CENTER" layoutX="249.0" layoutY="12.0" prefHeight="57.0" prefWidth="331.0" style="-fx-font: none;" text="welcome first name">
          <font>
             <Font name="Arial" size="26.0" />
          </font>
