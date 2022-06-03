@@ -5,15 +5,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.NetWorkerHomePage">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.NetWorkerHomePage">
    <children>
-      <Text layoutX="263.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome!">
+      <Text layoutX="314.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Welcome!">
          <font>
-            <Font name="Andalus" size="20.0" />
+            <Font name="Andalus" size="36.0" />
          </font>
       </Text>
-      <Button layoutX="257.0" layoutY="157.0" mnemonicParsing="false" onAction="#openCatalogue" prefHeight="40.0" prefWidth="95.0" text="Update Price" />
-      <Button layoutX="257.0" layoutY="240.0" mnemonicParsing="false" onAction="#addSale" prefHeight="40.0" prefWidth="95.0" text="Edit Sales" />
-      <Button layoutX="25.0" layoutY="26.0" mnemonicParsing="false" onAction="#signOut" prefHeight="40.0" prefWidth="90.0" text="Sing Out" />
+      <Button layoutX="290.0" layoutY="173.0" mnemonicParsing="false" onAction="#openCatalogue" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Update Price">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="290.0" layoutY="356.0" mnemonicParsing="false" onAction="#addSale" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Edit Sales">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="25.0" layoutY="26.0" mnemonicParsing="false" onAction="#signOut" prefHeight="47.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Sing Out" />
    </children>
 </AnchorPane>

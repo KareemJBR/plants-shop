@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ReportControl">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ReportControl">
    <children>
-      <Button fx:id="back" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back" textOverrun="CLIP">
+      <Button fx:id="back" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Back" textOverrun="CLIP">
          <font>
             <Font name="Arial" size="15.0" />
          </font></Button>
-      <Button fx:id="sentBtn" layoutX="606.0" layoutY="518.0" mnemonicParsing="false" onAction="#createRoport" prefHeight="39.0" prefWidth="124.0" style="-fx-background-radius: 25;" text="Send Report ">
+      <Button fx:id="sentBtn" layoutX="606.0" layoutY="518.0" mnemonicParsing="false" onAction="#createRoport" prefHeight="54.0" prefWidth="124.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Send Report ">
          <font>
             <Font size="15.0" />
          </font></Button>
       <TextArea fx:id="reportText" layoutX="25.0" layoutY="180.0" prefHeight="378.0" prefWidth="520.0" />
-      <Label fx:id="decriprinLabel" layoutX="25.0" layoutY="136.0" prefHeight="27.0" prefWidth="174.0" text="Report Description:">
+      <Label fx:id="decriprinLabel" layoutX="25.0" layoutY="136.0" prefHeight="27.0" prefWidth="174.0" style="-fx-text-fill: #F2F4F7;" text="Report Description:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ChoiceBox fx:id="selectMe" layoutX="593.0" layoutY="225.0" prefHeight="26.0" prefWidth="149.0" />
-      <Label fx:id="selectText" layoutX="612.0" layoutY="180.0" prefHeight="27.0" prefWidth="111.0" text="Select Store: ">
+      <Label fx:id="selectText" layoutX="612.0" layoutY="180.0" prefHeight="27.0" prefWidth="111.0" style="-fx-text-fill: #F2F4F7;" text="Select Store: ">
          <font>
             <Font size="18.0" />
          </font>

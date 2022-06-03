@@ -4,10 +4,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AddSale">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AddSale">
    <children>
-      <Button fx:id="backBTN" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBack" prefHeight="31.0" prefWidth="70.0" text="Back" />
+      <Button fx:id="backBTN" layoutX="15.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBack" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #E43A19; -fx-text-fill: #F2F4F7; -fx-background-radius: 15;" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <TableView fx:id="itemsTable" layoutX="3.0" layoutY="58.0" onMouseClicked="#rowClicked" prefHeight="474.0" prefWidth="634.0">
          <columns>
             <TableColumn fx:id="itemId" prefWidth="49.60003662109375" text="Item Id" />

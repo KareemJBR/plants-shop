@@ -90,7 +90,6 @@ public class Cart<T> {
             AccountTypeLabel.setText(LoginClient_acount_type);
             OrderShop=LoginClient_acount_type;
         }
-        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadPage();
     }
 
