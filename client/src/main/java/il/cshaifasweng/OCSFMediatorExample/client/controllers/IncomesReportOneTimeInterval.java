@@ -28,6 +28,8 @@ public class IncomesReportOneTimeInterval implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // update the values of the dates and initialize the GUI items
+
         boolean is_admin = App.getIsAdmin();
         int shop_id = App.getShopID();
         start_date = App.getReport_start_date1();
@@ -86,6 +88,8 @@ public class IncomesReportOneTimeInterval implements Initializable {
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
+        // shopAdmin and main admin shall have different controllers for creating reports since shopAdmins cannot
+        // compare two reports at the same time
         if (App.getIsAdmin())
             App.setRoot("controllers/ShowReportsForAdmin");
         else

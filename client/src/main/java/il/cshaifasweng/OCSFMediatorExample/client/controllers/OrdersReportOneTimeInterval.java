@@ -27,6 +27,8 @@ public class OrdersReportOneTimeInterval implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // get relevant fields values
+
         boolean is_admin = App.getIsAdmin();
         int shop_id = App.getShopID();
         start_date = App.getReport_start_date1();
@@ -61,18 +63,10 @@ public class OrdersReportOneTimeInterval implements Initializable {
         int[] arr = new int[all_items.size()];
         Arrays.fill(arr, 0);
         for (int i=0;i<all_items.size();i++)
-        {
             for (Order order : orders_to_show)
-            {
-
                 for (int k = 0; k < order.getOrderitems().size(); k++)
                     if (order.getOrderitems().get(k).getItem().getId() == all_items.get(i).getId())
                         arr[i] += order.getOrderitems().get(k).getAmount();
-            }
-
-        }
-
-
 
         for (int i=0;i<arr.length;i++)
             series.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
@@ -89,6 +83,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
     }
 
     public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
+        // create CSV file for the report and save it to the directory `Reports`
         App.createCSVFile("Orders", start_date, end_date, "Item, Sold Amount", series);
     }
 }
