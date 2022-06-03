@@ -9,23 +9,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="553.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowSelectedReportForSupportWorker">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowSelectedReportForSupportWorker">
    <children>
-      <TextArea fx:id="responseText" layoutX="467.0" layoutY="107.0" prefHeight="241.0" prefWidth="237.0" promptText="Respond to Client" />
+      <TextArea fx:id="responseText" layoutX="484.0" layoutY="107.0" prefHeight="241.0" prefWidth="269.0" promptText="Respond to Client" />
       <Text layoutX="276.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Respond">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="348.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respond Message:" />
-      <Text layoutX="358.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund Value:" />
-      <TextField fx:id="refundValueText" disable="true" layoutX="467.0" layoutY="404.0" />
+      <Text layoutX="358.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respond Message:" />
+      <Text layoutX="361.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund Value:" />
+      <TextField fx:id="refundValueText" disable="true" layoutX="484.0" layoutY="405.0" />
       <CheckBox fx:id="refundCheckBox" layoutX="358.0" layoutY="365.0" mnemonicParsing="false" onAction="#checkBoxClicked" text="Refund?" />
-      <Button layoutX="398.0" layoutY="483.0" mnemonicParsing="false" onAction="#sendResponse" prefHeight="34.0" prefWidth="66.0" text="Send" />
-      <Button layoutX="552.0" layoutY="483.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="66.0" text="Cancel" />
-      <Hyperlink layoutX="669.0" layoutY="15.0" onAction="#goBack" text="Back" underline="true">
+      <Button layoutX="484.0" layoutY="505.0" mnemonicParsing="false" onAction="#sendResponse" prefHeight="34.0" prefWidth="73.0" text="Send" />
+      <Button layoutX="662.0" layoutY="505.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="73.0" text="Cancel" />
+      <Hyperlink layoutX="15.0" layoutY="14.0" onAction="#goBack" text="Back" underline="true">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="15.0" />
          </font>
       </Hyperlink>
       <Text layoutX="14.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report ID:" />

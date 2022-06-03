@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane fx:id="Controller" accessibleRole="PASSWORD_FIELD" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
    <children>
       <TextField fx:id="userName" layoutX="279.0" layoutY="206.0" prefHeight="45.0" prefWidth="246.0" promptText="username" style="-fx-background-radius: 15;">
@@ -15,18 +16,24 @@
             <Font name="Arial" size="16.0" />
          </font>
       </TextField>
+
       <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="279.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;">
+
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </PasswordField>
+
       <CheckBox fx:id="showPassword" layoutX="538.0" layoutY="276.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
       <Button fx:id="logInBtn" layoutX="324.0" layoutY="352.0" mnemonicParsing="false" onAction="#logIN" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 25;" text="Login" textFill="WHITE">
+
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+
       <Label fx:id="notmemberLabel" alignment="CENTER" layoutX="350.0" layoutY="502.0" prefHeight="36.0" prefWidth="103.0" text="not a member?">
+
          <font>
             <Font size="13.0" />
          </font></Label>
@@ -35,15 +42,18 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
+
       <Button fx:id="catalogBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#openCatalog" prefHeight="64.0" prefWidth="163.0" style="-fx-background-radius: 15; -fx-background-color: gray;" text="Catalog" textFill="WHITE">
          <font>
             <Font name="Arial" size="17.0" />
          </font></Button>
-      <TextField fx:id="visiblePassword" disable="true" layoutX="279.0" layoutY="276.0" prefHeight="47.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
+      <TextField fx:id="visiblePassword" disable="true" layoutX="279.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
+
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </TextField>
+
       <Label alignment="CENTER" layoutX="320.0" layoutY="76.0" prefHeight="47.0" prefWidth="163.0" text="Login">
          <font>
             <Font name="Arial Bold" size="35.0" />
