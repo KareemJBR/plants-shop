@@ -119,6 +119,12 @@ public class ClientOrders {
         ordersList.getChildren().add(pane);
     }
 
+
+    @FXML
+    void initialize() throws IOException {
+        loadPage();
+    }
+
     public void showAlert(String title, String head) {
         Platform.runLater(new Runnable() {
             public void run() {

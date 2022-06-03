@@ -49,7 +49,7 @@ public class NetWorkerCatalog {
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
-                Container.setMinHeight(allItems.size() * 120);      ///the height of the container is related to the amount of the items
+                Container.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
                 ArrayList<TextField> newPrices = new ArrayList<>();
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item

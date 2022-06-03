@@ -144,6 +144,7 @@ public class LogIN {
         App.setRoot("controllers/publicCatalog");
     }
 
+
     @FXML
     void Show(ActionEvent event) {          ////////show checkbox //////////
         if(showPassword.isSelected())

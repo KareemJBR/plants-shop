@@ -6,23 +6,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AddSale">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.AddSale">
    <children>
       <Button fx:id="backBTN" layoutX="15.0" layoutY="8.0" mnemonicParsing="false" onAction="#goBack" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #E43A19; -fx-text-fill: #F2F4F7; -fx-background-radius: 15;" text="Back">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <TableView fx:id="itemsTable" layoutX="3.0" layoutY="58.0" onMouseClicked="#rowClicked" prefHeight="474.0" prefWidth="634.0">
+      <TableView fx:id="itemsTable" layoutX="3.0" layoutY="58.0" onMouseClicked="#rowClicked" prefHeight="538.0" prefWidth="774.0">
          <columns>
-            <TableColumn fx:id="itemId" prefWidth="49.60003662109375" text="Item Id" />
-            <TableColumn fx:id="ItemName" prefWidth="47.20001220703125" text="Name" />
-            <TableColumn fx:id="finalPrice" minWidth="8.0" prefWidth="64.0" text="Final Price" />
-            <TableColumn fx:id="underSale" prefWidth="74.39996337890625" text="Under Sale" />
-            <TableColumn fx:id="salePercante" minWidth="0.0" prefWidth="90.39996337890625" text="Sale Percante" />
-            <TableColumn fx:id="CatalogNumber" prefWidth="105.5999755859375" text="Catalog Number" />
-            <TableColumn fx:id="originalPrice" prefWidth="84.79998779296875" text="Original Price" />
-            <TableColumn fx:id="type" prefWidth="57.60003662109375" text="Type" />
-            <TableColumn fx:id="color" prefWidth="59.99997558593748" text="color" />
+            <TableColumn fx:id="itemId" prefWidth="70.39999532699585" text="Item Id" />
+            <TableColumn fx:id="ItemName" prefWidth="116.79998016357422" text="Name" />
+            <TableColumn fx:id="finalPrice" minWidth="0.0" prefWidth="69.60003662109375" text="Final Price" />
+            <TableColumn fx:id="underSale" prefWidth="66.39996337890625" text="Under Sale" />
+            <TableColumn fx:id="salePercante" minWidth="0.0" prefWidth="81.60003662109375" text="Sale Percante" />
+            <TableColumn fx:id="CatalogNumber" prefWidth="99.199951171875" text="Catalog Number" />
+            <TableColumn fx:id="originalPrice" prefWidth="81.60006713867188" text="Original Price" />
+            <TableColumn fx:id="type" prefWidth="103.99993896484375" text="Type" />
+            <TableColumn fx:id="color" prefWidth="88.0" text="color" />
          </columns>
       </TableView>
    </children>
