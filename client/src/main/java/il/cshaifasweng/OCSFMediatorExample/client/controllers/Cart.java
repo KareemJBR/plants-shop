@@ -34,6 +34,9 @@ public class Cart<T> {
     public static double OrderSubtotal;
     public static String OrderShop;
 
+    @FXML
+    private AnchorPane Controller;
+
     @FXML // fx:id="AccountTypeLabel"
     private Label AccountTypeLabel; // Value injected by FXMLLoader
     @FXML // fx:id="CheckoutBtn"
@@ -87,6 +90,7 @@ public class Cart<T> {
             AccountTypeLabel.setText(LoginClient_acount_type);
             OrderShop=LoginClient_acount_type;
         }
+        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadPage();
     }
 
@@ -162,8 +166,8 @@ public class Cart<T> {
 
                     ////////////// img /////////////
                     ImageView imageview=new ImageView();
-                    imageview.setFitWidth(78);   //width of img
-                    imageview.setFitHeight(78); //height of img
+                    imageview.setFitWidth(87);   //width of img
+                    imageview.setFitHeight(95); //height of img
 //                        System.out.println(cartItems.get(i).getUrl());
                     imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
                     imageview.setX(8);           //x & y coordinate related to the pane
@@ -176,13 +180,13 @@ public class Cart<T> {
                     name.setStyle("-fx-background-color:none");
                     name.setEditable(false);
                     name.setLayoutX(100);
-                    name.setLayoutY(8);
+                    name.setLayoutY(10);
                     ///////// price textfield ///////////
                     TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
                     price.setStyle("-fx-background-color:none");
                     price.setEditable(false);
                     price.setLayoutX(100);
-                    price.setLayoutY(28);
+                    price.setLayoutY(32);
 
 
                     ///////// type textfield ///////////
@@ -193,21 +197,21 @@ public class Cart<T> {
                     }
                     type.setStyle("-fx-background-color:none");
                     type.setLayoutX(100);
-                    type.setLayoutY(48);
+                    type.setLayoutY(54);
 
                     ///////// amount textfield ///////////
                     TextField amount=new TextField("Amount: "+ itemamount);
                     amount.setStyle("-fx-background-color:none");
                     amount.setEditable(false);
                     amount.setLayoutX(100);
-                    amount.setLayoutY(68);
+                    amount.setLayoutY(76);
 
                     ///////// delete button ///////////
                     Button btn=new Button();
-                    btn.setLayoutX(270);
-                    btn.setLayoutY(16);
-                    btn.setText("X");
-                    btn.setStyle("-fx-font-size:11;-fx-background-radius:2;");
+                    btn.setLayoutX(300);
+                    btn.setLayoutY(15);
+                    btn.setText("x");
+                    btn.setStyle("-fx-font-size:12.2;-fx-min-width: 23;-fx-min-height: 23;-fx-max-height: 23;-fx-max-height: 23;");
                     btn.setId(Integer.toString(cartItems.get(i).getId()));
                     btn.setOnAction(e->{
                         int num= Integer.parseInt(((Button) e.getTarget()).getId());
@@ -221,15 +225,32 @@ public class Cart<T> {
 
                     ///////// decrement button ///////////
                     Button btn2=new Button();
-                    btn2.setLayoutX(270);
-                    btn2.setLayoutY(58);
+                    btn2.setLayoutX(300);
+                    btn2.setLayoutY(75);
                     btn2.setText("-");
                     btn2.setId(Integer.toString(cartItems.get(i).getId()));
-                    btn2.setStyle("-fx-font-size:12.1;-fx-background-radius:2;");
+                    btn2.setStyle("-fx-font-size:13;-fx-min-width: 23;-fx-min-height: 23;-fx-max-height: 23;-fx-max-height: 23;");
                     btn2.setOnAction(e->{
                         int num= Integer.parseInt(((Button) e.getTarget()).getId());
                         try {
                             decrementAmountofCartItem(num);
+                            loadPage();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    });
+
+                    ///////// increment button ///////////
+                    Button btn3=new Button();
+                    btn3.setLayoutX(300);
+                    btn3.setLayoutY(44);
+                    btn3.setText("+");
+                    btn3.setId(Integer.toString(cartItems.get(i).getId()));
+                    btn3.setStyle("-fx-font-size:11;-fx-min-width: 23;-fx-min-height: 23;-fx-max-height: 23;-fx-max-height: 23;");
+                    btn3.setOnAction(e->{
+                        int num= Integer.parseInt(((Button) e.getTarget()).getId());
+                        try {
+                            incrementAmountofCartItem(num);
                             loadPage();
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
@@ -245,8 +266,9 @@ public class Cart<T> {
                     p.getChildren().add(amount);
                     p.getChildren().add(btn);
                     p.getChildren().add(btn2);
+                    p.getChildren().add(btn3);
 
-                    p.setLayoutY(90*i);
+                    p.setLayoutY(110*i);
 
                     itemscontainer.getChildren().add(p);
 

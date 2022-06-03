@@ -51,7 +51,7 @@ public class App extends Application {
         // EventBus.getDefault().register(this);
         client = SimpleClient.getClient();
         client.openConnection();
-        scene = new Scene(loadFXML("controllers/Login"),640,480);
+        scene = new Scene(loadFXML("controllers/Login"),780,600);
         stage.setScene(scene);
         stage.show();
     }
@@ -275,6 +275,12 @@ public class App extends Application {
 
     public static void decrementAmountofCartItem(int cartitemId) throws IOException {
         MsgClass msg = new MsgClass("#decrement amount", null);
+        msg.setObj(cartitemId);
+        SimpleClient.getClient().sendToServer(msg);
+    }
+
+    public static void incrementAmountofCartItem(int cartitemId) throws IOException {
+        MsgClass msg = new MsgClass("#increment amount", null);
         msg.setObj(cartitemId);
         SimpleClient.getClient().sendToServer(msg);
     }

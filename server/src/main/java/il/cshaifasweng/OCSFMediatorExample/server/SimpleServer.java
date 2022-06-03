@@ -858,6 +858,15 @@ public class SimpleServer extends AbstractServer {
                     }
 
                 }
+                if (msgtext.equals("#increment amount")) {
+                    try {
+                        System.out.println("in increment amount");
+                        incrementAmountofCartItem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in increment amount");
+                    }
+
+                }
                 if (msgString.startsWith("#close")) {
                     session.close();
                 }
@@ -977,6 +986,30 @@ public class SimpleServer extends AbstractServer {
                             cartItems.get(i).setAmount(amount-1);
                             session.update(cartItems.get(i));
                         }
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+
+    }
+
+    public static void incrementAmountofCartItem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        int amount= cartItems.get(i).getAmount();
+                            cartItems.get(i).setAmount(amount+1);
+                            session.update(cartItems.get(i));
                         break;
                     }
                 }
