@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
    <children>
-      <TableView fx:id="reports" layoutY="61.0" onMouseClicked="#openReport" prefHeight="338.0" prefWidth="600.0">
+      <TableView fx:id="reports" layoutY="61.0" onMouseClicked="#openReport" prefHeight="539.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
-          <TableColumn fx:id="reportIDColumn" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="clientIDColumn" prefWidth="159.20001220703125" text="Client ID" />
-            <TableColumn fx:id="shopIDColumn" prefWidth="124.0" text="Shop ID" />
-            <TableColumn fx:id="reportDateColumn" prefWidth="239.199951171875" text="Report Date" />
+          <TableColumn fx:id="reportIDColumn" prefWidth="104.79998934268951" text="ID" />
+          <TableColumn fx:id="clientIDColumn" prefWidth="197.5999984741211" text="Client ID" />
+            <TableColumn fx:id="shopIDColumn" prefWidth="225.60006713867188" text="Shop ID" />
+            <TableColumn fx:id="reportDateColumn" prefWidth="251.2000732421875" text="Report Date" />
         </columns>
       </TableView>
-      <Text layoutX="256.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="87.66909790039062">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Text>
       <Hyperlink layoutX="14.0" layoutY="16.0" onAction="#backToHomePage" text="Back" underline="true">
          <font>
-            <Font name="System Italic" size="15.0" />
+            <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
+      <Label layoutX="346.0" layoutY="10.0" text="Reports">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
