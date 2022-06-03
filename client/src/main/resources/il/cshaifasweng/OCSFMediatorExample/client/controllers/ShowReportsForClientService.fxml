@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
    <children>
       <TableView fx:id="reports" layoutY="61.0" onMouseClicked="#openReport" prefHeight="338.0" prefWidth="600.0">
         <columns>
@@ -22,9 +22,9 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="553.0" layoutY="16.0" onAction="#backToHomePage" text="Back" underline="true">
+      <Hyperlink layoutX="14.0" layoutY="16.0" onAction="#backToHomePage" text="Back" underline="true">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="15.0" />
          </font>
       </Hyperlink>
    </children>

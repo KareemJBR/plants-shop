@@ -13,11 +13,17 @@
             <Font name="System Bold Italic" size="28.0" />
          </font>
       </TextField>
-      <Button layoutX="263.0" layoutY="200.0" mnemonicParsing="false" onAction="#showCustomers" prefHeight="83.0" prefWidth="233.0" text="Customers" />
-      <Button layoutX="263.0" layoutY="385.0" mnemonicParsing="false" onAction="#showReports" prefHeight="83.0" prefWidth="233.0" text="Reports" />
+      <Button layoutX="263.0" layoutY="200.0" mnemonicParsing="false" onAction="#showCustomers" prefHeight="83.0" prefWidth="233.0" text="Customers">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button layoutX="263.0" layoutY="385.0" mnemonicParsing="false" onAction="#showReports" prefHeight="83.0" prefWidth="233.0" text="Reports">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
       <Hyperlink layoutX="23.0" layoutY="14.0" onAction="#signOut" text="Sign out">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font name="System Italic" size="15.0" />
          </font>
       </Hyperlink>
    </children>
