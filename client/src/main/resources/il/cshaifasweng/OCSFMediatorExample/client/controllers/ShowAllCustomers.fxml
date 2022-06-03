@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Glow?>
@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
    <children>
-      <Text layoutX="259.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="230.73953247070312" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="24.78515625">
+      <Text layoutX="259.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Customers Details:" wrappingWidth="230.73953247070312" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="24.78515625">
          <font>
             <Font size="28.0" />
          </font>
@@ -24,11 +24,7 @@
             <TableColumn fx:id="customersBudget" minWidth="8.0" prefWidth="134.39996337890625" text="Budget" />
         </columns>
       </TableView>
-      <Hyperlink layoutX="14.0" layoutY="13.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </Hyperlink>
+      <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="31.0" prefWidth="71.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 15; -fx-background-color: #E43A19;" text="Home" />
    </children>
    <effect>
       <Glow level="0.0" />
