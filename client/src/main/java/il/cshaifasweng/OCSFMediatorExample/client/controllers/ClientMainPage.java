@@ -67,6 +67,7 @@ public class ClientMainPage {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+
     @FXML
     void CreateReport(ActionEvent event) throws IOException {
         App.setRoot("controllers/CreateReport");

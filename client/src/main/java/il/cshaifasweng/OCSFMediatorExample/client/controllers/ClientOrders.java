@@ -42,6 +42,11 @@ public class ClientOrders {
         App.setRoot("controllers/ClientMainPage");
     }
 
+    @FXML
+    public void initialize() throws IOException, InterruptedException {
+        loadPage();
+    }
+
 
     public void loadorderlist()
     {

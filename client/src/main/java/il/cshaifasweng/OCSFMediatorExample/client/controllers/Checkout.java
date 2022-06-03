@@ -37,8 +37,9 @@ public class Checkout {
     @FXML
     private RadioButton DeliveryRadioBtn;
 
-    @FXML
-    private TextField Greeting;
+
+    @FXML // fx:id="Greeting"
+    private TextArea Greeting; // Value injected by FXMLLoader
 
     @FXML
     private TextField NameTextFeild;

@@ -285,7 +285,6 @@ public class SignUp {
         AcountTypeCombo.getItems().removeAll(AcountTypeCombo.getItems());
         AcountTypeCombo.getItems().addAll("Network account", "Network account with 10% discount","Account for a particular store");
         AcountTypeCombo.getSelectionModel().select(0);
-        Controller.setStyle("-fx-background-color: #fff8dc");
 
         ArrayList<Shop> shops=getAllShops();
 
