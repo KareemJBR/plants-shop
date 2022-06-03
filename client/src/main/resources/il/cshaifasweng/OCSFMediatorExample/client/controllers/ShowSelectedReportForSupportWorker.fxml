@@ -2,39 +2,65 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowSelectedReportForSupportWorker">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowSelectedReportForSupportWorker">
    <children>
       <TextArea fx:id="responseText" layoutX="484.0" layoutY="107.0" prefHeight="241.0" prefWidth="269.0" promptText="Respond to Client" />
-      <Text layoutX="325.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Respond">
+      <Text layoutX="286.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Report Respond">
          <font>
-            <Font name="System Bold Italic" size="18.0" />
+            <Font name="System Bold Italic" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="358.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respond Message:" />
-      <Text layoutX="361.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund Value:" />
-      <TextField fx:id="refundValueText" disable="true" layoutX="484.0" layoutY="405.0" />
-      <CheckBox fx:id="refundCheckBox" layoutX="358.0" layoutY="365.0" mnemonicParsing="false" onAction="#checkBoxClicked" text="Refund?" />
-      <Button layoutX="484.0" layoutY="505.0" mnemonicParsing="false" onAction="#sendResponse" prefHeight="34.0" prefWidth="73.0" text="Send" />
-      <Button layoutX="662.0" layoutY="505.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="73.0" text="Cancel" />
-      <Hyperlink layoutX="15.0" layoutY="14.0" onAction="#goBack" text="Back" underline="true">
+      <Text layoutX="358.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Respond Message:">
          <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </Hyperlink>
-      <Text layoutX="14.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report ID:" />
-      <Text layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Body:" />
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="361.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Refund Value:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <TextField fx:id="refundValueText" disable="true" layoutX="484.0" layoutY="405.0" />
+      <CheckBox fx:id="refundCheckBox" layoutX="358.0" layoutY="365.0" mnemonicParsing="false" onAction="#checkBoxClicked" style="-fx-text-fill: #F2F4F7;" text="Refund?">
+         <font>
+            <Font size="14.0" />
+         </font></CheckBox>
+      <Button layoutX="484.0" layoutY="505.0" mnemonicParsing="false" onAction="#sendResponse" prefHeight="42.0" prefWidth="80.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 20;" text="Send">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button layoutX="651.0" layoutY="505.0" mnemonicParsing="false" onAction="#goBack" prefHeight="42.0" prefWidth="86.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 20;" text="Cancel">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Text layoutX="14.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Report ID:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="14.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Report Body:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
       <TextArea fx:id="reportBody" editable="false" layoutX="15.0" layoutY="253.0" prefHeight="286.0" prefWidth="316.0" />
-      <Text layoutX="14.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cleint ID:" />
-      <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop ID:" />
+      <Text layoutX="14.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Cleint ID:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="15.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Shop ID:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
       <TextField fx:id="shopIDText" editable="false" layoutX="181.0" layoutY="184.0" />
       <TextField fx:id="clientIDText" editable="false" layoutX="181.0" layoutY="143.0" />
       <TextField fx:id="reportIDText" editable="false" layoutX="181.0" layoutY="103.0" />
+      <Button layoutX="24.0" layoutY="18.0" mnemonicParsing="false" onAction="#goBack" prefHeight="42.0" prefWidth="85.0" style="-fx-background-radius: 20; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Back">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -4,46 +4,61 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportTwoTimeIntervals">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportTwoTimeIntervals">
     <children>
-        <LineChart fx:id="incomesChart2" layoutX="446.0" layoutY="157.0" prefHeight="400.0" prefWidth="410.0" title="Incomes Report">
-            <xAxis>
-                <CategoryAxis fx:id="dayAxes2" label="Day" side="BOTTOM" />
-            </xAxis>
-            <yAxis>
-                <NumberAxis fx:id="incomesNumAxes2" label="Incomes" side="LEFT" />
-            </yAxis>
-        </LineChart>
-        <LineChart fx:id="incomesChart1" layoutX="7.0" layoutY="157.0" prefHeight="400.0" prefWidth="410.0" title="Incomes Report">
-            <xAxis>
-                <CategoryAxis fx:id="dayAxes1" label="Day" side="BOTTOM" />
-            </xAxis>
-            <yAxis>
-                <NumberAxis fx:id="incomesNumAxes1" label="Incomes" side="LEFT" />
-            </yAxis>
-        </LineChart>
-        <Line endY="212.80001831054688" layoutX="445.0" layoutY="336.0" startY="-322.0" />
-        <Text layoutX="32.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
-        <Text layoutX="36.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
-        <Text layoutX="472.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
-        <Text layoutX="476.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
-        <TextArea fx:id="startDate2" editable="false" layoutX="617.0" layoutY="35.0" prefHeight="34.0" prefWidth="200.0" />
-        <TextArea fx:id="endDate2" editable="false" layoutX="617.0" layoutY="96.0" prefHeight="34.0" prefWidth="200.0" />
+        <Line endY="212.80001831054688" layoutX="402.0" layoutY="337.0" startY="-322.0" />
+        <Text layoutX="98.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Start Date: ">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <Text layoutX="102.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="End Date:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <Text layoutX="458.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Start Date: ">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <Text layoutX="463.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="End Date:">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+        <TextArea fx:id="startDate2" editable="false" layoutX="538.0" layoutY="35.0" prefHeight="34.0" prefWidth="200.0" />
+        <TextArea fx:id="endDate2" editable="false" layoutX="538.0" layoutY="95.0" prefHeight="34.0" prefWidth="200.0" />
         <TextArea fx:id="endDate1" editable="false" layoutX="170.0" layoutY="95.0" prefHeight="16.0" prefWidth="200.0" />
         <TextArea fx:id="startDate1" editable="false" layoutX="170.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" />
-      <Hyperlink layoutX="19.0" layoutY="13.0" onAction="#backButtonClicked" text="Back" underline="true">
-         <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </Hyperlink>
-      <Button layoutX="148.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
-      <Button layoutX="587.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
+      <Button layoutX="148.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="127.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 20; -fx-background-color: #6366f1;" text="Download CSV File" />
+      <Button layoutX="587.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="127.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 20; -fx-background-color: #6366f1;" text="Download CSV File" />
+      <AnchorPane layoutX="36.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F2F4F7;">
+         <children>
+              <LineChart fx:id="incomesChart1" prefHeight="380.0" prefWidth="350.0" title="Incomes Report">
+                  <xAxis>
+                      <CategoryAxis fx:id="dayAxes1" label="Day" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                      <NumberAxis fx:id="incomesNumAxes1" label="Incomes" side="LEFT" />
+                  </yAxis>
+              </LineChart>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="415.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F2F4F7;">
+         <children>
+              <LineChart fx:id="incomesChart2" prefHeight="380.0" prefWidth="350.0" style="-fx-background-color: #F2F4F7;" title="Incomes Report">
+                  <xAxis>
+                      <CategoryAxis fx:id="dayAxes2" label="Day" side="BOTTOM" />
+                  </xAxis>
+                  <yAxis>
+                      <NumberAxis fx:id="incomesNumAxes2" label="Incomes" side="LEFT" />
+                  </yAxis>
+              </LineChart>
+         </children>
+      </AnchorPane>
+      <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="38.0" prefWidth="75.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #E43A19; -fx-background-radius: 20;" text="Back" />
     </children>
 </AnchorPane>
