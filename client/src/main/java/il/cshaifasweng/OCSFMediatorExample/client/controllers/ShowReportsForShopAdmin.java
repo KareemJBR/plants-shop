@@ -56,6 +56,7 @@ public class ShowReportsForShopAdmin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // initialize the report types ComboBox
         ObservableList<String> reports_types = FXCollections.observableArrayList();
 
         reports_types.add("Orders");

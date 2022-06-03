@@ -47,6 +47,8 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // initialize GUI items and get teh right values for the dates and is_admin from client/App
+
         boolean is_admin = App.getIsAdmin();
 
         start_date1 = App.getReport_start_date1();
@@ -78,6 +80,9 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         int len1 = 0, len2 = 0;
 
         for (int i=0; i<2; i++) {
+
+            // shall create two different reports
+
             if (i==0){
                 start_date = start_date1;
                 end_date = end_date1;
@@ -96,6 +101,8 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
                 e.printStackTrace();
             }
 
+            // we will use len1 and len2 for solving the start date in the CSV file's name
+
             if (i == 0)
                 len1 = App.get_num_of_days_in_time_interval(start_date, end_date);
             else
@@ -103,10 +110,11 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
 
             int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
             assert reports_to_show != null;
-            for (Report report : reports_to_show) {
 
+            for (Report report : reports_to_show) {
+                int temp = report.getMonth();
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(report.getYear(), report.getMonth() - 1, report.getDay(),
+                calendar.set(report.getYear(), temp - 1, report.getDay(),
                         5, 0, 0);
 
                 int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;

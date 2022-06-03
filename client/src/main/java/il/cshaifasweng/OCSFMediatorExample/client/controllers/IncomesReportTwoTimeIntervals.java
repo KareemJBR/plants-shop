@@ -52,10 +52,15 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
         Calendar start_date;
         Calendar end_date;
 
+        // initialize GUI items and get the values for the fields from App
+
         start_date1 = App.getReport_start_date1();
         end_date1 = App.getReport_end_date1();
         start_date2 = App.getReport_start_date2();
         end_date2 = App.getReport_end_date2();
+
+        series1 = new XYChart.Series<>();
+        series2 = new XYChart.Series<>();
 
         startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
                 Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
@@ -63,21 +68,21 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
         startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
                 Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
 
+        series1.setName("Incomes Report");
+        series2.setName("Incomes Report");
+
         endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
                 Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
 
         endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
                 Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
 
-        series1 = new XYChart.Series<>();
-        series2 = new XYChart.Series<>();
-
-        series1.setName("Incomes Report");
-        series2.setName("Incomes Report");
 
         int len1 = 0, len2 = 0;
 
         for (int i=0;i<2;i++) {
+
+            // creating two charts
 
             if (i==0) {
                 start_date = start_date1;
@@ -95,6 +100,8 @@ public class IncomesReportTwoTimeIntervals implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // using the values of len1 and len2 to fix start date in the file's name
 
             if (i==0)
                 len1 = App.get_num_of_days_in_time_interval(start_date, end_date);

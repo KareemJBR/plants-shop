@@ -45,9 +45,7 @@ public class App extends Application {
     private static boolean is_admin;
     private static int shop_id;
     private static int report_id_for_client_service;
-    private static String support_worker_id_for_report;
     private static Item edit_item;
-    private static Item edit_item_for_NW;
 
 
     @Override
@@ -69,8 +67,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-
-
     @Override
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub
@@ -83,7 +79,6 @@ public class App extends Application {
         client.closeConnection();
 		super.stop();
 	}
-
 
 	public static void main(String[] args) {
         launch();
@@ -103,7 +98,6 @@ public class App extends Application {
         MsgClass msg = new MsgClass("#customerDelete", customer);
         SimpleClient.getClient().sendToServer(msg);
     }
-
 
     public static  Customer getCurrentCustomer() throws IOException {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
@@ -132,7 +126,6 @@ public class App extends Application {
         items=(ArrayList<Item>)allItemsData;
         return items;
     }
-
 
     public static  ArrayList<Customer> getAllCustomers() throws IOException {
         ArrayList<Customer> customers=new ArrayList<Customer>();
@@ -194,7 +187,6 @@ public class App extends Application {
         return shopAdmins;
     }
 
-
     public static ArrayList<Order> getAllOrders() throws IOException {
 
         ArrayList<Order> orders = new ArrayList<Order>();
@@ -206,7 +198,6 @@ public class App extends Application {
         return orders;
     }
 
-
     public  static List<OrderItem> getOrderItems(int orderId) throws IOException {
         List<OrderItem> orderItems=new ArrayList<OrderItem>();
         MsgClass msg=new MsgClass("#get orderItems",null);
@@ -217,7 +208,6 @@ public class App extends Application {
         orderItems=(List<OrderItem>) OrderItemData;
         return orderItems;
     }
-
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
         ArrayList<SupportWorker> support_workers = new ArrayList<SupportWorker>();
@@ -261,7 +251,6 @@ public class App extends Application {
         SimpleClient.getClient().sendToServer(msg);
     }
 
-
     public static void deleteCartitem(int cartitemId) throws IOException {
         MsgClass msg = new MsgClass("#delete CartItem", null);
         msg.setObj(cartitemId);
@@ -282,7 +271,6 @@ public class App extends Application {
         msg.setObj(ob);
         SimpleClient.getClient().sendToServer(msg);
     }
-
         
     public static int get_num_of_days_in_time_interval(Calendar start_date, Calendar end_date) {
         // interval must be valid
@@ -456,15 +444,6 @@ public class App extends Application {
 
     public static void setReport_id_for_client_service(int report_id) {
         report_id_for_client_service = report_id;
-    }
-
-
-    public static String getSupport_worker_id_for_report() {
-        return support_worker_id_for_report;
-    }
-
-    public static void setSupport_worker_id_for_report(String temp_id) {
-        support_worker_id_for_report = temp_id;
     }
 
     public static Item getEdit_item() {
