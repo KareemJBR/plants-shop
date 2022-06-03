@@ -72,6 +72,7 @@ public class publicCatalogControl {
         filterBTN.setStyle("-fx-background-color:#DBEDF3");
         filterSelect.setStyle("-fx-background-color:#DBEDF3");
         filterSelect.getItems().addAll("All Items","Under Sale");
+        filterSelect.getSelectionModel().select(0);
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {

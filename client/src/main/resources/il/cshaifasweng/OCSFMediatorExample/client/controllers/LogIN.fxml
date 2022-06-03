@@ -10,18 +10,18 @@
 
 <AnchorPane fx:id="Controller" accessibleRole="PASSWORD_FIELD" prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
    <children>
-      <TextField fx:id="userName" layoutX="279.0" layoutY="203.0" prefHeight="47.0" prefWidth="246.0" promptText="username" style="-fx-background-radius: 15;">
+      <TextField fx:id="userName" layoutX="279.0" layoutY="206.0" prefHeight="45.0" prefWidth="246.0" promptText="username" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="279.0" layoutY="276.0" prefHeight="47.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;">
+      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="279.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </PasswordField>
       <CheckBox fx:id="showPassword" layoutX="538.0" layoutY="276.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" text="Show" />
-      <Button fx:id="logInBtn" layoutX="324.0" layoutY="352.0" mnemonicParsing="false" onAction="#logIN" prefHeight="47.0" prefWidth="155.0" style="-fx-background-radius: 25;" text="Login" textFill="WHITE">
+      <Button fx:id="logInBtn" layoutX="324.0" layoutY="352.0" mnemonicParsing="false" onAction="#logIN" prefHeight="44.0" prefWidth="155.0" style="-fx-background-radius: 25;" text="Login" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -30,7 +30,7 @@
          <font>
             <Font size="13.0" />
          </font></Label>
-      <Button fx:id="createAcountBtn" alignment="CENTER" layoutX="337.0" layoutY="538.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="36.0" prefWidth="130.0" style="-fx-background-radius: 30; -fx-background-color: orange;" text="Create account" textFill="#fbfbfb">
+      <Button fx:id="createAcountBtn" alignment="CENTER" layoutX="337.0" layoutY="538.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="34.0" prefWidth="130.0" style="-fx-background-radius: 30; -fx-background-color: orange;" text="Create account" textFill="#fbfbfb">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
