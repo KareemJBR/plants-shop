@@ -88,7 +88,7 @@ public class ClientMainPage {
 
     @FXML
     void catalog(ActionEvent event) throws IOException {
-        getAllitems();
+        getAllItems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/RegisteredCatalog");
     }
@@ -138,5 +138,4 @@ public class ClientMainPage {
             }
         });
     }
-    
 }

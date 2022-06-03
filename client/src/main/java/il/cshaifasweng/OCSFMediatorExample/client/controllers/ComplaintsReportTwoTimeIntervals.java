@@ -47,12 +47,17 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // initialize GUI items and get teh right values for the dates and is_admin from client/App
+
         boolean is_admin = App.getIsAdmin();
 
-        Calendar start_date1 = App.getReport_start_date1();
-        Calendar end_date1 = App.getReport_end_date1();
-        Calendar start_date2 = App.getReport_start_date2();
-        Calendar end_date2 = App.getReport_end_date2();
+        start_date1 = App.getReport_start_date1();
+        end_date1 = App.getReport_end_date1();
+        start_date2 = App.getReport_start_date2();
+        end_date2 = App.getReport_end_date2();
+
+        Calendar start_date;
+        Calendar end_date;
 
         startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
                 Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
@@ -72,8 +77,11 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
         series1.setName("Complaints Report");
         series2.setName("Complaints Report");
 
+        int len1 = 0, len2 = 0;
+
         for (int i=0; i<2; i++) {
-            Calendar start_date, end_date;
+
+            // shall create two different reports
 
             if (i==0){
                 start_date = start_date1;
@@ -93,12 +101,20 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
                 e.printStackTrace();
             }
 
+            // we will use len1 and len2 for solving the start date in the CSV file's name
+
+            if (i == 0)
+                len1 = App.get_num_of_days_in_time_interval(start_date, end_date);
+            else
+                len2 = App.get_num_of_days_in_time_interval(start_date, end_date);
+
             int[] arr = new int[App.get_num_of_days_in_time_interval(start_date, end_date)];
             assert reports_to_show != null;
-            for (Report report : reports_to_show) {
 
+            for (Report report : reports_to_show) {
+                int temp = report.getMonth();
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(report.getYear(), report.getMonth() - 1, report.getDay(),
+                calendar.set(report.getYear(), temp - 1, report.getDay(),
                         5, 0, 0);
 
                 int col_num = App.get_num_of_days_in_time_interval(start_date, calendar) - 1;
@@ -124,6 +140,9 @@ public class ComplaintsReportTwoTimeIntervals implements Initializable {
             else
                 complaintsChart2.getData().add(series2);
         }
+
+        start_date1.add(Calendar.DAY_OF_MONTH, -1 * len1);
+        start_date2.add(Calendar.DAY_OF_MONTH, -1 * len2);
 
     }
 

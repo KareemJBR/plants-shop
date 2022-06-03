@@ -94,7 +94,7 @@ public class RegisteredCatalogControl {
             // allItemsData=null;
             //SimpleClient.getClient().sendToServer(msg);
             // while(allItemsData==null){}
-            getAllitems();
+            App.getAllItems();
             System.out.println("all items filter1");
         } else {
             // msg.setMsg("#get shop items that under sale");

@@ -45,28 +45,23 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        boolean is_admin = App.getIsAdmin();
-        int shop_id = App.getShopID();
+        Calendar start_date;
+        Calendar end_date;
+
+        // getting parameters from App
 
         start_date1 = App.getReport_start_date1();
         end_date1 = App.getReport_end_date1();
         start_date2 = App.getReport_start_date2();
         end_date2 = App.getReport_end_date2();
 
-        Calendar start_date;
-        Calendar end_date;
+        boolean is_admin = App.getIsAdmin();
+        int shop_id = App.getShopID();
+
+        // initialize GUI items
 
         endDate1.textProperty().set(end_date1.get(Calendar.DAY_OF_MONTH) + "/" + (end_date1.get(
                 Calendar.MONTH) + 1) + "/" + end_date1.get(Calendar.YEAR));
-
-        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
-                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
-
-        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
-                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
-
-        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
-                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
 
         series1 = new XYChart.Series<>();
         series2 = new XYChart.Series<>();
@@ -74,7 +69,17 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
         series1.setName("Orders Report");
         series2.setName("Orders Report");
 
+        endDate2.textProperty().set(end_date2.get(Calendar.DAY_OF_MONTH) + "/" + (end_date2.get(
+                Calendar.MONTH) + 1) + "/" + end_date2.get(Calendar.YEAR));
+
         ArrayList<Item> all_items = null;
+
+        startDate1.textProperty().set(start_date1.get(Calendar.DAY_OF_MONTH) + "/" + (start_date1.get(
+                Calendar.MONTH) + 1) + "/" + start_date1.get(Calendar.YEAR));
+
+        startDate2.textProperty().set(start_date2.get(Calendar.DAY_OF_MONTH) + "/" + (start_date2.get(
+                Calendar.MONTH) + 1) + "/" + start_date2.get(Calendar.YEAR));
+
 
         try {
             all_items = App.getAllItems();
@@ -112,6 +117,7 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
             int[] arr = new int[all_items.size()];
             Arrays.fill(arr, 0);
 
+            // search the appearance of each item in all relevant orders
             for (int i=0;i<=all_items.size()-1;i++)
                 for (Order order : orders_to_show)
                     for (int k = 0; k < order.getOrderitems().size(); k++)
@@ -120,7 +126,7 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
 
 
             for (int i=0;i<arr.length;i++)
-                if (i==0)
+                if (a==0)
                     series1.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
                 else
                     series2.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
@@ -138,10 +144,12 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
     }
 
     public void downloadCSVFile1(ActionEvent actionEvent) throws FileNotFoundException {
+        // create a CSV file of the report 1
         App.createCSVFile("Orders", start_date1, end_date1, "Item, Sold Amount", series1);
     }
 
     public void downloadCSVFile2(ActionEvent actionEvent) throws FileNotFoundException {
+        // create a CSV file of the report 2
         App.createCSVFile("Orders", start_date2, end_date2, "Item, Sold Amount", series2);
     }
 }

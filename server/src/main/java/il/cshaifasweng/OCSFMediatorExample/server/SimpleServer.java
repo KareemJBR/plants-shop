@@ -4,11 +4,9 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//my imports
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -113,31 +111,16 @@ public class SimpleServer extends AbstractServer {
         return data;
     }
 
-    private static void generateShops() {
-        /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","211406343");
-        session.save(shop1);
-        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
-        session.save(shop2);
-        session.flush();
-        Shop shop3 = new Shop("cheap shop","Hanamal 100, Haifa","223355789");
-        session.save(shop3);
-        session.flush();
-        Shop shop4 = new Shop("best shop","Abba Houshi 1, Haifa","999999999");
-        session.save(shop4);
-        session.flush();
-    }
-
     private static void generateShopsData() {
 
         /* ---------- Saving Items To Data Base ---------- */
         Item item1 = new Item("red",true,0.3,30,"flower", "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
         session.flush();
-        Item item2 = new Item("blue",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+        Item item2 = new Item("blue",false,0,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
         session.flush();
-        Item item3 = new Item("red",false,1,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
+        Item item3 = new Item("red",false,0,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
         session.save(item3);
         session.flush();
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
@@ -467,15 +450,6 @@ public class SimpleServer extends AbstractServer {
         session.flush();
     }
 
-    public static Session getSession() {
-        return session;
-    }
-
-    public static void setSession(Session session) {
-        SimpleServer.session = session;
-    }
-
-
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Shop.class);
@@ -599,6 +573,7 @@ public class SimpleServer extends AbstractServer {
                         System.out.println(e.getMessage());
                     }
                 }
+
                 if (msgtext.equals("#update cartIrem")) {
                     try {
                         updateCartIrem((CartItem) ((MsgClass) msg).getObj());
@@ -621,6 +596,17 @@ public class SimpleServer extends AbstractServer {
                     try {
                         Customer temp = (Customer) (((MsgClass) msg).getObj());
                         delete_customer(temp);
+                    } catch (Exception e) {
+                        System.out.println("error occurred");
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                if (msgtext.equals("#reload for all clients")) {
+                    try {
+                        MsgClass myMSg = new MsgClass("reload");
+                        myMSg.setObj(null);
+                        sendToAllClients(myMSg);
                     } catch (Exception e) {
                         System.out.println("error occurred");
                         System.out.println(e.getMessage());
@@ -879,9 +865,6 @@ public class SimpleServer extends AbstractServer {
         }
     }
 
-
-
-
     private static void AddCustomer(Customer p) {
         session.clear();
         session.beginTransaction();
@@ -906,6 +889,7 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
 
     }
+
     private static void AddCartItem(CartItem I) {
         session.beginTransaction();
         session.clear();
@@ -1047,6 +1031,7 @@ public class SimpleServer extends AbstractServer {
         session.delete(session.get(Customer.class, customer.getId()));
         session.getTransaction().commit();
     }
+
     private static void deleteReport(Report report) {
         session.beginTransaction();
         session.clear();
@@ -1054,8 +1039,8 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
     }
 
-        @Transactional
-        private static List<OrderItem> getorderitems(int orderId) throws Exception {
+    @Transactional
+    private static List<OrderItem> getorderitems(int orderId) throws Exception {
         ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
         if(orders!=null)
         {
@@ -1113,7 +1098,19 @@ public class SimpleServer extends AbstractServer {
             }
         }
     }
+    @Override
+    public void sendToAllClients(Object msg)
+    {
+        Thread[] clientThreadList = getClientConnections();
 
-
+        for (int i=0; i<clientThreadList.length; i++)
+        {
+            try
+            {
+                ((ConnectionToClient)clientThreadList[i]).sendToClient(msg);
+            }
+            catch (Exception ex) {}
+        }
+    }
 
 }
