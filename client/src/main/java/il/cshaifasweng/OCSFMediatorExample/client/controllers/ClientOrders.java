@@ -31,6 +31,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 public class ClientOrders {
 
 
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
     @FXML // fx:id="ordersList"
     private AnchorPane ordersList; // Value injected by FXMLLoader
 
@@ -41,6 +44,7 @@ public class ClientOrders {
 
     @FXML
     void initialize() throws IOException {
+        Controller.setStyle("-fx-background-color: #D4F1F4");
        loadPage();
     }
 
@@ -66,11 +70,19 @@ public class ClientOrders {
         receiptdate.setLayoutY(8);
         pane.getChildren().add(receiptdate);
 
+        //////////// receipt time ////////////
+        TextField receipttime=new TextField("Receipt Time");
+        receipttime.setEditable(false);
+        receipttime.setStyle("-fx-background-color:none");
+        receipttime.setLayoutX(235);
+        receipttime.setLayoutY(8);
+        pane.getChildren().add(receipttime);
+
         //////////// Ship address ////////////
         TextField shippingaddress=new TextField("Ship To");
         shippingaddress.setEditable(false);
         shippingaddress.setStyle("-fx-background-color:none");
-        shippingaddress.setLayoutX(238);
+        shippingaddress.setLayoutX(365);
         shippingaddress.setLayoutY(8);
         pane.getChildren().add(shippingaddress);
 
@@ -78,7 +90,7 @@ public class ClientOrders {
         TextField price=new TextField("Order Total");
         price.setEditable(false);
         price.setStyle("-fx-background-color:none");
-        price.setLayoutX(328);
+        price.setLayoutX(480);
         price.setLayoutY(8);
         pane.getChildren().add(price);
 
@@ -86,7 +98,7 @@ public class ClientOrders {
         TextField status=new TextField("Status");
         status.setEditable(false);
         status.setStyle("-fx-background-color:none");
-        status.setLayoutX(428);
+        status.setLayoutX(580);
         status.setLayoutY(8);
         pane.getChildren().add(status);
 
@@ -94,11 +106,11 @@ public class ClientOrders {
         TextField action=new TextField("Action");
         action.setEditable(false);
         action.setStyle("-fx-background-color:none");
-        action.setLayoutX(528);
+        action.setLayoutX(682);
         action.setLayoutY(8);
         pane.getChildren().add(action);
 
-        Line line = new Line(608,0,0,0);
+        Line line = new Line(780,0,0,0);
         line.setLayoutY(40);
         line.setLayoutX(4);
         line.setDisable(true);
@@ -193,12 +205,21 @@ public class ClientOrders {
                     receiptdate.setLayoutY(12.5);
                     pane.getChildren().add(receiptdate);
 
+                    ////////// order receipttime ////////////
+                    LocalTime time=LocalTime.of(orders.get(i).getReceipt_hour(),orders.get(i).getReceipt_minute());
+                    TextField receipttime=new TextField(time.toString());
+                    receipttime.setEditable(false);
+                    receipttime.setStyle("-fx-background-color:none");
+                    receipttime.setLayoutX(250);
+                    receipttime.setLayoutY(12.5);
+                    pane.getChildren().add(receipttime);
+
                     ////////// Ship to ////////////
                     TextField shipto=new TextField(orders.get(i).getShipping_address());
                     shipto.setEditable(false);
-                    shipto.setMaxWidth(85);
+                    shipto.setMaxWidth(92);
                     shipto.setStyle("-fx-background-color:none");
-                    shipto.setLayoutX(228);
+                    shipto.setLayoutX(349);
                     shipto.setLayoutY(12.5);
                     pane.getChildren().add(shipto);
 
@@ -206,7 +227,7 @@ public class ClientOrders {
                     TextField price=new TextField(Double.toString(orders.get(i).getPrice()));
                     price.setEditable(false);
                     price.setStyle("-fx-background-color:none");
-                    price.setLayoutX(345);
+                    price.setLayoutX(492);
                     price.setLayoutY(12.5);
                     pane.getChildren().add(price);
 
@@ -230,7 +251,7 @@ public class ClientOrders {
                     }
                     status.setEditable(false);
                     status.setStyle("-fx-background-color:none");
-                    status.setLayoutX(426);
+                    status.setLayoutX(580);
                     status.setLayoutY(12.5);
                     pane.getChildren().add(status);
 
@@ -238,7 +259,7 @@ public class ClientOrders {
                     Button btn=new Button();
                     btn.setText("Cancel");
                     btn.setStyle("-fx-background-color:none");
-                    btn.setLayoutX(525);
+                    btn.setLayoutX(680);
                     btn.setLayoutY(8);
                     btn.setId(String.valueOf(orders.get(i).getId()));
 
@@ -277,7 +298,7 @@ public class ClientOrders {
 
                     pane.getChildren().add(btn);
 
-                    Line line = new Line(608,0,0,0);
+                    Line line = new Line(780,0,0,0);
                     line.setLayoutY(51);
                     line.setLayoutX(4);
                     line.setDisable(true);

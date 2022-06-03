@@ -3,7 +3,6 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
-import il.cshaifasweng.OCSFMediatorExample.entities.OrderItem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,8 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getOrderItems;
 
 
 public class OrdersReportOneTimeInterval implements Initializable {
@@ -29,6 +26,8 @@ public class OrdersReportOneTimeInterval implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // get relevant fields values
 
         boolean is_admin = App.getIsAdmin();
         int shop_id = App.getShopID();
@@ -63,29 +62,17 @@ public class OrdersReportOneTimeInterval implements Initializable {
         assert all_items != null;
         int[] arr = new int[all_items.size()];
         Arrays.fill(arr, 0);
-        List<OrderItem> orderItems=null;
         for (int i=0;i<all_items.size();i++)
-        {
             for (Order order : orders_to_show)
-            {
-                try {
-                    orderItems= getOrderItems(order.getId());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                for (int k = 0; k < orderItems.size(); k++)
-                    if (orderItems.get(k).getItem().getId() == all_items.get(i).getId())
-                        arr[i] += orderItems.get(k).getAmount();
-            }
-
-        }
-
-
+                for (int k = 0; k < order.getOrderitems().size(); k++)
+                    if (order.getOrderitems().get(k).getItem().getId() == all_items.get(i).getId())
+                        arr[i] += order.getOrderitems().get(k).getAmount();
 
         for (int i=0;i<arr.length;i++)
             series.getData().add(new XYChart.Data<>(all_items.get(i).getName(), arr[i]));
 
         ordersChart.getData().add(series);
+
     }
 
     public void backButtonClicked(ActionEvent actionEvent) throws IOException {
@@ -96,6 +83,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
     }
 
     public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
+        // create CSV file for the report and save it to the directory `Reports`
         App.createCSVFile("Orders", start_date, end_date, "Item, Sold Amount", series);
     }
 }

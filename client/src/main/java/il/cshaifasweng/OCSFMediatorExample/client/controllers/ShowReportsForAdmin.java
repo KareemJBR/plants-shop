@@ -70,6 +70,7 @@ public class ShowReportsForAdmin implements Initializable {
             untilC2.set(Calendar.MINUTE, 59);
         }
 
+        // shall consider the reports in the interval in all the day hours
         fromC1.set(Calendar.HOUR, 0);
         fromC1.set(Calendar.MINUTE, 0);
         untilC1.set(Calendar.HOUR, 23);
@@ -99,7 +100,8 @@ public class ShowReportsForAdmin implements Initializable {
         }
     }
 
-    public boolean legalFields() {
+    public boolean legalFields() {  // returns true iff the input values for the report are legal, otherwise it
+        // returns false
         if(fromDate1.getValue() == null || untilDate1.getValue() == null || reportTypeComboBox.getValue() == null) {
             App.showAlert("Error", "Please fill all needed fields.");
             return false;
@@ -125,6 +127,7 @@ public class ShowReportsForAdmin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // initialize report types ComboBox
 
         ObservableList<String> reports_types = FXCollections.observableArrayList();
 
@@ -133,6 +136,7 @@ public class ShowReportsForAdmin implements Initializable {
         reports_types.add("Complaints");
 
         reportTypeComboBox.setItems(reports_types);
+        reportTypeComboBox.getSelectionModel().select(0);
     }
 
 }

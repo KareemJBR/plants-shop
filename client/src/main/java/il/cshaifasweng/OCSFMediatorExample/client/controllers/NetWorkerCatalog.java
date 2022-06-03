@@ -21,10 +21,7 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitems;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getCurrentCustomer;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.currentCustomerData;
 
 public class NetWorkerCatalog {
 

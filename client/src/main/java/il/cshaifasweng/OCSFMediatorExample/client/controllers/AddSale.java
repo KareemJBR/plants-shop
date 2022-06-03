@@ -19,8 +19,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllCustomers;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitems;
 
 public class AddSale implements Initializable {
 
@@ -93,7 +91,7 @@ public class AddSale implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Item> customersToShow = null;
         try {
-            items = getAllitems();
+            items = App.getAllItems();
             customersToShow = FXCollections.observableArrayList(items);
         } catch (IOException e) {
             e.printStackTrace();

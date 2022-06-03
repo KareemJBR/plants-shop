@@ -4,11 +4,9 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//my imports
 import org.hibernate.SessionFactory;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -111,21 +109,6 @@ public class SimpleServer extends AbstractServer {
         query.from(Order.class);
         List<Order> data = session.createQuery(query).getResultList();
         return data;
-    }
-
-    private static void generateShops() {
-        /* ---------- Saving Shops To Data Base ---------- */
-        Shop shop1 = new Shop("bad shop","Abba Houshi 199, Haifa","211406343");
-        session.save(shop1);
-        Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","123456789");
-        session.save(shop2);
-        session.flush();
-        Shop shop3 = new Shop("cheap shop","Hanamal 100, Haifa","223355789");
-        session.save(shop3);
-        session.flush();
-        Shop shop4 = new Shop("best shop","Abba Houshi 1, Haifa","999999999");
-        session.save(shop4);
-        session.flush();
     }
 
     private static void generateShopsData() {
@@ -466,15 +449,6 @@ public class SimpleServer extends AbstractServer {
         session.save(worker2);
         session.flush();
     }
-
-    public static Session getSession() {
-        return session;
-    }
-
-    public static void setSession(Session session) {
-        SimpleServer.session = session;
-    }
-
 
     private static SessionFactory getSessionFactory() throws HibernateException {
         Configuration configuration = new Configuration();
@@ -870,6 +844,15 @@ public class SimpleServer extends AbstractServer {
                     }
 
                 }
+                if (msgtext.equals("#increment amount")) {
+                    try {
+                        System.out.println("in increment amount");
+                        incrementAmountofCartItem((Integer) ((MsgClass) msg).getObj());
+                    } catch (Exception e) {
+                        System.out.println("error happened in increment amount");
+                    }
+
+                }
                 if (msgString.startsWith("#close")) {
                     session.close();
                 }
@@ -881,9 +864,6 @@ public class SimpleServer extends AbstractServer {
             session.close();
         }
     }
-
-
-
 
     private static void AddCustomer(Customer p) {
         session.clear();
@@ -909,6 +889,7 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
 
     }
+
     private static void AddCartItem(CartItem I) {
         session.beginTransaction();
         session.clear();
@@ -999,6 +980,30 @@ public class SimpleServer extends AbstractServer {
 
     }
 
+    public static void incrementAmountofCartItem(int cartitemId) throws Exception {
+        ArrayList<CartItem> cartItems= (ArrayList<CartItem>) getAllCartIetms();
+        session.beginTransaction();
+        if(cartItems!=null)
+        {
+            if(cartItems.size()!=0)
+            {
+                for(int i=0;i<cartItems.size();i++)
+                {
+                    if(cartItems.get(i).getId()==cartitemId)
+                    {
+                        int amount= cartItems.get(i).getAmount();
+                            cartItems.get(i).setAmount(amount+1);
+                            session.update(cartItems.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+        session.flush();
+        session.getTransaction().commit();
+
+    }
+
     private static void update_customer(Customer customer) {
         session.beginTransaction();
         session.clear();
@@ -1026,6 +1031,7 @@ public class SimpleServer extends AbstractServer {
         session.delete(session.get(Customer.class, customer.getId()));
         session.getTransaction().commit();
     }
+
     private static void deleteReport(Report report) {
         session.beginTransaction();
         session.clear();
@@ -1033,8 +1039,8 @@ public class SimpleServer extends AbstractServer {
         session.getTransaction().commit();
     }
 
-        @Transactional
-        private static List<OrderItem> getorderitems(int orderId) throws Exception {
+    @Transactional
+    private static List<OrderItem> getorderitems(int orderId) throws Exception {
         ArrayList<Order> orders= (ArrayList<Order>) getAllOrders();
         if(orders!=null)
         {
@@ -1106,6 +1112,5 @@ public class SimpleServer extends AbstractServer {
             catch (Exception ex) {}
         }
     }
-
 
 }

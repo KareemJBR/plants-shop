@@ -34,6 +34,9 @@ public class LogIN {
     String  current;
     String password_status="invisible";
 
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
     @FXML // fx:id="Password"
     private PasswordField Password; // Value injected by FXMLLoader
 
@@ -62,12 +65,12 @@ public class LogIN {
   void initialize()
   {
       logInBtn.setStyle("-fx-background-color:#4ea7f6;-fx-background-radius:25");
+      Controller.setStyle("-fx-background-color: #fff8dc");
   }
     @FXML
     void createAcount(ActionEvent event) throws IOException {
         shop=false;
        App.setRoot("controllers/SignUp");
-        //SignUp.main(null);
     }
     @FXML
     void logIN(ActionEvent event) throws IOException {

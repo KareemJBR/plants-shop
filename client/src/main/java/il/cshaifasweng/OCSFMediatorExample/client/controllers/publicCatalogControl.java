@@ -11,14 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitems;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.Itemsdata;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.data;
 
 public class publicCatalogControl {
 
@@ -66,7 +62,7 @@ public class publicCatalogControl {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        ArrayList<Item> allItems = getAllitems();
+        ArrayList<Item> allItems = App.getAllItems();
         itemscontainer.setStyle("-fx-background-color: #404B69");
         backBtn.setStyle("-fx-background-color:#DBEDF3");
         singUp.setStyle("-fx-background-color:#DBEDF3");
@@ -76,6 +72,7 @@ public class publicCatalogControl {
         filterBTN.setStyle("-fx-background-color:#DBEDF3");
         filterSelect.setStyle("-fx-background-color:#DBEDF3");
         filterSelect.getItems().addAll("All Items","Under Sale");
+        filterSelect.getSelectionModel().select(0);
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {

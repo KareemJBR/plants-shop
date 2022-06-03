@@ -132,7 +132,7 @@ public class ReportControl {
 
     public void initialize() throws IOException, InterruptedException {
         mainPane.setStyle("-fx-background-color:#222831");
-        back.setStyle("-fx-background-color:#00ADB5");
+        back.setStyle("-fx-background-color:#00ADB5;-fx-background-radius:25");
         decriprinLabel.setStyle("-fx-background-color: #393E46");
         reportText.setStyle("-fx-background-color: #393E46");
         decriprinLabel.setTextFill(Color.WHITE);
@@ -141,12 +141,14 @@ public class ReportControl {
         selectText.setTextFill(Color.WHITE);
         sentBtn.setStyle("-fx-background-color:#00ADB5");
 
+
         ArrayList<Shop> shopArr=new ArrayList<>(getAllShops());
         ArrayList<String> shops = new ArrayList<>();
         for(int i=0;i<shopArr.size();i++){
             shops.add(shopArr.get(i).getName());
         }
         selectMe.getItems().addAll(shops);
+        selectMe.getSelectionModel().select(0);
     }
 
 }

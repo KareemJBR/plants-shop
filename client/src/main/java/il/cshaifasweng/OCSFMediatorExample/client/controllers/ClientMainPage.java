@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,30 +28,40 @@ import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 import  il.cshaifasweng.OCSFMediatorExample.client.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.stage.Stage;
 
 import javax.transaction.Transactional;
 
 public class ClientMainPage {
 
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
     @FXML // fx:id="LogOutBtn"
     private Button LogOutBtn; // Value injected by FXMLLoader
-    @FXML
-    private Button cartBtn;
 
-    @FXML
-    private Button catalogBtn;
+    @FXML // fx:id="SendReportBtn"
+    private Button SendReportBtn; // Value injected by FXMLLoader
 
-    @FXML
-    private Button customizedOrderBtn;
-    @FXML
-    private TextField messagetextfield;
+    @FXML // fx:id="cartBtn"
+    private Button cartBtn; // Value injected by FXMLLoader
 
-    @FXML
-    private Button SendReportBtn;
+    @FXML // fx:id="catalogBtn"
+    private Button catalogBtn; // Value injected by FXMLLoader
 
-    @FXML
-    private Button viewReportBtn;
+    @FXML // fx:id="messagetextfield"
+    private TextField messagetextfield; // Value injected by FXMLLoader
+
+    @FXML // fx:id="myOrdersBtn"
+    private Button myOrdersBtn; // Value injected by FXMLLoader
+
+    @FXML // fx:id="viewReportBtn"
+    private Button viewReportBtn; // Value injected by FXMLLoader
+
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
@@ -77,18 +88,9 @@ public class ClientMainPage {
 
     @FXML
     void catalog(ActionEvent event) throws IOException {
-       // MsgClass msg=new MsgClass("#get Items",null);
-      //  allItemsData=null;
-       // SimpleClient.getClient().sendToServer(msg);
-      //  while(allItemsData==null){System.out.println("waiting");}
-        getAllitems();
+        getAllItems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/RegisteredCatalog");
-    }
-
-    @FXML
-    void customizedOrder(ActionEvent event) throws IOException {
-        App.setRoot("controllers/CustomizedOrder");
     }
 
 
@@ -101,6 +103,9 @@ public class ClientMainPage {
     void initialize() throws IOException {
         ArrayList<Customer> customers=getAllCustomers();
         customers=getAllCustomers();
+        messagetextfield.setEditable(false);
+        Controller.setStyle("-fx-background-color: #D4F1F4");
+//        myOrdersBtn.setStyle("-fx-border-radius: 25;-fx-background-color: rgba(117,230,218,0.8)");
         if(customers!=null)
         {
             for(int i=0;i<customers.size();i++)
@@ -133,6 +138,4 @@ public class ClientMainPage {
             }
         });
     }
-
-
 }
