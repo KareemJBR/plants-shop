@@ -131,8 +131,12 @@ public class addItem {
         colorText.setPromptText("Enter The Color"); //to set the hint text
         colorLabel.getParent().requestFocus(); //to not setting the focus on that node so that the hint will display immediately
 
-        priceText.setPromptText("Enter Picture Link"); //to set the hint text
+        priceText.setPromptText("Enter Item Price"); //to set the hint text
         priceText.getParent().requestFocus(); //to not setting the focus on that node so that the hint will display immediately
+
+        picText.setPromptText("Enter Image link");
+        typeText.setPromptText("Enter Item Type");
+
 
     }
 
