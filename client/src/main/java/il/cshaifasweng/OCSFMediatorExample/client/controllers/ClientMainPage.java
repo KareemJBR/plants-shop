@@ -104,7 +104,6 @@ public class ClientMainPage {
         ArrayList<Customer> customers=getAllCustomers();
         customers=getAllCustomers();
         messagetextfield.setEditable(false);
-        Controller.setStyle("-fx-background-color: #D4F1F4");
 //        myOrdersBtn.setStyle("-fx-border-radius: 25;-fx-background-color: rgba(117,230,218,0.8)");
         if(customers!=null)
         {

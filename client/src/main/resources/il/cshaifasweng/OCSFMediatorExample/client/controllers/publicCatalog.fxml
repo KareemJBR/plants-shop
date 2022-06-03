@@ -7,33 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="itemsContainer" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.publicCatalogControl">
+<AnchorPane fx:id="itemsContainer" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.publicCatalogControl">
     <children>
-        <Button fx:id="backBtn" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Back">
+        <Button fx:id="backBtn" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Back">
             <font>
                 <Font size="15.0" />
             </font>
         </Button>
-        <Button fx:id="singUp" layoutX="547.0" layoutY="8.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25;" text="Sign up">
+        <Button fx:id="singUp" layoutX="670.0" layoutY="14.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Sign Up">
             <font>
                 <Font size="15.0" />
             </font>
         </Button>
-        <ScrollPane layoutY="119.0" prefHeight="361.0" prefWidth="640.0">
+        <ScrollPane layoutX="5.0" layoutY="119.0" prefHeight="473.0" prefWidth="766.0">
             <content>
-                <AnchorPane fx:id="itemscontainer" minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="638.0" />
+                <AnchorPane fx:id="itemscontainer" minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="750.0" style="-fx-background-color: #0c1738;" />
             </content>
         </ScrollPane>
-      <Label fx:id="textFilter" alignment="CENTER" layoutX="25.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" text="Show:">
+      <Label fx:id="textFilter" alignment="CENTER" layoutX="25.0" layoutY="64.0" prefHeight="25.0" prefWidth="150.0" style="-fx-text-fill: #F2F4F7;" text="Show:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="filterSelect" layoutX="25.0" layoutY="90.0" prefWidth="150.0" />
-      <Button fx:id="filterBTN" layoutX="174.0" layoutY="89.0" mnemonicParsing="false" text="Button" />
-      <Label fx:id="title" alignment="CENTER" layoutX="192.0" layoutY="4.0" prefHeight="46.0" prefWidth="256.0" text="Catalog">
+      <ChoiceBox fx:id="filterSelect" layoutX="25.0" layoutY="90.0" prefWidth="150.0" style="-fx-background-color: F2F4F7;" />
+      <Button fx:id="filterBTN" layoutX="175.0" layoutY="90.0" mnemonicParsing="false" onAction="#filter" style="-fx-text-fill: black; -fx-background-color: F2F4F7;" text="Filter" />
+      <Label fx:id="title" alignment="CENTER" layoutX="246.0" layoutY="10.0" prefHeight="46.0" prefWidth="256.0" style="-fx-text-fill: #F2F4F7;" text="Catalog">
          <font>
-            <Font size="24.0" />
+            <Font size="30.0" />
          </font>
       </Label>
     </children>

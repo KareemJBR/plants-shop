@@ -42,11 +42,6 @@ public class ClientOrders {
         App.setRoot("controllers/ClientMainPage");
     }
 
-    @FXML
-    void initialize() throws IOException {
-        Controller.setStyle("-fx-background-color: #D4F1F4");
-       loadPage();
-    }
 
     public void loadorderlist()
     {
