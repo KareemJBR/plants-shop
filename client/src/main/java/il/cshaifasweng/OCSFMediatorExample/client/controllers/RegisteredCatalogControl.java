@@ -167,7 +167,11 @@ public class RegisteredCatalogControl {
                     imageview.setFitWidth(180);   //width of img
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
-                    imageview.setImage(new Image(allItems.get(i).getUrl()));
+                    try{
+                        imageview.setImage(new Image(allItems.get(i).getUrl()));
+                    } catch (Exception e) {
+                        imageview.setImage(new Image("https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg?ver=6"));
+                    }
                     imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
                     ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
