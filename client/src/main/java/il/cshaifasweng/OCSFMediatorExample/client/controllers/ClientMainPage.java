@@ -138,10 +138,5 @@ public class ClientMainPage {
             }
         });
     }
-
-
-//    public void Click(javafx.scene.input.MouseEvent mouseEvent) {
-//       showAlert("sdf","sdfsdf");
-//
-//    }
+    
 }
