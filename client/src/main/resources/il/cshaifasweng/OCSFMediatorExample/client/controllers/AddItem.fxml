@@ -44,12 +44,12 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="saleLabel" layoutX="466.0" layoutY="175.0" prefHeight="50.0" prefWidth="132.0" style="-fx-text-fill: #F2F4F7;" text="Sale Percente:">
+      <Label fx:id="saleLabel" layoutX="445.0" layoutY="175.0" prefHeight="50.0" prefWidth="132.0" style="-fx-text-fill: #F2F4F7;" text="Sale Percente:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <CheckBox fx:id="SaleCheck" layoutX="466.0" layoutY="137.0" mnemonicParsing="false" onAction="#undableSale" style="-fx-text-fill: #F2F4F7;" text="Under Sale">
+      <CheckBox fx:id="SaleCheck" layoutX="445.0" layoutY="139.0" mnemonicParsing="false" onAction="#undableSale" style="-fx-text-fill: #F2F4F7;" text="Under Sale">
          <font>
             <Font size="16.0" />
          </font>
@@ -58,7 +58,7 @@
       <TextField fx:id="priceText" layoutX="177.0" layoutY="200.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="colorText" layoutX="177.0" layoutY="255.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="picText" layoutX="177.0" layoutY="315.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="SaleText" layoutX="598.0" layoutY="181.0" prefHeight="38.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+      <TextField fx:id="SaleText" layoutX="577.0" layoutY="181.0" prefHeight="38.0" prefWidth="180.0" style="-fx-background-radius: 10;" />
       <Label fx:id="typeLabel" layoutX="50.0" layoutY="365.0" prefHeight="50.0" prefWidth="132.0" style="-fx-text-fill: #F2F4F7;" text="Item Type:">
          <font>
             <Font size="16.0" />
