@@ -61,19 +61,24 @@ public class addItem {
     void addItem(ActionEvent event) throws IOException {
         if (colorText.getText() == null || colorText.getText().trim().isEmpty()) {
             showAlert("Error", "please enter the item color");
+            return;
         }
         if (priceText.getText() == null || priceText.getText().trim().isEmpty()) {
             showAlert("Error", "please enter the item price");
+            return;
         }
         if (nameText.getText() == null || nameText.getText().trim().isEmpty()) {
             showAlert("Error", "please enter the item name");
+            return;
         }
 
         if ((SaleCheck.isSelected() && SaleText.getText() == null) || (SaleCheck.isSelected() && SaleText.getText().trim().isEmpty())) {
             showAlert("Error", "please enter the item sale percent");
+            return;
         }
         if (typeText.getText() == null || typeText.getText().trim().isEmpty()) {
             showAlert("Error", "please enter the item picture");
+            return;
         }
         Item newitem = new Item();
         newitem.setUnderSale(SaleCheck.isSelected());
