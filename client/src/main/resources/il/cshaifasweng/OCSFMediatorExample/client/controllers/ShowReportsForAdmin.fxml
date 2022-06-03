@@ -4,36 +4,56 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
    <children>
-      <Text layoutX="337.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
+      <Text layoutX="320.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Reports">
          <font>
-            <Font size="25.0" />
+            <Font size="36.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="17.0" layoutY="14.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true">
+      <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="135.0" />
+      <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="193.0" />
+      <Text layoutX="17.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="From Date:" wrappingWidth="77.53125">
          <font>
-            <Font name="System Italic" size="15.0" />
+            <Font size="16.0" />
+         </font></Text>
+      <Text layoutX="18.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Until Date:">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <CheckBox fx:id="comparisonOn" layoutX="17.0" layoutY="332.0" mnemonicParsing="false" onAction="#compareButtonPressed" style="-fx-text-fill: #F2F4F7;" text="Compare?">
+         <font>
+            <Font size="16.0" />
+         </font></CheckBox>
+      <Line endX="-100.00003051757812" endY="171.0" layoutX="481.0" layoutY="125.0" startX="-100.0" />
+      <Text layoutX="428.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="From Date:">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <Text layoutX="429.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Until Date:">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="134.0" />
+      <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="193.0" />
+      <Button layoutX="320.0" layoutY="401.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="71.0" prefWidth="164.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 25; -fx-background-color: #E43A19;" text="Show">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Text layoutX="11.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Report Type:">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="262.0" prefHeight="26.0" prefWidth="175.0" />
+      <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="48.0" prefWidth="102.0" style="-fx-background-radius: 20; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Home">
+         <font>
+            <Font size="16.0" />
          </font>
-      </Hyperlink>
-      <DatePicker fx:id="fromDate1" layoutX="122.0" layoutY="82.0" />
-      <DatePicker fx:id="untilDate1" layoutX="122.0" layoutY="138.0" />
-      <Text layoutX="17.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
-      <Text layoutX="18.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
-      <CheckBox fx:id="comparisonOn" layoutX="18.0" layoutY="246.0" mnemonicParsing="false" onAction="#compareButtonPressed" text="Compare?" />
-      <Line endX="-100.0" endY="161.40000915527344" layoutX="481.0" layoutY="61.0" startX="-100.0" />
-      <Text layoutX="434.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From Date:" />
-      <Text layoutX="435.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Until Date:" />
-      <DatePicker fx:id="fromDate2" disable="true" layoutX="540.0" layoutY="82.0" />
-      <DatePicker fx:id="untilDate2" disable="true" layoutX="540.0" layoutY="138.0" />
-      <Button layoutX="322.0" layoutY="330.0" mnemonicParsing="false" onAction="#showButtonPressed" prefHeight="42.0" prefWidth="117.0" text="Show" />
-      <Text layoutX="18.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Type:" />
-      <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="188.0" prefHeight="26.0" prefWidth="175.0" />
+      </Button>
    </children>
 </AnchorPane>

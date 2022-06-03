@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="521.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowAllCustomers">
    <children>
-      <Text layoutX="286.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="150.739501953125" AnchorPane.leftAnchor="286.0" AnchorPane.rightAnchor="286.260498046875" AnchorPane.topAnchor="13.6552734375">
+      <Text layoutX="259.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers Details:" wrappingWidth="230.73953247070312" AnchorPane.leftAnchor="259.0" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="24.78515625">
          <font>
-            <Font size="17.0" />
+            <Font size="28.0" />
          </font>
       </Text>
       <TableView fx:id="customersTable" layoutY="48.0" onMouseClicked="#rowClicked" prefHeight="474.0" prefWidth="723.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -20,8 +20,8 @@
           <TableColumn fx:id="customersID" prefWidth="140.79999387264252" text="ID" />
           <TableColumn fx:id="customersFirstName" prefWidth="127.199951171875" text="First Name" />
             <TableColumn fx:id="customersLastName" prefWidth="138.4000244140625" text="Last Name" />
-            <TableColumn fx:id="customersEmail" prefWidth="214.39993286132812" text="E-mail" />
-            <TableColumn fx:id="customersBudget" minWidth="8.0" prefWidth="104.7999267578125" text="Budget" />
+            <TableColumn fx:id="customersEmail" prefWidth="235.20004272460938" text="E-mail" />
+            <TableColumn fx:id="customersBudget" minWidth="8.0" prefWidth="134.39996337890625" text="Budget" />
         </columns>
       </TableView>
       <Hyperlink layoutX="14.0" layoutY="13.0" onAction="#backToHomePage" text="Home" textAlignment="CENTER" underline="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">

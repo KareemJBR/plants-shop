@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
    <children>
       <TableView fx:id="reports" layoutY="61.0" onMouseClicked="#openReport" prefHeight="539.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
@@ -17,15 +17,11 @@
             <TableColumn fx:id="reportDateColumn" prefWidth="250.39996337890625" text="Report Date" />
         </columns>
       </TableView>
-      <Hyperlink layoutX="14.0" layoutY="16.0" onAction="#backToHomePage" text="Back" underline="true">
+      <Label layoutX="346.0" layoutY="10.0" style="-fx-text-fill: #F2F4F7;" text="Reports">
          <font>
-            <Font name="System Italic" size="12.0" />
-         </font>
-      </Hyperlink>
-      <Label layoutX="346.0" layoutY="10.0" text="Reports">
-         <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
+      <Button layoutX="25.0" layoutY="13.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="78.0" style="-fx-background-radius: 20; -fx-text-fill: #F2F4F7; -fx-background-color: red;" text="Back" />
    </children>
 </AnchorPane>
