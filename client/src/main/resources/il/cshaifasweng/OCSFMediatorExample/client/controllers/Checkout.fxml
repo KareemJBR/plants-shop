@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
    <children>
       <Button fx:id="CheckoutBtn" layoutX="433.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: E43A19;" text=" Checkout" textFill="WHITE">
 
@@ -69,11 +69,10 @@
             <Font size="27.0" />
          </font>
       </Label>
-<<<<<<< HEAD
-      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" />
+      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" textFill="WHITE" />
       <TextArea fx:id="Greeting" layoutX="14.0" layoutY="114.0" prefHeight="457.0" prefWidth="275.0" promptText="Add greeting here (optional)" />
-=======
-      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="I am The Receiver" />
->>>>>>> 3109966d86d1c248ee1870733a6dcd48839613a6
+<!--=======-->
+<!--      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="I am The Receiver" />-->
+<!--&gt;>>>>>> 3109966d86d1c248ee1870733a6dcd48839613a6-->
    </children>
 </AnchorPane>

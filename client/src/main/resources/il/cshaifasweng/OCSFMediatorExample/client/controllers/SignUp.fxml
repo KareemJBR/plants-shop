@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp">
    <children>
       <TextField fx:id="userName" layoutX="271.0" layoutY="136.0" prefHeight="41.0" prefWidth="255.0" promptText="User Name" style="-fx-background-radius: 15;">
          <font>
@@ -58,7 +58,7 @@
          </cursor>
       </TextField>
       <ComboBox fx:id="ShopsCombo" disable="true" layoutX="462.0" layoutY="292.0" prefHeight="36.0" prefWidth="150.0" promptText="Stores" visible="false" />
-      <TextField fx:id="lastNameTextBox" layoutX="406.0" layoutY="86.0" prefHeight="41.0" prefWidth="118.0" promptText="Last Name" style="-fx-background-radius: 15;">
+      <TextField fx:id="lastNameTextBox" layoutX="399.0" layoutY="86.0" prefHeight="41.0" prefWidth="125.0" promptText="Last Name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
