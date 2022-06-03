@@ -15,9 +15,9 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
-      <Label layoutX="254.0" layoutY="38.0" text="Admin HomePage">
+      <Label layoutX="274.0" layoutY="26.0" text="Welcome Admin">
          <font>
-            <Font name="Arial Black" size="26.0" />
+            <Font name="Arial Black" size="24.0" />
          </font>
       </Label>
    </children>

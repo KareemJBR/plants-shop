@@ -5,11 +5,17 @@ import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class ShopAdminHomePage {
+public class ShopAdminHomePage implements Initializable {
+
+    public Label welcomeSentence;
 
     @FXML
     void showReports(ActionEvent event) throws IOException {
@@ -31,4 +37,10 @@ public class ShopAdminHomePage {
         App.setRoot("controllers/LogIN");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // adding the admin name to the greeting sentence
+        welcomeSentence.textProperty().set(welcomeSentence.getText() + " " + LogIN.Login_shopAdmin.getAdmin_first_name() +
+                " " + LogIN.Login_shopAdmin.getAdmin_last_name() + "!");
+    }
 }

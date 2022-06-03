@@ -17,7 +17,7 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
-      <Label layoutX="320.0" layoutY="38.0" text="Welcome">
+      <Label fx:id="welcomeSentence" layoutX="204.0" layoutY="38.0" text="Welcome">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
