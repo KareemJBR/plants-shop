@@ -7,20 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="367.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SupportWorkerHomePage">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SupportWorkerHomePage">
    <children>
-      <TextField alignment="CENTER" cache="true" editable="false" layoutX="130.0" layoutY="38.0" text="Customer service">
+      <TextField alignment="CENTER" cache="true" editable="false" layoutX="262.0" layoutY="34.0" text="Customer service">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <font>
-            <Font name="System Bold Italic" size="20.0" />
+            <Font name="System Bold Italic" size="23.0" />
          </font>
       </TextField>
-      <Button layoutX="188.0" layoutY="144.0" mnemonicParsing="false" onAction="#showReports" prefHeight="62.0" prefWidth="150.0" text="Show the reports" />
-      <Hyperlink layoutX="460.0" layoutY="14.0" onAction="#signOut" text="Sign out" underline="true">
+      <Button layoutX="308.0" layoutY="274.0" mnemonicParsing="false" onAction="#showReports" prefHeight="78.0" prefWidth="213.0" text="Show the reports">
          <font>
-            <Font name="System Italic" size="12.0" />
+            <Font size="20.0" />
+         </font></Button>
+      <Hyperlink layoutX="14.0" layoutY="14.0" onAction="#signOut" text="Sign out" underline="true">
+         <font>
+            <Font name="System Italic" size="15.0" />
          </font></Hyperlink>
    </children>
 </AnchorPane>

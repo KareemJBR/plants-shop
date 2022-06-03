@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="634.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals">
+<AnchorPane prefHeight="600.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals">
    <children>
       <LineChart fx:id="complaintsChart2" layoutX="454.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Complaints Report">
          <xAxis>
@@ -43,7 +43,7 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
-      <Button layoutX="205.0" layoutY="570.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="38.0" prefWidth="129.0" text="Download CSV File" />
-      <Button layoutX="608.0" layoutY="570.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="38.0" prefWidth="129.0" text="Download CSV File" />
+      <Button layoutX="191.0" layoutY="557.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="38.0" prefWidth="129.0" text="Download CSV File" />
+      <Button layoutX="636.0" layoutY="557.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="38.0" prefWidth="129.0" text="Download CSV File" />
    </children>
 </AnchorPane>
