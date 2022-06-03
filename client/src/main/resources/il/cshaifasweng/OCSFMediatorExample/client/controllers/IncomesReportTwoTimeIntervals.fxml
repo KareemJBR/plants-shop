@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="617.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportTwoTimeIntervals">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.IncomesReportTwoTimeIntervals">
     <children>
-        <LineChart fx:id="incomesChart2" layoutX="454.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
+        <LineChart fx:id="incomesChart2" layoutX="446.0" layoutY="157.0" prefHeight="400.0" prefWidth="410.0" title="Incomes Report">
             <xAxis>
                 <CategoryAxis fx:id="dayAxes2" label="Day" side="BOTTOM" />
             </xAxis>
@@ -21,7 +21,7 @@
                 <NumberAxis fx:id="incomesNumAxes2" label="Incomes" side="LEFT" />
             </yAxis>
         </LineChart>
-        <LineChart fx:id="incomesChart1" layoutX="14.0" layoutY="157.0" prefHeight="400.0" prefWidth="438.0" title="Incomes Report">
+        <LineChart fx:id="incomesChart1" layoutX="7.0" layoutY="157.0" prefHeight="400.0" prefWidth="410.0" title="Incomes Report">
             <xAxis>
                 <CategoryAxis fx:id="dayAxes1" label="Day" side="BOTTOM" />
             </xAxis>
@@ -29,7 +29,7 @@
                 <NumberAxis fx:id="incomesNumAxes1" label="Incomes" side="LEFT" />
             </yAxis>
         </LineChart>
-        <Line endY="212.80001831054688" layoutX="453.0" layoutY="336.0" startY="-322.0" />
+        <Line endY="212.80001831054688" layoutX="445.0" layoutY="336.0" startY="-322.0" />
         <Text layoutX="32.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
         <Text layoutX="36.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End Date:" />
         <Text layoutX="472.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date: " />
@@ -43,7 +43,7 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Hyperlink>
-      <Button layoutX="206.0" layoutY="557.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
-      <Button layoutX="653.0" layoutY="557.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
+      <Button layoutX="148.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
+      <Button layoutX="587.0" layoutY="549.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="127.0" text="Download CSV File" />
     </children>
 </AnchorPane>

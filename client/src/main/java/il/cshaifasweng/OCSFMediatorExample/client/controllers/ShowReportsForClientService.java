@@ -2,9 +2,9 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import il.cshaifasweng.OCSFMediatorExample.entities.ReportToDisplay;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -20,22 +20,22 @@ import java.util.ResourceBundle;
 public class ShowReportsForClientService implements Initializable {
 
     @FXML
-    private TableColumn<Report, String> clientIDColumn;
+    private TableColumn<ReportToDisplay, String> clientIDColumn;
 
     @FXML
-    private TableColumn<Report, String> reportDateColumn;
+    private TableColumn<ReportToDisplay, String> reportDateColumn;
 
     @FXML
-    private TableColumn<Report, Integer> reportIDColumn;
+    private TableColumn<ReportToDisplay, Integer> reportIDColumn;
 
     @FXML
-    private TableView<Report> reports;
+    private TableView<ReportToDisplay> reports;
 
     @FXML
-    private TableColumn<Report, Integer> shopIDColumn;
+    private TableColumn<ReportToDisplay, Integer> shopIDColumn;
 
     @FXML
-    void backToHomePage(ActionEvent event) throws IOException {
+    void backToHomePage() throws IOException {
         App.setRoot("controllers/SupportWorkerHomePage");
     }
 
@@ -76,12 +76,23 @@ public class ShowReportsForClientService implements Initializable {
         if (reportsToShow == null)
             return;
 
-        reportIDColumn.setCellValueFactory(new PropertyValueFactory<Report, Integer>("id"));
-        clientIDColumn.setCellValueFactory(new PropertyValueFactory<Report, String>("customer_id"));
-        reportDateColumn.setCellValueFactory(new PropertyValueFactory<Report, String>("report_date"));
-        shopIDColumn.setCellValueFactory(new PropertyValueFactory<Report, Integer>("shop_id"));
+        ArrayList<ReportToDisplay> temp = new ArrayList<>();
 
-        reports.setItems(reportsToShow);
+        for (Report value : reportsToShow) {
+            ReportToDisplay report = new ReportToDisplay(value.getId(), value.getDay() + "/" +
+                    value.getMonth() + "/" + value.getYear(), value.getCustomer().getId(), value.getShop().getId());
+
+            temp.add(report);
+        }
+
+        ObservableList<ReportToDisplay> final_reports = FXCollections.observableArrayList(temp);
+
+        reportIDColumn.setCellValueFactory(new PropertyValueFactory<>("report_id"));
+        clientIDColumn.setCellValueFactory(new PropertyValueFactory<>("client_id"));
+        reportDateColumn.setCellValueFactory(new PropertyValueFactory<>("report_date"));
+        shopIDColumn.setCellValueFactory(new PropertyValueFactory<>("shop_id"));
+
+        reports.setItems(final_reports);
 
     }
 
@@ -89,16 +100,15 @@ public class ShowReportsForClientService implements Initializable {
         if (mouseEvent.getClickCount() != 2)
             return;
 
-        int index = 0;
-        int report_id = -1;
+        int index, report_id;
 
         try {
 
             index = reports.getSelectionModel().selectedIndexProperty().get();
-            report_id = reports.getItems().get(index).getId();
+            report_id = reports.getItems().get(index).getReport_id();
         } catch (Exception e) {
             return;
-            // double-clicked the table but not a row
+            // double-clicked an empty row
         }
 
         ArrayList<Report> all_reports = App.getAllReports();
