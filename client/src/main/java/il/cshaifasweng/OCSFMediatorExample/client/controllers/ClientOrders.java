@@ -31,6 +31,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 public class ClientOrders {
 
 
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
     @FXML // fx:id="ordersList"
     private AnchorPane ordersList; // Value injected by FXMLLoader
 
@@ -41,6 +44,7 @@ public class ClientOrders {
 
     @FXML
     void initialize() throws IOException {
+        Controller.setStyle("-fx-background-color: #D4F1F4");
        loadPage();
     }
 
@@ -98,7 +102,7 @@ public class ClientOrders {
         action.setLayoutY(8);
         pane.getChildren().add(action);
 
-        Line line = new Line(608,0,0,0);
+        Line line = new Line(780,0,0,0);
         line.setLayoutY(40);
         line.setLayoutX(4);
         line.setDisable(true);
@@ -277,7 +281,7 @@ public class ClientOrders {
 
                     pane.getChildren().add(btn);
 
-                    Line line = new Line(608,0,0,0);
+                    Line line = new Line(780,0,0,0);
                     line.setLayoutY(51);
                     line.setLayoutX(4);
                     line.setDisable(true);
