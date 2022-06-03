@@ -140,6 +140,7 @@ public class LogIN {
     void openCatalog(ActionEvent event) throws IOException {
         MsgClass msg=new MsgClass("#get Items",null);
         SimpleClient.getClient().sendToServer(msg);
+        getAllItems();
         System.out.println("msg sent to got shop items");
         App.setRoot("controllers/publicCatalog");
     }
