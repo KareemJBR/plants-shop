@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import java.util.List;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import javafx.scene.layout.AnchorPane;
 import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import javafx.application.Platform;
@@ -17,6 +18,10 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 
 public class SignUp {
     public static boolean shop;
+
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
     @FXML // fx:id="EmailTextBox"
     private TextField EmailTextBox; // Value injected by FXMLLoader
 
@@ -280,7 +285,7 @@ public class SignUp {
         AcountTypeCombo.getItems().removeAll(AcountTypeCombo.getItems());
         AcountTypeCombo.getItems().addAll("Network account", "Network account with 10% discount","Account for a particular store");
         AcountTypeCombo.getSelectionModel().select(0);
-
+        Controller.setStyle("-fx-background-color: #fff8dc");
 
         ArrayList<Shop> shops=getAllShops();
 

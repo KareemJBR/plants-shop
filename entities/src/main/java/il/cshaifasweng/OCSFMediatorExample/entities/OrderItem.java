@@ -21,9 +21,9 @@ public class OrderItem  implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id",insertable = false, updatable = false)
-//    private Order order;
+    @ManyToOne
+    @JoinColumn(name = "order_id",insertable = false, updatable = false)
+    private Order order;
 
     @ManyToOne()
     @JoinColumn(name = "Item_id")

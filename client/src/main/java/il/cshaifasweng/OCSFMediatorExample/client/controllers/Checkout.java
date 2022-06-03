@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -78,12 +79,16 @@ public class Checkout {
     @FXML // fx:id="recieverRadioBtn"
     private RadioButton recieverRadioBtn; // Value injected by FXMLLoader
 
+    @FXML // fx:id="Controller"
+    private AnchorPane Controller; // Value injected by FXMLLoader
+
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
         SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
         recieverRadioBtn.setSelected(false);
+        Controller.setStyle("-fx-background-color: #D4F1F4");
         loadTime();
 
     }
