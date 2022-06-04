@@ -12,23 +12,18 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ScrollPane layoutX="23.0" layoutY="179.0" prefHeight="397.0" prefWidth="594.0">
+      <ScrollPane layoutX="23.0" layoutY="179.0" prefHeight="398.0" prefWidth="574.0">
         <content>
-          <AnchorPane fx:id="pane_contianer" minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="578.0" />
+          <AnchorPane fx:id="pane_contianer" minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="557.0" />
         </content>
       </ScrollPane>
-      <Button fx:id="deleteReportbtn" layoutX="652.0" layoutY="538.0" mnemonicParsing="false" onAction="#deleteReport" prefHeight="47.0" prefWidth="106.0" style="-fx-background-color: #E43A19; -fx-background-radius: 15; -fx-text-fill: #F2F4F7;" text="Delete Report">
+      <Button fx:id="deleteReportbtn" layoutX="604.0" layoutY="538.0" mnemonicParsing="false" onAction="#deleteReport" prefHeight="47.0" prefWidth="170.0" style="-fx-background-color: #6366f1; -fx-background-radius: 15; -fx-text-fill: #F2F4F7;" text="Delete Selcted Reports">
          <font>
             <Font size="14.0" />
          </font></Button>
       <Label fx:id="title1" alignment="CENTER" layoutX="210.0" layoutY="9.0" prefHeight="46.0" prefWidth="248.0" style="-fx-text-fill: #F2F4F7;" text="Reports">
          <font>
             <Font size="32.0" />
-         </font>
-      </Label>
-      <Label fx:id="title2" layoutX="14.0" layoutY="128.0" prefHeight="38.0" prefWidth="230.0" style="-fx-text-fill: #F2F4F7;" text="your current reports: ">
-         <font>
-            <Font size="20.0" />
          </font>
       </Label>
    </children>
