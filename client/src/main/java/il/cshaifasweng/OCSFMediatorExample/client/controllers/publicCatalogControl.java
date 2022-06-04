@@ -80,15 +80,14 @@ public class publicCatalogControl {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        allitems=getAllItems();
-        saleitems=getAllitemsUnderSale();
         filterSelect.getItems().addAll("All Items","Under Sale");
         filterSelect.getSelectionModel().select(0);
        loadcatalog();
     }
 
-    public void loadcatalog()
-    {
+    public void loadcatalog() throws IOException {
+        saleitems=getAllitemsUnderSale();
+        allitems=getAllItems();
         itemscontainer.getChildren().removeAll(itemscontainer.getChildren());
         ArrayList<Item> items=null;
         if(allitemsfilter)
