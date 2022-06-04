@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.chart.BarChart?>
 <AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportOneTimeInterval">
     <children>
       <Button layoutX="332.0" layoutY="543.0" mnemonicParsing="false" onAction="#downloadCSVFile" prefHeight="42.0" prefWidth="130.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 20;" text="Download CSV File" />
       <Button layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="35.0" prefWidth="74.0" style="-fx-background-color: #E43A19; -fx-text-fill: #F2F4F7; -fx-background-radius: 15;" text="back" />
       <AnchorPane layoutX="94.0" layoutY="75.0" prefHeight="437.0" prefWidth="606.0" style="-fx-background-color: #F2F4F7;">
          <children>
-              <LineChart fx:id="ordersChart" prefHeight="449.0" prefWidth="605.0" title="Orders Report">
+              <BarChart fx:id="ordersChart" prefHeight="449.0" prefWidth="605.0" title="Orders Report">
                   <xAxis>
                       <CategoryAxis fx:id="itemAxes" label="Item" side="BOTTOM" />
                   </xAxis>
                   <yAxis>
                       <NumberAxis fx:id="ordersNumAxes" label="Sold Amount" side="LEFT" />
                   </yAxis>
-              </LineChart>
+              </BarChart>
          </children>
       </AnchorPane>
     </children>
