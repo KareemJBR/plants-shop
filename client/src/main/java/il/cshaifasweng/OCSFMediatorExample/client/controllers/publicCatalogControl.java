@@ -15,6 +15,8 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllItems;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitemsUnderSale;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -120,13 +122,24 @@ public class publicCatalogControl {
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
                     try{
-                        imageview.setImage(new Image(items.get(i).getUrl()));
+                        File imageFile = new File(items.get(i).getImgURL());
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
                     } catch (Exception e) {
-                        imageview.setImage(new Image("https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg?ver=6"));
+                        File imageFile = new File("C:/Users/Karee/Documents/plants-shop/Images/no_image.jpg");
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
                     }
                     imageview.setLayoutX(5);           //x & y coordinate related in the pane
                     imageview.setLayoutY(5);
-                    ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
+
+                    File imageFile = new File("C:/Users/Karee/Documents/plants-shop/Images/sale_image.jpg");
+                    String fileLocation = imageFile.toURI().toString();
+                    Image fxImage = new Image(fileLocation);
+                    ImageView saleImg = new ImageView();
+                    saleImg.setImage(fxImage);
 
                     if(items.get(i).isUnderSale()){
                         saleImg.setFitWidth(40);   //width of img
