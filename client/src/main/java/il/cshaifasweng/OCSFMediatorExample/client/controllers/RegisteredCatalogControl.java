@@ -1,10 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
-import com.mysql.cj.xdevapi.Client;
+
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
-import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -15,34 +14,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import il.cshaifasweng.OCSFMediatorExample.client.controllers.Cart.*;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 public class RegisteredCatalogControl {
+    private boolean allitemsfilter=true;
+
+    private ArrayList<Item> allitems1;
+    private ArrayList<Item> saleitems;
+
 
     @FXML
     private Button filterBTN;
@@ -76,24 +61,15 @@ public class RegisteredCatalogControl {
         App.setRoot("controllers/ClientMainPage");
     }
 
-    @FXML
-    void BuyNow(ActionEvent event) throws IOException {
-
-    }
-
-    @FXML
-    void addToCart(ActionEvent event) throws IOException {
-
-    }
 
     @FXML
     void filter(ActionEvent event) throws IOException {
         if (filterSelect.getValue().toString().equals("All Items")) {
-            App.getAllItems();
+            allitemsfilter=true;
         } else {
-            getAllitemsUnderSale();
+            allitemsfilter=false;
         }
-        App.setRoot("controllers/RegisteredCatalog");
+        loadcatalog();
     }
 
     @FXML
@@ -101,27 +77,6 @@ public class RegisteredCatalogControl {
         App.setRoot("controllers/Cart");
     }
 
-    /*  @FXML
-      void initialize() {
-          try {
-              System.out.println("in init for catalog");
-             // ArrayList<Flower> flowers = getAllFlowers();
-              System.out.println(((ArrayList<Flower>)data));
-              text1.setText(((ArrayList<Flower>)data).get(0).toString());
-              imgView1.setImage(new Image(((ArrayList<Flower>)data).get(0).getImgURL()));
-              text2.setText(((ArrayList<Flower>)data).get(1).toString());
-              imgView3.setImage(new Image(((ArrayList<Flower>)data).get(1).getImgURL()));
-              text3.setText(((ArrayList<Flower>)data).get(2).toString());
-              imgView3.setImage(new Image(((ArrayList<Flower>)data).get(2).getImgURL()));
-              text4.setText(((ArrayList<Flower>)data).get(3).toString());
-              imgView4.setImage(new Image(((ArrayList<Flower>)data).get(3).getImgURL()));
-              text5.setText(((ArrayList<Flower>)data).get(4).toString());
-              imgView5.setImage(new Image(((ArrayList<Flower>)data).get(4).getImgURL()));
-          } catch (Exception e) {
-              System.out.println("init exception for reg catalog");
-              System.out.println(e);
-          }
-      }*/
     public ArrayList<CartItem> searchCartItems(String ClientId) throws IOException {
         CartItemsdata = null;
         ArrayList<CartItem> allcartitems = getAllCartItems();
@@ -139,20 +94,29 @@ public class RegisteredCatalogControl {
     }
 
     public void initialize() throws IOException {
-
-        ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
-        filterSelect.getItems().addAll("     ","All Items", "Under Sale");
-        filterSelect.setValue("     ");
+        saleitems=getAllitemsUnderSale();
+        allitems1=getAllItems();
+        filterSelect.getItems().addAll("All Items", "Under Sale");
         filterSelect.getSelectionModel().select(0);
+        loadcatalog();
+    }
+
+    public  void loadcatalog() throws IOException {
+        ArrayList<Item> allItems=null;
+        if(allitemsfilter)
+        {
+             allItems = allitems1;
+        }
+        else
+        {
+            allItems = saleitems;
+        }
+        itemscontainer.getChildren().removeAll(itemscontainer.getChildren());
         boolean moveRight = false;
         int j = 0;
         if (allItems != null) {
             if (allItems.size() != 0) {
                 itemscontainer.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
-//                ArrayList<Button> addtocartBTNS = new ArrayList<>();
-//                for (int i = 0; i < allItems.size(); i++) {
-//                    addtocartBTNS.add(new Button());
-//                }
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #E43A19");
@@ -240,6 +204,7 @@ public class RegisteredCatalogControl {
                     Button addToCartbtn = new Button();
 
                     addToCartbtn.setText("Add To Cart");
+                    ArrayList<Item> finalAllItems = allItems;
                     addToCartbtn.setOnAction(e -> {
                         try {
                             //  boolean add=false;
@@ -256,7 +221,7 @@ public class RegisteredCatalogControl {
                                     return;
                                 }
                             }
-                            CartItem newItem = new CartItem(getCurrentCustomer(), allItems.get(num), 1);
+                            CartItem newItem = new CartItem(getCurrentCustomer(), finalAllItems.get(num), 1);
                             MsgClass addCartItm = new MsgClass("#add cartItem", newItem);
                             SimpleClient.getClient().sendToServer(addCartItm);
                             System.out.println("the item you whant is " + num);
@@ -270,16 +235,6 @@ public class RegisteredCatalogControl {
                     addToCartbtn.setLayoutY(160);
 
                     addToCartbtn.setId(String.valueOf(i));
-
-                    ///////////////////////////////////////////////////////
-//                    Button buyNow = new Button();
-//                    buyNow.setText("Buy Now");
-//                    buyNow.setOnAction(e -> {
-//
-//                    });
-//                    buyNow.setStyle("-fx-background-color:#EEEEEE");
-//                    buyNow.setLayoutX(225);
-//                    buyNow.setLayoutY(105);
 
                     /////////////// adding components to the pane /////////////
                     p.getChildren().add(imageview);

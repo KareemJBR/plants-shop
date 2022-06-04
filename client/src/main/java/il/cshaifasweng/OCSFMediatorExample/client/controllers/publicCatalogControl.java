@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllItems;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitemsUnderSale;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
@@ -19,6 +20,10 @@ import java.util.ArrayList;
 
 
 public class publicCatalogControl {
+    private boolean allitemsfilter=true;
+
+    private ArrayList<Item> allitems;
+    private ArrayList<Item> saleitems;
 
     @FXML
     private Button backBtn;
@@ -56,11 +61,11 @@ public class publicCatalogControl {
     @FXML
     void filter(ActionEvent event) throws IOException {
         if (filterSelect.getValue().toString().equals("All Items")) {
-            App.getAllItems();
+            allitemsfilter=true;
         } else {
-            getAllitemsUnderSale();
+            allitemsfilter=false;
         }
-        App.setRoot("controllers/publicCatalog");
+        loadcatalog();
     }
 
 
@@ -71,20 +76,35 @@ public class publicCatalogControl {
         MsgClass msg=new MsgClass("#get customers",null);
         SimpleClient.getClient().sendToServer(msg);
         App.setRoot("controllers/SignUp");
-        //SignUp.main(null);
     }
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        ArrayList<Item> allItems = (ArrayList<Item>) allItemsData;
+        allitems=getAllItems();
+        saleitems=getAllitemsUnderSale();
         filterSelect.getItems().addAll("All Items","Under Sale");
         filterSelect.getSelectionModel().select(0);
+       loadcatalog();
+    }
+
+    public void loadcatalog()
+    {
+        itemscontainer.getChildren().removeAll(itemscontainer.getChildren());
+        ArrayList<Item> items=null;
+        if(allitemsfilter)
+        {
+            items = allitems;
+        }
+        else
+        {
+            items = saleitems;
+        }
         boolean moveRight = false;
         int j = 0;
-        if (allItems != null) {
-            if (allItems.size() != 0) {
-                itemscontainer.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
-                for (int i = 0; i < allItems.size(); i++) {
+        if (items != null) {
+            if (items.size() != 0) {
+                itemscontainer.setMinHeight(items.size() * 150);      ///the height of the container is related to the amount of the items
+                for (int i = 0; i < items.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #E43A19");
                     p.setMinSize(350, 190);
@@ -101,7 +121,7 @@ public class publicCatalogControl {
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
                     try{
-                        imageview.setImage(new Image(allItems.get(i).getUrl()));
+                        imageview.setImage(new Image(items.get(i).getUrl()));
                     } catch (Exception e) {
                         imageview.setImage(new Image("https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg?ver=6"));
                     }
@@ -109,7 +129,7 @@ public class publicCatalogControl {
                     imageview.setLayoutY(5);
                     ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
 
-                    if(allItems.get(i).isUnderSale()){
+                    if(items.get(i).isUnderSale()){
                         saleImg.setFitWidth(40);   //width of img
                         saleImg.setFitHeight(40); //height of img
                         saleImg.setLayoutX(305);           //x & y coordinate related in the pane
@@ -118,27 +138,27 @@ public class publicCatalogControl {
 
                     //////////////// details of the item //////////////
                     ///////// price textfield ///////////
-                    TextField name = new TextField("Name: " + allItems.get(i).getName());
+                    TextField name = new TextField("Name: " + items.get(i).getName());
                     name.setStyle("-fx-background-color:#F2F4F7");
                     name.setLayoutX(190);
                     name.setLayoutY(50);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
-                    TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
+                    TextField catologNum = new TextField("Catalog Number: " + items.get(i).getCatalogNumber());
                     catologNum.setStyle("-fx-background-color:#F2F4F7");
                     catologNum.setLayoutX(190);
                     catologNum.setLayoutY(70);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
-                    TextField type = new TextField("Type: " + allItems.get(i).getType());
+                    TextField type = new TextField("Type: " + items.get(i).getType());
                     type.setStyle("-fx-background-color:#F2F4F7");
                     type.setLayoutX(190);           //x & y coordinate related in the pane
                     type.setLayoutY(90);
                     type.setEditable(false);
 
-                    TextField color = new TextField("Color: " + allItems.get(i).getColor());
+                    TextField color = new TextField("Color: " + items.get(i).getColor());
                     color.setStyle("-fx-background-color:#F2F4F7");
                     color.setLayoutX(190);           //x & y coordinate related in the pane
                     color.setLayoutY(110);
@@ -148,12 +168,12 @@ public class publicCatalogControl {
                     ///////// type textfield ///////////
                     TextField price = new TextField();
                     TextField priceAfterSale = new TextField();
-                    if(allItems.get(i).isUnderSale()) {
-                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After "+allItems.get(i).getSalePercent()*100 +"% sale is:"+allItems.get(i).getPriceAfterSale());
+                    if(items.get(i).isUnderSale()) {
+                        price.setText("Original Price: " + items.get(i).getOriginal_price());
+                        priceAfterSale.setText("Price After "+items.get(i).getSalePercent()*100 +"% sale is:"+items.get(i).getPriceAfterSale());
                     }
                     else{
-                        price.setText("Price :"+allItems.get(i).getOriginal_price());
+                        price.setText("Price :"+items.get(i).getOriginal_price());
                     }
                     price.setStyle("-fx-background-color:#F2F4F7");
                     price.setLayoutX(190);           //x & y coordinate related in the pane
@@ -172,7 +192,7 @@ public class publicCatalogControl {
                     p.getChildren().add(name);
                     p.getChildren().add(color);
                     p.getChildren().add(catologNum);
-                    if(allItems.get(i).isUnderSale()){
+                    if(items.get(i).isUnderSale()){
                         p.getChildren().add(saleImg);
                         p.getChildren().add(priceAfterSale);
                     }
