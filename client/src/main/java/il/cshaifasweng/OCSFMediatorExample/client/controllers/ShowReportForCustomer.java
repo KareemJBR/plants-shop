@@ -51,11 +51,16 @@ public class ShowReportForCustomer {
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
         SimpleClient.getClient().sendToServer(msg);
 
-        while (currentCustomerData == null){System.out.println("stuuuuuck");}
-        ArrayList<Report> allReports = new ArrayList<Report>();
-        for (int i = 0; i < ((Customer) currentCustomerData).getCustomerReports().size(); i++) {
-            allReports.add(((Customer) currentCustomerData).getCustomerReports().get(i));
+        while (currentCustomerData == null) {System.out.println("wait");}
+        ArrayList<Report> allReports =new ArrayList<>();
+        Customer cus = (Customer) currentCustomerData;
+        for(int i=0;i<getAllReports().size();i++){
+            if(getAllReports().get(i).getCustomer().getId().equals(cus.getId())){
+                allReports.add(getAllReports().get(i));
+            }
+            System.out.println(getAllReports().get(i).getCustomer());
         }
+        System.out.println("all report::::::::"+allReports);
         for (int i = 0; i < cheackBoxs.size(); i++) {
             if (cheackBoxs.get(i).isSelected() == true) {
                 MsgClass msg2 = new MsgClass("#delete Report", allReports.get(i));
