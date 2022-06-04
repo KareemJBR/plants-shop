@@ -90,7 +90,10 @@ public class Checkout {
         SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
         recieverRadioBtn.setSelected(false);
         loadTime();
-
+        PhoneTextFeild.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            PhoneTextFeild.setText(newValue.replaceAll("[^\\d]", ""));
+        });
     }
 
     public  void loadTime()
