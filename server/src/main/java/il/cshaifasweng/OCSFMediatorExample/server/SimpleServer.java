@@ -115,32 +115,32 @@ public class SimpleServer extends AbstractServer {
 
         /* ---------- Saving Items To Data Base ---------- */
         Item item1 = new Item("red",true,0.3,30,"flower",
-                "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","red flower1");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
+                "Images/red_flower1.jpg","red flower1");
         session.save(item1);
         session.flush();
 
         Item item2 = new Item("white",false,0,30,"FlowerBouquet",
-                "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","white rose");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+                "Images/white_flower.jpg","white rose");
         session.save(item2);
         session.flush();
 
         Item item3 = new Item("red",false,0,30,"FlowerBouquet",
-                "https://www.florca.com/downloads/layoutentitylinkvalue/339/8d6884de904e90f/Rhodos.jpg","red flower2");
+                "Images/red_flower2.jpg","red flower2");
         session.save(item3);
         session.flush();
 
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet",
-                "https://www.familyhandyman.com/wp-content/uploads/2019/08/shutterstock_542544256-Sunflower.jpg","sunflower");
+                "Images/sunflower.jpg","sunflower");
         session.save(item4);
         session.flush();
 
-        Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet", "https://diaryofdennis.files.wordpress.com/2015/12/beautiful-pink-flower.jpg",
-                "pink flower");
+        Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet",
+                "Images/pink_flower.jpg" ,"pink flower");
         session.save(item5);
         session.flush();
 
-        Item item6 = new Item("purple", false, 0, 80, "FlowerBouquet", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/surprising-flower-meanings-balloon-flowers-1650767465.jpg?crop=1xw:1xh;center,top&resize=480:*",
-                "purple flower");
+        Item item6 = new Item("purple", false, 0, 80, "FlowerBouquet",
+                "Images/purple_flower.jpg", "purple flower");
         session.save(item6);
         session.flush();
 
