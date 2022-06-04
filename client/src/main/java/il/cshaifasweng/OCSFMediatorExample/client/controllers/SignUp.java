@@ -286,6 +286,16 @@ public class SignUp {
         AcountTypeCombo.getItems().addAll("Network account", "Network account with 10% discount","Account for a particular store");
         AcountTypeCombo.getSelectionModel().select(0);
 
+        IDNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            IDNumber.setText(newValue.replaceAll("[^\\d]", ""));
+        });
+
+        creditCardNumber.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            creditCardNumber.setText(newValue.replaceAll("[^\\d]", ""));
+        });
+
         ArrayList<Shop> shops=getAllShops();
 
         if(shops!=null)
