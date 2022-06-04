@@ -94,14 +94,14 @@ public class RegisteredCatalogControl {
     }
 
     public void initialize() throws IOException {
-        saleitems=getAllitemsUnderSale();
-        allitems1=getAllItems();
         filterSelect.getItems().addAll("All Items", "Under Sale");
         filterSelect.getSelectionModel().select(0);
         loadcatalog();
     }
 
     public  void loadcatalog() throws IOException {
+        saleitems=getAllitemsUnderSale();
+        allitems1=getAllItems();
         ArrayList<Item> allItems=null;
         if(allitemsfilter)
         {
