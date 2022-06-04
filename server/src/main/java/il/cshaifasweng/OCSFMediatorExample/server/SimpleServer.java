@@ -115,26 +115,26 @@ public class SimpleServer extends AbstractServer {
 
         /* ---------- Saving Items To Data Base ---------- */
         Item item1 = new Item("red",true,0.3,30,"flower",
-                "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","beautiful flower");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
+                "https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","red flower1");//(30,"blue","Flower","https://www.ikea.cn/cn/en/images/products/smycka-artificial-flower-rose-red__0903311_pe596728_s5.jpg","item1");
         session.save(item1);
         session.flush();
 
-        Item item2 = new Item("blue",false,0,30,"FlowerBouquet",
-                "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
+        Item item2 = new Item("white",false,0,30,"FlowerBouquet",
+                "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","white rose");//(25,"blue","FlowerBouquet","https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","good item");
         session.save(item2);
         session.flush();
 
         Item item3 = new Item("red",false,0,30,"FlowerBouquet",
-                "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","item");
+                "https://www.florca.com/downloads/layoutentitylinkvalue/339/8d6884de904e90f/Rhodos.jpg","red flower2");
         session.save(item3);
         session.flush();
 
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet",
-                "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg","bad item");
+                "https://www.familyhandyman.com/wp-content/uploads/2019/08/shutterstock_542544256-Sunflower.jpg","sunflower");
         session.save(item4);
         session.flush();
 
-        Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet", "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonas-kakaroto-736230.jpg&fm=jpg",
+        Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet", "https://diaryofdennis.files.wordpress.com/2015/12/beautiful-pink-flower.jpg",
                 "pink flower");
         session.save(item5);
         session.flush();
@@ -152,11 +152,11 @@ public class SimpleServer extends AbstractServer {
         session.flush();
 
         // adding admins to the shops
-        ShopAdmin admin1 = new ShopAdmin("mostafa1234", "mostafa1234",
+        ShopAdmin admin1 = new ShopAdmin("shop1", "shop1",
                 "212955587", "mostafa", "jabareen");
         session.save(admin1);
 
-        ShopAdmin admin2 = new ShopAdmin("mortada", "mortada",
+        ShopAdmin admin2 = new ShopAdmin("shop2", "shop2",
                 "888333755", "mortada", "mahameed");
         session.save(admin2);
         session.flush();
