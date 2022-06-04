@@ -11,7 +11,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Label fx:id="welcomeSentence" layoutX="273.0" layoutY="26.0" style="-fx-text-fill: #F2F4F7;" text="Welcome" textAlignment="CENTER">
+      <Label fx:id="welcomeSentence" layoutX="169.0" layoutY="26.0" style="-fx-text-fill: #F2F4F7;" text="Welcome" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="36.0" />
          </font>

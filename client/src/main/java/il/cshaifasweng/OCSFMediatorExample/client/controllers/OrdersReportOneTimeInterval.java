@@ -22,7 +22,7 @@ public class OrdersReportOneTimeInterval implements Initializable {
     private XYChart.Series<String, Number> series;
 
     @FXML
-    private LineChart<String, Number> ordersChart;
+    private BarChart<String, Number> ordersChart;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

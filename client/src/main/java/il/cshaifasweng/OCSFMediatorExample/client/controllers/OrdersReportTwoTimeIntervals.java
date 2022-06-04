@@ -31,10 +31,10 @@ public class OrdersReportTwoTimeIntervals implements Initializable {
     private TextArea endDate2;
 
     @FXML
-    private LineChart<String, Number> ordersChart1;
+    private BarChart<String, Number> ordersChart1;
 
     @FXML
-    private LineChart<String, Number> ordersChart2;
+    private BarChart<String, Number> ordersChart2;
 
     @FXML
     private TextArea startDate1;

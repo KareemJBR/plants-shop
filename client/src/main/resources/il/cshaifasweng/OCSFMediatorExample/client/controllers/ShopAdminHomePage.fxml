@@ -11,9 +11,9 @@
          <font>
             <Font size="21.0" />
          </font></Button>
-      <Label fx:id="welcomeSentence" layoutX="295.0" layoutY="27.0" prefHeight="54.0" prefWidth="204.0" style="-fx-text-fill: #F2F4F7;" text="Welcome">
+      <Label fx:id="welcomeSentence" layoutX="158.0" layoutY="25.0" prefHeight="54.0" prefWidth="464.0" style="-fx-text-fill: #F2F4F7;" text="Welcome">
          <font>
-            <Font name="Arial Black" size="36.0" />
+            <Font name="Arial Black" size="27.0" />
          </font>
       </Label>
       <Button layoutX="27.0" layoutY="14.0" mnemonicParsing="false" onAction="#signOut" prefHeight="38.0" prefWidth="88.0" style="-fx-background-radius: 15; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Sing Out" />
