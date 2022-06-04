@@ -76,6 +76,8 @@ public class Order implements Serializable {
     @Column(name="shipping_address")
     private String shipping_address;
 
+    @Column(name="message_sent")
+    private boolean message_sent;
 
     @Column(name="got_cancelled")
     private boolean got_cancelled;
@@ -113,6 +115,7 @@ public class Order implements Serializable {
         this.shop=shop;
         this.got_cancelled = false;
         this.refund = 0.0;
+        this.message_sent = false;
     }
 
     public Order(Shop shop,Customer customer,int order_year,int order_month,int order_day,int receipt_year,
@@ -141,6 +144,15 @@ public class Order implements Serializable {
         this.shop=shop;
         this.got_cancelled = got_cancelled;
         this.refund = refund;
+        this.message_sent = false;
+    }
+
+    public void setMessage_sent() {
+        message_sent = true;
+    }
+
+    public boolean isMessage_sent() {
+        return message_sent;
     }
   
     @Deprecated
