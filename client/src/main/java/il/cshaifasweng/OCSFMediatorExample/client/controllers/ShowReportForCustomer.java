@@ -93,16 +93,6 @@ public class ShowReportForCustomer {
             System.out.println(getAllReports().get(i).getCustomer());
         }
 
-
-        //set style
-
-
-        mainPane.setStyle("-fx-background-color:#222831");
-        pane_contianer.setStyle("-fx-background-color: #222831");
-        deleteReportbtn.setStyle("-fx-background-color:#EEEEEE");
-        back.setStyle("-fx-background-color:#EEEEEE");
-        title1.setStyle("-fx-background-color:#00ADB5");
-        title2.setStyle("-fx-background-color:#00ADB5");
         //in case there in no reports
         if (allReports == null || allReports.size() == 0) {
             System.out.println("was here");
@@ -133,7 +123,7 @@ public class ShowReportForCustomer {
             reportTitle.setLayoutX(15);
             reportTitle.setMinWidth(160);
             reportTitle.setFont(new Font(16));
-            reportTitle.setStyle("-fx-background-color:#00ADB5");
+            reportTitle.setStyle("-fx-text-fill: #F2F4F7");
             mainPane.getChildren().add(reportTitle);
             for (int i = 0; i < allReports.size(); i++) {
                 if (i % 2 == 1) {
@@ -142,15 +132,15 @@ public class ShowReportForCustomer {
                     moveRight = false;
                 }
                 AnchorPane p = new AnchorPane();            //container of each item
-                p.setStyle("-fx-background-color: #393E46");
-                p.setMinSize(230, 100);
+                p.setStyle("-fx-background-color: #243447");
+                p.setMinSize(250, 100);
                 Label reportNum = new Label();
                 reportNum.setText("Report " + i);
                 reportNum.setLayoutY(5);
                 reportNum.setLayoutX(100);
 
                 reportNum.setFont(new Font(20));
-                reportNum.setStyle("-fx-background-color:#EEEEEE");
+                reportNum.setStyle("-fx-text-fill: #F2F4F7");
                 CheckBox tabMe = new CheckBox();
                 tabMe.setLayoutY(5);
                 tabMe.setLayoutX(230);
@@ -158,6 +148,7 @@ public class ShowReportForCustomer {
 
                 Button viewme = new Button();
                 viewme.setText("View Report");
+                viewme.setStyle("-fx-background-color:  #E43A19;-fx-text-fill: #F2F4F7");
                 viewme.setLayoutX(20);
                 viewme.setLayoutY(70);
                 int finalI = i;
@@ -197,6 +188,7 @@ public class ShowReportForCustomer {
                 Button iewAnswer = new Button();
                 iewAnswer.setText("View Answer");
                 iewAnswer.setLayoutY(70);
+                iewAnswer.setStyle("-fx-background-color:  #E43A19;-fx-text-fill: #F2F4F7");
                 iewAnswer.setLayoutX(140);
                 iewAnswer.setOnAction(e -> {
                     System.out.println("dont press me  pls");
@@ -235,17 +227,18 @@ public class ShowReportForCustomer {
                     iewAnswer.setDisable(true);
                 }
                 if (moveRight) {
-                    p.setLayoutY(140 * j);
-                    p.setLayoutX(310);
+                    p.setLayoutY(145 * j);
+                    p.setLayoutX(300);
                     j++;
                 } else {
-                    p.setLayoutY(140 * j);
+                    p.setLayoutY(145 * j);
                 }
                 p.getChildren().add(iewAnswer);
                 p.getChildren().add(viewme);
                 p.getChildren().add(tabMe);
                 p.getChildren().add(reportNum);
                 pane_contianer.getChildren().add(p);
+                pane_contianer.setStyle("-fx-background-color:#111F4D");
             }
         }
         currentCustomerData = null;

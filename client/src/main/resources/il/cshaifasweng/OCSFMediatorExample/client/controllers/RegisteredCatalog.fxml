@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="itemsContainer" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.RegisteredCatalogControl">
    <children>
-      <Button fx:id="goToCartBut" layoutX="660.0" layoutY="10.0" mnemonicParsing="false" onAction="#goCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Go To Cart">
+      <Button fx:id="goToCartBut" layoutX="660.0" layoutY="10.0" mnemonicParsing="false" onAction="#goCart" prefHeight="40.0" prefWidth="95.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Go To Cart">
          <font>
             <Font size="15.0" />
          </font>

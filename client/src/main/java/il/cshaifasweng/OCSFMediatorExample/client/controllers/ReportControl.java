@@ -57,7 +57,7 @@ public class ReportControl {
     @FXML
     void createRoport(ActionEvent event) throws Exception {
         if (reportText.equals(null)) {
-            showAlert("error", "are u stupid ? report is empty");
+            showAlert("error", "report is empty");
             return;
         }
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
@@ -65,8 +65,6 @@ public class ReportControl {
         while (currentCustomerData == null) {
             System.out.println("waiting for server");
         }
-
-        System.out.println("before the eroro shit  " + currentCustomerData);
         Customer customer = (Customer) currentCustomerData;
         System.out.println("the customer is  " + customer);
 
@@ -131,17 +129,6 @@ public class ReportControl {
     }
 
     public void initialize() throws IOException, InterruptedException {
-        mainPane.setStyle("-fx-background-color:#222831");
-        back.setStyle("-fx-background-color:#00ADB5;-fx-background-radius:25");
-        decriprinLabel.setStyle("-fx-background-color: #393E46");
-        reportText.setStyle("-fx-background-color: #393E46");
-        decriprinLabel.setTextFill(Color.WHITE);
-        selectMe.setStyle("-fx-background-color:#00ADB5");
-        selectText.setStyle("-fx-background-color: #393E46");
-        selectText.setTextFill(Color.WHITE);
-        sentBtn.setStyle("-fx-background-color:#00ADB5");
-
-
         ArrayList<Shop> shopArr=new ArrayList<>(getAllShops());
         ArrayList<String> shops = new ArrayList<>();
         for(int i=0;i<shopArr.size();i++){

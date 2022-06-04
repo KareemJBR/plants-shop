@@ -14,7 +14,7 @@
                 <Font size="15.0" />
             </font>
         </Button>
-        <Button fx:id="singUp" layoutX="670.0" layoutY="14.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Sign Up">
+        <Button fx:id="singUp" layoutX="670.0" layoutY="14.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Sign Up">
             <font>
                 <Font size="15.0" />
             </font>
