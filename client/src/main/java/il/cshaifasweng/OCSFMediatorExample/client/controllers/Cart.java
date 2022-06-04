@@ -158,13 +158,14 @@ public class Cart<T> {
         double subtotal=0;
         if (cartItems != null) {
             if (cartItems.size() != 0) {
-                itemscontainer.setMinHeight(cartItems.size()*98);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(cartItems.size()*127);      ///the height of the container is related to the amount of the items
                 ArrayList<ImageView> arr=new ArrayList<ImageView>();
                 for(int i=0;i<cartItems.size();i++)
                 {
                     int itemamount=amountOfItems.get(i);
                     Pane p=new Pane();            //container of each item
-
+                    p.setMinHeight(114);
+                    p.setMinWidth(334);
                     ////////////// img /////////////
                     ImageView imageview=new ImageView();
                     imageview.setFitWidth(87);   //width of img
@@ -181,8 +182,8 @@ public class Cart<T> {
                         Image fxImage = new Image(fileLocation);
                         imageview.setImage(fxImage);
                     }
-                    imageview.setX(8);           //x & y coordinate related to the pane
-                    imageview.setY(8);
+                    imageview.setX(10);           //x & y coordinate related to the pane
+                    imageview.setY(9);
 
                     //////////////// details of the item //////////////
 
@@ -190,13 +191,13 @@ public class Cart<T> {
                     TextField name=new TextField("Name: "+ cartItems.get(i).getItem().getName());
                     name.setStyle("-fx-background-color:none");
                     name.setEditable(false);
-                    name.setLayoutX(100);
+                    name.setLayoutX(101);
                     name.setLayoutY(10);
                     ///////// price textfield ///////////
                     TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
                     price.setStyle("-fx-background-color:none");
                     price.setEditable(false);
-                    price.setLayoutX(100);
+                    price.setLayoutX(101);
                     price.setLayoutY(32);
 
 
@@ -207,14 +208,14 @@ public class Cart<T> {
                         type.setText("Price after discount: " +cartItems.get(i).getItem().getPrice());
                     }
                     type.setStyle("-fx-background-color:none");
-                    type.setLayoutX(100);
+                    type.setLayoutX(101);
                     type.setLayoutY(54);
 
                     ///////// amount textfield ///////////
                     TextField amount=new TextField("Amount: "+ itemamount);
                     amount.setStyle("-fx-background-color:none");
                     amount.setEditable(false);
-                    amount.setLayoutX(100);
+                    amount.setLayoutX(101);
                     amount.setLayoutY(76);
 
                     ///////// delete button ///////////
@@ -278,8 +279,11 @@ public class Cart<T> {
                     p.getChildren().add(btn);
                     p.getChildren().add(btn2);
                     p.getChildren().add(btn3);
+                    
+                    p.setStyle("-fx-border-color: #111F4D;-fx-border-radius: 15");
 
-                    p.setLayoutY(110*i);
+                    p.setLayoutX(10);
+                    p.setLayoutY(124*i+10);
 
                     itemscontainer.getChildren().add(p);
 
