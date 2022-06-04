@@ -115,32 +115,32 @@ public class SimpleServer extends AbstractServer {
 
         /* ---------- Saving Items To Data Base ---------- */
         Item item1 = new Item("red",true,0.3,30,"flower",
-                "C:/Users/Karee/Documents/plants-shop/Images/red_flower1.jpg","red flower1");
+                "Images/red_flower1.jpg","red flower1");
         session.save(item1);
         session.flush();
 
         Item item2 = new Item("white",false,0,30,"FlowerBouquet",
-                "C:/Users/Karee/Documents/plants-shop/Images/white_flower.jpg","white rose");
+                "Images/white_flower.jpg","white rose");
         session.save(item2);
         session.flush();
 
         Item item3 = new Item("red",false,0,30,"FlowerBouquet",
-                "C:/Users/Karee/Documents/plants-shop/Images/red_flower2.jpg","red flower2");
+                "Images/red_flower2.jpg","red flower2");
         session.save(item3);
         session.flush();
 
         Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet",
-                "C:/Users/Karee/Documents/plants-shop/Images/sunflower.jpg","sunflower");
+                "Images/sunflower.jpg","sunflower");
         session.save(item4);
         session.flush();
 
         Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet",
-                "C:/Users/Karee/Documents/plants-shop/Images/pink_flower.jpg" ,"pink flower");
+                "Images/pink_flower.jpg" ,"pink flower");
         session.save(item5);
         session.flush();
 
         Item item6 = new Item("purple", false, 0, 80, "FlowerBouquet",
-                "C:/Users/Karee/Documents/plants-shop/Images/purple_flower.jpg", "purple flower");
+                "Images/purple_flower.jpg", "purple flower");
         session.save(item6);
         session.flush();
 

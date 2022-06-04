@@ -138,7 +138,7 @@ public class RegisteredCatalogControl {
                         Image fxImage = new Image(fileLocation);
                         imageview.setImage(fxImage);
                     } catch (Exception e) {
-                        File imageFile = new File("C:/Users/Karee/Documents/plants-shop/Images/no_image.jpg");
+                        File imageFile = new File("Images/no_image.jpg");
                         String fileLocation = imageFile.toURI().toString();
                         Image fxImage = new Image(fileLocation);
                         imageview.setImage(fxImage);
@@ -146,7 +146,7 @@ public class RegisteredCatalogControl {
                     imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
 
-                    File imageFile = new File("C:/Users/Karee/Documents/plants-shop/Images/sale_image.jpg");
+                    File imageFile = new File("Images/sale_image.jpg");
                     String fileLocation = imageFile.toURI().toString();
                     Image fxImage = new Image(fileLocation);
                     ImageView saleImg = new ImageView();
