@@ -103,7 +103,7 @@ public class SimpleServer extends AbstractServer {
     }
 
 
-    private static List<Order> getAllOrders() throws Exception {
+    static List<Order> getAllOrders() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
         query.from(Order.class);
@@ -164,32 +164,33 @@ public class SimpleServer extends AbstractServer {
         // adding customers
         Customer customer1 = new Customer("123456789", "saeed", "mahameed",
                 "saeed_mahamed20", "saeed123", "1234123412341234",
-                "Network account","saeed@gmail.com");
+                "Network account","kareemokhtar@gmail.com");
 
         session.save(customer1);
 
         Customer customer2 = new Customer("208101458", "ons", "jijini",
                 "ons_jijini", "ons123123", "0000111100001111",
-                "Network account","ons@gmail.com");
+                "Network account","kareemokhtar@gmail.com");
 
         session.save(customer2);
 
         Customer customer3 = new Customer("206522435", "bayan", "swetat",
                 "bayan123", "bayanswetat123", "0000000011111111",
-                "Network account","bayan@gmail.com");
+                "Network account","kareemokhtar@gmail.com");
 
         session.save(customer3);
         session.flush();
 
         Customer customer4 = new Customer("12312333", "bayann", "swetatn",
                 "1", "1", "0000000011111111", "Network account with 10% discount",
-                "bayann@gmail.com");
+                "kareemokhtar@gmail.com");
 
         session.save(customer4);
         session.flush();
 
         Customer customer5 = new Customer("12332312", "sewy", "sew", "2",
-                "2", "0000000011141111", "Network account","email@gmail.com");
+                "2", "0000000011141111", "Network account",
+                "kareemokhtar@gmail.com");
 
         session.save(customer5);
         session.flush();
@@ -218,6 +219,7 @@ public class SimpleServer extends AbstractServer {
                 true, "Abba Houshi 30, Haifa", false, 0.0);
 
         order1.setOrderitems(order_items1);
+        order1.setMessage_sent();
         total_price = 0.0;
         session.save(order1);
         session.flush();
@@ -247,6 +249,7 @@ public class SimpleServer extends AbstractServer {
                 false, 0.0);
 
         order3.setOrderitems(order_items3);
+        order3.setMessage_sent();
         total_price = 0.0;
         session.save(order3);
         session.flush();
@@ -267,6 +270,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Delivery", "", true,
                 "Al-Quds 1, Umm Al-Fahem", false, 0.0);
 
+        order4.setMessage_sent();
         order4.setOrderitems(order_items4);
         total_price = 0.0;
         session.save(order4);
@@ -284,6 +288,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Delivery", "May you have a happy birthday!\n\nFrom Sewy",
                 true, "Hanamal 1, Haifa", false, 0.0);
 
+        order5.setMessage_sent();
         order5.setOrderitems(order_items5);
         total_price = 0.0;
         session.save(order5);
@@ -315,6 +320,7 @@ public class SimpleServer extends AbstractServer {
 
         order6.setOrderitems(order_items6);
         total_price = 0.0;
+        order6.setMessage_sent();
         session.save(order6);
         session.flush();
 
@@ -336,6 +342,7 @@ public class SimpleServer extends AbstractServer {
 
         order7.setOrderitems(order_items7);
         total_price = 0.0;
+        order7.setMessage_sent();
         session.save(order7);
         session.flush();
 
@@ -363,6 +370,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Delivery", "",
                 true, "Hanamal 51, Haifa", false, 0.0);
 
+        order9.setMessage_sent();
         order9.setOrderitems(order_items9);
         total_price = 0.0;
         session.save(order9);
@@ -388,6 +396,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Delivery", "",
                 true, "Hanamal 33, Haifa", false, 0.0);
 
+        order10.setMessage_sent();
         order10.setOrderitems(order_items10);
         total_price = 0.0;
         session.save(order10);
@@ -417,6 +426,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order11.setMessage_sent();
         order11.setOrderitems(order_items11);
         session.save(order11);
         session.flush();
@@ -446,6 +456,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order12.setMessage_sent();
         order12.setOrderitems(order_items12);
         session.save(order12);
         session.flush();
@@ -464,6 +475,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order13.setMessage_sent();
         order13.setOrderitems(order_items13);
         total_price = 0.0;
         session.save(order13);
@@ -499,6 +511,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order14.setMessage_sent();
         order14.setOrderitems(order_items14);
         total_price = 0.0;
         session.save(order14);
@@ -522,6 +535,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order15.setMessage_sent();
         order15.setOrderitems(order_items15);
         total_price = 0.0;
         session.save(order15);
@@ -541,6 +555,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order16.setMessage_sent();
         order16.setOrderitems(order_items16);
         total_price = 0.0;
         session.save(order16);
@@ -564,6 +579,7 @@ public class SimpleServer extends AbstractServer {
                 "CreditCard", "Pickup", "", false, "",
                 false, 0.0);
 
+        order17.setMessage_sent();
         order17.setOrderitems(order_items17);
         session.save(order17);
         session.flush();
