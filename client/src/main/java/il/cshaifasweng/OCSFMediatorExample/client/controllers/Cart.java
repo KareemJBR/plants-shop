@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -170,9 +171,15 @@ public class Cart<T> {
                     imageview.setFitHeight(95); //height of img
 //                        System.out.println(cartItems.get(i).getUrl());
                     try{
-                        imageview.setImage(new Image(cartItems.get(i).getItem().getUrl()));
+                        File imageFile = new File(cartItems.get(i).getItem().getImgURL());
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
                     } catch (Exception e) {
-                        imageview.setImage(new Image("https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101027/112815900-no-image-available-icon-flat-vector.jpg?ver=6"));
+                        File imageFile = new File("Images/no_image.jpg");
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
                     }
                     imageview.setX(8);           //x & y coordinate related to the pane
                     imageview.setY(8);
