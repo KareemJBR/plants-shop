@@ -36,13 +36,6 @@ public class SimpleClient extends AbstractClient {
             if (myMsg.getMsg().equals("all shop items")) {
                 System.out.println("in main client handler to get all items");
                 allItemsData = myMsg.getObj();
-				/*	try {
-						App.setRoot("controllers/CatalogForRegisteredClients");
-					}	catch (Exception e){
-						System.out.println("get all execption");
-						System.out.println(e);
-					}*/
-
 			}
 			if (myMsg.getMsg().equals("your current customer")) {
 				currentCustomerData = myMsg.getObj();
