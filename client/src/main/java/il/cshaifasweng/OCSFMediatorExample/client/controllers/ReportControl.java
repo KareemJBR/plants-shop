@@ -57,7 +57,7 @@ public class ReportControl {
     @FXML
     void createRoport(ActionEvent event) throws Exception {
         if (reportText.equals(null)) {
-            showAlert("error", "are u stupid ? report is empty");
+            showAlert("error", "report is empty");
             return;
         }
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
@@ -65,8 +65,6 @@ public class ReportControl {
         while (currentCustomerData == null) {
             System.out.println("waiting for server");
         }
-
-        System.out.println("before the eroro shit  " + currentCustomerData);
         Customer customer = (Customer) currentCustomerData;
         System.out.println("the customer is  " + customer);
 

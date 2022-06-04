@@ -119,29 +119,78 @@ public class SimpleServer extends AbstractServer {
         session.save(item1);
         session.flush();
 
-        Item item2 = new Item("white",false,0,30,"FlowerBouquet",
+        Item item2 = new Item("white",false,0,30,"Flower",
                 "Images/white_flower.jpg","white rose");
         session.save(item2);
         session.flush();
 
-        Item item3 = new Item("red",false,0,30,"FlowerBouquet",
+        Item item3 = new Item("red",false,0,30,"Flower",
                 "Images/red_flower2.jpg","red flower2");
         session.save(item3);
         session.flush();
 
-        Item item4 = new Item("yellow",true,0.50,30,"FlowerBouquet",
+        Item item4 = new Item("yellow",true,0.50,30,"Flower",
                 "Images/sunflower.jpg","sunflower");
         session.save(item4);
         session.flush();
 
-        Item item5 = new Item("pink", false, 0, 50, "FlowerBouquet",
+        Item item5 = new Item("pink", false, 0, 50, "Flower",
                 "Images/pink_flower.jpg" ,"pink flower");
         session.save(item5);
         session.flush();
 
-        Item item6 = new Item("purple", false, 0, 80, "FlowerBouquet",
+        Item item6 = new Item("purple", true, 0.70, 80, "Flower",
                 "Images/purple_flower.jpg", "purple flower");
         session.save(item6);
+        session.flush();
+        Item item7 = new Item("Red", false, 0, 80, "Jar",
+                "Images/red_jar.jpg", "Red Jar");
+        session.save(item7);
+        session.flush();
+        Item item8 = new Item("Green", false, 0, 100, "Jar",
+                "Images/green_jar.jpg", "Green Jar");
+        session.save(item8);
+        session.flush();
+        Item item9 = new Item("gold", true, 0.2, 90, "Jar",
+                "Images/flower-vase-jar.jpg", "golden jar");
+        session.save(item9);
+        session.flush();
+        Item item10 = new Item("pink", false, 0, 120, "Flower With Jar",
+                "Images/pink_with_jar.jpg", "pink with jar");
+        session.save(item10);
+        session.flush();
+        Item item11 = new Item("red", false, 0, 150, "Flower With Jar",
+                "Images/pink_with_jar.jpg", "red flower with jar ");
+        session.save(item11);
+        session.flush();
+        Item item12 = new Item("red and yellow", true, 0.1, 70, "Flower Bouquet",
+                "Images/red_yellow_.png", "red and yellow bouquet");
+        session.save(item12);
+        session.flush();
+        Item item13 = new Item("pink", false, 0, 130, "Flower Bouquet",
+                "Images/pink_bouquet.png", "pink bouquet");
+        session.save(item13);
+        session.flush();
+        Item item14 = new Item("pink", false, 0, 200, "Flower Bouquet",
+                "Images/pink_rose.jpg", "pink rose");
+        session.save(item14);
+        session.flush();
+        Item item15 = new Item("red", true, 0.15, 250, "Flower Bouquet",
+                "Images/red_rose.jpg", "red rose");
+        session.save(item15);
+        session.flush();
+        Item item16 = new Item("blue", true, 0.25, 130, "Flower Bouquet",
+                "Images/blue_rose.jpg", "blue rose");
+        session.save(item16);
+        session.flush();
+        Item item17 = new Item("black", false, 0, 300, "Flower Bouquet",
+                "Images/black_rose.jpg", "black rose");
+        session.save(item17);
+        session.flush();
+
+        Item item18 = new Item("white", true, 0.15, 250, "Flower Bouquet",
+                "Images/White-Rose-Black-Wrap-Bouquet.jpg", "black and white rose");
+        session.save(item18);
         session.flush();
 
         /* ---------- Saving Shops To Data Base ---------- */
@@ -159,6 +208,11 @@ public class SimpleServer extends AbstractServer {
         ShopAdmin admin2 = new ShopAdmin("shop2", "shop2",
                 "888333755", "mortada", "mahameed");
         session.save(admin2);
+        session.flush();
+
+        ShopAdmin admin3 = new ShopAdmin("ad", "ad",
+                "888888888", "f", "f");
+        session.save(admin3);
         session.flush();
 
         // adding customers
@@ -683,8 +737,8 @@ public class SimpleServer extends AbstractServer {
 
         session.save(worker2);
         session.flush();
-        NetWorker worker3 = new NetWorker("212186613","sameer","najjar","net3",
-                "net3");
+        NetWorker worker3 = new NetWorker("212186613","sameer","najjar","nw",
+                "nw");
 
         session.save(worker3);
         session.flush();

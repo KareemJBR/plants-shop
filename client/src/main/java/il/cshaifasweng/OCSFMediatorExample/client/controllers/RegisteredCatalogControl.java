@@ -24,7 +24,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 
 public class RegisteredCatalogControl {
-    private boolean allitemsfilter=true;
+    private boolean allitemsfilter = true;
 
     private ArrayList<Item> allitems1;
     private ArrayList<Item> saleitems;
@@ -66,9 +66,9 @@ public class RegisteredCatalogControl {
     @FXML
     void filter(ActionEvent event) throws IOException {
         if (filterSelect.getValue().toString().equals("All Items")) {
-            allitemsfilter=true;
+            allitemsfilter = true;
         } else {
-            allitemsfilter=false;
+            allitemsfilter = false;
         }
         loadcatalog();
     }
@@ -100,16 +100,13 @@ public class RegisteredCatalogControl {
         loadcatalog();
     }
 
-    public  void loadcatalog() throws IOException {
-        saleitems=getAllitemsUnderSale();
-        allitems1=getAllItems();
-        ArrayList<Item> allItems=null;
-        if(allitemsfilter)
-        {
-             allItems = allitems1;
-        }
-        else
-        {
+    public void loadcatalog() throws IOException {
+        saleitems = getAllitemsUnderSale();
+        allitems1 = getAllItems();
+        ArrayList<Item> allItems = null;
+        if (allitemsfilter) {
+            allItems = allitems1;
+        } else {
             allItems = saleitems;
         }
         itemscontainer.getChildren().removeAll(itemscontainer.getChildren());
@@ -120,8 +117,8 @@ public class RegisteredCatalogControl {
                 itemscontainer.setMinHeight(allItems.size() * 150);      ///the height of the container is related to the amount of the items
                 for (int i = 0; i < allItems.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
-                    p.setStyle("-fx-background-color: #E43A19");
-                    p.setMinSize(355, 200);
+                    p.setStyle("-fx-background-color: #243447");
+                    p.setMinSize(355, 175);
                     if (i % 2 == 1) {
                         moveRight = true;
                     } else {
@@ -129,10 +126,10 @@ public class RegisteredCatalogControl {
                     }
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
-                    imageview.setFitWidth(180);   //width of img
-                    imageview.setFitHeight(180); //height of img
+                    imageview.setFitWidth(165);   //width of img
+                    imageview.setFitHeight(165); //height of img
                     System.out.println(i);
-                    try{
+                    try {
                         File imageFile = new File(allItems.get(i).getImgURL());
                         String fileLocation = imageFile.toURI().toString();
                         Image fxImage = new Image(fileLocation);
@@ -143,8 +140,8 @@ public class RegisteredCatalogControl {
                         Image fxImage = new Image(fileLocation);
                         imageview.setImage(fxImage);
                     }
-                    imageview.setLayoutX(10);           //x & y coordinate related in the pane
-                    imageview.setLayoutY(10);
+                    imageview.setLayoutX(5);           //x & y coordinate related in the pane
+                    imageview.setLayoutY(5);
 
                     File imageFile = new File("Images/sale_image.jpg");
                     String fileLocation = imageFile.toURI().toString();
@@ -153,10 +150,10 @@ public class RegisteredCatalogControl {
                     saleImg.setImage(fxImage);
 
                     if (allItems.get(i).isUnderSale()) {
-                        saleImg.setFitWidth(25);   //width of img
-                        saleImg.setFitHeight(25); //height of img
-                        saleImg.setLayoutX(325);           //x & y coordinate related in the pane
-                        saleImg.setLayoutY(2);
+                        saleImg.setFitWidth(30);   //width of img
+                        saleImg.setFitHeight(30); //height of img
+                        saleImg.setLayoutX(320);           //x & y coordinate related in the pane
+                        saleImg.setLayoutY(140);
                     }
 
                     //////////////// details of the item //////////////
@@ -166,29 +163,33 @@ public class RegisteredCatalogControl {
                             //  + "Type: " + cartItems.get(i).getType() + "\n"
                             //  + "Price: " + cartItems.get(i).getPrice() + "\n"
                     );
-                    name.setStyle("-fx-background-color:#F2F4F7");
-                    name.setLayoutX(200);
-                    name.setLayoutY(30);
+                    name.setStyle("-fx-background-color: #F2F4F7");
+                    name.setLayoutX(175);
+                    name.setLayoutY(10);
+                    name.setMinWidth(175);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + allItems.get(i).getCatalogNumber());
-                    catologNum.setStyle("-fx-background-color:#F2F4F7");
-                    catologNum.setLayoutX(200);
-                    catologNum.setLayoutY(50);
+                    catologNum.setStyle("-fx-background-color: #F2F4F7");
+                    catologNum.setLayoutX(175);
+                    catologNum.setLayoutY(30);
+                    catologNum.setMinWidth(175);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("Type: " + allItems.get(i).getType());
-                    type.setStyle("-fx-background-color:#F2F4F7");
-                    type.setLayoutX(200);           //x & y coordinate related in the pane
-                    type.setLayoutY(70);
+                    type.setStyle("-fx-background-color: #F2F4F7");
+                    type.setLayoutX(175);           //x & y coordinate related in the pane
+                    type.setLayoutY(50);
+                    type.setMinWidth(175);
                     type.setEditable(false);
 
                     TextField color = new TextField("Color: " + allItems.get(i).getColor());
-                    color.setStyle("-fx-background-color:#F2F4F7");
-                    color.setLayoutX(200);           //x & y coordinate related in the pane
-                    color.setLayoutY(90);
+                    color.setStyle("-fx-background-color: #F2F4F7");
+                    color.setLayoutX(175);           //x & y coordinate related in the pane
+                    color.setLayoutY(70);
+                    color.setMinWidth(175);
                     color.setEditable(false);
 
 
@@ -197,17 +198,19 @@ public class RegisteredCatalogControl {
                     TextField priceAfterSale = new TextField();
                     if (allItems.get(i).isUnderSale()) {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent()*100 + "% sale:" + allItems.get(i).getPriceAfterSale());
+                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent() * 100 + "% sale:" + allItems.get(i).getPriceAfterSale());
                     } else {
                         price.setText("Original Price: " + allItems.get(i).getOriginal_price());
                         priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price());
                     }
-                    price.setStyle("-fx-background-color:#F2F4F7");
-                    price.setLayoutX(200);           //x & y coordinate related in the pane
-                    price.setLayoutY(110);
-                    priceAfterSale.setStyle("-fx-background-color:#F2F4F7");
-                    priceAfterSale.setLayoutX(200);
-                    priceAfterSale.setLayoutY(130);
+                    price.setStyle("-fx-background-color: #F2F4F7");
+                    price.setLayoutX(175);           //x & y coordinate related in the pane
+                    price.setLayoutY(90);
+                    price.setMinWidth(175);
+                    priceAfterSale.setStyle("-fx-background-color:  #F2F4F7");
+                    priceAfterSale.setLayoutX(175);
+                    priceAfterSale.setLayoutY(110);
+                    priceAfterSale.setMinWidth(175);
                     price.setEditable(false);
                     priceAfterSale.setEditable(false);
 
@@ -242,9 +245,9 @@ public class RegisteredCatalogControl {
                         }
                     });
                     addToCartbtn.setFont(new Font(14));
-                    addToCartbtn.setStyle("-fx-background-color: #243447; -fx-text-fill: #F2F4F7; -fx-background-radius: 20");
-                    addToCartbtn.setLayoutX(225);
-                    addToCartbtn.setLayoutY(160);
+                    addToCartbtn.setStyle("-fx-background-color:#6366f1; -fx-text-fill: #F2F4F7; -fx-background-radius: 20");
+                    addToCartbtn.setLayoutX(210);
+                    addToCartbtn.setLayoutY(140);
 
                     addToCartbtn.setId(String.valueOf(i));
 
@@ -262,11 +265,11 @@ public class RegisteredCatalogControl {
                     // p.getChildren().add(buyNow);
                     p.getChildren().add(addToCartbtn);
                     if (moveRight) {
-                        p.setLayoutY(240 * j);
+                        p.setLayoutY(220 * j);
                         p.setLayoutX(395);
                         j++;
                     } else {
-                        p.setLayoutY(240 * j);
+                        p.setLayoutY(220 * j);
                     }
                     itemscontainer.getChildren().add(p);
                 }

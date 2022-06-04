@@ -104,11 +104,11 @@ public class publicCatalogControl {
         int j = 0;
         if (items != null) {
             if (items.size() != 0) {
-                itemscontainer.setMinHeight(items.size() * 150);      ///the height of the container is related to the amount of the items
+                itemscontainer.setMinHeight(items.size() * 120);      ///the height of the container is related to the amount of the items
                 for (int i = 0; i < items.size(); i++) {
                     AnchorPane p = new AnchorPane();            //container of each item
-                    p.setStyle("-fx-background-color: #E43A19");
-                    p.setMinSize(350, 190);
+                    p.setStyle("-fx-background-color: #243447");
+                    p.setMinSize(350, 175);
                     if (i % 2 == 1) {
                         moveRight = true;
                     } else {
@@ -118,8 +118,8 @@ public class publicCatalogControl {
                     p.setLayoutY(5);
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
-                    imageview.setFitWidth(180);   //width of img
-                    imageview.setFitHeight(180); //height of img
+                    imageview.setFitWidth(165);   //width of img
+                    imageview.setFitHeight(165); //height of img
                     System.out.println(i);
                     try{
                         File imageFile = new File(items.get(i).getImgURL());
@@ -142,9 +142,9 @@ public class publicCatalogControl {
                     saleImg.setImage(fxImage);
 
                     if(items.get(i).isUnderSale()){
-                        saleImg.setFitWidth(40);   //width of img
-                        saleImg.setFitHeight(40); //height of img
-                        saleImg.setLayoutX(305);           //x & y coordinate related in the pane
+                        saleImg.setFitWidth(30);   //width of img
+                        saleImg.setFitHeight(30); //height of img
+                        saleImg.setLayoutX(315);           //x & y coordinate related in the pane
                         saleImg.setLayoutY(5);
                     }
 
@@ -152,28 +152,32 @@ public class publicCatalogControl {
                     ///////// price textfield ///////////
                     TextField name = new TextField("Name: " + items.get(i).getName());
                     name.setStyle("-fx-background-color:#F2F4F7");
-                    name.setLayoutX(190);
-                    name.setLayoutY(50);
+                    name.setLayoutX(175);
+                    name.setLayoutY(40);
+                    name.setMinWidth(170);
                     name.setEditable(false);
 
                     ///////// type catalog number ///////////
                     TextField catologNum = new TextField("Catalog Number: " + items.get(i).getCatalogNumber());
                     catologNum.setStyle("-fx-background-color:#F2F4F7");
-                    catologNum.setLayoutX(190);
-                    catologNum.setLayoutY(70);
+                    catologNum.setLayoutX(175);
+                    catologNum.setMinWidth(170);
+                    catologNum.setLayoutY(60);
                     catologNum.setEditable(false);
 
                     ///////// type textfield ///////////
                     TextField type = new TextField("Type: " + items.get(i).getType());
                     type.setStyle("-fx-background-color:#F2F4F7");
-                    type.setLayoutX(190);           //x & y coordinate related in the pane
-                    type.setLayoutY(90);
+                    type.setLayoutX(175);           //x & y coordinate related in the pane
+                    type.setLayoutY(80);
+                    type.setMinWidth(170);
                     type.setEditable(false);
 
                     TextField color = new TextField("Color: " + items.get(i).getColor());
                     color.setStyle("-fx-background-color:#F2F4F7");
-                    color.setLayoutX(190);           //x & y coordinate related in the pane
-                    color.setLayoutY(110);
+                    color.setLayoutX(175);           //x & y coordinate related in the pane
+                    color.setLayoutY(100);
+                    color.setMinWidth(170);
                     color.setEditable(false);
 
 
@@ -182,17 +186,19 @@ public class publicCatalogControl {
                     TextField priceAfterSale = new TextField();
                     if(items.get(i).isUnderSale()) {
                         price.setText("Original Price: " + items.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After "+items.get(i).getSalePercent()*100 +"% sale is:"+items.get(i).getPriceAfterSale());
+                        priceAfterSale.setText("Price After "+items.get(i).getSalePercent()*100 +"% sale is: "+items.get(i).getPriceAfterSale());
                     }
                     else{
                         price.setText("Price :"+items.get(i).getOriginal_price());
                     }
                     price.setStyle("-fx-background-color:#F2F4F7");
-                    price.setLayoutX(190);           //x & y coordinate related in the pane
-                    price.setLayoutY(130);
+                    price.setLayoutX(175);           //x & y coordinate related in the pane
+                    price.setLayoutY(120);
+                    price.setMinWidth(170);
                     priceAfterSale.setStyle("-fx-background-color:#F2F4F7");
-                    priceAfterSale.setLayoutX(190);
-                    priceAfterSale.setLayoutY(150);
+                    priceAfterSale.setLayoutX(175);
+                    priceAfterSale.setLayoutY(140);
+                    priceAfterSale.setMinWidth(170);
                     price.setEditable(false);
                     priceAfterSale.setEditable(false);
 
@@ -209,11 +215,11 @@ public class publicCatalogControl {
                         p.getChildren().add(priceAfterSale);
                     }
                     if (moveRight) {
-                        p.setLayoutY(240 * j);
+                        p.setLayoutY(220 * j);
                         p.setLayoutX(400);
                         j++;
                     } else {
-                        p.setLayoutY(240 * j);
+                        p.setLayoutY(220 * j);
                     }
                     itemscontainer.getChildren().add(p);
                 }
