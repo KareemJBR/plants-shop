@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" accessibleRole="PASSWORD_FIELD" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
+<AnchorPane fx:id="Controller" accessibleRole="PASSWORD_FIELD" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
    <children>
       <TextField fx:id="userName" layoutX="279.0" layoutY="206.0" prefHeight="45.0" prefWidth="246.0" promptText="username" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
          <font>
@@ -46,7 +46,7 @@
          <font>
             <Font name="Arial" size="17.0" />
          </font></Button>
-      <TextField fx:id="visiblePassword" disable="true" layoutX="279.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 15;" visible="false">
+      <TextField fx:id="visiblePassword" disable="true" layoutX="278.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 10;" visible="false">
 
          <font>
             <Font name="Arial" size="16.0" />
