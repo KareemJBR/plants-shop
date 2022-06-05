@@ -279,7 +279,7 @@ public class Cart<T> {
                     p.getChildren().add(btn);
                     p.getChildren().add(btn2);
                     p.getChildren().add(btn3);
-                    
+
                     p.setStyle("-fx-border-color: #111F4D;-fx-border-radius: 15");
 
                     p.setLayoutX(10);
