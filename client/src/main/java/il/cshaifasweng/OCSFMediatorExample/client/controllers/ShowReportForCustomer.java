@@ -196,7 +196,7 @@ public class ShowReportForCustomer {
                 DateFormat parser = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
                 Date date1 = parser.parse(allReports.get(finalI).getdate().toString());
 
-                DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+                DateFormat formatter = new SimpleDateFormat("MM.dd.yyyy");
                 System.out.println();
 
                 Label date=new Label();
