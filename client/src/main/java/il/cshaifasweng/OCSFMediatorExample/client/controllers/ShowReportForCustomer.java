@@ -116,7 +116,7 @@ public class ShowReportForCustomer {
             pane_contianer.getChildren().add(error);
         } else {
             //real shit start here
-            pane_contianer.setMinHeight(allReports.size() * 80);      ///the height of the container is related to the amount of the items
+            pane_contianer.setMinHeight(allReports.size() * 120);      ///the height of the container is related to the amount of the items
             Label reportTitle = new Label();
             int handledReports = 0;
             //get number of hanldler reports
@@ -256,11 +256,11 @@ public class ShowReportForCustomer {
                     iewAnswer.setDisable(true);
                 }
                 if (moveRight) {
-                    p.setLayoutY(200 * j);
+                    p.setLayoutY(180 * j);
                     p.setLayoutX(300);
                     j++;
                 } else {
-                    p.setLayoutY(200 * j);
+                    p.setLayoutY(180 * j);
                 }
                 p.getChildren().add(iewAnswer);
                 p.getChildren().add(viewme);
