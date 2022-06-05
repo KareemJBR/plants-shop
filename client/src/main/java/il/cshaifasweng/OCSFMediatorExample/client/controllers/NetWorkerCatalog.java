@@ -67,6 +67,7 @@ public class NetWorkerCatalog {
                     imageview.setFitWidth(180);   //width of img
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
+                  
                     imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
                     try {

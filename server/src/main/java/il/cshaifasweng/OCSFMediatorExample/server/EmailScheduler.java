@@ -47,7 +47,9 @@ public class EmailScheduler extends TimerTask {
 
                 if (order_cal.before(current)) {
                     String message_body = "Hello " + all_orders.get(i).getCustomer().getFirst_name() + ",\n\n";
-                    message_body += "We are pleased to tell that the order you asked has just been delivered.\n\n";
+                    message_body += "We are pleased to tell you that the order " + all_orders.get(i).getId() + " ";
+                    message_body += "you have ordered has just been delivered.\n\n";
+
                     message_body += "Regards,\nLilac";
 
                     // we shall send an email
