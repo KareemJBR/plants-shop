@@ -158,7 +158,7 @@ public class Report implements Serializable {
     public void setdate(){
         //Date date=new Date();
         //this.reportDate=date.toString();
-        String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         this.reportDate=timeStamp;
     }
 
