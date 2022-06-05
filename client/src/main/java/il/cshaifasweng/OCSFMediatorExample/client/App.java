@@ -476,7 +476,12 @@ public class App extends Application {
     public static void createCSVFile(String name_prefix, Calendar start_date, Calendar end_date, String first_line,
                                      XYChart.Series<String, Number> data) throws FileNotFoundException {
         String file_name = App.getCSVFileName(name_prefix, start_date, end_date);
+
         File csv_file = new File(file_name);
+
+        File temp = new File("Reports/");
+        temp.mkdir();
+
         PrintWriter out = new PrintWriter(csv_file);
 
         out.println(first_line);
