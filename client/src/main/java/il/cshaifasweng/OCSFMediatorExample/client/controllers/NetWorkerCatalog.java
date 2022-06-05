@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -66,10 +67,19 @@ public class NetWorkerCatalog {
                     imageview.setFitWidth(180);   //width of img
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
-                    imageview.setImage(new Image(allItems.get(i).getUrl()));
+
+                    File imageFile = new File(allItems.get(i).getImgURL());
+                    String fileLocation = imageFile.toURI().toString();
+                    Image fxImage = new Image(fileLocation);
+                    imageview.setImage(fxImage);
+
                     imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
-                    ImageView saleImg = new ImageView("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_sSCL4v_OTxw8XXoGNcWeV0rYEV0e76Nsw&usqp=CAU");
+
+                    File sale_img_file = new File("Images/sale_image.jpg");
+                    String sale_str = sale_img_file.toURI().toString();
+                    Image temp = new Image(sale_str);
+                    ImageView saleImg = new ImageView(temp);
 
                     if (allItems.get(i).isUnderSale()) {
                         saleImg.setFitWidth(25);   //width of img
