@@ -52,7 +52,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         client = SimpleClient.getClient();
         client.openConnection();
-        scene = new Scene(loadFXML("controllers/Login"),780,600);
+        scene = new Scene(loadFXML("controllers/LogIN"),780,600);
         stage.setTitle("Plants Shop");
         stage.setScene(scene);
         stage.show();
