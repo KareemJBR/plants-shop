@@ -18,7 +18,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllReports;
@@ -82,7 +86,7 @@ public class ShowReportForCustomer {
     }
 
 
-    public void initialize() throws IOException, InterruptedException {
+    public void initialize() throws IOException, InterruptedException, ParseException {
        boolean moveRight=false;
         int j=0;
         MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
@@ -101,18 +105,18 @@ public class ShowReportForCustomer {
         //in case there in no reports
         if (allReports == null || allReports.size() == 0) {
             System.out.println("was here");
-            TextField wtf = new TextField();
-            wtf.setText("you have no reports");
-            wtf.setStyle("-fx-background-color: red");
-            wtf.setFont(new Font("Default", 20));
-            wtf.setLayoutY(100);
-            wtf.setLayoutX(150);
-            wtf.setEditable(false);
-            wtf.setMinWidth(180);
-            pane_contianer.getChildren().add(wtf);
+            TextField error = new TextField();
+            error.setText("you have no reports");
+            error.setStyle("-fx-background-color: green");
+            error.setFont(new Font("Default", 20));
+            error.setLayoutY(100);
+            error.setLayoutX(150);
+            error.setEditable(false);
+            error.setMinWidth(180);
+            pane_contianer.getChildren().add(error);
         } else {
             //real shit start here
-            pane_contianer.setMinHeight(allReports.size() * 120);      ///the height of the container is related to the amount of the items
+            pane_contianer.setMinHeight(allReports.size() * 80);      ///the height of the container is related to the amount of the items
             Label reportTitle = new Label();
             int handledReports = 0;
             //get number of hanldler reports
@@ -138,9 +142,9 @@ public class ShowReportForCustomer {
                 }
                 AnchorPane p = new AnchorPane();            //container of each item
                 p.setStyle("-fx-background-color: #243447");
-                p.setMinSize(250, 100);
+                p.setMinSize(250, 130);
                 Label reportNum = new Label();
-                reportNum.setText("Report " + i);
+                reportNum.setText("Report " + (i+1));
                 reportNum.setLayoutY(5);
                 reportNum.setLayoutX(100);
 
@@ -155,7 +159,7 @@ public class ShowReportForCustomer {
                 viewme.setText("View Report");
                 viewme.setStyle("-fx-background-color:  #E43A19;-fx-text-fill: #F2F4F7");
                 viewme.setLayoutX(20);
-                viewme.setLayoutY(70);
+                viewme.setLayoutY(100);
                 int finalI = i;
                 viewme.setOnAction(e -> {
                     System.out.println("dont press me  pls");
@@ -189,12 +193,31 @@ public class ShowReportForCustomer {
 
 
                 });
+                DateFormat parser = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+                Date date1 = parser.parse(allReports.get(finalI).getdate().toString());
+
+                DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+                System.out.println();
+
+                Label date=new Label();
+                date.setText("Report Date: "+formatter.format(date1));
+                date.setLayoutY(40);
+                date.setStyle("-fx-text-fill:  #F2F4F7");
+                date.setLayoutX(5);
+                date.setFont(new Font(13));
+
+                Label shop=new Label();
+                shop.setText("Shop: "+allReports.get(finalI).getShop().getName());
+                shop.setStyle("-fx-text-fill:  #F2F4F7");
+                shop.setLayoutY(65);
+                shop.setFont(new Font(13));
+                shop.setLayoutX(5);
 
                 Button iewAnswer = new Button();
                 iewAnswer.setText("View Answer");
-                iewAnswer.setLayoutY(70);
+                iewAnswer.setLayoutY(100);
                 iewAnswer.setStyle("-fx-background-color:  #E43A19;-fx-text-fill: #F2F4F7");
-                iewAnswer.setLayoutX(140);
+                iewAnswer.setLayoutX(160);
                 iewAnswer.setOnAction(e -> {
                     System.out.println("dont press me  pls");
                     Stage popupwindow = new Stage();
@@ -207,6 +230,7 @@ public class ShowReportForCustomer {
                     label1.setText(allReports.get(finalI).getAnswer());
                     label1.setLayoutY(5);
                     label1.setLayoutX(5);
+
 
 
                     Button button1 = new Button("hit me");
@@ -232,16 +256,18 @@ public class ShowReportForCustomer {
                     iewAnswer.setDisable(true);
                 }
                 if (moveRight) {
-                    p.setLayoutY(145 * j);
+                    p.setLayoutY(200 * j);
                     p.setLayoutX(300);
                     j++;
                 } else {
-                    p.setLayoutY(145 * j);
+                    p.setLayoutY(200 * j);
                 }
                 p.getChildren().add(iewAnswer);
                 p.getChildren().add(viewme);
                 p.getChildren().add(tabMe);
                 p.getChildren().add(reportNum);
+                p.getChildren().add(shop);
+                p.getChildren().add(date);
                 pane_contianer.getChildren().add(p);
                 pane_contianer.setStyle("-fx-background-color:#111F4D");
             }

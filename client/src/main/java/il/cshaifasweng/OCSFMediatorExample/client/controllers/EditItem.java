@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
+import java.io.File;
 import java.io.IOException;
 
 public class EditItem {
@@ -117,7 +119,7 @@ public class EditItem {
 
     public void initialize() {
         Item item = App.getEdit_item();
-        saleText.setPromptText("Enter Sale Percent between 1-99%"); //to set the hint text
+        saleText.setPromptText("Enter Sale Percent"); //to set the hint text
         saleText.getParent().requestFocus(); //to not setting the focus on that node so that the hint will display immediately
         saleText.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*")) return;
@@ -125,52 +127,75 @@ public class EditItem {
         });
 
         ImageView imageview = new ImageView();
-        imageview.setFitWidth(210);   //width of img
-        imageview.setFitHeight(210); //height of img
-        imageview.setImage(new Image(item.getUrl()));
+        imageview.setFitWidth(280);   //width of img
+        imageview.setFitHeight(280); //height of img
+        try {
+            File imageFile = new File(item.getImgURL());
+            String fileLocation = imageFile.toURI().toString();
+            Image fxImage = new Image(fileLocation);
+            imageview.setImage(fxImage);
+        } catch (Exception e) {
+            File imageFile = new File("Images/no_image.jpg");
+            String fileLocation = imageFile.toURI().toString();
+            Image fxImage = new Image(fileLocation);
+            imageview.setImage(fxImage);
+        }
         imageview.setLayoutX(5);           //x & y coordinate related in the pane
-        imageview.setLayoutY(5);
+        imageview.setLayoutY(50);
 
         //////////////// details of the item //////////////
         ///////// price textfield ///////////
         TextField name = new TextField("Name: " + item.getName()  //"\n"
         );
-        name.setStyle("-fx-background-color:#EC610A");
-        name.setLayoutX(5);
-        name.setLayoutY(220);
+        name.setFont(new Font(14));
+        name.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        name.setLayoutX(300);
+        name.setLayoutY(100);
+        name.setMinWidth(230);
         name.setEditable(false);
 
         ///////// type catalog number ///////////
         TextField catologNum = new TextField("Catalog Number: " + item.getCatalogNumber());
-        catologNum.setStyle("-fx-background-color:#EC610A");
-        catologNum.setLayoutX(5);
-        catologNum.setLayoutY(240);
+        catologNum.setFont(new Font(14));
+        catologNum.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        catologNum.setLayoutX(300);
+        catologNum.setLayoutY(125);
+        catologNum.setMinWidth(230);
         catologNum.setEditable(false);
 
         ///////// type catalog number ///////////
         TextField color = new TextField("Color: " + item.getColor());
-        color.setStyle("-fx-background-color:#EC610A");
-        color.setLayoutX(5);
-        color.setLayoutY(260);
+        color.setFont(new Font(14));
+        color.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        color.setLayoutX(300);
+        color.setLayoutY(150);
+        color.setMinWidth(230);
         color.setEditable(false);
 
         TextField underSale = new TextField("Under Sale: " + item.isUnderSale());
-        underSale.setStyle("-fx-background-color:#EC610A");
-        underSale.setLayoutX(5);
-        underSale.setLayoutY(280);
+        underSale.setFont(new Font(15));
+        underSale.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        underSale.setLayoutX(300);
+        underSale.setLayoutY(175);
+        underSale.setMinWidth(230);
         underSale.setEditable(false);
 
         TextField sale = new TextField("Sale Percent: " + item.getSalePercent()*100 + "%");
-        sale.setStyle("-fx-background-color:#EC610A");
-        sale.setLayoutX(5);
-        sale.setLayoutY(300);
+        sale.setFont(new Font(14));
+        sale.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        sale.setLayoutX(300);
+        sale.setLayoutY(200);
+        sale.setMinWidth(230);
         sale.setEditable(false);
 
         ///////// type textfield ///////////
         TextField type = new TextField("Type: " + item.getType());
-        type.setStyle("-fx-background-color:#EC610A");
-        type.setLayoutX(5);           //x & y coordinate related in the pane
-        type.setLayoutY(320);
+        type.setFont(new Font(14));
+        type.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        type.setLayoutX(300);           //x & y coordinate related in the pane
+        type.setLayoutY(225);
+        type.setMinWidth(230);
+
         type.setEditable(false);
 
         ///////// type textfield ///////////
@@ -179,16 +204,21 @@ public class EditItem {
         price.setText("Original Price: " + item.getOriginal_price());
         priceAfterSale.setText("Final Price: " + item.getPriceAfterSale());
 
-        price.setStyle("-fx-background-color:#EC610A");
-        price.setLayoutX(5);           //x & y coordinate related in the pane
-        price.setLayoutY(340);
-        priceAfterSale.setStyle("-fx-background-color:#EC610A");
-        priceAfterSale.setLayoutX(5);
-        priceAfterSale.setLayoutY(360);
+        price.setFont(new Font(14));
+        price.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        price.setLayoutX(300);           //x & y coordinate related in the pane
+        price.setLayoutY(250);
+        price.setMinWidth(230);
+        priceAfterSale.setFont(new Font(14));
+        priceAfterSale.setStyle("-fx-background-color:#EC610A;-fx-text-fill: #F2F4F7 ");
+        priceAfterSale.setLayoutX(300);
+        priceAfterSale.setLayoutY(275);
+        priceAfterSale.setMinWidth(230);
         price.setEditable(false);
 
         priceAfterSale.setEditable(false);
 
+        itemPane.setStyle("-fx-background-color:  #0c1738");
         itemPane.getChildren().add(imageview);
         itemPane.getChildren().add(price);
         itemPane.getChildren().add(type);
@@ -197,8 +227,7 @@ public class EditItem {
         itemPane.getChildren().add(sale);
         itemPane.getChildren().add(catologNum);
         itemPane.getChildren().add(priceAfterSale);
-        itemPane.setMaxWidth(400);
-        itemPane.setMaxHeight(375);
+        itemPane.getChildren().add(name);
 
         if (item.isUnderSale()){
             addSale.setDisable(true);

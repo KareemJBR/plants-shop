@@ -67,19 +67,25 @@ public class NetWorkerCatalog {
                     imageview.setFitWidth(180);   //width of img
                     imageview.setFitHeight(180); //height of img
                     System.out.println(i);
-
-                    File imageFile = new File(allItems.get(i).getImgURL());
-                    String fileLocation = imageFile.toURI().toString();
-                    Image fxImage = new Image(fileLocation);
-                    imageview.setImage(fxImage);
-
+                  
                     imageview.setLayoutX(10);           //x & y coordinate related in the pane
                     imageview.setLayoutY(10);
-
-                    File sale_img_file = new File("Images/sale_image.jpg");
-                    String sale_str = sale_img_file.toURI().toString();
-                    Image temp = new Image(sale_str);
-                    ImageView saleImg = new ImageView(temp);
+                    try {
+                        File imageFile = new File(allItems.get(i).getImgURL());
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
+                    } catch (Exception e) {
+                        File imageFile = new File("Images/no_image.jpg");
+                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image(fileLocation);
+                        imageview.setImage(fxImage);
+                    }
+                    File imageFile = new File("Images/sale_image.jpg");
+                    String fileLocation = imageFile.toURI().toString();
+                    Image fxImage = new Image(fileLocation);
+                    ImageView saleImg = new ImageView();
+                    saleImg.setImage(fxImage);
 
                     if (allItems.get(i).isUnderSale()) {
                         saleImg.setFitWidth(25);   //width of img
