@@ -29,31 +29,11 @@ public class RegisteredCatalogControl {
     private ArrayList<Item> allitems1;
     private ArrayList<Item> saleitems;
 
-
-    @FXML
-    private Button filterBTN;
-
     @FXML
     private ChoiceBox<String> filterSelect;
 
     @FXML
-    private Label textFilter;
-
-    @FXML
-    private Button goBack;
-
-    @FXML
-    private Button goToCartBut;
-
-    @FXML
     private AnchorPane itemscontainer;
-
-    @FXML
-    private Label title;
-
-
-    @FXML
-    private AnchorPane itemsContainer;
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -65,11 +45,7 @@ public class RegisteredCatalogControl {
 
     @FXML
     void filter(ActionEvent event) throws IOException {
-        if (filterSelect.getValue().toString().equals("All Items")) {
-            allitemsfilter = true;
-        } else {
-            allitemsfilter = false;
-        }
+        allitemsfilter = filterSelect.getValue().equals("All Items");
         loadcatalog();
     }
 
@@ -84,9 +60,9 @@ public class RegisteredCatalogControl {
         ArrayList<CartItem> returnedcartitems = new ArrayList<CartItem>();
 
         if (allcartitems != null) {
-            for (int i = 0; i < allcartitems.size(); i++) {
-                if (allcartitems.get(i).getCustomer().getUser_id().equals(ClientId)) {
-                    returnedcartitems.add(allcartitems.get(i));
+            for (CartItem allcartitem : allcartitems) {
+                if (allcartitem.getCustomer().getUser_id().equals(ClientId)) {
+                    returnedcartitems.add(allcartitem);
                 }
             }
         }
@@ -119,11 +95,7 @@ public class RegisteredCatalogControl {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #243447");
                     p.setMinSize(355, 175);
-                    if (i % 2 == 1) {
-                        moveRight = true;
-                    } else {
-                        moveRight = false;
-                    }
+                    moveRight = i % 2 == 1;
                     ////////////// img /////////////
                     ImageView imageview = new ImageView();
                     imageview.setFitWidth(165);   //width of img
@@ -226,13 +198,13 @@ public class RegisteredCatalogControl {
                             getCurrentCustomer();
                             int num = Integer.parseInt(((Button) e.getTarget()).getId());
                             ArrayList<CartItem> incart = searchCartItems(((Customer) currentCustomerData).getId());
-                            for (int k = 0; k < incart.size(); k++) {
-                                if (incart.get(k).getItem().getId() == (num + 1)) {
-                                    int increase = (incart.get(k).getAmount() + 1);
-                                    incart.get(k).setAmount(increase);
-                                    MsgClass update = new MsgClass("#update cartIrem", incart.get(k));
+                            for (CartItem cartItem : incart) {
+                                if (cartItem.getItem().getId() == (num + 1)) {
+                                    int increase = (cartItem.getAmount() + 1);
+                                    cartItem.setAmount(increase);
+                                    MsgClass update = new MsgClass("#update cartIrem", cartItem);
                                     SimpleClient.getClient().sendToServer(update);
-                                    System.out.println("the amount of shit" + incart.get(k).getAmount());
+                                    System.out.println("the amount of shit" + cartItem.getAmount());
                                     return;
                                 }
                             }

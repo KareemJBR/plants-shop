@@ -2,16 +2,11 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.CartItem;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,21 +17,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static il.cshaifasweng.OCSFMediatorExample.client.App.showAlert;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
 
 public class NetWorkerCatalog {
 
     @FXML
-    private Button BackBTN;
-
-    @FXML
     private AnchorPane Container;
-
-    @FXML
-    private AnchorPane MainPane;
-
-    @FXML
-    private ScrollPane scrollPane;
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -226,17 +213,5 @@ public class NetWorkerCatalog {
             flower.setPriceAfterSale((int) (flower.getOriginal_price() * (1 - flower.getSalePercent())));
         }
         System.out.println(flower);
-    }
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
     }
 }

@@ -5,7 +5,6 @@ import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -31,19 +30,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 
 public class ShowReportForCustomer {
 
-
-    @FXML
-    private Button back;
-    @FXML
-    private Button deleteReportbtn;
     @FXML
     private AnchorPane pane_contianer;
 
-    @FXML
-    private Label title1;
-
-    @FXML
-    private Label title2;
     @FXML
     private AnchorPane mainPane;
 
@@ -66,16 +55,15 @@ public class ShowReportForCustomer {
         }
         System.out.println("all report::::::::"+allReports);
         for (int i = 0; i < cheackBoxs.size(); i++) {
-            if (cheackBoxs.get(i).isSelected() == true) {
+            if (cheackBoxs.get(i).isSelected()) {
                 MsgClass msg2 = new MsgClass("#delete Report", allReports.get(i));
                 SimpleClient.getClient().sendToServer(msg2);
                 cheaked++;
             }
         }
         if (cheaked == 0) {
-            showAlert("error", "pls select report to be deleted");
+            App.showAlert("error", "pls select report to be deleted");
         }
-        App.setRoot("controllers/showReportForCustomer");
     }
 
     @FXML
@@ -120,9 +108,9 @@ public class ShowReportForCustomer {
             Label reportTitle = new Label();
             int handledReports = 0;
             //get number of hanldler reports
-            for (int i = 0; i < allReports.size(); i++) {
-                System.out.println(allReports.get(i));
-                if (allReports.get(i).isHandled() == true) {
+            for (Report allReport : allReports) {
+                System.out.println(allReport);
+                if (allReport.isHandled()) {
                     handledReports++;
                 }
             }
@@ -135,11 +123,7 @@ public class ShowReportForCustomer {
             reportTitle.setStyle("-fx-text-fill: #F2F4F7");
             mainPane.getChildren().add(reportTitle);
             for (int i = 0; i < allReports.size(); i++) {
-                if (i % 2 == 1) {
-                    moveRight = true;
-                } else {
-                    moveRight = false;
-                }
+                moveRight = i % 2 == 1;
                 AnchorPane p = new AnchorPane();            //container of each item
                 p.setStyle("-fx-background-color: #243447");
                 p.setMinSize(250, 130);
@@ -252,7 +236,7 @@ public class ShowReportForCustomer {
 
 
                 });
-                if (allReports.get(i).isHandled() == false) {
+                if (!allReports.get(i).isHandled()) {
                     iewAnswer.setDisable(true);
                 }
                 if (moveRight) {
@@ -273,18 +257,5 @@ public class ShowReportForCustomer {
             }
         }
         currentCustomerData = null;
-    }
-
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
     }
 }

@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllItems;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllitemsUnderSale;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.allItemsData;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp.shop;
 
 import java.io.File;
@@ -21,20 +20,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class publicCatalogControl {
+public class PublicCatalogControl {
     private boolean allitemsfilter=true;
 
     private ArrayList<Item> allitems;
     private ArrayList<Item> saleitems;
-
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private Button singUp;
-
-    @FXML
-    private Button filterBTN;
 
     @FXML
     private ChoiceBox<String> filterSelect;
@@ -45,14 +35,6 @@ public class publicCatalogControl {
     @FXML
     private AnchorPane itemscontainer;
 
-    @FXML
-    private Label title;
-
-    @FXML
-    private Label textFilter;
-
-    @FXML
-    private AnchorPane itemsContainer;
     @FXML
     void Back(ActionEvent event) throws IOException {
         MsgClass msg=new MsgClass("#get customers",null);
@@ -109,11 +91,7 @@ public class publicCatalogControl {
                     AnchorPane p = new AnchorPane();            //container of each item
                     p.setStyle("-fx-background-color: #243447");
                     p.setMinSize(350, 175);
-                    if (i % 2 == 1) {
-                        moveRight = true;
-                    } else {
-                        moveRight = false;
-                    }
+                    moveRight = i % 2 == 1;
                     p.setLayoutX(5);
                     p.setLayoutY(5);
                     ////////////// img /////////////

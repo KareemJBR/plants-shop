@@ -10,13 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class addItem {
-    @FXML
-    private Button Add;
-
-    @FXML
-    private Button Back;
+public class AddItem {
 
     @FXML
     private CheckBox SaleCheck;
@@ -31,52 +27,37 @@ public class addItem {
     private TextField colorText;
 
     @FXML
-    private Label nameLabel;
-
-    @FXML
     private TextField nameText;
-
-    @FXML
-    private Label picLabel;
 
     @FXML
     private TextField picText;
 
     @FXML
-    private Label priceLabel;
-
-    @FXML
     private TextField priceText;
-
-    @FXML
-    private Label typeLabel;
 
     @FXML
     private TextField typeText;
 
     @FXML
-    private Label saleLabel;
-
-    @FXML
     void addItem(ActionEvent event) throws IOException {
-        if (colorText.getText() == null || colorText.getText().trim().isEmpty()) {
+        if (Objects.equals(colorText.getText(), "")) {
             showAlert("Error", "please enter the item color");
             return;
         }
-        if (priceText.getText() == null || priceText.getText().trim().isEmpty()) {
+        if (Objects.equals(priceText.getText(), "")) {
             showAlert("Error", "please enter the item price");
             return;
         }
-        if (nameText.getText() == null || nameText.getText().trim().isEmpty()) {
+        if (Objects.equals(nameText.getText(), "")) {
             showAlert("Error", "please enter the item name");
             return;
         }
 
-        if ((SaleCheck.isSelected() && SaleText.getText() == null) || (SaleCheck.isSelected() && SaleText.getText().trim().isEmpty())) {
+        if (SaleCheck.isSelected() && Objects.equals(SaleText.getText(), "")) {
             showAlert("Error", "please enter the item sale percent");
             return;
         }
-        if (typeText.getText() == null || typeText.getText().trim().isEmpty()) {
+        if (Objects.equals(typeText.getText(), "")) {
             showAlert("Error", "please enter the item picture");
             return;
         }
@@ -103,11 +84,7 @@ public class addItem {
 
     @FXML
     void undableSale(ActionEvent event) {
-        if (SaleCheck.isSelected()) {
-            SaleText.setDisable(false);
-        } else {
-            SaleText.setDisable(true);
-        }
+        SaleText.setDisable(!SaleCheck.isSelected());
     }
 
     @FXML

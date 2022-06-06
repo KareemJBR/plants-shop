@@ -58,17 +58,13 @@ public class ShowAllCustomers implements Initializable {
         if (customersToShow == null)
             return;
 
-        customersID.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                ("id"));
-        customersFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                ("first_name"));
-        customersLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>
-                ("last_name"));
+        customersID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customersFirstName.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        customersLastName.setCellValueFactory(new PropertyValueFactory<>("last_name"));
 
-        customersEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>("Email"));
+        customersEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
 
-        customersBudget.setCellValueFactory(new PropertyValueFactory<Customer, Double>
-                ("Budget"));
+        customersBudget.setCellValueFactory(new PropertyValueFactory<>("Budget"));
 
         customersTable.setItems(customersToShow);
 

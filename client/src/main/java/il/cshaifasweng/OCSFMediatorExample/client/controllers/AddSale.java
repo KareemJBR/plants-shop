@@ -1,10 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
-import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
-import il.cshaifasweng.OCSFMediatorExample.entities.Sale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +20,6 @@ import java.util.ResourceBundle;
 public class AddSale implements Initializable {
 
     private ArrayList<Item> items=null;
-    private ArrayList<Integer> counters;
 
     @FXML
     private TableColumn<Item, String> CatalogNumber;
@@ -53,9 +49,6 @@ public class AddSale implements Initializable {
 
     @FXML
     private TableView<Item> itemsTable;
-
-    @FXML
-    private Button backBTN;
 
     @FXML
     void rowClicked(MouseEvent event) throws IOException {
