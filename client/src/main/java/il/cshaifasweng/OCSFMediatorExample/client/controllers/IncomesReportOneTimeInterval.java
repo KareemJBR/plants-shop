@@ -97,6 +97,6 @@ public class IncomesReportOneTimeInterval implements Initializable {
     }
 
     public void downloadCSVFile(ActionEvent actionEvent) throws FileNotFoundException {
-        App.createCSVFile("Incomes", start_date, end_date, "Datem, Incomes", series);
+        App.createCSVFile("Incomes", start_date, end_date, "Date, Incomes", series);
     }
 }

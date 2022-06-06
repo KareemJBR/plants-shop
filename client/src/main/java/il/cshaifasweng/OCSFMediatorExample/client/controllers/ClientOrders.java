@@ -10,29 +10,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.*;
 import javafx.scene.shape.Line;
 
-import java.awt.*;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_userId;
 
 public class ClientOrders {
-
-
-    @FXML // fx:id="Controller"
-    private AnchorPane Controller; // Value injected by FXMLLoader
 
     @FXML // fx:id="ordersList"
     private AnchorPane ordersList; // Value injected by FXMLLoader
@@ -118,18 +108,6 @@ public class ClientOrders {
     @FXML
     void initialize() throws IOException {
         loadPage();
-    }
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
     }
 
     public String orderStatus(Order order)

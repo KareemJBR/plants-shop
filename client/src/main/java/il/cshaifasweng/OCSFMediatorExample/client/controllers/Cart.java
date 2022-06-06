@@ -4,7 +4,6 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,21 +13,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 
 
 import javafx.scene.image.Image;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
-import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.CartItemsdata;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 public class Cart<T> {
@@ -78,9 +71,8 @@ public class Cart<T> {
             if(shops!=null)
             {
                 //   System.out.println("notnull");
-                for(int i=0;i<shops.size();i++)
-                {
-                    stores.getItems().addAll(shops.get(i).getAddress());
+                for (Shop shop : shops) {
+                    stores.getItems().addAll(shop.getAddress());
                 }
             }
             stores.getSelectionModel().select(0);
@@ -103,11 +95,9 @@ public class Cart<T> {
 
         if(allcartitems !=null)
         {
-            for(int i=0;i<allcartitems.size();i++)
-            {
-                if(allcartitems.get(i).getCustomer().getUser_id().equals(ClientId))
-                {
-                    returnedcartitems.add(allcartitems.get(i));
+            for (CartItem allcartitem : allcartitems) {
+                if (allcartitem.getCustomer().getUser_id().equals(ClientId)) {
+                    returnedcartitems.add(allcartitem);
                 }
             }
         }
@@ -135,19 +125,6 @@ public class Cart<T> {
     @FXML
     void Checkout(ActionEvent event) throws IOException {
         App.setRoot("controllers/Checkout");
-    }
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
-
     }
 
     void loadPage() throws IOException {

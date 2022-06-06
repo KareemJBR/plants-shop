@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class EditItem {
 
@@ -28,16 +29,10 @@ public class EditItem {
     private TextField saleText;
 
     @FXML
-    private Button back;
-
-    @FXML
     private Button editSale;
 
     @FXML
     private AnchorPane itemPane;
-
-    @FXML
-    private AnchorPane mainPane;
 
     @FXML
     private Button removeSale;
@@ -45,7 +40,7 @@ public class EditItem {
     @FXML
     void DelteSale(ActionEvent event) throws IOException {
         Item item = App.getEdit_item();
-        if(item.isUnderSale()==false){
+        if(!item.isUnderSale()){
             showAlert("Error","item isn't under sale ");
             return;
         }
@@ -55,12 +50,12 @@ public class EditItem {
         MsgClass msg = new MsgClass("#update Item",item);
         SimpleClient.getClient().sendToServer(msg);
         showAlert("successes","sale have been removed");
-        App.setRoot("controllers/addSale");
+        App.setRoot("controllers/AddSale");
     }
 
     @FXML
     void addSale(ActionEvent event) throws IOException {
-        if(saleText.toString().equals("")||saleText.toString()==(null)){
+        if(Objects.equals(saleText.getText(), "")){
             showAlert("Error","please enter the sale percent");
             return;
         }
@@ -70,7 +65,7 @@ public class EditItem {
             showAlert("Error","sale percent should be between 1-99%");
             return;
         }
-        if(item.isUnderSale()==true){
+        if(item.isUnderSale()){
             showAlert("Error","item is already under sale");
             return;
         }
@@ -81,26 +76,26 @@ public class EditItem {
         MsgClass msg = new MsgClass("#update Item",item);
         SimpleClient.getClient().sendToServer(msg);
         showAlert("successes","sale  have been added");
-        App.setRoot("controllers/addSale");
+        App.setRoot("controllers/AddSale");
 
     }
 
     @FXML
     void editSalePercente(ActionEvent event) throws IOException {
-        if(saleText.toString().equals("")||saleText.getText().equals(null)){
-            showAlert("Eror","please enter the sale percent");
+        if(Objects.equals(saleText.getText(), "")){
+            showAlert("Error","please enter the sale percent");
             return;
         }
         double sale =Integer.parseInt(saleText.getText());
         if(sale<1||sale>99){
-            showAlert("Eror","sale percent should be between 1-99%");
+            showAlert("Error","sale percent should be between 1-99%");
             return;
         }
 
         Item item = App.getEdit_item();
 
-        if(item.isUnderSale()==false){
-            showAlert("Eror","the item isnt under sale");
+        if(!item.isUnderSale()){
+            showAlert("Error","the item is not under sale");
             return;
         }
         sale=sale/100;
@@ -108,13 +103,13 @@ public class EditItem {
         item.setPriceAfterSale((int)(item.getOriginal_price()*(1-sale)));
         MsgClass msg = new MsgClass("#update Item",item);
         SimpleClient.getClient().sendToServer(msg);
-        showAlert("successes","sale percent have been edited");
-        App.setRoot("controllers/addSale");
+        showAlert("success","sale percent have been edited");
+        App.setRoot("controllers/AddSale");
     }
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
-        App.setRoot("controllers/addSale");
+        App.setRoot("controllers/AddSale");
     }
 
     public void initialize() {
@@ -235,7 +230,7 @@ public class EditItem {
         else{
             addSale.setDisable(false);
         }
-        if(item.isUnderSale()==false){
+        if(!item.isUnderSale()){
             removeSale.setDisable(true);
             editSale.setDisable(true);
         }

@@ -4,7 +4,6 @@ import java.util.List;
 import il.cshaifasweng.OCSFMediatorExample.client.SimpleClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.scene.layout.AnchorPane;
-import org.greenrobot.eventbus.Subscribe;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,15 +11,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 
 public class SignUp {
     public static boolean shop;
-
-    @FXML // fx:id="Controller"
-    private AnchorPane Controller; // Value injected by FXMLLoader
 
     @FXML // fx:id="EmailTextBox"
     private TextField EmailTextBox; // Value injected by FXMLLoader
@@ -32,12 +27,6 @@ public class SignUp {
     @FXML // fx:id="IDNumber"
     private TextField IDNumber; // Value injected by FXMLLoader
 
-    @FXML // fx:id="SignUpBtn"
-    private Button SignUpBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="backBtn"
-    private Button backBtn; // Value injected by FXMLLoader
-
     @FXML // fx:id="confirmPasswordBtn"
     private TextField confirmPasswordBtn; // Value injected by FXMLLoader
 
@@ -46,12 +35,6 @@ public class SignUp {
 
     @FXML // fx:id="passwordBtn"
     private TextField passwordBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="passwordLabel"
-    private Label passwordLabel; // Value injected by FXMLLoader
-
-    @FXML // fx:id="title"
-    private TextField title; // Value injected by FXMLLoader
 
     @FXML // fx:id="userName"
     private TextField userName; // Value injected by FXMLLoader
@@ -126,20 +109,16 @@ public class SignUp {
 
         if(customers!=null)
         {
-            for(int i=0;i<customers.size();i++)
-            {
-                if(username.equals(customers.get(i).getUser_name()) || username.equals("admin"))
-                {
+            for (Customer customer : customers) {
+                if (username.equals(customer.getUser_name()) || username.equals("admin")) {
                     errors.add("User Name already exists please try with another one");
                     userName.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                     break;
                 }
             }
-            for(int i=0;i<customers.size();i++)
-            {
+            for (Customer customer : customers) {
 
-                if(id.equals((customers.get(i).getUser_id())))
-                {
+                if (id.equals((customer.getUser_id()))) {
                     errors.add("Id Numer already exists please try with another one");
                     IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                     break;
@@ -207,11 +186,10 @@ public class SignUp {
       ///////////////////////////////// end of Input validation ///////////////////////////
 
       String errormessage="";
-      for(int i=0;i<errors.size();i++)
-      {
-          errormessage+=errors.get(i);
-          errormessage+="\n";
-      }
+        for (String error : errors) {
+            errormessage += error;
+            errormessage += "\n";
+        }
 
       if(!errormessage.equals(""))
       {
@@ -256,26 +234,13 @@ public class SignUp {
         creditCardNumber.setStyle("-fx-background-radius:15;");
     }
 
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
-    }
-
-
     @FXML
     void Back(ActionEvent event) throws IOException {
-        if(shop==false) {
+        if(!shop) {
             App.setRoot("controllers/LogIN");
         }
         else{
-            App.setRoot("controllers/publicCatalog");
+            App.setRoot("controllers/PublicCatalogControl");
         }
     }
 
@@ -301,9 +266,8 @@ public class SignUp {
         if(shops!=null)
         {
          //   System.out.println("notnull");
-            for(int i=0;i<shops.size();i++)
-            {
-                ShopsCombo.getItems().addAll(shops.get(i).getAddress());
+            for (Shop value : shops) {
+                ShopsCombo.getItems().addAll(value.getAddress());
             }
         }
     }
