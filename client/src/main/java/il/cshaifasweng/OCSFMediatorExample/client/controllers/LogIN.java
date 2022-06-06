@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,23 +33,8 @@ public class LogIN {
     String  current;
     String password_status="invisible";
 
-    @FXML // fx:id="Controller"
-    private AnchorPane Controller; // Value injected by FXMLLoader
-
     @FXML // fx:id="Password"
     private PasswordField Password; // Value injected by FXMLLoader
-
-    @FXML // fx:id="catalogBtn"
-    private Button catalogBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="createAcountBtn"
-    private Button createAcountBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="logInBtn"
-    private Button logInBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="notmemberLabel"
-    private Label notmemberLabel; // Value injected by FXMLLoader
 
     @FXML // fx:id="showPassword"
     private CheckBox showPassword; // Value injected by FXMLLoader
@@ -142,7 +126,7 @@ public class LogIN {
         SimpleClient.getClient().sendToServer(msg);
         getAllItems();
         System.out.println("msg sent to got shop items");
-        App.setRoot("controllers/publicCatalog");
+        App.setRoot("controllers/PublicCatalogControl");
     }
 
 
@@ -172,16 +156,4 @@ public class LogIN {
         }
     }
 
-
-    public void showAlert(String title, String head) {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(head);
-                alert.showAndWait();
-            }
-        });
-    }
 }
