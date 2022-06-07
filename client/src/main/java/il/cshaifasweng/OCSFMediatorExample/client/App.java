@@ -53,7 +53,7 @@ public class App extends Application {
         client = SimpleClient.getClient();
         client.openConnection();
         scene = new Scene(loadFXML("controllers/LogIN"),780,600);
-        stage.setTitle("Plants Shop");
+        stage.setTitle("Lilac");
         stage.setScene(scene);
         stage.show();
     }

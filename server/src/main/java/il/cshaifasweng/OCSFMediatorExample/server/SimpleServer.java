@@ -184,6 +184,12 @@ public class SimpleServer extends AbstractServer {
         session.save(shop1);
         Shop shop2 = new Shop("good shop","Hanamal 500, Haifa","888333755");
         session.save(shop2);
+        Shop shop3 = new Shop("bad shop","Flieman St 4, Haifa","888888888");
+        session.save(shop3);
+        Shop shop4 = new Shop("bad shop","Einstein St 10, Tel Aviv","111111111");
+        session.save(shop4);
+        Shop shop5 = new Shop("good shop","Reading St 35, Tel Aviv","222222222");
+        session.save(shop5);
         session.flush();
 
         // adding admins to the shops
@@ -196,9 +202,19 @@ public class SimpleServer extends AbstractServer {
         session.save(admin2);
         session.flush();
 
-        ShopAdmin admin3 = new ShopAdmin("ad", "ad",
-                "888888888", "f", "f");
+        ShopAdmin admin3 = new ShopAdmin("shop3", "shop3",
+                "888888888", "ahmad", "mahajna");
         session.save(admin3);
+        session.flush();
+
+        ShopAdmin admin4 = new ShopAdmin("shop4", "shop4",
+                "111111111", "sameer", "najjar");
+        session.save(admin4);
+        session.flush();
+
+        ShopAdmin admin5 = new ShopAdmin("shop5", "shop5",
+                "222222222", "saleh", "amara");
+        session.save(admin5);
         session.flush();
 
         // adding customers
