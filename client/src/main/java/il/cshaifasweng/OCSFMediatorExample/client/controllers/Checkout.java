@@ -6,6 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login_customer;
 
 public class Checkout {
+    public static double oldSubtotal = OrderSubtotal;
     @FXML
     private TextField AddressTextFeild;
 
@@ -48,13 +50,21 @@ public class Checkout {
     private Label ReceiverDetailsLabel;
 
     @FXML
+    private CheckBox useBudget;
+
+    @FXML
     private Label SubtotalLabel;
+    @FXML
+    private Label budget;
 
     @FXML
     private DatePicker datew;
 
     @FXML
     private ComboBox<String> Hour;
+
+    @FXML
+    private AnchorPane Controller;
 
     @FXML
     private ComboBox<String> Minute;
@@ -66,58 +76,57 @@ public class Checkout {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
-        SubtotalLabel.setText("Subtotal: "+ OrderSubtotal+" ₪");
+
+        SubtotalLabel.setText("Subtotal: " + OrderSubtotal + " ₪");
         recieverRadioBtn.setSelected(false);
         loadTime();
+        budget.setText("your current budget is: " + getCurrentCustomer().getBudget());
+        budget.setMinWidth(300);
+        if(searchCustomer(LoginClient_userId).getBudget()==0){
+            useBudget.setDisable(true);
+        }
+        else{
+            useBudget.setDisable(false);
+        }
         PhoneTextFeild.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*")) return;
             PhoneTextFeild.setText(newValue.replaceAll("[^\\d]", ""));
         });
     }
 
-    public  void loadTime()
-    {
+    public void loadTime() {
         Hour.getItems().removeAll(Hour.getItems());
         Minute.getItems().removeAll(Minute.getItems());
 
-        Minute.getItems().addAll("00","01","02","03","04","05","06","07","08","09");
-        for(int i=10;i<60;i++)
-        {
+        Minute.getItems().addAll("00", "01", "02", "03", "04", "05", "06", "07", "08", "09");
+        for (int i = 10; i < 60; i++) {
             Minute.getItems().add(String.valueOf(i));
         }
         Minute.getSelectionModel().select(0);
 
-        if(LocalDate.now().equals(datew.getValue()))
-        {
-            int hour=LocalTime.now().getHour()+1;
-            if(hour<=20 && hour>=8)
-            {
-                for(int i=hour;i<=20;i++)
-                {
-                    if(i<10)
-                    {
-                        Hour.getItems().add("0"+i);
-                    }
-                    else
-                    {
+        if (LocalDate.now().equals(datew.getValue())) {
+            int hour = LocalTime.now().getHour() + 1;
+            if (hour <= 20 && hour >= 8) {
+                for (int i = hour; i <= 20; i++) {
+                    if (i < 10) {
+                        Hour.getItems().add("0" + i);
+                    } else {
                         Hour.getItems().add(String.valueOf(i));
                     }
                 }
                 Hour.getSelectionModel().select(0);
                 return;
-            }
-            else if(hour>20)
-            {
+            } else if (hour > 20) {
                 datew.setValue(datew.getValue().plusDays(1));
             }
         }
-        Hour.getItems().addAll("08","09","10","11","12","13","14","15","16","17","18","19","20");
+        Hour.getItems().addAll("08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20");
         Hour.getSelectionModel().select(0);
     }
 
     @FXML
     void Checkdate(ActionEvent event) {
-        if(LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
+        if (LocalDate.now().isAfter(datew.getValue()))    //if the client entered and old date
         {
             datew.setValue(LocalDate.now());
         }
@@ -132,13 +141,10 @@ public class Checkout {
 
     @FXML
     void CashRadioBtnChange(ActionEvent event) {
-        if(CashRadioBtn.isSelected())
-        {
+        if (CashRadioBtn.isSelected()) {
             CashRadioBtn.setSelected(true);
             CreditcardRadioBtn.setSelected(false);
-        }
-        else
-        {
+        } else {
             CashRadioBtn.setSelected(false);
             CreditcardRadioBtn.setSelected(true);
         }
@@ -147,12 +153,10 @@ public class Checkout {
     @FXML
     void Checkout(ActionEvent event) throws IOException {
         clear();
-        ArrayList<Shop> allshops=getAllShops();
-        Shop shop=null;
-        if(allshops!=null)
-        {
-            if(allshops.size()!=0)
-            {
+        ArrayList<Shop> allshops = getAllShops();
+        Shop shop = null;
+        if (allshops != null) {
+            if (allshops.size() != 0) {
                 for (Shop allshop : allshops) {
                     if (allshop.getAddress().equals(OrderShop)) {
                         shop = allshop;
@@ -161,34 +165,27 @@ public class Checkout {
             }
         }
 
-        if(DeliveryRadioBtn.isSelected())
-        {
-            if(NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals(""))
-            {
-                showAlert("error","please fill out all Receiver details");
-                if(NameTextFeild.getText().equals(""))
-                {
+        if (DeliveryRadioBtn.isSelected()) {
+            if (NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals("")) {
+                showAlert("error", "please fill out all Receiver details");
+                if (NameTextFeild.getText().equals("")) {
                     NameTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
-                if(PhoneTextFeild.getText().equals(""))
-                {
+                if (PhoneTextFeild.getText().equals("")) {
                     PhoneTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
-                if(AddressTextFeild.getText().equals(""))
-                {
+                if (AddressTextFeild.getText().equals("")) {
                     AddressTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
-            }
-            else
-            {
-                ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
-                ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
-                String paymethod= CashRadioBtn.isSelected() ?"Cash":"CreditCard";
-                String shipingmethod= DeliveryRadioBtn.isSelected() ?"Delivery":"Pickup";
-                int hour= Integer.parseInt(Hour.getValue());
-                int minute= Integer.parseInt(Minute.getValue());
+            } else {
+                ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+                ArrayList<CartItem> cartItems = searchCartItems(LoginClient_userId);
+                String paymethod = CashRadioBtn.isSelected() ? "Cash" : "CreditCard";
+                String shipingmethod = DeliveryRadioBtn.isSelected() ? "Delivery" : "Pickup";
+                int hour = Integer.parseInt(Hour.getValue());
+                int minute = Integer.parseInt(Minute.getValue());
                 MsgClass msg = new MsgClass("#add order");
-                Order order=new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(),
+                Order order = new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(),
                         LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(),
                         datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(),
                         LocalTime.now().getMinute(), hour, minute, OrderSubtotal, paymethod, shipingmethod,
@@ -202,27 +199,25 @@ public class Checkout {
 //            order.setOrderitems(searchCartItems(LoginClient_userId));
                 order.setOrderitems(orderItems);
                 msg.setObj(order);
-                boolean deliveryforclient= recieverRadioBtn.isSelected();
-                order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),deliveryforclient,AddressTextFeild.getText());
+                boolean deliveryforclient = recieverRadioBtn.isSelected();
+                order = new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(), datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(), LocalTime.now().getMinute(), hour, minute, OrderSubtotal, paymethod, shipingmethod, Greeting.getText(), deliveryforclient, AddressTextFeild.getText());
                 order.setOrderitems(orderItems);
                 msg.setObj(order);
                 SimpleClient.getClient().sendToServer(msg);
                 deleteCart(LoginClient_userId);
-                showAlert("Order successful","Order Successfully placed");
+                showAlert("Order successful", "Order Successfully placed");
                 App.setRoot("controllers/ClientMainPage");
             }
 
-        }
-        else
-        {
-            ArrayList<OrderItem> orderItems=new ArrayList<OrderItem>();
-            ArrayList<CartItem> cartItems=searchCartItems(LoginClient_userId);
-            String paymethod= CashRadioBtn.isSelected() ?"Cash":"CreditCard";
-            String shipingmethod= DeliveryRadioBtn.isSelected() ?"Delivery":"Pickup";
-            int hour= Integer.parseInt(Hour.getValue());
-            int minute= Integer.parseInt(Minute.getValue());
+        } else {
+            ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+            ArrayList<CartItem> cartItems = searchCartItems(LoginClient_userId);
+            String paymethod = CashRadioBtn.isSelected() ? "Cash" : "CreditCard";
+            String shipingmethod = DeliveryRadioBtn.isSelected() ? "Delivery" : "Pickup";
+            int hour = Integer.parseInt(Hour.getValue());
+            int minute = Integer.parseInt(Minute.getValue());
             MsgClass msg = new MsgClass("#add order");
-            Order order=new Order(shop,searchCustomer(LoginClient_userId),LocalDate.now().getYear(),LocalDate.now().getMonthValue(),LocalDate.now().getDayOfMonth(),datew.getValue().getYear(),datew.getValue().getMonthValue(),datew.getValue().getDayOfMonth(),LocalTime.now().getHour(),LocalTime.now().getMinute(),hour,minute, OrderSubtotal,paymethod,shipingmethod,Greeting.getText(),false,"");
+            Order order = new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(), datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(), LocalTime.now().getMinute(), hour, minute, OrderSubtotal, paymethod, shipingmethod, Greeting.getText(), false, "");
             for (CartItem cartItem : cartItems) {
                 OrderItem orderItem = new OrderItem(cartItem);
                 AddOrderIem(orderItem);
@@ -233,7 +228,7 @@ public class Checkout {
             msg.setObj(order);
             SimpleClient.getClient().sendToServer(msg);
             deleteCart(LoginClient_userId);
-            showAlert("Order successful","Order Successfully placed");
+            showAlert("Order successful", "Order Successfully placed");
             App.setRoot("controllers/ClientMainPage");
         }
 
@@ -247,13 +242,10 @@ public class Checkout {
 
     @FXML
     void CreditcardRadioBtnChange(ActionEvent event) {
-        if(CreditcardRadioBtn.isSelected())
-        {
+        if (CreditcardRadioBtn.isSelected()) {
             CashRadioBtn.setSelected(false);
             CreditcardRadioBtn.setSelected(true);
-        }
-        else
-        {
+        } else {
             CashRadioBtn.setSelected(true);
             CreditcardRadioBtn.setSelected(false);
         }
@@ -261,8 +253,7 @@ public class Checkout {
 
     @FXML
     void DeliveryRadioBtnChange(ActionEvent event) {
-        if(DeliveryRadioBtn.isSelected())
-        {
+        if (DeliveryRadioBtn.isSelected()) {
             DeliveryRadioBtn.setSelected(true);
             PickupRadioBtn.setSelected(false);
             ReceiverDetailsLabel.setVisible(true);
@@ -270,9 +261,7 @@ public class Checkout {
             NameTextFeild.setVisible(true);
             AddressTextFeild.setVisible(true);
             recieverRadioBtn.setVisible(true);
-        }
-        else
-        {
+        } else {
             DeliveryRadioBtn.setSelected(false);
             PickupRadioBtn.setSelected(true);
             ReceiverDetailsLabel.setVisible(false);
@@ -285,8 +274,7 @@ public class Checkout {
 
     @FXML
     void PickupRadioBtnChange(ActionEvent event) {
-        if(PickupRadioBtn.isSelected())
-        {
+        if (PickupRadioBtn.isSelected()) {
             DeliveryRadioBtn.setSelected(false);
             PickupRadioBtn.setSelected(true);
             ReceiverDetailsLabel.setVisible(false);
@@ -294,9 +282,7 @@ public class Checkout {
             NameTextFeild.setVisible(false);
             AddressTextFeild.setVisible(false);
             recieverRadioBtn.setVisible(false);
-        }
-        else
-        {
+        } else {
             DeliveryRadioBtn.setSelected(true);
             PickupRadioBtn.setSelected(false);
             ReceiverDetailsLabel.setVisible(true);
@@ -308,11 +294,9 @@ public class Checkout {
     }
 
     public Customer searchCustomer(String customerId) throws IOException {
-        ArrayList<Customer> customers=getAllCustomers();
-        if(customers!=null)
-        {
-            if(customers.size()!=0)
-            {
+        ArrayList<Customer> customers = getAllCustomers();
+        if (customers != null) {
+            if (customers.size() != 0) {
                 for (Customer customer : customers) {
                     if (customer.getUser_id().equals(customerId)) {
                         return customer;
@@ -324,11 +308,10 @@ public class Checkout {
     }
 
     public ArrayList<CartItem> searchCartItems(String ClientId) throws IOException {
-        ArrayList<CartItem> allcartitems=getAllCartItems();
-        ArrayList<CartItem> returnedcartitems=new ArrayList<CartItem>();
+        ArrayList<CartItem> allcartitems = getAllCartItems();
+        ArrayList<CartItem> returnedcartitems = new ArrayList<CartItem>();
 
-        if(allcartitems !=null)
-        {
+        if (allcartitems != null) {
             for (CartItem allcartitem : allcartitems) {
                 if (allcartitem.getCustomer().getUser_id().equals(ClientId)) {
                     returnedcartitems.add(allcartitem);
@@ -342,18 +325,35 @@ public class Checkout {
 
     @FXML
     void receiverRadioBtnChange(ActionEvent event) {
-      if(recieverRadioBtn.isSelected())
-      {
-          NameTextFeild.setText(Login_customer.getFirst_name());
-          NameTextFeild.setEditable(false);
-      }
-      else
-      {
-          NameTextFeild.setText("");
-          NameTextFeild.setEditable(true);
-      }
+        if (recieverRadioBtn.isSelected()) {
+            NameTextFeild.setText(Login_customer.getFirst_name());
+            NameTextFeild.setEditable(false);
+        } else {
+            NameTextFeild.setText("");
+            NameTextFeild.setEditable(true);
+        }
     }
 
-
-
+    @FXML
+    void budgetUse(ActionEvent event) throws IOException {
+        Customer cus = searchCustomer(LoginClient_userId);
+        double total=0;
+        if (useBudget.isSelected()) {
+            if (cus.getBudget() > OrderSubtotal) {
+                cus.setBudget(cus.getBudget() - OrderSubtotal);
+                SubtotalLabel.setText("Subtotal After Using the budget is: 0");
+            } else {
+                total = OrderSubtotal - cus.getBudget();
+                cus.setBudget(0);
+                SubtotalLabel.setText("Subtotal After Using the budget is: "+total);
+            }
+        } else {
+            SubtotalLabel.setText("Subtotal: "+OrderSubtotal);
+        }
+        updateCustomer(cus);
+        SubtotalLabel.setMinWidth(300);
+        SubtotalLabel.setLayoutX(380);
+        Controller.getChildren().remove(SubtotalLabel);
+        Controller.getChildren().add(SubtotalLabel);
+    }
 }
