@@ -80,9 +80,9 @@ public class Checkout {
         SubtotalLabel.setText("Subtotal: " + OrderSubtotal + " ₪");
         recieverRadioBtn.setSelected(false);
         loadTime();
-        budget.setText("your current budget is: " + getCurrentCustomer().getBudget());
+        budget.setText("your current budget is: " + Login_customer.getBudget());
         budget.setMinWidth(300);
-        if(searchCustomer(LoginClient_userId).getBudget()==0){
+        if(Login_customer.getBudget()==0){
             useBudget.setDisable(true);
         }
         else{
@@ -336,21 +336,20 @@ public class Checkout {
 
     @FXML
     void budgetUse(ActionEvent event) throws IOException {
-        Customer cus = searchCustomer(LoginClient_userId);
         double total=0;
         if (useBudget.isSelected()) {
-            if (cus.getBudget() > OrderSubtotal) {
-                cus.setBudget(cus.getBudget() - OrderSubtotal);
+            if (Login_customer.getBudget() > OrderSubtotal) {
+                Login_customer.setBudget(Login_customer.getBudget() - OrderSubtotal);
                 SubtotalLabel.setText("Subtotal After Using the budget is: 0");
             } else {
-                total = OrderSubtotal - cus.getBudget();
-                cus.setBudget(0);
+                total = OrderSubtotal - Login_customer.getBudget();
+                Login_customer.setBudget(0);
                 SubtotalLabel.setText("Subtotal After Using the budget is: "+total);
             }
         } else {
             SubtotalLabel.setText("Subtotal: "+OrderSubtotal);
         }
-        updateCustomer(cus);
+        updateCustomer(Login_customer);
         SubtotalLabel.setMinWidth(300);
         SubtotalLabel.setLayoutX(380);
         Controller.getChildren().remove(SubtotalLabel);
