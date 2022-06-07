@@ -18,6 +18,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 import static il.cshaifasweng.OCSFMediatorExample.client.App.showAlert;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
+import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login_customer;
 
 public class ReportControl {
 
@@ -26,6 +27,9 @@ public class ReportControl {
 
     @FXML
     private ChoiceBox<String> selectMe;
+
+    @FXML
+    private Label selectText;
 
     @FXML
     void goBack(ActionEvent event) throws IOException {
@@ -75,13 +79,28 @@ public class ReportControl {
     }
 
     public void initialize() throws IOException, InterruptedException {
-        ArrayList<Shop> shopArr=new ArrayList<>(getAllShops());
-        ArrayList<String> shops = new ArrayList<>();
-        for (Shop shop : shopArr) {
-            shops.add(shop.getName());
+        if(Login_customer.getAcount_type().equals("Network account")||Login_customer.getAcount_type().equals("Network account with 10% discount"))
+        {
+            ArrayList<Shop> shopArr=new ArrayList<>(getAllShops());
+            selectMe.setVisible(true);
+            selectMe.setDisable(false);
+            selectText.setText("Select Store: ");
+            selectText.setStyle("-fx-font-size: 18;");
+            ArrayList<String> shops = new ArrayList<>();
+            for (Shop shop : shopArr) {
+                shops.add(shop.getAddress());
+            }
+            selectMe.getItems().addAll(shops);
+            selectMe.getSelectionModel().select(0);
         }
-        selectMe.getItems().addAll(shops);
-        selectMe.getSelectionModel().select(0);
+        else
+        {
+            selectMe.setVisible(false);
+            selectMe.setDisable(true);
+            selectText.setText(Login_customer.getAcount_type());
+            selectText.setStyle("-fx-font-size: 16;");
+        }
+
     }
 
 }

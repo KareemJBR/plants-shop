@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ReportControl">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ReportControl">
    <children>
       <Button fx:id="back" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Back" textOverrun="CLIP">
          <font>
@@ -23,8 +23,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="selectMe" layoutX="593.0" layoutY="225.0" prefHeight="26.0" prefWidth="149.0" />
-      <Label fx:id="selectText" layoutX="612.0" layoutY="180.0" prefHeight="27.0" prefWidth="111.0" style="-fx-text-fill: #F2F4F7;" text="Select Store: ">
+      <ChoiceBox fx:id="selectMe" layoutX="586.0" layoutY="226.0" prefHeight="26.0" prefWidth="164.0" />
+      <Label fx:id="selectText" layoutX="586.0" layoutY="180.0" prefHeight="27.0" prefWidth="174.0" text="Select Store: " textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
