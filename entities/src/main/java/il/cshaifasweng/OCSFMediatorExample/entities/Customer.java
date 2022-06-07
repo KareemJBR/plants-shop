@@ -73,6 +73,18 @@ public class Customer  implements Serializable {
         this.customerReports = customer.customerReports;
     }
 
+    public Customer(String id, String user_name, String first_name, String last_name, String password, String credit_card, double budget, String acount_type, String customer_email) {
+        this.id = id;
+        this.user_name = user_name;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.password = password;
+        this.credit_card = credit_card;
+        this.budget = budget;
+        this.acount_type = acount_type;
+        this.customer_email = customer_email;
+    }
+
     @Deprecated
     public Customer() {
         this.id="123456789";
