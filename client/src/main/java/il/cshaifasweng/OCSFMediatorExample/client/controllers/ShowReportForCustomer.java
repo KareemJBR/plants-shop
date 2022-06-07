@@ -192,7 +192,7 @@ public class ShowReportForCustomer {
                 date.setFont(new Font(13));
 
                 Label shop=new Label();
-                shop.setText("Shop: "+allReports.get(finalI).getShop().getName());
+                shop.setText("Shop: "+allReports.get(finalI).getShop().getAddress());
                 shop.setStyle("-fx-text-fill:  #F2F4F7");
                 shop.setLayoutY(65);
                 shop.setFont(new Font(13));
