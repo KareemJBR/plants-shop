@@ -77,10 +77,10 @@ public class ShowReportForCustomer {
     public void initialize() throws IOException, InterruptedException, ParseException {
        boolean moveRight=false;
         int j=0;
-//        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
-//        SimpleClient.getClient().sendToServer(msg);
-//
-//        while (currentCustomerData == null) {System.out.println("wait");}
+        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
+        SimpleClient.getClient().sendToServer(msg);
+
+        while (currentCustomerData == null) {System.out.println("wait");}
         ArrayList<Report> Reports =getAllReports();
         ArrayList<Report> allReports =new ArrayList<>();
         Customer cus = (Customer) currentCustomerData;
