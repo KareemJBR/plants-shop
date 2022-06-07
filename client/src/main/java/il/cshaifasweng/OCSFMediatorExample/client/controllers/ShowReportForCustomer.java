@@ -77,17 +77,18 @@ public class ShowReportForCustomer {
     public void initialize() throws IOException, InterruptedException, ParseException {
        boolean moveRight=false;
         int j=0;
-        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
-        SimpleClient.getClient().sendToServer(msg);
-
-        while (currentCustomerData == null) {System.out.println("wait");}
+//        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
+//        SimpleClient.getClient().sendToServer(msg);
+//
+//        while (currentCustomerData == null) {System.out.println("wait");}
+        ArrayList<Report> Reports =getAllReports();
         ArrayList<Report> allReports =new ArrayList<>();
         Customer cus = (Customer) currentCustomerData;
-        for(int i=0;i<getAllReports().size();i++){
-            if(getAllReports().get(i).getCustomer().getId().equals(cus.getId())){
-                allReports.add(getAllReports().get(i));
+        for(int i=0;i<Reports.size();i++){
+            if(Reports.get(i).getCustomer().getId().equals(cus.getId())){
+                allReports.add(Reports.get(i));
             }
-            System.out.println(getAllReports().get(i).getCustomer());
+            System.out.println(Reports.get(i).getCustomer());
         }
 
         //in case there in no reports
