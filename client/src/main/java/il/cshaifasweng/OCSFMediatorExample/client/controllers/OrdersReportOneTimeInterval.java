@@ -3,15 +3,19 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 
 
 public class OrdersReportOneTimeInterval implements Initializable {
@@ -24,6 +28,9 @@ public class OrdersReportOneTimeInterval implements Initializable {
     @FXML
     private BarChart<String, Number> ordersChart;
 
+    @FXML // fx:id="shopAddress"
+    private Label shopAddress; // Value injected by FXMLLoader
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -33,6 +40,29 @@ public class OrdersReportOneTimeInterval implements Initializable {
         int shop_id = App.getShopID();
         start_date = App.getReport_start_date1();
         end_date = App.getReport_end_date1();
+
+        if(!is_admin)
+        {
+            try {
+                ArrayList<Shop> shops=getAllShops();
+                if(shops!=null)
+                {
+                   for(Shop shop:shops)
+                   {
+                       if(shop.getId()==shop_id)
+                       {
+                           shopAddress.setVisible(true);
+                           shopAddress.setDisable(false);
+                           shopAddress.setText(shop.getAddress());
+                           break;
+                       }
+                   }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
 
         series = new XYChart.Series<>();
         series.setName("Orders Report");

@@ -154,9 +154,9 @@ public class Cart<T> {
                         Image fxImage = new Image(fileLocation);
                         imageview.setImage(fxImage);
                     } catch (Exception e) {
-                        File imageFile = new File("Images/no_image.jpg");
-                        String fileLocation = imageFile.toURI().toString();
-                        Image fxImage = new Image(fileLocation);
+//                        File imageFile = new File("Images/no_image.jpg");
+//                        String fileLocation = imageFile.toURI().toString();
+                        Image fxImage = new Image("https://www.dreamstime.com/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-image132482953");
                         imageview.setImage(fxImage);
                     }
                     imageview.setX(10);           //x & y coordinate related to the pane
