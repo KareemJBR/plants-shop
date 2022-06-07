@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -58,10 +59,12 @@ public class ShowReportsForShopAdmin implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // initialize the report types ComboBox
         ObservableList<String> reports_types = FXCollections.observableArrayList();
-
+       fromDate.setValue(LocalDate.now().minusDays(5));
+       untilDate.setValue(LocalDate.now().plusDays(5));
         reports_types.add("Orders");
         reports_types.add("Incomes");
         reports_types.add("Complaints");
         reportTypeComboBox.setItems(reports_types);
+        reportTypeComboBox.getSelectionModel().select(0);
     }
 }
