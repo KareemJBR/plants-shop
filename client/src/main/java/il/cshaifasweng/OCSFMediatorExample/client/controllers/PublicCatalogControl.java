@@ -163,11 +163,11 @@ public class PublicCatalogControl {
                     TextField price = new TextField();
                     TextField priceAfterSale = new TextField();
                     if(items.get(i).isUnderSale()) {
-                        price.setText("Original Price: " + items.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After "+items.get(i).getSalePercent()*100 +"% sale is: "+items.get(i).getPriceAfterSale());
+                        price.setText("Original Price: " + items.get(i).getOriginal_price()+"₪");
+                        priceAfterSale.setText("Price After "+items.get(i).getSalePercent()*100 +"% sale is: "+items.get(i).getPriceAfterSale()+"₪");
                     }
                     else{
-                        price.setText("Price :"+items.get(i).getOriginal_price());
+                        price.setText("Price: "+items.get(i).getOriginal_price()+"₪");
                     }
                     price.setStyle("-fx-background-color:#F2F4F7");
                     price.setLayoutX(175);           //x & y coordinate related in the pane

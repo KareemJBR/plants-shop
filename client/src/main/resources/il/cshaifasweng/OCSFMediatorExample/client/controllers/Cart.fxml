@@ -42,7 +42,7 @@
       <ComboBox fx:id="stores" disable="true" layoutX="480.0" layoutY="176.0" onAction="#ComboChange" prefHeight="25.0" prefWidth="172.0" visible="false" />
       <Label fx:id="Subtotal" layoutX="470.0" layoutY="480.0" prefHeight="39.0" prefWidth="265.0" text="Subtotal:" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font size="17.0" />
          </font>
       </Label>
    </children>

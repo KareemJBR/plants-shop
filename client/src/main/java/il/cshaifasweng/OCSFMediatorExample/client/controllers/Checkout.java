@@ -66,7 +66,7 @@ public class Checkout {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
-        SubtotalLabel.setText("Subtotal: "+ OrderSubtotal);
+        SubtotalLabel.setText("Subtotal: "+ OrderSubtotal+" ₪");
         recieverRadioBtn.setSelected(false);
         loadTime();
         PhoneTextFeild.textProperty().addListener((observable, oldValue, newValue) -> {
