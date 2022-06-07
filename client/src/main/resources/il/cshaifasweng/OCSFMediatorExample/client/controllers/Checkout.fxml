@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
    <children>
-      <Button fx:id="CheckoutBtn" layoutX="433.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: E43A19;" text=" Checkout" textFill="WHITE">
+      <Button fx:id="CheckoutBtn" layoutX="433.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" Checkout" textFill="WHITE">
 
          <font>
             <Font size="17.0" />
@@ -35,7 +35,7 @@
          </font>
       </Label>
 
-      <Label fx:id="SubtotalLabel" layoutX="405.0" layoutY="499.0" prefHeight="26.0" prefWidth="107.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
+      <Label fx:id="SubtotalLabel" layoutX="405.0" layoutY="499.0" prefHeight="26.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

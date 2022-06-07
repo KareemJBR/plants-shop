@@ -169,11 +169,11 @@ public class RegisteredCatalogControl {
                     TextField price = new TextField();
                     TextField priceAfterSale = new TextField();
                     if (allItems.get(i).isUnderSale()) {
-                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent() * 100 + "% sale:" + allItems.get(i).getPriceAfterSale());
+                        price.setText("Original Price: " + allItems.get(i).getOriginal_price()+"₪");
+                        priceAfterSale.setText("Price After " + allItems.get(i).getSalePercent() * 100 + "% sale: " + allItems.get(i).getPriceAfterSale()+"₪");
                     } else {
-                        price.setText("Original Price: " + allItems.get(i).getOriginal_price());
-                        priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price());
+                        price.setText("Original Price: " + allItems.get(i).getOriginal_price()+"₪");
+                        priceAfterSale.setText("Final Price: " + allItems.get(i).getOriginal_price()+"₪");
                     }
                     price.setStyle("-fx-background-color: #F2F4F7");
                     price.setLayoutX(175);           //x & y coordinate related in the pane

@@ -203,7 +203,7 @@ public class ClientOrders {
                     pane.getChildren().add(shipto);
 
                     ////////// price  ////////////
-                    TextField price=new TextField(Double.toString(orders.get(i).getPrice()));
+                    TextField price=new TextField(Double.toString(orders.get(i).getPrice())+" ₪");
                     price.setEditable(false);
                     price.setStyle("-fx-background-color:none");
                     price.setLayoutX(492);
@@ -263,7 +263,7 @@ public class ClientOrders {
                         try {
                             cancelOrder(num, finalRefund);
                             loadPage();
-                            App.showAlert("order cancelled","order cancelled successfully, you got "+ finalRefund +" refund.");
+                            App.showAlert("order cancelled","order cancelled successfully, you got "+ finalRefund +"₪"+" refund.");
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }

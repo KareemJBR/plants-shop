@@ -172,25 +172,25 @@ public class Cart<T> {
                     name.setLayoutY(10);
                     ///////// price textfield ///////////
                     TextField price=new TextField("Type: "+ cartItems.get(i).getItem().getType());
-                    price.setStyle("-fx-background-color:none");
+                    price.setStyle("-fx-background-color:none;-fx-font-size: 12.3");
                     price.setEditable(false);
                     price.setLayoutX(101);
                     price.setLayoutY(32);
 
 
                     ///////// type textfield ///////////
-                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice());
+                    TextField type=new TextField("Price: "+ cartItems.get(i).getItem().getPrice()+"₪");
                     if(cartItems.get(i).getItem().isUnderSale())
                     {
-                        type.setText("Price after discount: " +cartItems.get(i).getItem().getPrice());
+                        type.setText("Price after discount: " +cartItems.get(i).getItem().getPrice()+"₪");
                     }
-                    type.setStyle("-fx-background-color:none");
+                    type.setStyle("-fx-background-color:none;-fx-font-size: 12.3");
                     type.setLayoutX(101);
                     type.setLayoutY(54);
 
                     ///////// amount textfield ///////////
                     TextField amount=new TextField("Amount: "+ itemamount);
-                    amount.setStyle("-fx-background-color:none");
+                    amount.setStyle("-fx-background-color:none;-fx-font-size: 12.3");
                     amount.setEditable(false);
                     amount.setLayoutX(101);
                     amount.setLayoutY(76);
@@ -264,17 +264,18 @@ public class Cart<T> {
 
                     itemscontainer.getChildren().add(p);
 
+                    Subtotal.setStyle("-fx-font-size: 17");
                     subtotal+=(cartItems.get(i).getItem().getPrice()*(itemamount));
                     if(LoginClient_acount_type.equals("Network account with 10% discount")&&subtotal>50)
                     {
-                        Subtotal.setText("Subtotal after 10% discount: "+subtotal *0.9);
+                        Subtotal.setText("Subtotal after 10% discount: "+subtotal *0.9+" ₪");
                         Subtotal.setStyle("-fx-font-size:14;-fx-background-color:none;");
                         Subtotal.setMinWidth(225);
                         OrderSubtotal=  subtotal*0.9;
                     }
                     else
                     {
-                        Subtotal.setText("Subtotal: "+ subtotal);
+                        Subtotal.setText("Subtotal: "+ subtotal+" ₪");
                         OrderSubtotal=subtotal;
                     }
                 }
@@ -286,6 +287,7 @@ public class Cart<T> {
                 EmptyCartLabel.setVisible(true);
                 stores.setDisable(true);
                 Subtotal.setText("Please add some item in your cart first");
+                Subtotal.setStyle("-fx-font-size: 14");
             }
         }
     }
