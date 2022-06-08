@@ -72,8 +72,9 @@ public class App extends Application {
 		// TODO Auto-generated method stub
         if(Login_customer!=null)
         {
-            Login_customer.setOnline(false);
-            updateCustomer(Login_customer);
+            Customer customer=getCustomer(Login_customer.getId());
+            customer.setOnline(false);
+            updateCustomer(customer);
         }
         client.closeConnection();
 		super.stop();
