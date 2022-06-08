@@ -200,6 +200,11 @@ public class ClientOrders {
                     shipto.setStyle("-fx-background-color:none");
                     shipto.setLayoutX(349);
                     shipto.setLayoutY(12.5);
+                    if(orders.get(i).getShipping_address().equals(""))
+                    {
+                        shipto.setText("Pick up");
+                        shipto.setLayoutX(365);
+                    }
                     pane.getChildren().add(shipto);
 
                     ////////// price  ////////////

@@ -21,6 +21,7 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login
 
 public class Checkout {
     public static double oldSubtotal = OrderSubtotal;
+    private  double currentBudget;
     @FXML
     private TextField AddressTextFeild;
 
@@ -72,21 +73,24 @@ public class Checkout {
     @FXML // fx:id="recieverRadioBtn"
     private RadioButton recieverRadioBtn; // Value injected by FXMLLoader
 
+    @FXML // fx:id="budgetRadioBtn"
+    private RadioButton budgetRadioBtn; // Value injected by FXMLLoader
+
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
         datew.setValue(LocalDate.now());
-
+        currentBudget=Login_customer.getBudget();
         SubtotalLabel.setText("Subtotal: " + OrderSubtotal + " ₪");
         recieverRadioBtn.setSelected(false);
         loadTime();
-        budget.setText("your current budget is: " + Login_customer.getBudget());
+        budget.setText("your current budget is: " + Login_customer.getBudget()+ " ₪");
         budget.setMinWidth(300);
         if(Login_customer.getBudget()==0){
-            useBudget.setDisable(true);
+            budgetRadioBtn.setDisable(true);
         }
         else{
-            useBudget.setDisable(false);
+            budgetRadioBtn.setDisable(false);
         }
         PhoneTextFeild.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("\\d*")) return;
@@ -165,6 +169,15 @@ public class Checkout {
             }
         }
 
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+        ArrayList<CartItem> cartItems = searchCartItems(LoginClient_userId);
+        String paymethod = CashRadioBtn.isSelected() ? "Cash" : "CreditCard";
+        String shipingmethod = DeliveryRadioBtn.isSelected() ? "Delivery" : "Pickup";
+        int hour = Integer.parseInt(Hour.getValue());
+        int minute = Integer.parseInt(Minute.getValue());
+
+        MsgClass msg = new MsgClass("#add order");
+
         if (DeliveryRadioBtn.isSelected()) {
             if (NameTextFeild.getText().equals("") || PhoneTextFeild.getText().equals("") || AddressTextFeild.getText().equals("")) {
                 showAlert("error", "please fill out all Receiver details");
@@ -178,13 +191,6 @@ public class Checkout {
                     AddressTextFeild.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                 }
             } else {
-                ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
-                ArrayList<CartItem> cartItems = searchCartItems(LoginClient_userId);
-                String paymethod = CashRadioBtn.isSelected() ? "Cash" : "CreditCard";
-                String shipingmethod = DeliveryRadioBtn.isSelected() ? "Delivery" : "Pickup";
-                int hour = Integer.parseInt(Hour.getValue());
-                int minute = Integer.parseInt(Minute.getValue());
-                MsgClass msg = new MsgClass("#add order");
                 Order order = new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(),
                         LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(),
                         datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(),
@@ -196,7 +202,7 @@ public class Checkout {
                     AddOrderIem(orderItem);
                     orderItems.add(orderItem);
                 }
-//            order.setOrderitems(searchCartItems(LoginClient_userId));
+
                 order.setOrderitems(orderItems);
                 msg.setObj(order);
                 boolean deliveryforclient = recieverRadioBtn.isSelected();
@@ -205,25 +211,31 @@ public class Checkout {
                 msg.setObj(order);
                 SimpleClient.getClient().sendToServer(msg);
                 deleteCart(LoginClient_userId);
+                if(budgetRadioBtn.isSelected())
+                {
+                    Customer customer=getCustomer(Login_customer.getId());
+                    customer.setBudget(currentBudget);
+                    updateCustomer(customer);
+                }
                 showAlert("Order successful", "Order Successfully placed");
                 App.setRoot("controllers/ClientMainPage");
             }
 
         } else {
-            ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
-            ArrayList<CartItem> cartItems = searchCartItems(LoginClient_userId);
-            String paymethod = CashRadioBtn.isSelected() ? "Cash" : "CreditCard";
-            String shipingmethod = DeliveryRadioBtn.isSelected() ? "Delivery" : "Pickup";
-            int hour = Integer.parseInt(Hour.getValue());
-            int minute = Integer.parseInt(Minute.getValue());
-            MsgClass msg = new MsgClass("#add order");
+
             Order order = new Order(shop, searchCustomer(LoginClient_userId), LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth(), datew.getValue().getYear(), datew.getValue().getMonthValue(), datew.getValue().getDayOfMonth(), LocalTime.now().getHour(), LocalTime.now().getMinute(), hour, minute, OrderSubtotal, paymethod, shipingmethod, Greeting.getText(), false, "");
             for (CartItem cartItem : cartItems) {
                 OrderItem orderItem = new OrderItem(cartItem);
                 AddOrderIem(orderItem);
                 orderItems.add(orderItem);
             }
-//            order.setOrderitems(searchCartItems(LoginClient_userId));
+
+            if(budgetRadioBtn.isSelected())
+            {
+                Customer customer=getCustomer(Login_customer.getId());
+                customer.setBudget(currentBudget);
+                updateCustomer(customer);
+            }
             order.setOrderitems(orderItems);
             msg.setObj(order);
             SimpleClient.getClient().sendToServer(msg);
@@ -336,23 +348,25 @@ public class Checkout {
 
     @FXML
     void budgetUse(ActionEvent event) throws IOException {
-        double total=0;
-        if (useBudget.isSelected()) {
+        if(budgetRadioBtn.isSelected())
+        {
+            double total=0;
             if (Login_customer.getBudget() > OrderSubtotal) {
-                Login_customer.setBudget(Login_customer.getBudget() - OrderSubtotal);
                 SubtotalLabel.setText("Subtotal After Using the budget is: 0");
+                currentBudget=Login_customer.getBudget()-OrderSubtotal;
             } else {
                 total = OrderSubtotal - Login_customer.getBudget();
-                Login_customer.setBudget(0);
-                SubtotalLabel.setText("Subtotal After Using the budget is: "+total);
+                SubtotalLabel.setText("Subtotal After Using the budget is: "+total+ " ₪");
+                currentBudget=0;
             }
-        } else {
-            SubtotalLabel.setText("Subtotal: "+OrderSubtotal);
         }
-        updateCustomer(Login_customer);
-        SubtotalLabel.setMinWidth(300);
-        SubtotalLabel.setLayoutX(380);
-        Controller.getChildren().remove(SubtotalLabel);
-        Controller.getChildren().add(SubtotalLabel);
+        else
+        {
+            currentBudget=Login_customer.getBudget();
+            SubtotalLabel.setText("Subtotal: " + OrderSubtotal + " ₪");
+        }
+
     }
+
+
 }
