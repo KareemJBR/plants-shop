@@ -14,8 +14,7 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
-import static il.cshaifasweng.OCSFMediatorExample.client.App.showAlert;
+import static il.cshaifasweng.OCSFMediatorExample.client.App.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.SimpleClient.*;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.LoginClient_username;
 import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.Login_customer;
@@ -40,41 +39,32 @@ public class ReportControl {
 
     @FXML
     void createRoport(ActionEvent event) throws Exception {
-        if (reportText.equals(null)) {
+        if (reportText.getText().equals(null)||reportText.getText().equals("")) {
             showAlert("error", "report is empty");
             return;
         }
-        MsgClass msg = new MsgClass("#get current customer", LoginClient_username);
-        SimpleClient.getClient().sendToServer(msg);
-        while (currentCustomerData == null) {
-            System.out.println("waiting for server");
-        }
-        Customer customer = (Customer) currentCustomerData;
-        System.out.println("the customer is  " + customer);
-
 
         String value = (String) selectMe.getValue();
+        if(!Login_customer.getAcount_type().equals("Network account")&&!Login_customer.getAcount_type().equals("Network account with 10% discount"))
+        {
+           value=Login_customer.getAcount_type();
+        }
         if(value==null){
-            showAlert("error","select a store pls ");
+            showAlert("error","select a store please ");
             return;
         }
-        MsgClass msg2 = new MsgClass("#get selected Shop", value);
-        SimpleClient.getClient().sendToServer(msg2);
-        while (selectedShopData == null) {
-            System.out.println("waiting for server to get shop");
-        }
+
         Report newReport = new Report(reportText.getText(), false, false, null);
 
-        //customer.addReport(newReport);
+        Shop shop=getShop(value);
+        Customer customer=getCustomer(Login_customer.getId());
         newReport.setCustomer(customer);
-        newReport.setShop((Shop)selectedShopData);
+        newReport.setShop(shop);
         MsgClass msg1 = new MsgClass("#add report", newReport);
         SimpleClient.getClient().sendToServer(msg1);
         MsgClass msg3 = new MsgClass("#get customers", null);
         SimpleClient.getClient().sendToServer(msg3);
         App.setRoot("controllers/ClientMainPage");
-        currentCustomerData = null;
-        selectedShopData=null;
         showAlert("done", "report sent");
     }
 

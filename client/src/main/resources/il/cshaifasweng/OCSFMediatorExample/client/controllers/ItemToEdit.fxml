@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.EditItem">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.EditItem">
    <children>
       <AnchorPane fx:id="itemPane" layoutX="16.0" layoutY="202.0" prefHeight="386.0" prefWidth="585.0" style="-fx-background-color: #F2F4F7;" />
       <TextField fx:id="saleText" layoutX="626.0" layoutY="300.0" prefHeight="30.0" prefWidth="140.0" />
@@ -22,9 +22,9 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="46.0" prefWidth="83.0" style="-fx-background-radius: 20; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Back">
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Back">
          <font>
-            <Font size="15.0" />
+            <Font size="16.0" />
          </font></Button>
       <Label layoutX="259.0" layoutY="14.0" prefHeight="54.0" prefWidth="262.0" style="-fx-text-fill: #F2F4F7;" text="Edit Item Sale">
          <font>

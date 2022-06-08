@@ -12,14 +12,14 @@
             <Font name="Arial" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="LogOutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1;" text="Log out" textFill="WHITE">
+      <Button fx:id="LogOutBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutBtn" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1;" text="Sign out" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="cartBtn" layoutX="671.0" layoutY="17.0" mnemonicParsing="false" onAction="#Cart" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Cart">
+      <Button fx:id="cartBtn" layoutX="671.0" layoutY="17.0" mnemonicParsing="false" onAction="#Cart" prefHeight="47.0" prefWidth="86.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Cart">
          <font>
-            <Font size="15.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <Button fx:id="myOrdersBtn" alignment="CENTER" layoutX="458.0" layoutY="174.0" mnemonicParsing="false" onAction="#myOrders" prefHeight="89.0" prefWidth="197.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text="My Orders " textFill="#f4f4f4">

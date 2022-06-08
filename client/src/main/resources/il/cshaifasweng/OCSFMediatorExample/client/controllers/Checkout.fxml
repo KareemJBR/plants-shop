@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
    <children>
-      <Button fx:id="CheckoutBtn" layoutX="441.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" Checkout" textFill="WHITE">
+      <Button fx:id="CheckoutBtn" layoutX="441.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 15; -fx-background-color: #00D100;" text=" Checkout" textFill="WHITE">
 
          <font>
             <Font size="17.0" />
@@ -40,9 +40,9 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="39.0" prefWidth="78.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Back">
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="38.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Back">
          <font>
-            <Font name="Arial" size="15.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <DatePicker fx:id="datew" editable="false" layoutX="360.0" layoutY="222.0" onAction="#Checkdate" prefHeight="32.0" prefWidth="159.0" promptText="when do you want to get it" />

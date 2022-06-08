@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -9,8 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.chart.BarChart?>
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportTwoTimeIntervals">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.OrdersReportTwoTimeIntervals">
     <children>
         <Line endY="228.60003662109375" layoutX="395.0" layoutY="337.0" startY="-322.0" />
         <Text layoutX="45.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Start Date: ">
@@ -33,8 +33,8 @@
         <TextArea fx:id="endDate2" editable="false" layoutX="522.0" layoutY="94.0" prefHeight="34.0" prefWidth="200.0" />
         <TextArea fx:id="endDate1" editable="false" layoutX="133.0" layoutY="95.0" prefHeight="16.0" prefWidth="200.0" />
         <TextArea fx:id="startDate1" editable="false" layoutX="133.0" layoutY="41.0" prefHeight="34.0" prefWidth="200.0" />
-      <Button layoutX="168.0" layoutY="555.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="130.0" style="-fx-background-color: #6366f1;" text="Download CSV File" />
-      <Button layoutX="537.0" layoutY="555.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="130.0" style="-fx-background-color: #6366f1;" text="Download CSV File" />
+      <Button layoutX="168.0" layoutY="555.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="39.0" prefWidth="130.0" style="-fx-background-color: #E43A19; -fx-background-radius: 20;" text="Download CSV File" textFill="WHITE" />
+      <Button layoutX="537.0" layoutY="555.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="39.0" prefWidth="130.0" style="-fx-background-color: #E43A19; -fx-background-radius: 20;" text="Download CSV File" textFill="WHITE" />
       <AnchorPane layoutX="11.0" layoutY="147.0" prefHeight="400.0" prefWidth="363.0" style="-fx-background-color: #F2F4F7;">
          <children>
               <BarChart fx:id="ordersChart1" layoutX="7.0" prefHeight="400.0" prefWidth="360.0" title="Orders Report">
@@ -59,6 +59,6 @@
               </BarChart>
          </children>
       </AnchorPane>
-      <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="78.0" style="-fx-text-fill: F2F4F7; -fx-background-color: #E43A19;" text="back" />
+      <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="78.0" style="-fx-text-fill: F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 15;" text="Back" />
     </children>
 </AnchorPane>

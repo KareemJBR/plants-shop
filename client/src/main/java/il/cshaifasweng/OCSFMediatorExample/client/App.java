@@ -98,6 +98,21 @@ public class App extends Application {
         return null;
     }
 
+    public static Shop getShop(String address) throws IOException {
+        ArrayList<Shop> shops=getAllShops();
+        if(shops!=null)
+        {
+            for(Shop shop:shops)
+            {
+                if(shop.getAddress().equals(address))
+                {
+                    return shop;
+                }
+            }
+        }
+        return null;
+    }
+
     public static void updateCustomer(Customer customer) throws IOException {
         MsgClass msg = new MsgClass("#customerUpdate", customer);
         SimpleClient.getClient().sendToServer(msg);

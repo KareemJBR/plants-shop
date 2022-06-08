@@ -10,33 +10,33 @@
 
 <AnchorPane fx:id="Controller" accessibleRole="PASSWORD_FIELD" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN">
    <children>
-      <TextField fx:id="userName" layoutX="279.0" layoutY="206.0" prefHeight="45.0" prefWidth="246.0" promptText="username" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
+      <TextField fx:id="userName" layoutX="272.0" layoutY="214.0" prefHeight="45.0" prefWidth="257.0" promptText="username" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </TextField>
 
-      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="278.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
+      <PasswordField fx:id="Password" accessibleRole="TEXT_FIELD" layoutX="272.0" layoutY="277.0" prefHeight="45.0" prefWidth="257.0" promptText="password" style="-fx-background-radius: 10; -fx-background-color: #ffffff;">
 
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </PasswordField>
 
-      <CheckBox fx:id="showPassword" layoutX="538.0" layoutY="276.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" style="-fx-text-fill: #F2F4F7;" text="Show" />
-      <Button fx:id="logInBtn" layoutX="324.0" layoutY="352.0" mnemonicParsing="false" onAction="#logIN" prefHeight="64.0" prefWidth="155.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Login" textFill="WHITE">
+      <CheckBox fx:id="showPassword" layoutX="545.0" layoutY="276.0" mnemonicParsing="false" onAction="#Show" prefHeight="47.0" prefWidth="82.0" style="-fx-text-fill: #F2F4F7;" text="Show" />
+      <Button fx:id="logInBtn" layoutX="272.0" layoutY="338.0" mnemonicParsing="false" onAction="#logIN" prefHeight="39.0" prefWidth="257.0" style="-fx-background-radius: 10; -fx-background-color: #0095F6; -fx-text-fill: #F2F4F7;" text="Login" textFill="WHITE">
 
          <font>
             <Font size="18.0" />
          </font>
       </Button>
 
-      <Label fx:id="notmemberLabel" alignment="CENTER" layoutX="314.0" layoutY="484.0" prefHeight="36.0" prefWidth="178.0" style="-fx-text-fill: #F2F4F7;" text="not a member?">
+      <Label fx:id="notmemberLabel" alignment="CENTER" layoutX="312.0" layoutY="498.0" prefHeight="36.0" prefWidth="178.0" style="-fx-text-fill: #F2F4F7;" text="not a member?">
 
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Button fx:id="createAcountBtn" alignment="CENTER" layoutX="337.0" layoutY="527.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="57.0" prefWidth="130.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text="Create account" textFill="#fbfbfb">
+      <Button fx:id="createAcountBtn" alignment="CENTER" layoutX="330.0" layoutY="541.0" mnemonicParsing="false" onAction="#createAcount" prefHeight="36.0" prefWidth="141.0" style="-fx-background-radius: 10; -fx-background-color: #E43A19;" text="Create account" textFill="#fbfbfb">
          <font>
             <Font name="Arial" size="13.0" />
          </font>
@@ -46,7 +46,7 @@
          <font>
             <Font name="Arial" size="17.0" />
          </font></Button>
-      <TextField fx:id="visiblePassword" disable="true" layoutX="278.0" layoutY="276.0" prefHeight="45.0" prefWidth="246.0" promptText="password" style="-fx-background-radius: 10;" visible="false">
+      <TextField fx:id="visiblePassword" disable="true" layoutX="272.0" layoutY="277.0" prefHeight="45.0" prefWidth="257.0" promptText="password" style="-fx-background-radius: 10;" visible="false">
 
          <font>
             <Font name="Arial" size="16.0" />
