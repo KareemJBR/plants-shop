@@ -237,14 +237,14 @@ public class SimpleServer extends AbstractServer {
         session.save(customer3);
         session.flush();
 
-        Customer customer4 = new Customer("12312333", "1", "swetatn",
-                "bayann", "1", "0000000011111111",150 ,"Network account with 10% discount",
+        Customer customer4 = new Customer("12312333", "1", "sameer",
+                "najjar", "1", "0000000011111111",150 ,"Network account with 10% discount",
                 "kareemokhtar@gmail.com");
 
         session.save(customer4);
         session.flush();
 
-        Customer customer5 = new Customer("12332312", "2", "sew", "sewy",
+        Customer customer5 = new Customer("12332312", "2", "kamal", "melhem",
                 "2", "0000000011141111", 500,"Network account",
                 "kareemokhtar@gmail.com");
 

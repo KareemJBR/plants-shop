@@ -119,8 +119,16 @@ public class SignUp {
             for (Customer customer : customers) {
 
                 if (id.equals((customer.getUser_id()))) {
-                    errors.add("Id Numer already exists please try with another one");
+                    errors.add("Id Number already exists please try with another one");
                     IDNumber.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
+                    break;
+                }
+            }
+            for (Customer customer : customers) {
+
+                if (email.equals((customer.getEmail()))) {
+                    errors.add("Email address already in use");
+                    EmailTextBox.setStyle("-fx-background-radius:15;-fx-background-color:#f5c0c0;");
                     break;
                 }
             }
