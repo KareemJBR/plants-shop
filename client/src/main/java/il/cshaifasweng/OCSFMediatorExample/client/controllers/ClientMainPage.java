@@ -6,6 +6,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Customer;
 import il.cshaifasweng.OCSFMediatorExample.entities.MsgClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -18,8 +19,9 @@ import static il.cshaifasweng.OCSFMediatorExample.client.controllers.LogIN.*;
 
 public class ClientMainPage {
 
+
     @FXML // fx:id="messagetextfield"
-    private TextField messagetextfield; // Value injected by FXMLLoader
+    private Label messagetextfield; // Value injected by FXMLLoader
 
 
     @FXML
@@ -57,25 +59,19 @@ public class ClientMainPage {
     @FXML
     void initialize() throws IOException {
         ArrayList<Customer> customers=getAllCustomers();
-        customers=getAllCustomers();
-        messagetextfield.setEditable(false);
-//        myOrdersBtn.setStyle("-fx-border-radius: 25;-fx-background-color: rgba(117,230,218,0.8)");
-        if(customers!=null)
+        Customer customer=getCustomer(Login_customer.getId());
+        if(customer!=null)
         {
-            for (Customer customer : customers) {
-                if (customer.getUser_name().equals(LoginClient_username)) {
-                    messagetextfield.setText("Welcome Back " + customer.getFirst_name());
-                    break;
-                }
-            }
+            messagetextfield.setText("Welcome Back " + customer.getFirst_name());
         }
 
     }
 
     @FXML
     void logOutBtn(ActionEvent event) throws IOException {
-        Login_customer.setOnline(false);
-        updateCustomer(Login_customer);
+        Customer customer=getCustomer(Login_customer.getId());
+        customer.setOnline(false);
+        updateCustomer(customer);
         App.setRoot("controllers/LogIN");
     }
 }

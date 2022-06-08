@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -11,21 +10,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
+<AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.Checkout">
    <children>
-      <Button fx:id="CheckoutBtn" layoutX="433.0" layoutY="545.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" Checkout" textFill="WHITE">
+      <Button fx:id="CheckoutBtn" layoutX="441.0" layoutY="546.0" mnemonicParsing="false" onAction="#Checkout" prefHeight="39.0" prefWidth="172.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19;" text=" Checkout" textFill="WHITE">
 
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <TextField fx:id="PhoneTextFeild" layoutX="360.0" layoutY="418.0" prefHeight="39.0" prefWidth="186.0" promptText="Phone" style="-fx-background-radius: 15;" />
-      <TextField fx:id="NameTextFeild" layoutX="360.0" layoutY="369.0" prefHeight="39.0" prefWidth="186.0" promptText="Name" style="-fx-background-radius: 15;" />
-      <RadioButton fx:id="DeliveryRadioBtn" layoutX="360.0" layoutY="207.0" mnemonicParsing="false" onAction="#DeliveryRadioBtnChange" prefHeight="39.0" prefWidth="99.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="Delivery" />
-      <RadioButton fx:id="PickupRadioBtn" layoutX="477.0" layoutY="207.0" mnemonicParsing="false" onAction="#PickupRadioBtnChange" prefHeight="39.0" prefWidth="123.0" style="-fx-text-fill: #F2F4F7;" text="Pick up" />
-      <RadioButton fx:id="CreditcardRadioBtn" layoutX="373.0" layoutY="51.0" mnemonicParsing="false" onAction="#CreditcardRadioBtnChange" prefHeight="39.0" prefWidth="99.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="Credit card" />
-      <RadioButton fx:id="CashRadioBtn" layoutX="489.0" layoutY="51.0" mnemonicParsing="false" onAction="#CashRadioBtnChange" prefHeight="39.0" prefWidth="99.0" style="-fx-text-fill: #F2F4F7;" text="Cash" />
-      <Label fx:id="ReceiverDetailsLabel" layoutX="373.0" layoutY="327.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Receiver details: ">
+      <TextField fx:id="PhoneTextFeild" layoutX="360.0" layoutY="363.0" prefHeight="39.0" prefWidth="186.0" promptText="Phone" style="-fx-background-radius: 15;" />
+      <TextField fx:id="NameTextFeild" layoutX="360.0" layoutY="311.0" prefHeight="39.0" prefWidth="186.0" promptText="Name" style="-fx-background-radius: 15;" />
+      <RadioButton fx:id="DeliveryRadioBtn" layoutX="360.0" layoutY="135.0" mnemonicParsing="false" onAction="#DeliveryRadioBtnChange" prefHeight="39.0" prefWidth="99.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="Delivery" />
+      <RadioButton fx:id="PickupRadioBtn" layoutX="463.0" layoutY="135.0" mnemonicParsing="false" onAction="#PickupRadioBtnChange" prefHeight="39.0" prefWidth="123.0" style="-fx-text-fill: #F2F4F7;" text="Pick up" />
+      <RadioButton fx:id="CreditcardRadioBtn" layoutX="360.0" layoutY="53.0" mnemonicParsing="false" onAction="#CreditcardRadioBtnChange" prefHeight="39.0" prefWidth="99.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="Credit card" />
+      <RadioButton fx:id="CashRadioBtn" layoutX="469.0" layoutY="53.0" mnemonicParsing="false" onAction="#CashRadioBtnChange" prefHeight="39.0" prefWidth="99.0" style="-fx-text-fill: #F2F4F7;" text="Cash" />
+      <Label fx:id="ReceiverDetailsLabel" layoutX="360.0" layoutY="268.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Receiver details: ">
          <font>
             <Font size="15.0" />
          </font>
@@ -36,7 +35,7 @@
          </font>
       </Label>
 
-      <Label fx:id="SubtotalLabel" layoutX="452.0" layoutY="518.0" prefHeight="26.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
+      <Label fx:id="SubtotalLabel" layoutX="392.0" layoutY="513.0" prefHeight="26.0" prefWidth="346.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -46,38 +45,38 @@
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
-      <DatePicker fx:id="datew" editable="false" layoutX="360.0" layoutY="284.0" onAction="#Checkdate" prefHeight="32.0" prefWidth="159.0" promptText="when do you want to get it" />
-      <Label fx:id="dateLabel" layoutX="360.0" layoutY="248.0" prefHeight="32.0" prefWidth="159.0" style="-fx-text-fill: #F2F4F7;" text="Receipt date and time:">
+      <DatePicker fx:id="datew" editable="false" layoutX="360.0" layoutY="222.0" onAction="#Checkdate" prefHeight="32.0" prefWidth="159.0" promptText="when do you want to get it" />
+      <Label fx:id="dateLabel" layoutX="360.0" layoutY="174.0" prefHeight="32.0" prefWidth="159.0" style="-fx-text-fill: #F2F4F7;" text="Receipt date and time:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="ReceiverDetailsLabel1" layoutX="356.0" layoutY="18.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Paying method:">
+      <Label fx:id="ReceiverDetailsLabel1" layoutX="355.0" layoutY="21.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="Paying method:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="ReceiverDetailsLabel2" layoutX="355.0" layoutY="175.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="shipping method:">
+      <Label fx:id="ReceiverDetailsLabel2" layoutX="355.0" layoutY="103.0" prefHeight="32.0" prefWidth="133.0" style="-fx-text-fill: #F2F4F7;" text="shipping method:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="Hour" layoutX="543.0" layoutY="284.0" prefHeight="32.0" prefWidth="64.0" />
-      <ComboBox fx:id="Minute" layoutX="633.0" layoutY="284.0" prefHeight="32.0" prefWidth="64.0" />
-      <TextField fx:id="AddressTextFeild" layoutX="360.0" layoutY="467.0" prefHeight="39.0" prefWidth="186.0" promptText="Address" style="-fx-background-radius: 15;" />
-      <Label layoutX="616.0" layoutY="280.0" prefHeight="39.0" prefWidth="33.0" text=":" textFill="WHITE">
+      <ComboBox fx:id="Hour" layoutX="545.0" layoutY="222.0" prefHeight="32.0" prefWidth="64.0" />
+      <ComboBox fx:id="Minute" layoutX="634.0" layoutY="222.0" prefHeight="32.0" prefWidth="64.0" />
+      <TextField fx:id="AddressTextFeild" layoutX="360.0" layoutY="416.0" prefHeight="39.0" prefWidth="186.0" promptText="Address" style="-fx-background-radius: 15;" />
+      <Label layoutX="617.0" layoutY="218.0" prefHeight="39.0" prefWidth="33.0" text=":" textFill="WHITE">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="369.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" textFill="WHITE" />
+      <RadioButton fx:id="recieverRadioBtn" layoutX="634.0" layoutY="264.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" textFill="WHITE" />
       <TextArea fx:id="Greeting" layoutX="14.0" layoutY="114.0" prefHeight="457.0" prefWidth="275.0" promptText="Add greeting here (optional)" />
-      <CheckBox fx:id="useBudget" layoutX="359.0" layoutY="144.0" mnemonicParsing="false" onAction="#budgetUse" style="-fx-text-fill: #F2F4F7;" text="Use Current Budget" />
-      <Label fx:id="budget" layoutX="348.0" layoutY="98.0" prefHeight="32.0" prefWidth="146.0" style="-fx-text-fill: #F2F4F7;" text="Current Budget: ">
+      <Label fx:id="budget" layoutX="390.0" layoutY="470.0" prefHeight="32.0" prefWidth="146.0" style="-fx-text-fill: #F2F4F7;" text="Current Budget: ">
          <font>
-            <Font size="15.0" />
+            <Font name="Arial" size="15.0" />
          </font>
       </Label>
+      <RadioButton fx:id="budgetRadioBtn" layoutX="631.0" layoutY="477.0" mnemonicParsing="false" onAction="#budgetUse" text="Use Current Budget" textFill="WHITE" />
 <!--=======-->
 <!--      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="I am The Receiver" />-->
 <!--&gt;>>>>>> 3109966d86d1c248ee1870733a6dcd48839613a6-->

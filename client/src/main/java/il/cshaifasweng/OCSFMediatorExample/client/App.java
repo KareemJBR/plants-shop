@@ -83,6 +83,21 @@ public class App extends Application {
         launch();
     }
 
+    public static Customer getCustomer(String id) throws IOException {
+        ArrayList<Customer> customers=getAllCustomers();
+        if(customers!=null)
+        {
+            for(Customer customer:customers)
+            {
+                if(customer.getUser_id().equals(id))
+                {
+                    return customer;
+                }
+            }
+        }
+        return null;
+    }
+
     public static void updateCustomer(Customer customer) throws IOException {
         MsgClass msg = new MsgClass("#customerUpdate", customer);
         SimpleClient.getClient().sendToServer(msg);
@@ -195,17 +210,6 @@ public class App extends Application {
         while (OrdersData == null) {System.out.println("waiting for server7");}
         orders = (ArrayList<Order>) OrdersData;
         return orders;
-    }
-
-    public  static List<OrderItem> getOrderItems(int orderId) throws IOException {
-        List<OrderItem> orderItems=new ArrayList<OrderItem>();
-        MsgClass msg=new MsgClass("#get orderItems",null);
-        OrderItemData=null;
-        msg.setObj(orderId);
-        SimpleClient.getClient().sendToServer(msg);
-        while (OrderItemData==null){System.out.println("waiting for server11");}
-        orderItems=(List<OrderItem>) OrderItemData;
-        return orderItems;
     }
 
     public static ArrayList<SupportWorker> getAllSupportWorkers() throws IOException {
