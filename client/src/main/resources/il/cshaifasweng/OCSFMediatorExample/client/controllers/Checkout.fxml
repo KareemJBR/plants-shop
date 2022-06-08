@@ -35,7 +35,7 @@
          </font>
       </Label>
 
-      <Label fx:id="SubtotalLabel" layoutX="392.0" layoutY="513.0" prefHeight="26.0" prefWidth="346.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
+      <Label fx:id="SubtotalLabel" layoutX="360.0" layoutY="514.0" prefHeight="26.0" prefWidth="346.0" style="-fx-text-fill: #F2F4F7;" text="Subtotal: ">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -69,14 +69,14 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <RadioButton fx:id="recieverRadioBtn" layoutX="634.0" layoutY="264.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" textFill="WHITE" />
+      <RadioButton fx:id="recieverRadioBtn" layoutX="613.0" layoutY="264.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" text="I am The Receiver" textFill="WHITE" />
       <TextArea fx:id="Greeting" layoutX="14.0" layoutY="114.0" prefHeight="457.0" prefWidth="275.0" promptText="Add greeting here (optional)" />
-      <Label fx:id="budget" layoutX="390.0" layoutY="470.0" prefHeight="32.0" prefWidth="146.0" style="-fx-text-fill: #F2F4F7;" text="Current Budget: ">
+      <Label fx:id="budget" layoutX="360.0" layoutY="470.0" prefHeight="32.0" prefWidth="146.0" style="-fx-text-fill: #F2F4F7;" text="Current Budget: ">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Label>
-      <RadioButton fx:id="budgetRadioBtn" layoutX="631.0" layoutY="477.0" mnemonicParsing="false" onAction="#budgetUse" text="Use Current Budget" textFill="WHITE" />
+      <RadioButton fx:id="budgetRadioBtn" layoutX="613.0" layoutY="477.0" mnemonicParsing="false" onAction="#budgetUse" text="Use Current Budget" textFill="WHITE" />
 <!--=======-->
 <!--      <RadioButton fx:id="recieverRadioBtn" layoutX="575.0" layoutY="330.0" mnemonicParsing="false" onAction="#receiverRadioBtnChange" prefHeight="39.0" prefWidth="133.0" selected="true" style="-fx-text-fill: #F2F4F7;" text="I am The Receiver" />-->
 <!--&gt;>>>>>> 3109966d86d1c248ee1870733a6dcd48839613a6-->
