@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForShopAdmin">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForShopAdmin">
     <children>
         <Text layoutX="304.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Reports">
             <font>
@@ -33,6 +33,9 @@
             <Font size="16.0" />
          </font></Text>
         <ComboBox fx:id="reportTypeComboBox" layoutX="365.0" layoutY="300.0" prefHeight="26.0" prefWidth="175.0" />
-      <Button layoutX="29.0" layoutY="15.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="42.0" prefWidth="92.0" style="-fx-background-color: #E43A19; -fx-text-fill: white; -fx-background-radius: 20;" text="Home" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="38.0" prefWidth="75.0" style="-fx-background-color: #6366f1; -fx-text-fill: white; -fx-background-radius: 15;" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
     </children>
 </AnchorPane>

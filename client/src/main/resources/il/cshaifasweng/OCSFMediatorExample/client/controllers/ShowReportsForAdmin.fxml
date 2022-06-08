@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForAdmin">
    <children>
       <Text layoutX="320.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Reports">
          <font>
@@ -50,9 +50,9 @@
             <Font size="16.0" />
          </font></Text>
       <ComboBox fx:id="reportTypeComboBox" layoutX="122.0" layoutY="262.0" prefHeight="26.0" prefWidth="175.0" />
-      <Button layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="48.0" prefWidth="102.0" style="-fx-background-radius: 20; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Home">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="37.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Back">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </Button>
    </children>

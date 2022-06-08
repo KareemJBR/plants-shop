@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ShowReportsForClientService">
    <children>
       <TableView fx:id="reports" layoutY="61.0" onMouseClicked="#openReport" prefHeight="539.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
@@ -22,6 +22,9 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Button layoutX="25.0" layoutY="13.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="38.0" prefWidth="78.0" style="-fx-background-radius: 20; -fx-text-fill: #F2F4F7; -fx-background-color: red;" text="Back" />
+      <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#backToHomePage" prefHeight="38.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-text-fill: white; -fx-background-color: #6366f1;" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

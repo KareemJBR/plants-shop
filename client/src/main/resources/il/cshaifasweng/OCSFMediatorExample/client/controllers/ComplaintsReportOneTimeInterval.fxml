@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportOneTimeInterval">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportOneTimeInterval">
     <children>
       <Button layoutX="322.0" layoutY="539.0" mnemonicParsing="false" onAction="#downloadCSVFile" prefHeight="46.0" prefWidth="148.0" style="-fx-background-radius: 20; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Download CSV File">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="34.0" prefWidth="106.0" style="-fx-background-radius: 20; -fx-text-fill: #F2F4F7; -fx-background-color: #E43A19;" text="Back">
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="37.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-text-fill: #F2F4F7; -fx-background-color: #6366f1;" text="Back">
          <font>
-            <Font size="16.0" />
+            <Font size="14.0" />
          </font>
       </Button>
       <AnchorPane layoutX="80.0" layoutY="58.0" prefHeight="471.0" prefWidth="620.0">

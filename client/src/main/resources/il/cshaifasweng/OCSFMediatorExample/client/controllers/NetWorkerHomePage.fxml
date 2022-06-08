@@ -20,15 +20,16 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-
-      <Button layoutX="25.0" layoutY="26.0" mnemonicParsing="false" onAction="#signOut" prefHeight="47.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Sing Out" />
       <Button layoutX="290.0" layoutY="310.0" mnemonicParsing="false" onAction="#addSale" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Edit Sales">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
 
-      <Button layoutX="25.0" layoutY="26.0" mnemonicParsing="false" onAction="#signOut" prefHeight="47.0" prefWidth="90.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Sign Out" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#signOut" prefHeight="52.0" prefWidth="92.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Sign Out">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
 
    </children>
 </AnchorPane>

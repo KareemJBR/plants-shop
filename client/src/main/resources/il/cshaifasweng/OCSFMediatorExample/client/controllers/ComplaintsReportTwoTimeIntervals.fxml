@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals">
+<AnchorPane prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.ComplaintsReportTwoTimeIntervals">
    <children>
       <Line endY="212.80001831054688" layoutX="389.0" layoutY="354.0" startY="-322.0" style="-fx-fill: #F2F4F7;" />
       <Text layoutX="87.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F2F4F7;" text="Start Date: ">
@@ -33,8 +33,8 @@
       <TextArea fx:id="endDate2" editable="false" layoutX="547.0" layoutY="95.0" prefHeight="34.0" prefWidth="200.0" />
       <TextArea fx:id="endDate1" editable="false" layoutX="170.0" layoutY="95.0" prefHeight="16.0" prefWidth="200.0" />
       <TextArea fx:id="startDate1" editable="false" layoutX="170.0" layoutY="34.0" prefHeight="34.0" prefWidth="200.0" />
-      <Button layoutX="140.0" layoutY="540.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="38.0" prefWidth="129.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 20; -fx-background-color: #6366f1;" text="Download CSV File" />
-      <Button layoutX="547.0" layoutY="540.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="38.0" prefWidth="129.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 20;" text="Download CSV File" />
+      <Button layoutX="140.0" layoutY="540.0" mnemonicParsing="false" onAction="#downloadCSVFile1" prefHeight="38.0" prefWidth="129.0" style="-fx-text-fill: #F2F4F7; -fx-background-radius: 20; -fx-background-color: #E43A19;" text="Download CSV File" />
+      <Button layoutX="547.0" layoutY="540.0" mnemonicParsing="false" onAction="#downloadCSVFile2" prefHeight="38.0" prefWidth="129.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #E43A19; -fx-background-radius: 20;" text="Download CSV File" />
       <AnchorPane layoutX="14.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F2F4F7;">
          <children>
             <LineChart fx:id="complaintsChart1" layoutX="7.0" prefHeight="380.0" prefWidth="350.0" title="Complaints Report">
@@ -59,6 +59,6 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="66.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #E43A19; -fx-background-radius: 15;" text="Back" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="66.0" style="-fx-text-fill: #F2F4F7; -fx-background-color: #6366f1; -fx-background-radius: 15;" text="Back" />
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="Controller" prefHeight="600.0" prefWidth="780.0" style="-fx-background-color: #111F4D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.controllers.SignUp">
    <children>
-      <TextField fx:id="userName" layoutX="271.0" layoutY="136.0" prefHeight="41.0" prefWidth="255.0" promptText="User Name" style="-fx-background-radius: 15;">
+      <TextField fx:id="userName" layoutX="271.0" layoutY="141.0" prefHeight="41.0" prefWidth="255.0" promptText="User Name" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -18,33 +18,33 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
-      <TextField fx:id="passwordBtn" layoutX="271.0" layoutY="399.0" prefHeight="41.0" prefWidth="255.0" promptText="Password" style="-fx-background-radius: 15;">
+      <TextField fx:id="passwordBtn" layoutX="271.0" layoutY="416.0" prefHeight="41.0" prefWidth="255.0" promptText="Password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="confirmPasswordBtn" layoutX="271.0" layoutY="458.0" prefHeight="41.0" prefWidth="255.0" promptText="Confirm Password" style="-fx-background-radius: 15;">
+      <TextField fx:id="confirmPasswordBtn" layoutX="271.0" layoutY="471.0" prefHeight="41.0" prefWidth="255.0" promptText="Confirm Password" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <TextField fx:id="EmailTextBox" layoutX="271.0" layoutY="240.0" prefHeight="41.0" prefWidth="255.0" promptText="Email" style="-fx-background-radius: 15;">
+      <TextField fx:id="EmailTextBox" layoutX="271.0" layoutY="251.0" prefHeight="41.0" prefWidth="255.0" promptText="Email" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="SignUpBtn" layoutX="324.0" layoutY="525.0" mnemonicParsing="false" onAction="#signUp" prefHeight="54.0" prefWidth="150.0" style="-fx-background-radius: 25; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="SignUpBtn" layoutX="271.0" layoutY="529.0" mnemonicParsing="false" onAction="#signUp" prefHeight="38.0" prefWidth="255.0" style="-fx-background-radius: 10; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Sign Up" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font size="17.0" />
          </font>
       </Button>
-      <ComboBox fx:id="AcountTypeCombo" layoutX="271.0" layoutY="344.0" onAction="#CheckComboStatus" prefHeight="41.0" prefWidth="255.0" promptText="Account Type" />
-      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="42.0" prefWidth="84.0" style="-fx-background-radius: 25; -fx-background-color: #E43A19; -fx-text-fill: #F2F4F7;" text="Back">
+      <ComboBox fx:id="AcountTypeCombo" layoutX="271.0" layoutY="361.0" onAction="#CheckComboStatus" prefHeight="41.0" prefWidth="255.0" promptText="Account Type" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back" prefHeight="38.0" prefWidth="75.0" style="-fx-background-radius: 15; -fx-background-color: #6366f1; -fx-text-fill: #F2F4F7;" text="Back">
          <font>
-            <Font size="15.0" />
+            <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="creditCardNumber" layoutX="271.0" layoutY="292.0" prefHeight="41.0" prefWidth="255.0" promptText="Credit card  number" style="-fx-background-radius: 15;">
+      <TextField fx:id="creditCardNumber" layoutX="271.0" layoutY="306.0" prefHeight="41.0" prefWidth="255.0" promptText="Credit card  number" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TextField>
-      <TextField fx:id="IDNumber" layoutX="271.0" layoutY="188.0" prefHeight="41.0" prefWidth="255.0" promptText="ID Number" style="-fx-background-radius: 15;">
+      <TextField fx:id="IDNumber" layoutX="271.0" layoutY="196.0" prefHeight="41.0" prefWidth="255.0" promptText="ID Number" style="-fx-background-radius: 15;">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
