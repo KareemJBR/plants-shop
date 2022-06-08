@@ -2,17 +2,22 @@ package il.cshaifasweng.OCSFMediatorExample.client.controllers;
 
 import il.cshaifasweng.OCSFMediatorExample.client.App;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import il.cshaifasweng.OCSFMediatorExample.entities.Shop;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.Label;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static il.cshaifasweng.OCSFMediatorExample.client.App.getAllShops;
 
 
 public class ComplaintsReportOneTimeInterval implements Initializable {
@@ -24,6 +29,9 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
     @FXML
     private LineChart<String, Number> reportsChart;
 
+    @FXML // fx:id="shopAddress"
+    private Label shopAddress; // Value injected by FXMLLoader
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -33,6 +41,29 @@ public class ComplaintsReportOneTimeInterval implements Initializable {
         start_date = App.getReport_start_date1();
         end_date = App.getReport_end_date1();
         int shop_id = App.getShopID();
+
+        if(!is_admin)
+        {
+            try {
+                ArrayList<Shop> shops=getAllShops();
+                if(shops!=null)
+                {
+                    for(Shop shop:shops)
+                    {
+                        if(shop.getId()==shop_id)
+                        {
+                            shopAddress.setVisible(true);
+                            shopAddress.setDisable(false);
+                            shopAddress.setText(shop.getAddress());
+                            break;
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
 
         series = new XYChart.Series<>();
         series.setName("Complaints Report");
