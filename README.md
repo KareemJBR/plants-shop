@@ -22,11 +22,11 @@ For more information about the project please check the description PDF file.
 
 2. Create a new Scheme in MySQL on the same machine to run the server.
 
-3. Open the file `hibernate.properties` in the server model, and set the right values for your MySQL Scheme.
+3. Open the file `hibernate.properties` in the server module, and set the right values for your MySQL Scheme.
 
 ![image info](./md_screenshots/Capture2.JPG)
 
-4. Open the `SendMail` class in the server model, and set the right values for the E-mail address and password according to the E-mail you specified for sending conformation E-mails.
+4. Open the `SendMail` class in the server module, and set the right values for the E-mail address and password according to the E-mail you specified for sending conformation E-mails.
 
 ![image info](./md_screenshots/Capture1.JPG)
 
