@@ -224,7 +224,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Folder of MD screenshots
-md_screenshots/
-
 # End of https://www.toptal.com/developers/gitignore/api/maven,windows,intellij+all,pycharm+all,java,database
