@@ -16,8 +16,8 @@ public class SendMail {
     private final String message_header;
     private final String message_body;
 
-    private static final String from_email = "plantsshopSW@gmail.com";
-    private static final String from_email_password = "plantsshop123";
+    private static final String from_email = "";            // TODO: set the right email address for the software email
+    private static final String from_email_password = "";   // TODO: set the password for the software email
 
     public SendMail(String target_mail, String message_header, String message_body) {
         this.target_mail = target_mail;

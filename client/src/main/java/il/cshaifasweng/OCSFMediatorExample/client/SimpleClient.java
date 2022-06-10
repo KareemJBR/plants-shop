@@ -24,6 +24,10 @@ public class SimpleClient extends AbstractClient {
     public static Object ShopAdminsData;
     public static Object OrdersData;
     public static Object selectedShopData;
+
+    // TODO: if you are planning to run the server on a different machine, change the value of host to be the IP address
+    //  of the server machine
+
     private SimpleClient(String host, int port) {
         super(host, port);
     }
